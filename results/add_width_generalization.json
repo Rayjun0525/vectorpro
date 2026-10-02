@@ -1,0 +1,455 @@
+{
+  "experiment": "add_width_generalization",
+  "runs": [
+    {
+      "seed": 20261002,
+      "train": {
+        "width": 4,
+        "pairs": 32,
+        "steps": 3000,
+        "final_loss": 1.547427018522285e-05,
+        "train_exact_match": 1.0
+      },
+      "verification": {
+        "rule": "full_adder",
+        "domain_size": 8,
+        "mismatches": [],
+        "exact": true
+      },
+      "evaluations": {
+        "neural/continuous": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "neural/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "table/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "seed": 20261003,
+      "train": {
+        "width": 4,
+        "pairs": 32,
+        "steps": 3000,
+        "final_loss": 1.5665184037061408e-05,
+        "train_exact_match": 1.0
+      },
+      "verification": {
+        "rule": "full_adder",
+        "domain_size": 8,
+        "mismatches": [],
+        "exact": true
+      },
+      "evaluations": {
+        "neural/continuous": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "neural/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "table/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "seed": 20261004,
+      "train": {
+        "width": 4,
+        "pairs": 32,
+        "steps": 3000,
+        "final_loss": 1.4111566997598857e-05,
+        "train_exact_match": 1.0
+      },
+      "verification": {
+        "rule": "full_adder",
+        "domain_size": 8,
+        "mismatches": [],
+        "exact": true
+      },
+      "evaluations": {
+        "neural/continuous": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "neural/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ],
+        "table/quantized": [
+          {
+            "name": "4bit_unseen",
+            "width": 4,
+            "total": 224,
+            "correct": 224,
+            "accuracy": 1.0
+          },
+          {
+            "name": "8bit_exhaustive",
+            "width": 8,
+            "total": 65536,
+            "correct": 65536,
+            "accuracy": 1.0
+          },
+          {
+            "name": "16bit_random+edge",
+            "width": 16,
+            "total": 10329,
+            "correct": 10329,
+            "accuracy": 1.0
+          },
+          {
+            "name": "32bit_random+edge",
+            "width": 32,
+            "total": 10665,
+            "correct": 10665,
+            "accuracy": 1.0
+          },
+          {
+            "name": "64bit_random+edge",
+            "width": 64,
+            "total": 11337,
+            "correct": 11337,
+            "accuracy": 1.0
+          },
+          {
+            "name": "fold5x32bit",
+            "width": 32,
+            "total": 1000,
+            "correct": 1000,
+            "accuracy": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}
