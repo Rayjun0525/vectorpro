@@ -19,13 +19,17 @@ src/vectorpro/
   execution.py     BitExecutable: tensor-in/tensor-out executable tree
                    (execute, compiled, children, parameters)
   units.py         FunctionUnit = schema + cell + verification record (leaf)
-  programs.py      Fold, ShiftAddMultiply: compositions that stay in tensor space
+  programs/        wiring-only compositions that stay in tensor space:
+                   Fold, Window, ShiftAddMultiply, RestoringDivide, ExpressionProgram
+  expr.py          expression AST shared by programs (execution) and tasks (reference)
   tasks/           Task (reference semantics) + LocalRule (verification oracle)
-                   add, sub, lt, and/or/xor, mul, modular sum
+                   add, sub, lt, and/or/xor, mux, mul, divmod, expressions
   training.py      Trainer: end-to-end through any executable, final results only
   verification.py  exhaustive local-rule check
   evaluation.py    executor-agnostic harness
   benchmark.py     OperationSpec + run_spec: one train/verify/evaluate protocol
+  catalog.py       standard learnable primitive units and their specs
+  faults.py        single-entry fault injection for negative controls
   data.py          operand sets, splits, edge cases
 experiments/       declare specs, write JSON to results/
 ```
@@ -34,6 +38,7 @@ Boundaries:
 
 - **Tasks never execute.** They give reference results, plus optional local rules used only for verification.
 - **Schemas own structure, cells own the rule.** Schemas are currently human-provided. Discovering them is milestone M3.
+- **Programs only wire.** Shift, slice, concatenate, broadcast and constants are allowed; every bit of computation goes through a unit, so a program is exactly as correct as its verifiable units.
 - **Integers appear only at the encode/decode boundary** of `BitExecutable.__call__`.
 
 ## Quick start
@@ -43,6 +48,7 @@ pip install -e ".[dev]"
 pytest
 python experiments/add_width_generalization.py   # M0
 python experiments/primitives.py                  # M1
+python experiments/arithmetic.py                  # M1b
 ```
 
 ## M0 result: addition width generalization
@@ -97,12 +103,47 @@ What this shows:
 - Implication for the design: learn and verify small units, then compose them.
   Prefer that to end-to-end training of large programs.
 
+## M1b result: the four arithmetic operations
+
+Four units are learned, each from 32 4-bit examples with final results only,
+and verified exhaustively: add, sub, and, and mux (bitwise select). Everything
+else is wired from them with **no further training**
+(`python experiments/arithmetic.py`, seeds 20261002–4).
+
+| operation | built from | 4-bit, 8-bit exhaustive | 16/32/64-bit random + edge |
+|---|---|---|---|
+| `+` | add unit | 100% | 100% |
+| `-` | sub unit | 100% | 100% |
+| `*` | shift-add(and, add) | 100% | 100% |
+| `/`, `%` | restoring division(sub, mux) | 100% | 100% |
+
+These scores hold in all three execution modes. Division uses the sub unit's
+borrow-out as its comparison and the mux unit for both restoring and emitting
+quotient bits. Division by zero follows RISC-V: all-ones quotient, dividend as
+remainder.
+
+**Unseen programs.** 300 random expression trees over `+ - * / %` (1–7
+operators, mean 4.3) are evaluated at 32-bit `uint32_t` semantics on 128
+inputs each, half of them small values so that division by zero occurs. All
+300 expressions and all 38,400 samples are exact in every mode.
+
+**Negative control.** Each of the 44 single table entries across the four
+units is flipped in turn. Every fault is flagged, and exactly by the
+operations that use that unit: add 16, sub 16, mul 20 (and + add), divmod 24
+(sub + mux). No fault goes unnoticed, so the 100% results are not an artifact
+of a lenient harness.
+
+Scope: the operand structure (bit order, shift-add, restoring division) is
+human-provided, values are unsigned, and the e2e failure seen for
+multiplication in M1 was not retried for division.
+
 ## Roadmap
 
 | | milestone |
 |---|---|
 | M0 | core abstractions + addition reproduction ✅ |
 | M1 | sub, compare, bitwise, multiply at an equal data budget ✅ |
+| M1b | four arithmetic operations + random expressions from four verified units ✅ |
 | M2 | function registry, id vectors, program tensors and an execution kernel |
 | M3 | schema search: train small, select by generalization to larger widths |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |

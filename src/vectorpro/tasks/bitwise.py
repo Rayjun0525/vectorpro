@@ -4,7 +4,7 @@ import operator
 from typing import Callable, Sequence
 
 from vectorpro.cells.base import CellSignature
-from vectorpro.tasks.base import LocalRule, Task
+from vectorpro.tasks.base import Bits, LocalRule, Task
 
 
 class Bitwise(Task):
@@ -29,3 +29,26 @@ class Bitwise(Task):
 AND = Bitwise("and", operator.and_)
 OR = Bitwise("or", operator.or_)
 XOR = Bitwise("xor", operator.xor)
+
+
+def _mux(inputs: Bits, state: Bits) -> tuple[Bits, Bits]:
+    x, y, s = inputs
+    return ((y if s else x),), ()
+
+
+class Mux(Task):
+    """Bitwise select over ``(x, y, s)``: bit ``i`` is ``y_i`` where ``s_i`` is 1, else ``x_i``."""
+
+    name = "mux"
+    arity = 3
+    local_rule = LocalRule("mux", CellSignature(3, 0, 1), _mux)
+
+    def reference(self, operands: Sequence[int], width: int) -> int:
+        x, y, s = operands
+        return (x & ~s) | (y & s)
+
+    def output_width(self, width: int) -> int:
+        return width
+
+
+MUX = Mux()
