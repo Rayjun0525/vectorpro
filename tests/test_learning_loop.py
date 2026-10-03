@@ -93,7 +93,7 @@ def test_registry_save_load_search_and_describe(tmp_path):
     assert [c.name for c in loaded.search("bitwise")] == ["xor"]
     xor_examples = examples(lambda o, w: o[0] ^ o[1], 2, 8, 8)
     assert [c.name for c in loaded.find_by_examples(2, xor_examples)] == ["xor"]
-    assert "11 | 1 -> 1 | 1" in loaded.get("add").describe()
+    assert "11 | 1 -> 1 | 1" in loaded.explain("add")
 
 
 def test_structure_candidates_match_requested_shape():

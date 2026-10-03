@@ -2,7 +2,8 @@
 
 Each round the learner gets more examples and tries, cheapest first:
 
-1. **reuse**: an expression over capabilities already in the registry;
+1. **reuse**: a composition of capabilities already in the registry, stored
+   as a vector program that calls them by address;
 2. **learn**: a new unit, trying generic structures simplest first and
    training each from the examples (final results only).
 
@@ -19,16 +20,17 @@ from typing import Callable
 
 from vectorpro.cells import CellSignature, MLPCell
 from vectorpro.execution import BitExecutable
-from vectorpro.expr import expr_to_data, render
+from vectorpro.expr import render
 from vectorpro.learning.examples import ExampleSet, ExampleStream, ExampleTask, TargetSource
 from vectorpro.learning.plan import LearningPlan, OutputWidth
 from vectorpro.learning.registry import (
     Capability,
     Registry,
-    composition_provenance,
     describe_schema,
+    program_provenance,
     unit_provenance,
 )
+from vectorpro.machine import compile_expression
 from vectorpro.learning.search import search_composition
 from vectorpro.schemas import Direction, MapSchema, ScanSchema
 from vectorpro.training import TrainConfig, Trainer
@@ -151,7 +153,8 @@ class Learner:
         )
         if expr is None:
             return None
-        provenance = composition_provenance(expr_to_data(expr))
+        program = compile_expression(expr, plan.arity, self.registry.key_of)
+        provenance = program_provenance(program, "composition search")
         return self._score(Attempt("reuse", render(expr)), plan, provenance, train, validation)
 
     def _learn_unit(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt:

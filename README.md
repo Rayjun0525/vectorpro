@@ -24,7 +24,11 @@ src/vectorpro/
   execution.py     BitExecutable: tensor-in/tensor-out executable tree
                    (execute, compiled, children, parameters)
   units.py         FunctionUnit = schema + cell + verification record (leaf)
-  programs/        wiring-only compositions that stay in tensor space:
+  machine/         the vector machine (M2b):
+    program.py     VectorProgram: a program's whole logic as tensors
+    kernel.py      task-agnostic fetch-execute kernel; ProgramExecutable
+    assembler.py   assemble / compile_expression (writing) and disassemble (reading)
+  programs/        Python-wired compositions used by M0–M1b experiments (legacy):
                    Fold, Window, ShiftAddMultiply, RestoringDivide, ExpressionProgram
   expr.py          expression AST shared by programs (execution) and tasks (reference)
   tasks/           Task (reference semantics) + LocalRule (verification oracle)
@@ -41,16 +45,23 @@ src/vectorpro/
     examples.py    target sources, example streams; the learner's only view of targets
     search.py      composition search over registered capabilities
     learner.py     reuse first, else learn a unit over generic structures, round by round
-    registry.py    capabilities stored as data; search, explain, run, save/load
+    registry.py    capabilities with address vectors; resolves calls, search, explain, save/load
 experiments/       declare specs or curricula, write JSON to results/
   curricula/       learning plans as JSON
+  authored.py      hand-written vector programs (mul, div, mod): assembly-level demos
+  targets.py       target values standing in for human labels
 ```
 
 Boundaries:
 
+- **All program logic is in vectors.** A program is a `VectorProgram`: address
+  vectors for the capabilities it calls, read and write matrices for arguments
+  and results, and control tensors for branches and loops. Capabilities call
+  each other by address vector, never by name. The kernel that runs programs
+  holds no task knowledge; it is the CPU, not the program.
 - **Tasks never execute.** They give reference results, plus optional local rules used only for verification.
 - **Schemas own structure, cells own the rule.** In M0–M1b schemas are given; from M2 the learner chooses among generic ones.
-- **Programs only wire.** Shift, slice, concatenate, broadcast and constants are allowed; every bit of computation goes through a unit, so a program is exactly as correct as its verifiable units.
+- **Legacy Python programs only wire.** In M0–M1b, `programs/` classes did wiring only; from M2b this role moves into vector programs.
 - **Integers appear only at the encode/decode boundary** of `BitExecutable.__call__`.
 
 ## Quick start
@@ -62,6 +73,7 @@ python experiments/add_width_generalization.py   # M0
 python experiments/primitives.py                  # M1
 python experiments/arithmetic.py                  # M1b
 python experiments/learning_loop.py               # M2
+python experiments/vector_programs.py             # M2b
 ```
 
 ## M0 result: addition width generalization
@@ -183,8 +195,8 @@ only the examples it asked for (`python experiments/learning_loop.py`, seeds
   ones, e.g. `triple_sub` = `((x0 add x0) add (x0 sub x1))`, with zero training.
 - **No forgetting.** Learning never modifies registered capabilities, and all
   of them behave identically after the full curriculum.
-- **Requests.** The saved registry (`results/registry.json`, 16 KB of data and
-  no code) reloads and answers text search (`"sum"` → add, add3, sum_xor), lookup
+- **Requests.** The saved registry (`results/registry.json`, data only and no
+  code; compositions are stored as vector programs since M2b) reloads and answers text search (`"sum"` → add, add3, sum_xor), lookup
   by unnamed examples (→ add3) and runs at 32 bits. `Capability.describe()`
   explains each capability in plain language, including its truth table.
 
@@ -192,6 +204,41 @@ only the examples it asked for (`python experiments/learning_loop.py`, seeds
 not have: a loop over bits (mul), information flowing from higher bits (avg),
 or a decision broadcast across all bits (max, which plateaus near 50%). These
 are the next capabilities to add to the *machine*, not to any one task.
+
+## M2b result: all program logic in vectors
+
+A program is now a `VectorProgram`, a set of tensors. Each step holds the
+**address vector** of the capability it calls, **read/write matrices** that
+route arguments and results between registers, and **control tensors** for
+conditional jumps and halting. A single kernel runs every program. It resolves
+address vectors to capabilities by similarity, and its sources contain no
+capability names. Capabilities call one another only by address, so the network
+of vectors plays the role of functions and classes. Compositions the learner
+finds are stored as such programs (`python experiments/vector_programs.py`,
+seeds 20261002–4).
+
+| capability | how it exists | 8/16/32-bit accuracy |
+|---|---|---|
+| and, or, xor, add, sub, lt, shr | learned units, 8–32 examples | 100% |
+| shl | found by reuse as `x add x` (8 examples) | 100% |
+| mul, div, mod | **hand-authored** loop/branch vector programs calling the learned units | 100% |
+| square, mul_add, sum_mod, diff_div | found by reuse from 8 examples: vector programs calling mul/div/mod | 100% |
+
+Controls, on every seed:
+
+- **Dispatch is by vector.** Swapping the address vectors of add and sub leaves
+  the mul program's tensors untouched but drops it to 3–8%.
+- **Every routing entry carries logic.** Each of the 64 single re-routings of
+  the mul program (one read, write or jump moved) changes its behaviour.
+- **The kernel is task-agnostic.** Its sources name no capability.
+- **Programs are durable data.** Registries reload from JSON with identical results,
+  and `explain()` disassembles any program from its tensors, e.g. `mul_add`:
+  `@0: r3 = mul(r0, r1)`, `@1: r4 = add(r2, r3)`.
+
+Not yet learned: the loop programs themselves. mul, div and mod were written
+by hand (`experiments/authored.py`, assembly-level). They show that the format
+and kernel hold loops and branches. Finding such programs from examples is the
+next step.
 
 ## Roadmap
 
@@ -201,7 +248,8 @@ are the next capabilities to add to the *machine*, not to any one task.
 | M1 | sub, compare, bitwise, multiply at an equal data budget ✅ |
 | M1b | four arithmetic operations + random expressions from four verified units ✅ |
 | M2 | learning loop: plans → reuse/learn → searchable, explainable registry ✅ |
-| M2b | generic structures for loops, high-to-low flow and broadcast (mul, avg, max); LLM-written plans |
+| M2b | all logic in vector programs: address-vector calls, routing and control tensors, task-agnostic kernel ✅ |
+| M2c | learn loop/branch vector programs from examples (mul, div, avg, max); LLM-written plans |
 | M3 | structure discovery beyond a fixed candidate set; capability search by behaviour vectors |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |
 | M5 | synthesizer, effect log for native calls, cost vs native/interpreter |
