@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Sequence
+from typing import Callable, Mapping, Sequence
 
 from vectorpro.cells.base import CellSignature
 from vectorpro.tasks.base import Bits, LocalRule, Task
@@ -81,6 +81,42 @@ class Multiplication(Task):
 
     def output_width(self, width: int) -> int:
         return 2 * width
+
+
+def udiv(a: int, b: int, width: int) -> int:
+    """Unsigned quotient; division by zero gives all ones (RISC-V ``divu``)."""
+    return a // b if b else (1 << width) - 1
+
+
+def urem(a: int, b: int, width: int) -> int:
+    """Unsigned remainder; division by zero gives the dividend (RISC-V ``remu``)."""
+    return a % b if b else a
+
+
+class DivMod(Task):
+    """Unsigned quotient in the low word, remainder in the high word."""
+
+    name = "divmod"
+    arity = 2
+
+    def reference(self, operands: Sequence[int], width: int) -> int:
+        a, b = operands
+        return udiv(a, b, width) | (urem(a, b, width) << width)
+
+    def output_width(self, width: int) -> int:
+        return 2 * width
+
+
+OpSemantics = Callable[[int, int, int], int]
+
+MODULAR_OPS: Mapping[str, OpSemantics] = {
+    "+": lambda a, b, w: (a + b) % (1 << w),
+    "-": lambda a, b, w: (a - b) % (1 << w),
+    "*": lambda a, b, w: (a * b) % (1 << w),
+    "/": udiv,
+    "%": urem,
+}
+"""``W``-bit unsigned semantics, as in C ``uintW_t`` with RISC-V division by zero."""
 
 
 class ModularSum(Task):

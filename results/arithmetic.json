@@ -1,0 +1,3887 @@
+{
+  "experiment": "arithmetic",
+  "runs": [
+    {
+      "seed": 20261002,
+      "units": {
+        "add": {
+          "operation": "add",
+          "seed": 20261002,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.547427018522285e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.547427018522285e-05
+            ]
+          },
+          "verification": {
+            "add": {
+              "rule": "full_adder",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "sub": {
+          "operation": "sub",
+          "seed": 20261002,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.2333528502495028e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.2333528502495028e-05
+            ]
+          },
+          "verification": {
+            "sub": {
+              "rule": "full_subtractor",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "and": {
+          "operation": "and",
+          "seed": 20261002,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 8.229799277614802e-06,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              8.229799277614802e-06
+            ]
+          },
+          "verification": {
+            "and": {
+              "rule": "and",
+              "domain_size": 4,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "mux": {
+          "operation": "mux",
+          "seed": 20261002,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.4263697266869713e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.4263697266869713e-05
+            ]
+          },
+          "verification": {
+            "mux": {
+              "rule": "mux",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        }
+      },
+      "operations": {
+        "add": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "sub": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "mul": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "divmod": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        }
+      },
+      "expressions": {
+        "width": 32,
+        "expressions": 100,
+        "ops_per_expression": {
+          "min": 1,
+          "max": 7,
+          "mean": 4.37
+        },
+        "modes": {
+          "neural/continuous": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "neural/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "table/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          }
+        }
+      },
+      "fault_control": {
+        "add in=[0, 0] state=[0] out[0]": {
+          "add": 0.2626034612490594,
+          "sub": 1.0,
+          "mul": 0.0,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[0] out[1]": {
+          "add": 0.2626034612490594,
+          "sub": 1.0,
+          "mul": 0.0007524454477050414,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[0]": {
+          "add": 0.26034612490594433,
+          "sub": 1.0,
+          "mul": 0.006772009029345372,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[1]": {
+          "add": 0.26034612490594433,
+          "sub": 1.0,
+          "mul": 0.006772009029345372,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[0]": {
+          "add": 0.2708803611738149,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[1]": {
+          "add": 0.2708803611738149,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[0]": {
+          "add": 0.06997742663656885,
+          "sub": 1.0,
+          "mul": 0.1437170805116629,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[1]": {
+          "add": 0.06997742663656885,
+          "sub": 1.0,
+          "mul": 0.1437170805116629,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[0]": {
+          "add": 0.2106847253574116,
+          "sub": 1.0,
+          "mul": 0.1437170805116629,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[1]": {
+          "add": 0.2106847253574116,
+          "sub": 1.0,
+          "mul": 0.1437170805116629,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[0]": {
+          "add": 0.3506395786305493,
+          "sub": 1.0,
+          "mul": 0.2219714070729872,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[1]": {
+          "add": 0.3506395786305493,
+          "sub": 1.0,
+          "mul": 0.2219714070729872,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[0]": {
+          "add": 0.3303235515425132,
+          "sub": 1.0,
+          "mul": 0.1542513167795335,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[1]": {
+          "add": 0.3303235515425132,
+          "sub": 1.0,
+          "mul": 0.1542513167795335,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[0]": {
+          "add": 0.3671933784800602,
+          "sub": 1.0,
+          "mul": 0.16930022573363432,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[1]": {
+          "add": 0.3671933784800602,
+          "sub": 1.0,
+          "mul": 0.16930022573363432,
+          "divmod": 1.0
+        },
+        "sub in=[0, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.26109857035364936,
+          "mul": 1.0,
+          "divmod": 0.5289691497366441
+        },
+        "sub in=[0, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.26109857035364936,
+          "mul": 1.0,
+          "divmod": 0.49209932279909707
+        },
+        "sub in=[1, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.2219714070729872,
+          "mul": 1.0,
+          "divmod": 0.6305492851768246
+        },
+        "sub in=[1, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.2219714070729872,
+          "mul": 1.0,
+          "divmod": 0.6305492851768246
+        },
+        "sub in=[0, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.1053423626787058,
+          "mul": 1.0,
+          "divmod": 0.6290443942814146
+        },
+        "sub in=[0, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.1053423626787058,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.19789315274642588,
+          "mul": 1.0,
+          "divmod": 0.5161775771256584
+        },
+        "sub in=[1, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.19789315274642588,
+          "mul": 1.0,
+          "divmod": 0.5161775771256584
+        },
+        "sub in=[0, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.3852520692249812,
+          "mul": 1.0,
+          "divmod": 0.7313769751693002
+        },
+        "sub in=[0, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.3852520692249812,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.2520692249811889,
+          "mul": 1.0,
+          "divmod": 0.6290443942814146
+        },
+        "sub in=[1, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.2520692249811889,
+          "mul": 1.0,
+          "divmod": 0.6290443942814146
+        },
+        "sub in=[0, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.3340857787810384,
+          "mul": 1.0,
+          "divmod": 0.7012791572610986
+        },
+        "sub in=[0, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.3340857787810384,
+          "mul": 1.0,
+          "divmod": 0.1000752445447705
+        },
+        "sub in=[1, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.39202407825432656,
+          "mul": 1.0,
+          "divmod": 0.7328818660647103
+        },
+        "sub in=[1, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.39202407825432656,
+          "mul": 1.0,
+          "divmod": 0.5515425131677953
+        },
+        "and in=[0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.07298720842738901,
+          "divmod": 1.0
+        },
+        "and in=[1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03837471783295711,
+          "divmod": 1.0
+        },
+        "and in=[0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03837471783295711,
+          "divmod": 1.0
+        },
+        "and in=[1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "mux in=[0, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.508653122648608
+        },
+        "mux in=[1, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.49209932279909707
+        },
+        "mux in=[0, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.49435665914221216
+        },
+        "mux in=[1, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5846501128668171
+        },
+        "mux in=[0, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.042136945071482315
+        },
+        "mux in=[1, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "mux in=[0, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09706546275395034
+        },
+        "mux in=[1, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09781790820165538
+        }
+      }
+    },
+    {
+      "seed": 20261003,
+      "units": {
+        "add": {
+          "operation": "add",
+          "seed": 20261003,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.5665184037061408e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.5665184037061408e-05
+            ]
+          },
+          "verification": {
+            "add": {
+              "rule": "full_adder",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "sub": {
+          "operation": "sub",
+          "seed": 20261003,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.3846029105479829e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.3846029105479829e-05
+            ]
+          },
+          "verification": {
+            "sub": {
+              "rule": "full_subtractor",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "and": {
+          "operation": "and",
+          "seed": 20261003,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.2139799764554482e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.2139799764554482e-05
+            ]
+          },
+          "verification": {
+            "and": {
+              "rule": "and",
+              "domain_size": 4,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "mux": {
+          "operation": "mux",
+          "seed": 20261003,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.7194421161548235e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.7194421161548235e-05
+            ]
+          },
+          "verification": {
+            "mux": {
+              "rule": "mux",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        }
+      },
+      "operations": {
+        "add": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "sub": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "mul": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "divmod": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        }
+      },
+      "expressions": {
+        "width": 32,
+        "expressions": 100,
+        "ops_per_expression": {
+          "min": 1,
+          "max": 7,
+          "mean": 4.37
+        },
+        "modes": {
+          "neural/continuous": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "neural/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "table/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          }
+        }
+      },
+      "fault_control": {
+        "add in=[0, 0] state=[0] out[0]": {
+          "add": 0.2595936794582393,
+          "sub": 1.0,
+          "mul": 0.0,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[0] out[1]": {
+          "add": 0.2595936794582393,
+          "sub": 1.0,
+          "mul": 0.0007524454477050414,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[0]": {
+          "add": 0.2505643340857788,
+          "sub": 1.0,
+          "mul": 0.006772009029345372,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[1]": {
+          "add": 0.2505643340857788,
+          "sub": 1.0,
+          "mul": 0.006772009029345372,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[0]": {
+          "add": 0.2693754702784048,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[1]": {
+          "add": 0.2693754702784048,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[0]": {
+          "add": 0.07223476297968397,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[1]": {
+          "add": 0.07223476297968397,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[0]": {
+          "add": 0.2234762979683973,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[1]": {
+          "add": 0.2234762979683973,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[0]": {
+          "add": 0.35364936042136946,
+          "sub": 1.0,
+          "mul": 0.22272385252069224,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[1]": {
+          "add": 0.35364936042136946,
+          "sub": 1.0,
+          "mul": 0.22272385252069224,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[0]": {
+          "add": 0.33935289691497367,
+          "sub": 1.0,
+          "mul": 0.15124153498871332,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[1]": {
+          "add": 0.33935289691497367,
+          "sub": 1.0,
+          "mul": 0.15124153498871332,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[0]": {
+          "add": 0.3581640331075997,
+          "sub": 1.0,
+          "mul": 0.18133935289691497,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[1]": {
+          "add": 0.3581640331075997,
+          "sub": 1.0,
+          "mul": 0.18133935289691497,
+          "divmod": 1.0
+        },
+        "sub in=[0, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.26787057938299474,
+          "mul": 1.0,
+          "divmod": 0.5402558314522197
+        },
+        "sub in=[0, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.26787057938299474,
+          "mul": 1.0,
+          "divmod": 0.5048908954100828
+        },
+        "sub in=[1, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.23551542513167795,
+          "mul": 1.0,
+          "divmod": 0.6463506395786306
+        },
+        "sub in=[1, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.23551542513167795,
+          "mul": 1.0,
+          "divmod": 0.6463506395786306
+        },
+        "sub in=[0, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.1000752445447705,
+          "mul": 1.0,
+          "divmod": 0.6380737396538751
+        },
+        "sub in=[0, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.1000752445447705,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.19563581640331076,
+          "mul": 1.0,
+          "divmod": 0.5191873589164786
+        },
+        "sub in=[1, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.19563581640331076,
+          "mul": 1.0,
+          "divmod": 0.5191873589164786
+        },
+        "sub in=[0, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.37020316027088035,
+          "mul": 1.0,
+          "divmod": 0.7291196388261851
+        },
+        "sub in=[0, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.37020316027088035,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.23927765237020315,
+          "mul": 1.0,
+          "divmod": 0.6380737396538751
+        },
+        "sub in=[1, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.23927765237020315,
+          "mul": 1.0,
+          "divmod": 0.6380737396538751
+        },
+        "sub in=[0, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.3235515425131678,
+          "mul": 1.0,
+          "divmod": 0.7110609480812641
+        },
+        "sub in=[0, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.3235515425131678,
+          "mul": 1.0,
+          "divmod": 0.10082768999247554
+        },
+        "sub in=[1, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.400300978179082,
+          "mul": 1.0,
+          "divmod": 0.7298720842738902
+        },
+        "sub in=[1, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.400300978179082,
+          "mul": 1.0,
+          "divmod": 0.5726109857035365
+        },
+        "and in=[0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.07298720842738901,
+          "divmod": 1.0
+        },
+        "and in=[1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03837471783295711,
+          "divmod": 1.0
+        },
+        "and in=[0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03837471783295711,
+          "divmod": 1.0
+        },
+        "and in=[1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.003762227238525207,
+          "divmod": 1.0
+        },
+        "mux in=[0, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5191873589164786
+        },
+        "mux in=[1, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5048908954100828
+        },
+        "mux in=[0, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5071482317531979
+        },
+        "mux in=[1, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5989465763732129
+        },
+        "mux in=[0, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.042136945071482315
+        },
+        "mux in=[1, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "mux in=[0, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09781790820165538
+        },
+        "mux in=[1, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09781790820165538
+        }
+      }
+    },
+    {
+      "seed": 20261004,
+      "units": {
+        "add": {
+          "operation": "add",
+          "seed": 20261004,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.4111566997598857e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.4111566997598857e-05
+            ]
+          },
+          "verification": {
+            "add": {
+              "rule": "full_adder",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "sub": {
+          "operation": "sub",
+          "seed": 20261004,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.2824299119529314e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.2824299119529314e-05
+            ]
+          },
+          "verification": {
+            "sub": {
+              "rule": "full_subtractor",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "and": {
+          "operation": "and",
+          "seed": 20261004,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.2116730431444012e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.2116730431444012e-05
+            ]
+          },
+          "verification": {
+            "and": {
+              "rule": "and",
+              "domain_size": 4,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 224,
+                "correct": 224,
+                "accuracy": 1.0
+              },
+              {
+                "name": "8bit_exhaustive",
+                "width": 8,
+                "total": 65536,
+                "correct": 65536,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10329,
+                "correct": 10329,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10665,
+                "correct": 10665,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 11337,
+                "correct": 11337,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        },
+        "mux": {
+          "operation": "mux",
+          "seed": 20261004,
+          "train": {
+            "width": 4,
+            "examples": 32,
+            "steps": 3000,
+            "final_loss": 1.4182299310050439e-05,
+            "train_exact_match": 1.0,
+            "restart_losses": [
+              1.4182299310050439e-05
+            ]
+          },
+          "verification": {
+            "mux": {
+              "rule": "mux",
+              "domain_size": 8,
+              "mismatches": [],
+              "exact": true
+            }
+          },
+          "evaluations": {
+            "neural/continuous": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "neural/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ],
+            "table/quantized": [
+              {
+                "name": "4bit_unseen",
+                "width": 4,
+                "total": 4064,
+                "correct": 4064,
+                "accuracy": 1.0
+              },
+              {
+                "name": "6bit_exhaustive",
+                "width": 6,
+                "total": 262144,
+                "correct": 262144,
+                "accuracy": 1.0
+              },
+              {
+                "name": "16bit_random+edge",
+                "width": 16,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "32bit_random+edge",
+                "width": 32,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              },
+              {
+                "name": "64bit_random+edge",
+                "width": 64,
+                "total": 10000,
+                "correct": 10000,
+                "accuracy": 1.0
+              }
+            ]
+          }
+        }
+      },
+      "operations": {
+        "add": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "sub": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "mul": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        },
+        "divmod": {
+          "neural/continuous": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "neural/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ],
+          "table/quantized": [
+            {
+              "name": "4bit_exhaustive",
+              "width": 4,
+              "total": 256,
+              "correct": 256,
+              "accuracy": 1.0
+            },
+            {
+              "name": "8bit_exhaustive",
+              "width": 8,
+              "total": 65536,
+              "correct": 65536,
+              "accuracy": 1.0
+            },
+            {
+              "name": "16bit_random+edge",
+              "width": 16,
+              "total": 1329,
+              "correct": 1329,
+              "accuracy": 1.0
+            },
+            {
+              "name": "32bit_random+edge",
+              "width": 32,
+              "total": 1665,
+              "correct": 1665,
+              "accuracy": 1.0
+            },
+            {
+              "name": "64bit_random+edge",
+              "width": 64,
+              "total": 2337,
+              "correct": 2337,
+              "accuracy": 1.0
+            }
+          ]
+        }
+      },
+      "expressions": {
+        "width": 32,
+        "expressions": 100,
+        "ops_per_expression": {
+          "min": 1,
+          "max": 7,
+          "mean": 4.19
+        },
+        "modes": {
+          "neural/continuous": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "neural/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          },
+          "table/quantized": {
+            "fully_correct": 100,
+            "samples": 12800,
+            "correct": 12800,
+            "failures": []
+          }
+        }
+      },
+      "fault_control": {
+        "add in=[0, 0] state=[0] out[0]": {
+          "add": 0.26636568848758463,
+          "sub": 1.0,
+          "mul": 0.0,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[0] out[1]": {
+          "add": 0.26636568848758463,
+          "sub": 1.0,
+          "mul": 0.0007524454477050414,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[0]": {
+          "add": 0.2558314522197141,
+          "sub": 1.0,
+          "mul": 0.007524454477050414,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[0] out[1]": {
+          "add": 0.2558314522197141,
+          "sub": 1.0,
+          "mul": 0.007524454477050414,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[0]": {
+          "add": 0.27012791572610984,
+          "sub": 1.0,
+          "mul": 0.004514672686230248,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[0] out[1]": {
+          "add": 0.27012791572610984,
+          "sub": 1.0,
+          "mul": 0.004514672686230248,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[0]": {
+          "add": 0.07148231753197894,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[0] out[1]": {
+          "add": 0.07148231753197894,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[0]": {
+          "add": 0.2144469525959368,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[0, 0] state=[1] out[1]": {
+          "add": 0.2144469525959368,
+          "sub": 1.0,
+          "mul": 0.145221971407073,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[0]": {
+          "add": 0.35966892400300976,
+          "sub": 1.0,
+          "mul": 0.22422874341610233,
+          "divmod": 1.0
+        },
+        "add in=[1, 0] state=[1] out[1]": {
+          "add": 0.35966892400300976,
+          "sub": 1.0,
+          "mul": 0.22422874341610233,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[0]": {
+          "add": 0.326561324303988,
+          "sub": 1.0,
+          "mul": 0.16027088036117382,
+          "divmod": 1.0
+        },
+        "add in=[0, 1] state=[1] out[1]": {
+          "add": 0.326561324303988,
+          "sub": 1.0,
+          "mul": 0.16027088036117382,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[0]": {
+          "add": 0.3491346877351392,
+          "sub": 1.0,
+          "mul": 0.17607223476297967,
+          "divmod": 1.0
+        },
+        "add in=[1, 1] state=[1] out[1]": {
+          "add": 0.3491346877351392,
+          "sub": 1.0,
+          "mul": 0.17607223476297967,
+          "divmod": 1.0
+        },
+        "sub in=[0, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.2580887885628292,
+          "mul": 1.0,
+          "divmod": 0.5229495861550038
+        },
+        "sub in=[0, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.2580887885628292,
+          "mul": 1.0,
+          "divmod": 0.4890895410082769
+        },
+        "sub in=[1, 0] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.23777276147479307,
+          "mul": 1.0,
+          "divmod": 0.6343115124153499
+        },
+        "sub in=[1, 0] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.23777276147479307,
+          "mul": 1.0,
+          "divmod": 0.6343115124153499
+        },
+        "sub in=[0, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.10158013544018059,
+          "mul": 1.0,
+          "divmod": 0.6237772761474794
+        },
+        "sub in=[0, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.10158013544018059,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 1] state=[0] out[0]": {
+          "add": 1.0,
+          "sub": 0.18284424379232506,
+          "mul": 1.0,
+          "divmod": 0.5026335590669676
+        },
+        "sub in=[1, 1] state=[0] out[1]": {
+          "add": 1.0,
+          "sub": 0.18284424379232506,
+          "mul": 1.0,
+          "divmod": 0.5026335590669676
+        },
+        "sub in=[0, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.38148984198645597,
+          "mul": 1.0,
+          "divmod": 0.7208427389014297
+        },
+        "sub in=[0, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.38148984198645597,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "sub in=[1, 0] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.24529721595184348,
+          "mul": 1.0,
+          "divmod": 0.6237772761474794
+        },
+        "sub in=[1, 0] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.24529721595184348,
+          "mul": 1.0,
+          "divmod": 0.6237772761474794
+        },
+        "sub in=[0, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.34462001504890893,
+          "mul": 1.0,
+          "divmod": 0.7027840481565086
+        },
+        "sub in=[0, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.34462001504890893,
+          "mul": 1.0,
+          "divmod": 0.10082768999247554
+        },
+        "sub in=[1, 1] state=[1] out[0]": {
+          "add": 1.0,
+          "sub": 0.4070729872084274,
+          "mul": 1.0,
+          "divmod": 0.7306245297215952
+        },
+        "sub in=[1, 1] state=[1] out[1]": {
+          "add": 1.0,
+          "sub": 0.4070729872084274,
+          "mul": 1.0,
+          "divmod": 0.5613243039879608
+        },
+        "and in=[0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.07298720842738901,
+          "divmod": 1.0
+        },
+        "and in=[1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03912716328066215,
+          "divmod": 1.0
+        },
+        "and in=[0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.03837471783295711,
+          "divmod": 1.0
+        },
+        "and in=[1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 0.004514672686230248,
+          "divmod": 1.0
+        },
+        "mux in=[0, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5056433408577878
+        },
+        "mux in=[1, 0, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.4890895410082769
+        },
+        "mux in=[0, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.49134687735139204
+        },
+        "mux in=[1, 1, 0] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.5846501128668171
+        },
+        "mux in=[0, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.042136945071482315
+        },
+        "mux in=[1, 0, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.0030097817908201654
+        },
+        "mux in=[0, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09781790820165538
+        },
+        "mux in=[1, 1, 1] state=[] out[0]": {
+          "add": 1.0,
+          "sub": 1.0,
+          "mul": 1.0,
+          "divmod": 0.09857035364936043
+        }
+      }
+    }
+  ]
+}

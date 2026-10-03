@@ -20,38 +20,13 @@ import random
 from pathlib import Path
 
 from vectorpro.benchmark import OperationSpec, WidthSuite, evaluate_modes, run_spec, summarize
-from vectorpro.cells import CellSignature, MLPCell
+from vectorpro.catalog import UNIT_SPECS, map_unit, scan_unit
 from vectorpro.programs import ShiftAddMultiply
-from vectorpro.schemas import MapSchema, ScanSchema
-from vectorpro.tasks import (
-    AND,
-    FULL_ADDER,
-    FULL_SUBTRACTOR,
-    LESS_THAN,
-    OR,
-    XOR,
-    Addition,
-    Bitwise,
-    LessThan,
-    Multiplication,
-    Subtraction,
-)
+from vectorpro.tasks import AND, FULL_ADDER, Multiplication
 from vectorpro.training import TrainConfig
 from vectorpro.units import FunctionUnit, iter_units
 
 MUL_SUITE = WidthSuite(n_random=1_000)
-
-
-def scan_unit(name: str, signature: CellSignature, initial_state: tuple[int, ...]) -> FunctionUnit:
-    return FunctionUnit(name, ScanSchema(2, initial_state), MLPCell(signature))
-
-
-def map_unit(name: str) -> FunctionUnit:
-    return FunctionUnit(name, MapSchema(2), MLPCell(CellSignature(2, 0, 1)))
-
-
-def bitwise_spec(task: Bitwise) -> OperationSpec:
-    return OperationSpec(task.name, task, lambda: map_unit(task.name), {task.name: task.local_rule})
 
 
 def build_mul() -> ShiftAddMultiply:
@@ -59,15 +34,7 @@ def build_mul() -> ShiftAddMultiply:
 
 
 SPECS = {
-    "add": OperationSpec("add", Addition(), lambda: scan_unit("add", FULL_ADDER.signature, (0,)),
-                         {"add": FULL_ADDER}),
-    "sub": OperationSpec("sub", Subtraction(), lambda: scan_unit("sub", FULL_SUBTRACTOR.signature, (0,)),
-                         {"sub": FULL_SUBTRACTOR}),
-    "lt": OperationSpec("lt", LessThan(), lambda: scan_unit("lt", LESS_THAN.signature, (0,)),
-                        {"lt": LESS_THAN}),
-    "and": bitwise_spec(AND),
-    "or": bitwise_spec(OR),
-    "xor": bitwise_spec(XOR),
+    **{name: UNIT_SPECS[name] for name in ("add", "sub", "lt", "and", "or", "xor")},
     "mul_e2e": OperationSpec("mul_e2e", Multiplication(), build_mul,
                              {"gate": AND.local_rule, "adder": FULL_ADDER}, MUL_SUITE),
     "mul_e2e_r5": OperationSpec("mul_e2e_r5", Multiplication(), build_mul,
