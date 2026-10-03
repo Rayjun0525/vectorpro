@@ -14,7 +14,7 @@ from typing import Protocol, Sequence
 
 import torch
 
-from vectorpro.execution import BitExecutable
+from vectorpro.execution import BitExecutable, fit_width
 from vectorpro.machine.program import VectorProgram, constant_patterns
 from vectorpro.quantize import Quantizer
 
@@ -32,13 +32,6 @@ class RunResult:
     output: torch.Tensor   # (B, W)
     halted: torch.Tensor   # (B,) bool
     clocks: int
-
-
-def _fit(bits: torch.Tensor, width: int) -> torch.Tensor:
-    """Truncate or zero-extend results to the register width."""
-    if bits.shape[1] >= width:
-        return bits[:, :width]
-    return torch.cat([bits, bits.new_zeros(bits.shape[0], width - bits.shape[1])], dim=1)
 
 
 def run(
@@ -74,7 +67,7 @@ def run(
             op = ops[s]
             if op is not None:
                 args = torch.einsum("kr,brw->bkw", program.reads[s], r)[:, : op.arity]
-                result = _fit(op.execute(args, quantizer), width)
+                result = fit_width(op.execute(args, quantizer), width)
                 w = program.writes[s, :n_regs]
                 r = r * (1 - w)[None, :, None] + w[None, :, None] * result[:, None, :]
                 regs[rows] = r

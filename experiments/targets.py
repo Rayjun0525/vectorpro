@@ -36,5 +36,10 @@ TARGETS = {
     "diff_div": lambda o, w: ((o[0] - o[1]) & _mask(w)) // o[2] if o[2] else _mask(w),
     "square": lambda o, w: (o[0] * o[0]) & _mask(w),
     "div": lambda o, w: o[0] // o[1] if o[1] else _mask(w),
+    "neg": lambda o, w: (-o[0]) & _mask(w),
+    "nand": lambda o, w: ~(o[0] & o[1]) & _mask(w),
+    "min": lambda o, w: min(o[0], o[1]),
+    "popcount": lambda o, w: bin(o[0]).count("1"),
+    "reverse": lambda o, w: int(format(o[0], f"0{w}b")[::-1], 2),
     "mod": lambda o, w: o[0] % o[1] if o[1] else o[0],
 }

@@ -5,7 +5,9 @@ Each round the learner gets more examples and tries, cheapest first:
 1. **reuse**: a composition of capabilities already in the registry, stored
    as a vector program that calls them by address;
 2. **learn**: a new unit, trying generic structures simplest first and
-   training each from the examples (final results only).
+   training each from the examples (final results only);
+3. **loop**: a loop program, searching for the body of a generic bit fold
+   over registered capabilities.
 
 A candidate is accepted when its table-compiled form reproduces every training
 and validation example. The learner never sees the target source, the task's
@@ -30,8 +32,9 @@ from vectorpro.learning.registry import (
     program_provenance,
     unit_provenance,
 )
-from vectorpro.machine import compile_expression
+from vectorpro.learning.loops import find_primitives, search_bit_fold
 from vectorpro.learning.search import search_composition
+from vectorpro.machine import compile_bit_fold, compile_expression
 from vectorpro.schemas import Direction, MapSchema, ScanSchema
 from vectorpro.training import TrainConfig, Trainer
 from vectorpro.units import FunctionUnit
@@ -72,7 +75,8 @@ def structure_candidates(name: str, arity: int, output: OutputWidth) -> list[Str
 class LearnerConfig:
     train: TrainConfig = field(default_factory=lambda: TrainConfig(steps=1500))
     restarts: int = 2
-    max_depth: int = 2
+    search_size: int = 3
+    search_budget: int = 2_000_000
 
 
 @dataclass
@@ -141,21 +145,43 @@ class Learner:
 
     def _attempt(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt:
         reused = self._reuse(plan, train, validation)
-        if reused is not None:
+        if reused is not None and reused.accepted:
             return reused
-        return self._learn_unit(plan, train, validation)
+        learned = self._learn_unit(plan, train, validation)
+        if learned.accepted:
+            return learned
+        looped = self._loop(plan, train, validation)
+        if looped is not None and looped.accepted:
+            return looped
+        candidates = [a for a in (reused, learned, looped) if a is not None]
+        return max(candidates, key=lambda a: (a.validation_accuracy, a.train_accuracy))
 
     def _reuse(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt | None:
         if plan.output is not OutputWidth.SAME:
             return None
-        expr = search_composition(
-            self.registry.operators(), plan.arity, [train, validation], self.config.max_depth
-        )
+        expr = search_composition(self.registry.operators(), plan.arity, [train, validation],
+                                  self.config.search_size, self.config.search_budget)
         if expr is None:
             return None
         program = compile_expression(expr, plan.arity, self.registry.key_of)
         provenance = program_provenance(program, "composition search")
         return self._score(Attempt("reuse", render(expr)), plan, provenance, train, validation)
+
+    def _loop(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt | None:
+        if plan.output is not OutputWidth.SAME:
+            return None
+        # Fold bodies may use units and straight-line programs, but no loops inside loops (yet).
+        operators = [op for op in self.registry.operators() if not op.loops]
+        primitives = find_primitives(operators)
+        if primitives is None:  # the registry cannot yet extract bits
+            return None
+        fold = search_bit_fold(operators, plan.arity, [train, validation],
+                               self.config.search_size, self.config.search_budget)
+        if fold is None:
+            return None
+        program = compile_bit_fold(fold, self.registry.key_of, primitives)
+        provenance = program_provenance(program, "loop search")
+        return self._score(Attempt("loop", fold.describe()), plan, provenance, train, validation)
 
     def _learn_unit(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt:
         best = Attempt("learn")

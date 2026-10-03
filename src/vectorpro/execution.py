@@ -52,3 +52,30 @@ class BitExecutable(ABC):
         operands = BitCodec.encode_operands(operand_tuples, width)
         with torch.no_grad():
             return BitCodec.decode(self.execute(operands, quantizer))
+
+
+def fit_width(bits: torch.Tensor, width: int) -> torch.Tensor:
+    """Truncate or zero-extend ``(B, n)`` bits to ``width``: how results land in a W-bit register."""
+    if bits.shape[1] >= width:
+        return bits[:, :width]
+    return torch.cat([bits, bits.new_zeros(bits.shape[0], width - bits.shape[1])], dim=1)
+
+
+class Fitted(BitExecutable):
+    """An executable whose result is fitted to the operand width (``W -> W``)."""
+
+    def __init__(self, inner: BitExecutable) -> None:
+        self.inner = inner
+        self.arity = inner.arity
+
+    def output_width(self, width: int) -> int:
+        return width
+
+    def execute(self, operands: torch.Tensor, quantizer: Quantizer) -> torch.Tensor:
+        return fit_width(self.inner.execute(operands, quantizer), operands.shape[-1])
+
+    def children(self) -> Sequence[BitExecutable]:
+        return (self.inner,)
+
+    def compiled(self) -> Fitted:
+        return Fitted(self.inner.compiled())
