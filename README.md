@@ -2,6 +2,11 @@
 
 Vector programs executed by learned, verifiable state-transition cells.
 
+The goal: people state intent, a language model turns it into a **learning
+plan** (what to learn, from which targets, when it is done), and the program
+itself is **learned, not coded**. Learned programs accumulate in a registry
+that can be searched, explained in plain language, and asked to run.
+
 A function is expressed as a **schema** (the iteration structure) applied to a
 small learned **cell** (the shared local rule). Because a cell's binary domain
 is finite, it can be verified exhaustively. An exactly verified cell inside a
@@ -31,13 +36,20 @@ src/vectorpro/
   catalog.py       standard learnable primitive units and their specs
   faults.py        single-entry fault injection for negative controls
   data.py          operand sets, splits, edge cases
-experiments/       declare specs, write JSON to results/
+  learning/        the learning loop (M2):
+    plan.py        LearningPlan: plain-data plan (what an LLM would emit)
+    examples.py    target sources, example streams; the learner's only view of targets
+    search.py      composition search over registered capabilities
+    learner.py     reuse first, else learn a unit over generic structures, round by round
+    registry.py    capabilities stored as data; search, explain, run, save/load
+experiments/       declare specs or curricula, write JSON to results/
+  curricula/       learning plans as JSON
 ```
 
 Boundaries:
 
 - **Tasks never execute.** They give reference results, plus optional local rules used only for verification.
-- **Schemas own structure, cells own the rule.** Schemas are currently human-provided. Discovering them is milestone M3.
+- **Schemas own structure, cells own the rule.** In M0–M1b schemas are given; from M2 the learner chooses among generic ones.
 - **Programs only wire.** Shift, slice, concatenate, broadcast and constants are allowed; every bit of computation goes through a unit, so a program is exactly as correct as its verifiable units.
 - **Integers appear only at the encode/decode boundary** of `BitExecutable.__call__`.
 
@@ -49,6 +61,7 @@ pytest
 python experiments/add_width_generalization.py   # M0
 python experiments/primitives.py                  # M1
 python experiments/arithmetic.py                  # M1b
+python experiments/learning_loop.py               # M2
 ```
 
 ## M0 result: addition width generalization
@@ -137,6 +150,49 @@ Scope: the operand structure (bit order, shift-add, restoring division) is
 human-provided, values are unsigned, and the e2e failure seen for
 multiplication in M1 was not retried for division.
 
+## M2 result: the learning loop
+
+No per-task code and no per-task structure. A curriculum of 17 plans
+(`experiments/curricula/arithmetic.json`, plain data) is fed to one learner in
+order. For each plan, the learner draws examples round by round: 8, 16, 32, 64
+at 4 bits, plus 32 validation examples at 8 bits. It first searches for a
+composition of what the registry already holds. Otherwise it learns a new unit
+by trying generic structures (map, scan from the low or high bit), simplest
+first. It accepts a candidate once its table form reproduces every example,
+then registers it. The learner never sees target functions or local rules,
+only the examples it asked for (`python experiments/learning_loop.py`, seeds
+20261002–4).
+
+| plan | learned | how | examples used |
+|---|---|---|---|
+| and, or, xor, xnor, mux | 3/3 each | new unit (map) | 8 |
+| add, sub | 3/3 each | new unit (low-to-high scan, carry) | 8–32 |
+| lt, gt | 3/3 each | new unit (low-to-high scan, final state) | 8–16 |
+| double, add3, sub_add, triple_sub, sum_xor | 3/3 each | **reuse**: composition found, no training | 8 |
+| mul, avg, max | 0/3 | not learned within 64 examples | – |
+
+- **Structure was chosen, not given.** The learner picked map for bitwise tasks
+  and a low-to-high scan for add, sub, lt and gt.
+- **Learned rules are exact.** An experimenter-only audit compared all 7 audited
+  unit tables (and, or, xor, mux, add, sub, lt) with the known rules: 21/21
+  exact over 3 seeds. Every learned capability is 100% on 16- and 32-bit probes.
+- **Accuracy rises with data.** For example, `lt` on seed 20261002 had 88%
+  validation from 8 examples, then 100% from 16. Every round is logged with
+  its examples, structure, accuracies and probe.
+- **Reuse grows with the registry.** Later tasks were composed from earlier
+  ones, e.g. `triple_sub` = `((x0 add x0) add (x0 sub x1))`, with zero training.
+- **No forgetting.** Learning never modifies registered capabilities, and all
+  of them behave identically after the full curriculum.
+- **Requests.** The saved registry (`results/registry.json`, 16 KB of data and
+  no code) reloads and answers text search (`"sum"` → add, add3, sum_xor), lookup
+  by unnamed examples (→ add3) and runs at 32 bits. `Capability.describe()`
+  explains each capability in plain language, including its truth table.
+
+**Where it stops.** mul, avg and max need structure the generic candidates do
+not have: a loop over bits (mul), information flowing from higher bits (avg),
+or a decision broadcast across all bits (max, which plateaus near 50%). These
+are the next capabilities to add to the *machine*, not to any one task.
+
 ## Roadmap
 
 | | milestone |
@@ -144,7 +200,8 @@ multiplication in M1 was not retried for division.
 | M0 | core abstractions + addition reproduction ✅ |
 | M1 | sub, compare, bitwise, multiply at an equal data budget ✅ |
 | M1b | four arithmetic operations + random expressions from four verified units ✅ |
-| M2 | function registry, id vectors, program tensors and an execution kernel |
-| M3 | schema search: train small, select by generalization to larger widths |
+| M2 | learning loop: plans → reuse/learn → searchable, explainable registry ✅ |
+| M2b | generic structures for loops, high-to-low flow and broadcast (mul, avg, max); LLM-written plans |
+| M3 | structure discovery beyond a fixed candidate set; capability search by behaviour vectors |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |
 | M5 | synthesizer, effect log for native calls, cost vs native/interpreter |

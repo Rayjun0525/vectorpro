@@ -39,6 +39,24 @@ class ScanSchema(Schema):
     def output_width(self, width: int, signature: CellSignature) -> int:
         return width * signature.n_outputs + (signature.n_state if self.emit_final_state else 0)
 
+    def to_spec(self) -> dict:
+        return {
+            "kind": "scan",
+            "arity": self.arity,
+            "initial_state": list(self.initial_state),
+            "direction": self.direction.value,
+            "emit_final_state": self.emit_final_state,
+        }
+
+    @classmethod
+    def from_spec(cls, spec: dict) -> ScanSchema:
+        return cls(
+            spec["arity"],
+            tuple(spec["initial_state"]),
+            Direction(spec["direction"]),
+            spec["emit_final_state"],
+        )
+
     def run(self, cell: Cell, operands: torch.Tensor, quantizer: Quantizer) -> torch.Tensor:
         self.check(cell.signature)
         batch, _, width = operands.shape
