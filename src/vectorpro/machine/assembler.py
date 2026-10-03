@@ -44,6 +44,7 @@ def assemble(
     registers: Mapping[str, str],
     output: str,
     key_of: Callable[[str], torch.Tensor],
+    headroom: int = 0,
 ) -> VectorProgram:
     """``registers`` maps every register name to its initial constant (inputs override it)."""
     names = list(registers)
@@ -84,6 +85,7 @@ def assemble(
         inputs=torch.stack([_one_hot(reg[i], n_regs) for i in inputs]),
         init=torch.stack([_one_hot(CONSTANTS.index(registers[n]), len(CONSTANTS)) for n in names]),
         output=_one_hot(reg[output], n_regs),
+        headroom=torch.tensor([float(headroom)]),
     )
 
 
@@ -91,6 +93,7 @@ def compile_expression(
     expr: Expr,
     arity: int,
     key_of: Callable[[str], torch.Tensor],
+    headroom: int = 0,
 ) -> VectorProgram:
     """Straight-line program: one register per operand, constant and operator node (post-order)."""
     instrs: list[Instr] = []
@@ -112,7 +115,7 @@ def compile_expression(
     if not instrs:  # a bare leaf: a branch-only step so the program has one
         instrs.append(Instr())
     instrs[-1] = replace(instrs[-1], then=HALT, otherwise=HALT)
-    return assemble(instrs, [f"x{i}" for i in range(arity)], registers, result, key_of)
+    return assemble(instrs, [f"x{i}" for i in range(arity)], registers, result, key_of, headroom)
 
 
 def disassemble(program: VectorProgram, resolver: Resolver) -> list[str]:
@@ -126,7 +129,7 @@ def disassemble(program: VectorProgram, resolver: Resolver) -> list[str]:
     def step_name(i: int) -> str:
         return "halt" if i == n_steps else f"@{i}"
 
-    lines = []
+    lines = [f"registers carry {program.extra_bits} extra bit(s)"] if program.extra_bits else []
     for r in range(n_regs):
         start = f"input x{inputs[r]}" if r in inputs else CONSTANTS[int(program.init[r].argmax())]
         lines.append(f"{reg_name(r)} = {start}")

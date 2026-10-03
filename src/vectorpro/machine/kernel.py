@@ -42,7 +42,10 @@ def run(
     budget: int | None = None,
 ) -> RunResult:
     """Execute ``program`` on ``operands: (B, arity, W)``."""
-    batch, _, width = operands.shape
+    batch, arity, out_width = operands.shape
+    width = out_width + program.extra_bits  # register width
+    if width != out_width:
+        operands = torch.cat([operands, operands.new_zeros(batch, arity, width - out_width)], dim=2)
     n_steps, n_regs = program.n_steps, program.n_registers
     budget = budget if budget is not None else 16 * n_steps * (width + 2)
 
@@ -77,7 +80,7 @@ def run(
             new_pc[rows] = torch.where(flag[:, None], program.next_true[s], program.next_false[s])
         pc = new_pc
 
-    output = torch.einsum("r,brw->bw", program.output, regs)
+    output = torch.einsum("r,brw->bw", program.output, regs)[:, :out_width]
     return RunResult(output, pc[:, n_steps] > 0.5, clocks)
 
 
