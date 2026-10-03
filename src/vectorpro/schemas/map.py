@@ -24,6 +24,13 @@ class MapSchema(Schema):
     def output_width(self, width: int, signature: CellSignature) -> int:
         return width * signature.n_outputs
 
+    def to_spec(self) -> dict:
+        return {"kind": "map", "arity": self.arity}
+
+    @classmethod
+    def from_spec(cls, spec: dict) -> MapSchema:
+        return cls(spec["arity"])
+
     def run(self, cell: Cell, operands: torch.Tensor, quantizer: Quantizer) -> torch.Tensor:
         self.check(cell.signature)
         batch, arity, width = operands.shape

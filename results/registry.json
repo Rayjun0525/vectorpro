@@ -1,0 +1,1003 @@
+{
+ "capabilities": [
+  {
+   "plan": {
+    "name": "and",
+    "description": "bitwise and of two numbers",
+    "arity": 2,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "bitwise"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "map",
+     "arity": 2
+    },
+    "signature": [
+     2,
+     0,
+     1
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "and",
+    "domain_size": 4,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "or",
+    "description": "bitwise or of two numbers",
+    "arity": 2,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "bitwise"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "map",
+     "arity": 2
+    },
+    "signature": [
+     2,
+     0,
+     1
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "or",
+    "domain_size": 4,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "xor",
+    "description": "bitwise exclusive or of two numbers",
+    "arity": 2,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "bitwise"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "map",
+     "arity": 2
+    },
+    "signature": [
+     2,
+     0,
+     1
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "xor",
+    "domain_size": 4,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "xnor",
+    "description": "bitwise equality of two numbers",
+    "arity": 2,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "bitwise"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "map",
+     "arity": 2
+    },
+    "signature": [
+     2,
+     0,
+     1
+    ],
+    "table": [
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "add",
+    "description": "sum of two numbers with carry out",
+    "arity": 2,
+    "output": "W+1",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "scan",
+     "arity": 2,
+     "initial_state": [
+      0
+     ],
+     "direction": "lsb_first",
+     "emit_final_state": true
+    },
+    "signature": [
+     2,
+     1,
+     1
+    ],
+    "table": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "full_adder",
+    "domain_size": 8,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "sub",
+    "description": "difference x0 - x1 with borrow out",
+    "arity": 2,
+    "output": "W+1",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "scan",
+     "arity": 2,
+     "initial_state": [
+      0
+     ],
+     "direction": "lsb_first",
+     "emit_final_state": true
+    },
+    "signature": [
+     2,
+     1,
+     1
+    ],
+    "table": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "full_subtractor",
+    "domain_size": 8,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "lt",
+    "description": "whether x0 is less than x1",
+    "arity": 2,
+    "output": "1",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "comparison"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "scan",
+     "arity": 2,
+     "initial_state": [
+      0
+     ],
+     "direction": "lsb_first",
+     "emit_final_state": true
+    },
+    "signature": [
+     2,
+     1,
+     0
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 0.875,
+     "accepted": false,
+     "probe": {
+      "16bit": 0.73,
+      "32bit": 0.77
+     }
+    },
+    {
+     "round": 2,
+     "train_examples": 16,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "less_than_lsb_first",
+    "domain_size": 8,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "gt",
+    "description": "whether x0 is greater than x1",
+    "arity": 2,
+    "output": "1",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "comparison"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "scan",
+     "arity": 2,
+     "initial_state": [
+      0
+     ],
+     "direction": "lsb_first",
+     "emit_final_state": true
+    },
+    "signature": [
+     2,
+     1,
+     0
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "mux",
+    "description": "per bit pick x1 where x2 is set, else x0",
+    "arity": 3,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "bitwise",
+     "select"
+    ]
+   },
+   "provenance": {
+    "kind": "unit",
+    "schema": {
+     "kind": "map",
+     "arity": 3
+    },
+    "signature": [
+     3,
+     0,
+     1
+    ],
+    "table": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      0
+     ],
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      1
+     ]
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (3 inputs per bit)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": {
+    "rule": "mux",
+    "domain_size": 8,
+    "mismatches": [],
+    "exact": true,
+    "comparable": true
+   }
+  },
+  {
+   "plan": {
+    "name": "double",
+    "description": "two times a number, wrapping",
+    "arity": 1,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "composition",
+    "expression": {
+     "op": "add",
+     "left": {
+      "var": 0
+     },
+     "right": {
+      "var": 0
+     }
+    },
+    "uses": [
+     "add"
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "add3",
+    "description": "sum of three numbers, wrapping",
+    "arity": 3,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "composition",
+    "expression": {
+     "op": "add",
+     "left": {
+      "var": 0
+     },
+     "right": {
+      "op": "add",
+      "left": {
+       "var": 1
+      },
+      "right": {
+       "var": 2
+      }
+     }
+    },
+    "uses": [
+     "add"
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "reuse",
+     "structure": "(x0 add (x1 add x2))",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "sub_add",
+    "description": "x0 - x1 + x2, wrapping",
+    "arity": 3,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "composition",
+    "expression": {
+     "op": "add",
+     "left": {
+      "var": 0
+     },
+     "right": {
+      "op": "sub",
+      "left": {
+       "var": 2
+      },
+      "right": {
+       "var": 1
+      }
+     }
+    },
+    "uses": [
+     "add",
+     "sub"
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "reuse",
+     "structure": "(x0 add (x2 sub x1))",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "triple_sub",
+    "description": "3 * x0 - x1, wrapping",
+    "arity": 2,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic"
+    ]
+   },
+   "provenance": {
+    "kind": "composition",
+    "expression": {
+     "op": "add",
+     "left": {
+      "op": "add",
+      "left": {
+       "var": 0
+      },
+      "right": {
+       "var": 0
+      }
+     },
+     "right": {
+      "op": "sub",
+      "left": {
+       "var": 0
+      },
+      "right": {
+       "var": 1
+      }
+     }
+    },
+    "uses": [
+     "add",
+     "sub"
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "reuse",
+     "structure": "((x0 add x0) add (x0 sub x1))",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  },
+  {
+   "plan": {
+    "name": "sum_xor",
+    "description": "(x0 + x1) xor x2, wrapping",
+    "arity": 3,
+    "output": "W",
+    "rounds": [
+     8,
+     16,
+     32,
+     64
+    ],
+    "train_width": 4,
+    "validation_width": 8,
+    "validation_examples": 32,
+    "tags": [
+     "arithmetic",
+     "bitwise"
+    ]
+   },
+   "provenance": {
+    "kind": "composition",
+    "expression": {
+     "op": "xor",
+     "left": {
+      "var": 2
+     },
+     "right": {
+      "op": "add",
+      "left": {
+       "var": 0
+      },
+      "right": {
+       "var": 1
+      }
+     }
+    },
+    "uses": [
+     "add",
+     "xor"
+    ]
+   },
+   "history": [
+    {
+     "round": 1,
+     "train_examples": 8,
+     "strategy": "reuse",
+     "structure": "(x2 xor (x0 add x1))",
+     "train_accuracy": 1.0,
+     "validation_accuracy": 1.0,
+     "accepted": true,
+     "probe": {
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   ],
+   "audit": null
+  }
+ ]
+}

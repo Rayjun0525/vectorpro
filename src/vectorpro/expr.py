@@ -35,6 +35,17 @@ def render(expr: Expr) -> str:
     return fold_expr(expr, lambda i: f"x{i}", lambda o, a, b: f"({a} {o} {b})")
 
 
+def expr_to_data(expr: Expr) -> dict:
+    """JSON-serializable form; inverse of ``expr_from_data``."""
+    return fold_expr(expr, lambda i: {"var": i}, lambda o, a, b: {"op": o, "left": a, "right": b})
+
+
+def expr_from_data(data: dict) -> Expr:
+    if "var" in data:
+        return Var(data["var"])
+    return BinOp(data["op"], expr_from_data(data["left"]), expr_from_data(data["right"]))
+
+
 def operators(expr: Expr) -> set[str]:
     return fold_expr(expr, lambda _: set(), lambda o, a, b: a | b | {o})
 

@@ -1,0 +1,1912 @@
+{
+ "experiment": "learning_loop",
+ "curriculum": [
+  {
+   "name": "and",
+   "description": "bitwise and of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "bitwise"
+   ]
+  },
+  {
+   "name": "or",
+   "description": "bitwise or of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "bitwise"
+   ]
+  },
+  {
+   "name": "xor",
+   "description": "bitwise exclusive or of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "bitwise"
+   ]
+  },
+  {
+   "name": "xnor",
+   "description": "bitwise equality of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "bitwise"
+   ]
+  },
+  {
+   "name": "add",
+   "description": "sum of two numbers with carry out",
+   "arity": 2,
+   "output": "W+1",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "sub",
+   "description": "difference x0 - x1 with borrow out",
+   "arity": 2,
+   "output": "W+1",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "lt",
+   "description": "whether x0 is less than x1",
+   "arity": 2,
+   "output": "1",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "comparison"
+   ]
+  },
+  {
+   "name": "gt",
+   "description": "whether x0 is greater than x1",
+   "arity": 2,
+   "output": "1",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "comparison"
+   ]
+  },
+  {
+   "name": "mux",
+   "description": "per bit pick x1 where x2 is set, else x0",
+   "arity": 3,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "bitwise",
+    "select"
+   ]
+  },
+  {
+   "name": "double",
+   "description": "two times a number, wrapping",
+   "arity": 1,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "add3",
+   "description": "sum of three numbers, wrapping",
+   "arity": 3,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "sub_add",
+   "description": "x0 - x1 + x2, wrapping",
+   "arity": 3,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "triple_sub",
+   "description": "3 * x0 - x1, wrapping",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "sum_xor",
+   "description": "(x0 + x1) xor x2, wrapping",
+   "arity": 3,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic",
+    "bitwise"
+   ]
+  },
+  {
+   "name": "mul",
+   "description": "product of two numbers, wrapping",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "avg",
+   "description": "floor of the mean of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "name": "max",
+   "description": "the larger of two numbers",
+   "arity": 2,
+   "output": "W",
+   "rounds": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "train_width": 4,
+   "validation_width": 8,
+   "validation_examples": 32,
+   "tags": [
+    "comparison"
+   ]
+  }
+ ],
+ "runs": [
+  {
+   "seed": 20261002,
+   "outcomes": {
+    "and": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "and",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "or": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "or",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "xor",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xnor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_adder",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_subtractor",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "lt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 0.875,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.73,
+        "32bit": 0.77
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "less_than_lsb_first",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "gt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mux": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (3 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "mux",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "double": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add x0)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add3": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x1 add x2))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sub_add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x2 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "triple_sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "((x0 add x0) add (x0 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sum_xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x2 xor (x0 add x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mul": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.4375,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.28125,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.234375,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "avg": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.3125,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "max": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.5,
+       "validation_accuracy": 0.3125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5,
+        "32bit": 0.49666666666666665
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.625,
+       "validation_accuracy": 0.3125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5,
+        "32bit": 0.49666666666666665
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.75,
+       "validation_accuracy": 0.4375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5166666666666667,
+        "32bit": 0.49666666666666665
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.828125,
+       "validation_accuracy": 0.4375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5166666666666667,
+        "32bit": 0.49666666666666665
+       }
+      }
+     ],
+     "audit": null
+    }
+   },
+   "retained": {
+    "and": true,
+    "or": true,
+    "xor": true,
+    "xnor": true,
+    "add": true,
+    "sub": true,
+    "lt": true,
+    "gt": true,
+    "mux": true,
+    "double": true,
+    "add3": true,
+    "sub_add": true,
+    "triple_sub": true,
+    "sum_xor": true
+   }
+  },
+  {
+   "seed": 20261003,
+   "outcomes": {
+    "and": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "and",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "or": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "or",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "xor",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xnor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_adder",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_subtractor",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "lt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "less_than_lsb_first",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "gt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mux": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (3 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "mux",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "double": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add x0)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add3": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x1 add x2))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sub_add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x2 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "triple_sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "((x0 add x0) add (x0 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sum_xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x2 xor (x0 add x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mul": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.5,
+       "validation_accuracy": 0.0625,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.5,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.59375,
+       "validation_accuracy": 0.125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.0625,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "avg": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.625,
+       "validation_accuracy": 0.0,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.02,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.6875,
+       "validation_accuracy": 0.3125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.11,
+        "32bit": 0.0033333333333333335
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.46875,
+       "validation_accuracy": 0.09375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.03666666666666667,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.171875,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "max": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.875,
+       "validation_accuracy": 0.3125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.14,
+        "32bit": 0.08333333333333333
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.9375,
+       "validation_accuracy": 0.1875,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.016666666666666666,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.84375,
+       "validation_accuracy": 0.3125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.17333333333333334,
+        "32bit": 0.05
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.78125,
+       "validation_accuracy": 0.5625,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5533333333333333,
+        "32bit": 0.56
+       }
+      }
+     ],
+     "audit": null
+    }
+   },
+   "retained": {
+    "and": true,
+    "or": true,
+    "xor": true,
+    "xnor": true,
+    "add": true,
+    "sub": true,
+    "lt": true,
+    "gt": true,
+    "mux": true,
+    "double": true,
+    "add3": true,
+    "sub_add": true,
+    "triple_sub": true,
+    "sum_xor": true
+   }
+  },
+  {
+   "seed": 20261004,
+   "outcomes": {
+    "and": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "and",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "or": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "or",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "xor",
+      "domain_size": 4,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "xnor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 0.5625,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.2,
+        "32bit": 0.04
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_adder",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 0.34375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.09333333333333334,
+        "32bit": 0.006666666666666667
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 0.59375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.23333333333333334,
+        "32bit": 0.05333333333333334
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "full_subtractor",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "lt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "less_than_lsb_first",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "gt": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 0.875,
+       "validation_accuracy": 0.53125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5766666666666667,
+        "32bit": 0.5266666666666666
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mux": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (3 inputs per bit)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": {
+      "rule": "mux",
+      "domain_size": 8,
+      "mismatches": [],
+      "exact": true,
+      "comparable": true
+     }
+    },
+    "double": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add x0)",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "add3": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x1 add x2))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sub_add": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x0 add (x2 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "triple_sub": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "((x0 add x0) add (x0 sub x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "sum_xor": {
+     "learned": true,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "reuse",
+       "structure": "(x2 xor (x0 add x1))",
+       "train_accuracy": 1.0,
+       "validation_accuracy": 1.0,
+       "accepted": true,
+       "probe": {
+        "16bit": 1.0,
+        "32bit": 1.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "mul": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.375,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.375,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.125,
+       "validation_accuracy": 0.09375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.390625,
+       "validation_accuracy": 0.03125,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "avg": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.625,
+       "validation_accuracy": 0.0,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+       "train_accuracy": 0.25,
+       "validation_accuracy": 0.0,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.21875,
+       "validation_accuracy": 0.0,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.15625,
+       "validation_accuracy": 0.0,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.0,
+        "32bit": 0.0
+       }
+      }
+     ],
+     "audit": null
+    },
+    "max": {
+     "learned": false,
+     "history": [
+      {
+       "round": 1,
+       "train_examples": 8,
+       "strategy": "learn",
+       "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.625,
+       "validation_accuracy": 0.25,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.07,
+        "32bit": 0.0033333333333333335
+       }
+      },
+      {
+       "round": 2,
+       "train_examples": 16,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.75,
+       "validation_accuracy": 0.5,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.25333333333333335,
+        "32bit": 0.08666666666666667
+       }
+      },
+      {
+       "round": 3,
+       "train_examples": 32,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.71875,
+       "validation_accuracy": 0.59375,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.55,
+        "32bit": 0.5033333333333333
+       }
+      },
+      {
+       "round": 4,
+       "train_examples": 64,
+       "strategy": "learn",
+       "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+       "train_accuracy": 0.703125,
+       "validation_accuracy": 0.71875,
+       "accepted": false,
+       "probe": {
+        "16bit": 0.5533333333333333,
+        "32bit": 0.5033333333333333
+       }
+      }
+     ],
+     "audit": null
+    }
+   },
+   "retained": {
+    "and": true,
+    "or": true,
+    "xor": true,
+    "xnor": true,
+    "add": true,
+    "sub": true,
+    "lt": true,
+    "gt": true,
+    "mux": true,
+    "double": true,
+    "add3": true,
+    "sub_add": true,
+    "triple_sub": true,
+    "sum_xor": true
+   }
+  }
+ ],
+ "requests_demo": {
+  "search 'sum'": [
+   "add",
+   "add3",
+   "sum_xor"
+  ],
+  "search 'bitwise'": [
+   "and",
+   "or",
+   "xor",
+   "xnor",
+   "mux",
+   "sum_xor"
+  ],
+  "find_by_examples (unnamed 3-input examples)": [
+   "add3"
+  ],
+  "run add3 at 32 bits": {
+   "(1, 2, 3)": 6,
+   "(2147483648, 2147483648, 5)": 5,
+   "(4294967295, 1, 0)": 0
+  }
+ }
+}

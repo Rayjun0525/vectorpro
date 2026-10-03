@@ -29,3 +29,7 @@ class Schema(ABC):
     @abstractmethod
     def run(self, cell: Cell, operands: torch.Tensor, quantizer: Quantizer) -> torch.Tensor:
         """``operands: (B, arity, W)`` -> ``(B, output_width(W))``."""
+
+    @abstractmethod
+    def to_spec(self) -> dict:
+        """JSON-serializable description; inverse of ``schema_from_spec``."""
