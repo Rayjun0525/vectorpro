@@ -1,0 +1,25 @@
+{
+  "curriculum": "machine",
+  "note": "Units first, then plans that can only be met by calling the authored loop programs (mul, div, mod).",
+  "units": [
+    {"name": "and", "description": "bitwise and of two numbers",          "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "or",  "description": "bitwise or of two numbers",           "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "xor", "description": "bitwise exclusive or of two numbers", "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "add", "description": "sum of two numbers with carry out",   "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "sub", "description": "difference x0 - x1 with borrow out",  "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "lt",  "description": "whether x0 is less than x1",          "arity": 2, "output": "1",   "tags": ["comparison"]},
+    {"name": "shl", "description": "shift a number left by one bit",      "arity": 1, "output": "W",   "tags": ["bitwise", "shift"]},
+    {"name": "shr", "description": "shift a number right by one bit",     "arity": 1, "output": "W",   "tags": ["bitwise", "shift"]}
+  ],
+  "authored": [
+    {"name": "mul", "description": "product of two numbers, wrapping",            "arity": 2, "output": "W", "tags": ["arithmetic", "loop"]},
+    {"name": "div", "description": "quotient of x0 by x1 (all ones if x1 is 0)",  "arity": 2, "output": "W", "tags": ["arithmetic", "loop"]},
+    {"name": "mod", "description": "remainder of x0 by x1 (x0 if x1 is 0)",       "arity": 2, "output": "W", "tags": ["arithmetic", "loop"]}
+  ],
+  "compositions": [
+    {"name": "square",   "description": "a number times itself, wrapping",   "arity": 1, "output": "W", "tags": ["arithmetic"]},
+    {"name": "mul_add",  "description": "x0 * x1 + x2, wrapping",             "arity": 3, "output": "W", "tags": ["arithmetic"]},
+    {"name": "sum_mod",  "description": "(x0 + x1) mod x2",                   "arity": 3, "output": "W", "tags": ["arithmetic"]},
+    {"name": "diff_div", "description": "(x0 - x1) divided by x2",            "arity": 3, "output": "W", "tags": ["arithmetic"]}
+  ]
+}

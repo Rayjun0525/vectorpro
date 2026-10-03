@@ -31,32 +31,10 @@ from vectorpro.learning import ExampleSet, Learner, LearningOutcome, LearningPla
 from vectorpro.tasks import AND, FULL_ADDER, FULL_SUBTRACTOR, LESS_THAN, MUX, OR, XOR, LocalRule
 from vectorpro.verification import verify_local_rule
 
+from targets import TARGETS
+
 HERE = Path(__file__).parent
 
-
-def _mask(w: int) -> int:
-    return (1 << w) - 1
-
-
-TARGETS = {
-    "and": lambda o, w: o[0] & o[1],
-    "or": lambda o, w: o[0] | o[1],
-    "xor": lambda o, w: o[0] ^ o[1],
-    "xnor": lambda o, w: ~(o[0] ^ o[1]) & _mask(w),
-    "add": lambda o, w: o[0] + o[1],
-    "sub": lambda o, w: ((o[0] - o[1]) & _mask(w)) | (int(o[0] < o[1]) << w),
-    "lt": lambda o, w: int(o[0] < o[1]),
-    "gt": lambda o, w: int(o[0] > o[1]),
-    "mux": lambda o, w: (o[0] & ~o[2]) | (o[1] & o[2]),
-    "double": lambda o, w: (2 * o[0]) & _mask(w),
-    "add3": lambda o, w: (o[0] + o[1] + o[2]) & _mask(w),
-    "sub_add": lambda o, w: (o[0] - o[1] + o[2]) & _mask(w),
-    "triple_sub": lambda o, w: (3 * o[0] - o[1]) & _mask(w),
-    "sum_xor": lambda o, w: ((o[0] + o[1]) & _mask(w)) ^ o[2],
-    "mul": lambda o, w: (o[0] * o[1]) & _mask(w),
-    "avg": lambda o, w: (o[0] + o[1]) >> 1,
-    "max": lambda o, w: max(o[0], o[1]),
-}
 
 AUDIT_RULES: dict[str, LocalRule] = {
     "and": AND.local_rule, "or": OR.local_rule, "xor": XOR.local_rule, "mux": MUX.local_rule,

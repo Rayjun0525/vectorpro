@@ -1,9 +1,14 @@
-"""The capability registry: learned vector programs, how they came to be, and what they can do.
+"""The capability registry: vector programs, how they came to be, and what they can do.
 
-Every capability is stored as data only: a learned unit as its schema spec
-plus binary table, a composition as an expression over other capabilities.
-The registry can be searched by text or by behaviour, explained in plain
-language, and asked to run a capability.
+Every capability has an **address vector**; programs call capabilities by
+address, never by name. A capability is stored as data only:
+
+* ``unit``:    a learned schema spec plus its binary table;
+* ``program``: a vector program (tensors) whose steps address other capabilities.
+
+The registry resolves address vectors (it is the kernel's resolver), can be
+searched by text or by behaviour, explains capabilities in plain language
+from their tensors, runs them, and saves and loads them.
 """
 
 from __future__ import annotations
@@ -14,14 +19,15 @@ from pathlib import Path
 from typing import Iterator, Sequence
 
 import torch
+import torch.nn.functional as F
 
 from vectorpro.cells import CellSignature, TableCell
 from vectorpro.cells.base import binary_domain
 from vectorpro.execution import BitExecutable
-from vectorpro.expr import expr_from_data, operators, render
 from vectorpro.learning.examples import ExampleSet, Operands
 from vectorpro.learning.plan import LearningPlan, OutputWidth
-from vectorpro.programs import ExpressionProgram, Window
+from vectorpro.machine import ProgramExecutable, VectorProgram, disassemble
+from vectorpro.programs import Window
 from vectorpro.schemas import schema_from_spec
 from vectorpro.units import FunctionUnit
 
@@ -35,6 +41,7 @@ class Capability:
     provenance: dict
     history: list[dict] = field(default_factory=list)
     audit: dict | None = None
+    key: torch.Tensor | None = None  # address vector, assigned on registration
 
     @property
     def name(self) -> str:
@@ -42,28 +49,6 @@ class Capability:
 
     def run(self, operand_tuples: Sequence[Operands], width: int) -> list[int]:
         return self.executable(operand_tuples, width)
-
-    def describe(self) -> str:
-        plan = self.plan
-        lines = [
-            f"{plan.name}: {plan.description}",
-            f"  shape: {plan.arity} operand(s) of W bits -> {plan.output.value} bits",
-        ]
-        prov = self.provenance
-        if prov["kind"] == "composition":
-            lines.append(f"  built by composing: {render(expr_from_data(prov['expression']))}")
-            lines.append(f"  uses: {', '.join(prov['uses'])}")
-        else:
-            lines.append(f"  learned unit: {describe_schema(prov['schema'])}")
-            lines.append("  local rule (inputs | state -> outputs | next state):")
-            lines += [f"    {row}" for row in describe_table(prov)]
-        if self.history:
-            last = self.history[-1]
-            lines.append(
-                f"  learned in {len(self.history)} round(s) from {last['train_examples']} examples; "
-                f"validation {last['validation_accuracy']:.0%} at {plan.validation_width} bits"
-            )
-        return "\n".join(lines)
 
 
 def describe_schema(spec: dict) -> str:
@@ -97,14 +82,15 @@ def unit_provenance(unit: FunctionUnit) -> dict:
     }
 
 
-def composition_provenance(expr_data: dict) -> dict:
-    expr = expr_from_data(expr_data)
-    return {"kind": "composition", "expression": expr_data, "uses": sorted(operators(expr))}
+def program_provenance(program: VectorProgram, origin: str) -> dict:
+    return {"kind": "program", "origin": origin, "program": program.to_data()}
 
 
 class Registry:
-    def __init__(self) -> None:
+    def __init__(self, key_dim: int = 32, seed: int = 0) -> None:
         self._caps: dict[str, Capability] = {}
+        self.key_dim = key_dim
+        self._rng = torch.Generator().manual_seed(seed)
 
     def __contains__(self, name: str) -> bool:
         return name in self._caps
@@ -121,17 +107,36 @@ class Registry:
     def add(self, capability: Capability) -> None:
         if capability.name in self._caps:
             raise ValueError(f"capability {capability.name!r} already registered")
+        if capability.key is None:
+            capability.key = F.normalize(torch.randn(self.key_dim, generator=self._rng), dim=0)
         self._caps[capability.name] = capability
 
-    # -- building executables from data -------------------------------------------
+    # -- addressing (the kernel's resolver) ------------------------------------------
+
+    def key_of(self, name: str) -> torch.Tensor:
+        return self.get(name).key
+
+    def _nearest(self, key: torch.Tensor) -> Capability:
+        caps = list(self)
+        keys = torch.stack([c.key for c in caps])
+        return caps[int((keys @ F.normalize(key, dim=0)).argmax())]
+
+    def resolve(self, key: torch.Tensor) -> BitExecutable:
+        return self._nearest(key).executable
+
+    def name_of(self, key: torch.Tensor) -> str:
+        return self._nearest(key).name
+
+    # -- building executables from data -----------------------------------------------
 
     def build(self, plan: LearningPlan, provenance: dict) -> BitExecutable:
         if provenance["kind"] == "unit":
             sig = CellSignature(*provenance["signature"])
             table = TableCell(sig, torch.tensor(provenance["table"]))
             return FunctionUnit(plan.name, schema_from_spec(provenance["schema"]), table)
-        expr = expr_from_data(provenance["expression"])
-        return ExpressionProgram(expr, {n: self.operator(n) for n in operators(expr)}, plan.arity)
+        if provenance["kind"] == "program":
+            return ProgramExecutable(VectorProgram.from_data(provenance["program"]), self)
+        raise ValueError(f"unknown provenance kind {provenance['kind']!r}")
 
     def operator(self, name: str) -> BitExecutable:
         """``name`` as a ``W -> W`` binary operator (low word of its result)."""
@@ -147,7 +152,7 @@ class Registry:
             if c.plan.arity == 2 and c.plan.output in COMPOSABLE_OUTPUTS
         }
 
-    # -- finding and using capabilities -------------------------------------------
+    # -- finding, explaining and using capabilities ---------------------------------
 
     def search(self, query: str) -> list[Capability]:
         """Capabilities whose name, description or tags contain every query word."""
@@ -166,24 +171,51 @@ class Registry:
     def run(self, name: str, operand_tuples: Sequence[Operands], width: int) -> list[int]:
         return self.get(name).run(operand_tuples, width)
 
-    def describe(self) -> str:
-        return "\n\n".join(c.describe() for c in self)
+    def explain(self, name: str) -> str:
+        """Plain-language description, reconstructed from the stored tensors."""
+        cap = self.get(name)
+        plan, prov = cap.plan, cap.provenance
+        lines = [
+            f"{plan.name}: {plan.description}",
+            f"  shape: {plan.arity} operand(s) of W bits -> {plan.output.value} bits",
+        ]
+        if prov["kind"] == "program":
+            lines.append(f"  vector program ({prov['origin']}), disassembled from its tensors:")
+            program = VectorProgram.from_data(prov["program"])
+            lines += [f"    {line}" for line in disassemble(program, self)]
+        else:
+            lines.append(f"  learned unit: {describe_schema(prov['schema'])}")
+            lines.append("  local rule (inputs | state -> outputs | next state):")
+            lines += [f"    {row}" for row in describe_table(prov)]
+        if cap.history:
+            last = cap.history[-1]
+            lines.append(
+                f"  learned in {len(cap.history)} round(s) from {last['train_examples']} examples; "
+                f"validation {last['validation_accuracy']:.0%} at {plan.validation_width} bits"
+            )
+        return "\n".join(lines)
 
-    # -- persistence -----------------------------------------------------------------
+    def describe(self) -> str:
+        return "\n\n".join(self.explain(c.name) for c in self)
+
+    # -- persistence -------------------------------------------------------------------
 
     def save(self, path: Path) -> None:
         records = [
-            {"plan": c.plan.to_dict(), "provenance": c.provenance, "history": c.history, "audit": c.audit}
+            {"plan": c.plan.to_dict(), "key": c.key.tolist(), "provenance": c.provenance,
+             "history": c.history, "audit": c.audit}
             for c in self
         ]
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"capabilities": records}, indent=1))
+        path.write_text(json.dumps({"key_dim": self.key_dim, "capabilities": records}, indent=1))
 
     @classmethod
     def load(cls, path: Path) -> Registry:
-        registry = cls()
-        for record in json.loads(path.read_text())["capabilities"]:
+        data = json.loads(path.read_text())
+        registry = cls(key_dim=data["key_dim"])
+        for record in data["capabilities"]:
             plan = LearningPlan.from_dict(record["plan"])
             executable = registry.build(plan, record["provenance"])
-            registry.add(Capability(plan, executable, record["provenance"], record["history"], record["audit"]))
+            registry.add(Capability(plan, executable, record["provenance"], record["history"],
+                                    record["audit"], torch.tensor(record["key"])))
         return registry

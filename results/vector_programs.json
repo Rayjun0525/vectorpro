@@ -1,0 +1,605 @@
+{
+ "experiment": "vector_programs",
+ "runs": [
+  {
+   "seed": 20261002,
+   "capabilities": {
+    "and": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "square": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 mul x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul_add": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x2 add (x0 mul x1))",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sum_mod": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 add x1) mod x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "diff_div": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 sub x1) div x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "controls": {
+    "key_swap": {
+     "mul_8bit_before": 1.0,
+     "mul_8bit_with_add_sub_keys_swapped": 0.08333333333333333
+    },
+    "rerouting": {
+     "program": "mul",
+     "reroutings": 64,
+     "behaviour_changed": 64,
+     "unchanged": []
+    },
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "mul": "mul: product of two numbers, wrapping\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (authored), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    @0: r4 = and(r1, r3); if r4 != 0 goto @1 else @2\n    @1: r2 = add(r2, r0)\n    @2: r0 = shl(r0)\n    @3: r1 = shr(r1); if r1 != 0 goto @0 else halt\n    result = r2",
+    "mul_add": "mul_add: x0 * x1 + x2, wrapping\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = zero\n    @0: r3 = mul(r0, r1)\n    @1: r4 = add(r2, r3)\n    result = r4\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  },
+  {
+   "seed": 20261003,
+   "capabilities": {
+    "and": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "square": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 mul x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul_add": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x2 add (x0 mul x1))",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sum_mod": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 add x1) mod x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "diff_div": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 sub x1) div x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "controls": {
+    "key_swap": {
+     "mul_8bit_before": 1.0,
+     "mul_8bit_with_add_sub_keys_swapped": 0.05416666666666667
+    },
+    "rerouting": {
+     "program": "mul",
+     "reroutings": 64,
+     "behaviour_changed": 64,
+     "unchanged": []
+    },
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "mul": "mul: product of two numbers, wrapping\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (authored), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    @0: r4 = and(r1, r3); if r4 != 0 goto @1 else @2\n    @1: r2 = add(r2, r0)\n    @2: r0 = shl(r0)\n    @3: r1 = shr(r1); if r1 != 0 goto @0 else halt\n    result = r2",
+    "mul_add": "mul_add: x0 * x1 + x2, wrapping\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = zero\n    @0: r3 = mul(r0, r1)\n    @1: r4 = add(r2, r3)\n    result = r4\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  },
+  {
+   "seed": 20261004,
+   "capabilities": {
+    "and": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 32,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "stage": "unit",
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "stage": "authored",
+     "learned": null,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "square": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 mul x0)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul_add": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x2 add (x0 mul x1))",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sum_mod": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 add x1) mod x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "diff_div": {
+     "stage": "composition",
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 sub x1) div x2)",
+     "examples": 8,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "controls": {
+    "key_swap": {
+     "mul_8bit_before": 1.0,
+     "mul_8bit_with_add_sub_keys_swapped": 0.03333333333333333
+    },
+    "rerouting": {
+     "program": "mul",
+     "reroutings": 64,
+     "behaviour_changed": 64,
+     "unchanged": []
+    },
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "mul": "mul: product of two numbers, wrapping\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (authored), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    @0: r4 = and(r1, r3); if r4 != 0 goto @1 else @2\n    @1: r2 = add(r2, r0)\n    @2: r0 = shl(r0)\n    @3: r1 = shr(r1); if r1 != 0 goto @0 else halt\n    result = r2",
+    "mul_add": "mul_add: x0 * x1 + x2, wrapping\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = zero\n    @0: r3 = mul(r0, r1)\n    @1: r4 = add(r2, r3)\n    result = r4\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  }
+ ]
+}
