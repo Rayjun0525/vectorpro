@@ -28,6 +28,7 @@ src/vectorpro/
     program.py     VectorProgram: a program's whole logic as tensors
     kernel.py      task-agnostic fetch-execute kernel; ProgramExecutable
     assembler.py   assemble / compile_expression (writing) and disassemble (reading)
+    skeletons.py   generic loop skeletons (BitFold) and their compilation to vector programs
   programs/        Python-wired compositions used by M0–M1b experiments (legacy):
                    Fold, Window, ShiftAddMultiply, RestoringDivide, ExpressionProgram
   expr.py          expression AST shared by programs (execution) and tasks (reference)
@@ -43,8 +44,9 @@ src/vectorpro/
   learning/        the learning loop (M2):
     plan.py        LearningPlan: plain-data plan (what an LLM would emit)
     examples.py    target sources, example streams; the learner's only view of targets
-    search.py      composition search over registered capabilities
-    learner.py     reuse first, else learn a unit over generic structures, round by round
+    search.py      size-ordered composition search (any arity, constants, behaviour dedup)
+    loops.py       loop search: bit-fold bodies; bit-extraction capabilities found by behaviour
+    learner.py     per round: reuse, else learn a unit, else learn a loop
     registry.py    capabilities with address vectors; resolves calls, search, explain, save/load
 experiments/       declare specs or curricula, write JSON to results/
   curricula/       learning plans as JSON
@@ -74,6 +76,7 @@ python experiments/primitives.py                  # M1
 python experiments/arithmetic.py                  # M1b
 python experiments/learning_loop.py               # M2
 python experiments/vector_programs.py             # M2b
+python experiments/loop_learning.py               # M2c
 ```
 
 ## M0 result: addition width generalization
@@ -240,6 +243,59 @@ by hand (`experiments/authored.py`, assembly-level). They show that the format
 and kernel hold loops and branches. Finding such programs from examples is the
 next step.
 
+## M2c result: loop programs learned from examples
+
+Nothing is authored. One learner works through 20 plans
+(`experiments/curricula/loops.json`), each given only as examples. Each round
+it tries, cheapest first:
+
+1. a **composition** of registered capabilities. The search is size-ordered,
+   handles any arity plus the constants `zero`, `one` and `ones`, and drops
+   candidates that behave identically on the examples. Commutativity is
+   detected by running each operator.
+2. a **new unit**, as in M2.
+3. a **loop**: the body of a generic *bit fold*, `acc = 0; for each bit of
+   x[k] (high→low or low→high): acc = body(x…, acc, bit, mask)`. The machine
+   provides the fold once. The bit-extraction capabilities it compiles to
+   (and, lt, sub, shifts) are found in the registry **by behaviour**, not by
+   name. The body is searched over units and straight-line programs, batched
+   so that shared sub-expressions run once.
+
+Results (`python experiments/loop_learning.py`, seeds 20261002–4). Every
+learned capability is 100% at 8, 16 and 32 bits, and the same structure was
+found on every seed:
+
+| plan | how | what was found | examples |
+|---|---|---|---|
+| and, or, xor, sub, lt, shr | new unit | map / scans, as in M2 | 8–32 |
+| add | new unit | low-to-high scan | 8–16 |
+| shl | composition | `x add x` | 8 |
+| mux | composition | `x0 xor (x2 and (x0 xor x1))` | 8 |
+| neg, nand | composition | `zero sub x`, `mux(ones, zero, x0 and x1)` | 8 |
+| max | composition | `mux(x0, x1, ones add (x1 lt x0))` | 8 |
+| min | composition | `x0 add (x1 sub max(x0, x1))` | 8 |
+| **mul** | **loop** | `for each bit of x1, high→low: acc = acc + (acc + (x0 and mask))` | 8 |
+| **popcount** | **loop** | `for each bit, high→low: acc = acc + bit` | 8 |
+| **reverse** | **loop** | `for each bit, low→high: acc = acc + (acc + bit)` | 8 |
+| square, mul_add | composition calling the learned loop | `x0 mul x0`, `x2 add (x0 mul x1)` | 8 |
+| avg, div | not learned | – | – |
+
+- **mul was learned from 8 examples, as a loop.** The learner found Horner's
+  method (`acc = 2·acc + (x0 if bit else 0)`), not the shift-and-add version
+  authored in M2b. The result is an ordinary vector program; `explain("mul")`
+  disassembles its 7 steps, including the backward jump.
+- **Every routing entry of the learned mul carries logic.** All 236 single
+  re-routings change its behaviour on every seed. The kernel names no
+  capability, and registries reload identically.
+- **Where it stops.** `avg` needs the carry out of the top bit inside a W-bit
+  result. `div` needs two accumulators (quotient and remainder). Neither fits
+  a single-accumulator fold or a size-3 composition. Loops inside loops are not
+  searched; loop programs are composed only at the top level.
+
+Results sections record the code at their milestone. Rerunning an earlier
+experiment with later code can do better: with M2c's search, M2's `max` and
+`mul` become learnable.
+
 ## Roadmap
 
 | | milestone |
@@ -249,7 +305,8 @@ next step.
 | M1b | four arithmetic operations + random expressions from four verified units ✅ |
 | M2 | learning loop: plans → reuse/learn → searchable, explainable registry ✅ |
 | M2b | all logic in vector programs: address-vector calls, routing and control tensors, task-agnostic kernel ✅ |
-| M2c | learn loop/branch vector programs from examples (mul, div, avg, max); LLM-written plans |
+| M2c | learn loop programs from examples: generic bit fold, wider composition search ✅ |
+| M2d | multi-accumulator folds (div), nested loops, faster search; LLM-written plans |
 | M3 | structure discovery beyond a fixed candidate set; capability search by behaviour vectors |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |
 | M5 | synthesizer, effect log for native calls, cost vs native/interpreter |

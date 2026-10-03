@@ -1,0 +1,30 @@
+{
+  "curriculum": "loops",
+  "note": "Everything is learned from examples: units, straight-line compositions, loop programs, and compositions that call loop programs. No authored programs.",
+  "plans": [
+    {"name": "and", "description": "bitwise and of two numbers",          "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "or",  "description": "bitwise or of two numbers",           "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "xor", "description": "bitwise exclusive or of two numbers", "arity": 2, "output": "W",   "tags": ["bitwise"]},
+    {"name": "add", "description": "sum of two numbers with carry out",   "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "sub", "description": "difference x0 - x1 with borrow out",  "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "lt",  "description": "whether x0 is less than x1",          "arity": 2, "output": "1",   "tags": ["comparison"]},
+    {"name": "shl", "description": "shift a number left by one bit",      "arity": 1, "output": "W",   "tags": ["shift"]},
+    {"name": "shr", "description": "shift a number right by one bit",     "arity": 1, "output": "W",   "tags": ["shift"]},
+    {"name": "mux", "description": "per bit pick x1 where x2 is set, else x0", "arity": 3, "output": "W", "tags": ["select"]},
+
+    {"name": "neg",  "description": "two's complement negation",          "arity": 1, "output": "W", "tags": ["arithmetic"]},
+    {"name": "nand", "description": "bitwise not-and",                    "arity": 2, "output": "W", "tags": ["bitwise"]},
+    {"name": "max",  "description": "the larger of two numbers",          "arity": 2, "output": "W", "tags": ["comparison"]},
+    {"name": "min",  "description": "the smaller of two numbers",         "arity": 2, "output": "W", "tags": ["comparison"]},
+
+    {"name": "mul",      "description": "product of two numbers, wrapping",  "arity": 2, "output": "W", "tags": ["arithmetic", "loop"]},
+    {"name": "popcount", "description": "number of set bits",                "arity": 1, "output": "W", "tags": ["bitwise", "loop"]},
+    {"name": "reverse",  "description": "bits in reverse order",             "arity": 1, "output": "W", "tags": ["bitwise", "loop"]},
+
+    {"name": "square",  "description": "a number times itself, wrapping",    "arity": 1, "output": "W", "tags": ["arithmetic"]},
+    {"name": "mul_add", "description": "x0 * x1 + x2, wrapping",             "arity": 3, "output": "W", "tags": ["arithmetic"]},
+
+    {"name": "avg", "description": "floor of the mean of two numbers",   "arity": 2, "output": "W", "rounds": [32], "tags": ["boundary"]},
+    {"name": "div", "description": "quotient of x0 by x1",                "arity": 2, "output": "W", "rounds": [32], "tags": ["boundary"]}
+  ]
+}

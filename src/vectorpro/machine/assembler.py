@@ -14,7 +14,7 @@ from typing import Callable, Mapping, Sequence
 
 import torch
 
-from vectorpro.expr import BinOp, Expr, Var
+from vectorpro.expr import Const, Expr, Var
 from vectorpro.machine.kernel import Resolver
 from vectorpro.machine.program import CONSTANTS, MAX_ARGS, VectorProgram
 
@@ -87,23 +87,29 @@ def assemble(
     )
 
 
-def compile_expression(expr: Expr, arity: int, key_of: Callable[[str], torch.Tensor]) -> VectorProgram:
-    """Straight-line program: one register per operand, one per operator node (post-order)."""
+def compile_expression(
+    expr: Expr,
+    arity: int,
+    key_of: Callable[[str], torch.Tensor],
+) -> VectorProgram:
+    """Straight-line program: one register per operand, constant and operator node (post-order)."""
     instrs: list[Instr] = []
     registers = {f"x{i}": "zero" for i in range(arity)}
 
     def emit(e: Expr) -> str:
         if isinstance(e, Var):
             return f"x{e.index}"
-        assert isinstance(e, BinOp)
-        left, right = emit(e.left), emit(e.right)
+        if isinstance(e, Const):
+            registers.setdefault(f"c_{e.name}", e.name)
+            return f"c_{e.name}"
+        args = tuple(emit(a) for a in e.args)
         dest = f"t{len(instrs)}"
         registers[dest] = "zero"
-        instrs.append(Instr(e.op, (left, right), dest))
+        instrs.append(Instr(e.op, args, dest))
         return dest
 
     result = emit(expr)
-    if not instrs:  # a bare variable: copy through a no-op so the program has a step
+    if not instrs:  # a bare leaf: a branch-only step so the program has one
         instrs.append(Instr())
     instrs[-1] = replace(instrs[-1], then=HALT, otherwise=HALT)
     return assemble(instrs, [f"x{i}" for i in range(arity)], registers, result, key_of)

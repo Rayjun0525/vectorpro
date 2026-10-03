@@ -71,6 +71,13 @@ class VectorProgram:
     def arity(self) -> int:
         return self.inputs.shape[0]
 
+    @property
+    def has_loop(self) -> bool:
+        """Whether any step can jump back to itself or an earlier step."""
+        steps = torch.arange(self.n_steps)
+        targets = torch.stack([self.next_true.argmax(dim=1), self.next_false.argmax(dim=1)])
+        return bool((targets <= steps).any())
+
     def to_data(self) -> dict:
         return {f.name: getattr(self, f.name).tolist() for f in fields(self)}
 

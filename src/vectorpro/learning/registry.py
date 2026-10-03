@@ -23,16 +23,13 @@ import torch.nn.functional as F
 
 from vectorpro.cells import CellSignature, TableCell
 from vectorpro.cells.base import binary_domain
-from vectorpro.execution import BitExecutable
+from vectorpro.execution import BitExecutable, Fitted
 from vectorpro.learning.examples import ExampleSet, Operands
-from vectorpro.learning.plan import LearningPlan, OutputWidth
+from vectorpro.learning.plan import LearningPlan
+from vectorpro.learning.search import Operator, detect_commutative
 from vectorpro.machine import ProgramExecutable, VectorProgram, disassemble
-from vectorpro.programs import Window
 from vectorpro.schemas import schema_from_spec
 from vectorpro.units import FunctionUnit
-
-COMPOSABLE_OUTPUTS = (OutputWidth.SAME, OutputWidth.PLUS_ONE, OutputWidth.DOUBLE)
-
 
 @dataclass
 class Capability:
@@ -89,6 +86,7 @@ def program_provenance(program: VectorProgram, origin: str) -> dict:
 class Registry:
     def __init__(self, key_dim: int = 32, seed: int = 0) -> None:
         self._caps: dict[str, Capability] = {}
+        self._operator_cache: dict[str, Operator] = {}
         self.key_dim = key_dim
         self._rng = torch.Generator().manual_seed(seed)
 
@@ -138,19 +136,32 @@ class Registry:
             return ProgramExecutable(VectorProgram.from_data(provenance["program"]), self)
         raise ValueError(f"unknown provenance kind {provenance['kind']!r}")
 
-    def operator(self, name: str) -> BitExecutable:
-        """``name`` as a ``W -> W`` binary operator (low word of its result)."""
-        cap = self.get(name)
-        if cap.plan.arity != 2 or cap.plan.output not in COMPOSABLE_OUTPUTS:
-            raise ValueError(f"{name} is not usable as a W-bit binary operator")
-        return Window(cap.executable)
+    def loops(self, name: str) -> bool:
+        """Whether running ``name`` can loop: its own control tensors, or any capability it calls."""
+        executable = self.get(name).executable
+        if not isinstance(executable, ProgramExecutable):
+            return False
+        program = executable.program
+        if program.has_loop:
+            return True
+        called = {self.name_of(program.keys[s]) for s in range(program.n_steps)
+                  if program.writes[s, -1] < 0.5}
+        return any(self.loops(n) for n in called if n != name)
 
-    def operators(self) -> dict[str, BitExecutable]:
-        return {
-            c.name: self.operator(c.name)
-            for c in self
-            if c.plan.arity == 2 and c.plan.output in COMPOSABLE_OUTPUTS
-        }
+    def operators(self) -> list[Operator]:
+        """Every capability as a ``W -> W`` search operator (results fitted to the operand width)."""
+        ops = []
+        for cap in self:
+            if cap.name not in self._operator_cache:
+                executable = Fitted(cap.executable)
+                commutative = cap.plan.arity == 2 and detect_commutative(executable)
+                program = isinstance(cap.executable, ProgramExecutable)
+                loops = self.loops(cap.name)
+                cost = 100 if loops else 3 if program else 1  # loop programs are costly to run in bulk
+                self._operator_cache[cap.name] = Operator(
+                    cap.name, executable, cap.plan.arity, cost, commutative, loops)
+            ops.append(self._operator_cache[cap.name])
+        return ops
 
     # -- finding, explaining and using capabilities ---------------------------------
 
