@@ -79,8 +79,12 @@ def unit_provenance(unit: FunctionUnit) -> dict:
     }
 
 
-def program_provenance(program: VectorProgram, origin: str) -> dict:
-    return {"kind": "program", "origin": origin, "program": program.to_data()}
+def program_provenance(program: VectorProgram, origin: str, **notes) -> dict:
+    """``notes`` record how the program was found (e.g. the fold it came from).
+
+    They are descriptive and reusable as search material; execution reads only ``program``.
+    """
+    return {"kind": "program", "origin": origin, "program": program.to_data(), **notes}
 
 
 class Registry:

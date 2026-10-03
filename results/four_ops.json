@@ -1,0 +1,670 @@
+{
+ "experiment": "four_ops",
+ "runs": [
+  {
+   "seed": 20261002,
+   "capabilities": {
+    "and": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "dadd": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add (x0 add x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "ge": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 lt x1) lt one)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "gemask": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(ones add (x0 lt x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "csub": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 sub (x1 and (x0 gemask x1)))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x1 (highest to lowest): acc = (acc dadd (x0 and mask))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x0 (highest to lowest): acc = ((acc dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = c1 = 0; for each bit of x0 (highest to lowest): acc = (acc dadd ((c1 dadd bit) ge x1)); c1 = ((c1 dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "avg": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "shr((x0 add x1)) with 1 extra bit(s)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "expressions": {
+    "expressions": 60,
+    "fully_correct": 60,
+    "samples": 3840,
+    "correct": 3840,
+    "ops_per_expression": 4.283333333333333,
+    "failures": []
+   },
+   "controls": {
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "rerouting_div": {
+     "program": "div",
+     "reroutings": 256,
+     "behaviour_changed": 255,
+     "unchanged": [
+      "@1 arg0 reads r4"
+     ]
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "div": "div: quotient of x0 by x1 (all ones if x1 is 0)\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (loop search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    r4 = zero\n    r5 = zero\n    r6 = zero\n    r7 = top\n    r8 = zero\n    r9 = zero\n    r10 = zero\n    @0: r5 = and(r0, r7)\n    @1: r3 = lt(r6, r5)\n    @2: r9 = dadd(r8, r3)\n    @3: r10 = ge(r9, r1)\n    @4: r2 = dadd(r2, r10)\n    @5: r8 = csub(r9, r1)\n    @6: r7 = shr(r7); if r7 != 0 goto @0 else halt\n    result = r2\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits",
+    "avg": "avg: floor of the mean of two numbers\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    registers carry 1 extra bit(s)\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    @0: r2 = add(r0, r1)\n    @1: r3 = shr(r2)\n    result = r3\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  },
+  {
+   "seed": 20261003,
+   "capabilities": {
+    "and": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "rounds": 2,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "rounds": 2,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "dadd": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add (x0 add x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "ge": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 lt x1) lt one)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "gemask": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(ones add (x0 lt x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "csub": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 sub (x1 and (x0 gemask x1)))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x1 (highest to lowest): acc = (acc dadd (x0 and mask))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x0 (highest to lowest): acc = ((acc dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = c1 = 0; for each bit of x0 (highest to lowest): acc = (acc dadd ((c1 dadd bit) ge x1)); c1 = ((c1 dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "avg": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "shr((x0 add x1)) with 1 extra bit(s)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "expressions": {
+    "expressions": 60,
+    "fully_correct": 60,
+    "samples": 3840,
+    "correct": 3840,
+    "ops_per_expression": 4.516666666666667,
+    "failures": []
+   },
+   "controls": {
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "div": "div: quotient of x0 by x1 (all ones if x1 is 0)\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (loop search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    r4 = zero\n    r5 = zero\n    r6 = zero\n    r7 = top\n    r8 = zero\n    r9 = zero\n    r10 = zero\n    @0: r5 = and(r0, r7)\n    @1: r3 = lt(r6, r5)\n    @2: r9 = dadd(r8, r3)\n    @3: r10 = ge(r9, r1)\n    @4: r2 = dadd(r2, r10)\n    @5: r8 = csub(r9, r1)\n    @6: r7 = shr(r7); if r7 != 0 goto @0 else halt\n    result = r2\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits",
+    "avg": "avg: floor of the mean of two numbers\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    registers carry 1 extra bit(s)\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    @0: r2 = add(r0, r1)\n    @1: r3 = shr(r2)\n    result = r3\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  },
+  {
+   "seed": 20261004,
+   "capabilities": {
+    "and": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "or": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "xor": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "add": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 16,
+     "rounds": 2,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "sub": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "lt": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shl": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add x0)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "shr": {
+     "learned": true,
+     "strategy": "learn",
+     "structure": "walks bits highest to lowest bit carrying 1 state bit(s) (starting at [0])",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "dadd": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 add (x0 add x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "ge": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "((x0 lt x1) lt one)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "gemask": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(ones add (x0 lt x1))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "csub": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "(x0 sub (x1 and (x0 gemask x1)))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mul": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x1 (highest to lowest): acc = (acc dadd (x0 and mask))",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "mod": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = 0; for each bit of x0 (highest to lowest): acc = ((acc dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "div": {
+     "learned": true,
+     "strategy": "loop",
+     "structure": "acc = c1 = 0; for each bit of x0 (highest to lowest): acc = (acc dadd ((c1 dadd bit) ge x1)); c1 = ((c1 dadd bit) csub x1)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    },
+    "avg": {
+     "learned": true,
+     "strategy": "reuse",
+     "structure": "shr((x0 add x1)) with 1 extra bit(s)",
+     "examples": 8,
+     "rounds": 1,
+     "accuracy": {
+      "8bit": 1.0,
+      "16bit": 1.0,
+      "32bit": 1.0
+     }
+    }
+   },
+   "expressions": {
+    "expressions": 60,
+    "fully_correct": 60,
+    "samples": 3840,
+    "correct": 3840,
+    "ops_per_expression": 4.116666666666666,
+    "failures": []
+   },
+   "controls": {
+    "kernel": {
+     "capability_names_in_kernel_sources": {
+      "vectorpro.machine.kernel": [],
+      "vectorpro.machine.program": []
+     },
+     "clean": true
+    },
+    "reload_identical": true
+   },
+   "explain": {
+    "div": "div: quotient of x0 by x1 (all ones if x1 is 0)\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (loop search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    r4 = zero\n    r5 = zero\n    r6 = zero\n    r7 = top\n    r8 = zero\n    r9 = zero\n    r10 = zero\n    @0: r5 = and(r0, r7)\n    @1: r3 = lt(r6, r5)\n    @2: r9 = dadd(r8, r3)\n    @3: r10 = ge(r9, r1)\n    @4: r2 = dadd(r2, r10)\n    @5: r8 = csub(r9, r1)\n    @6: r7 = shr(r7); if r7 != 0 goto @0 else halt\n    result = r2\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits",
+    "avg": "avg: floor of the mean of two numbers\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (composition search), disassembled from its tensors:\n    registers carry 1 extra bit(s)\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    @0: r2 = add(r0, r1)\n    @1: r3 = shr(r2)\n    result = r3\n  learned in 1 round(s) from 8 examples; validation 100% at 8 bits"
+   }
+  }
+ ]
+}

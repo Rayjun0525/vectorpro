@@ -32,7 +32,13 @@ class ExampleSet:
 
 
 class ExampleStream:
-    """Draws fresh, distinct examples from a target source on request."""
+    """Draws fresh, distinct examples from a target source on request.
+
+    A fraction of draws can be *boundary* inputs, which uniform sampling
+    almost never produces: all operands equal, or each operand one of 0, 1,
+    the top bit alone, all ones. This is task-agnostic; it protects against
+    candidates that are right everywhere except on such boundaries.
+    """
 
     def __init__(self, source: TargetSource, arity: int, rng: random.Random) -> None:
         self.source = source
@@ -40,12 +46,21 @@ class ExampleStream:
         self.rng = rng
         self._drawn: set[tuple[int, Operands]] = set()
 
-    def extend(self, examples: ExampleSet, total: int) -> ExampleSet:
+    def _boundary(self, width: int) -> Operands:
+        if self.arity > 1 and self.rng.random() < 0.5:
+            return (self.rng.getrandbits(width),) * self.arity
+        values = (0, 1, 1 << (width - 1), (1 << width) - 1, self.rng.getrandbits(width))
+        return tuple(self.rng.choice(values) for _ in range(self.arity))
+
+    def extend(self, examples: ExampleSet, total: int, boundary_fraction: float = 0.0) -> ExampleSet:
         """Grow ``examples`` to ``total`` distinct examples (fewer if the width runs out)."""
         width = examples.width
         capacity = 1 << (width * self.arity)
         while len(examples) < min(total, capacity):
-            operands = tuple(self.rng.getrandbits(width) for _ in range(self.arity))
+            if boundary_fraction and self.rng.random() < boundary_fraction:
+                operands = self._boundary(width)
+            else:
+                operands = tuple(self.rng.getrandbits(width) for _ in range(self.arity))
             if (width, operands) in self._drawn:
                 continue
             self._drawn.add((width, operands))

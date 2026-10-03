@@ -9,13 +9,16 @@ A program has ``S`` steps over ``R`` registers of ``W`` bits. Step ``s``:
 * ``next_true[s]`` / ``next_false[s]`` ``(S+1,)`` one-hot next step; the last slot halts.
 
 Registers start from ``init`` (one-hot over ``CONSTANTS``); ``inputs`` loads
-operands into registers; ``output`` selects the result register. There are no
-names, symbols or code in a program, only these tensors.
+operands into registers; ``output`` selects the result register. ``headroom``
+gives registers that many extra high bits: operands are zero-extended on
+entry and the result is cut back to ``W`` bits on exit (like a carry bit, it
+lets intermediate values exceed ``W`` bits). There are no names, symbols or
+code in a program, only these tensors.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 
 import torch
 
@@ -45,13 +48,14 @@ class VectorProgram:
     inputs: torch.Tensor      # (A, R)
     init: torch.Tensor        # (R, len(CONSTANTS))
     output: torch.Tensor      # (R,)
+    headroom: torch.Tensor = field(default_factory=lambda: torch.zeros(1))  # (1,) extra bits
 
     def __post_init__(self) -> None:
         s, r = self.n_steps, self.n_registers
         expected = {
             "reads": (s, MAX_ARGS, r), "writes": (s, r + 1), "cond": (s, r + 1),
             "next_true": (s, s + 1), "next_false": (s, s + 1),
-            "init": (r, len(CONSTANTS)), "output": (r,),
+            "init": (r, len(CONSTANTS)), "output": (r,), "headroom": (1,),
         }
         for name, shape in expected.items():
             if tuple(getattr(self, name).shape) != shape:
@@ -72,6 +76,10 @@ class VectorProgram:
         return self.inputs.shape[0]
 
     @property
+    def extra_bits(self) -> int:
+        return int(self.headroom.item())
+
+    @property
     def has_loop(self) -> bool:
         """Whether any step can jump back to itself or an earlier step."""
         steps = torch.arange(self.n_steps)
@@ -83,4 +91,6 @@ class VectorProgram:
 
     @classmethod
     def from_data(cls, data: dict) -> VectorProgram:
-        return cls(**{f.name: torch.tensor(data[f.name], dtype=torch.float32) for f in fields(cls)})
+        """Inverse of ``to_data``; programs saved before ``headroom`` existed load with none."""
+        return cls(**{f.name: torch.tensor(data[f.name], dtype=torch.float32)
+                      for f in fields(cls) if f.name in data})

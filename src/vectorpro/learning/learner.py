@@ -33,8 +33,8 @@ from vectorpro.learning.registry import (
     unit_provenance,
 )
 from vectorpro.learning.loops import find_primitives, search_bit_fold
-from vectorpro.learning.search import search_composition
-from vectorpro.machine import compile_bit_fold, compile_expression
+from vectorpro.learning.search import find_composition
+from vectorpro.machine import BitFold, compile_bit_fold, compile_expression
 from vectorpro.schemas import Direction, MapSchema, ScanSchema
 from vectorpro.training import TrainConfig, Trainer
 from vectorpro.units import FunctionUnit
@@ -75,6 +75,8 @@ def structure_candidates(name: str, arity: int, output: OutputWidth) -> list[Str
 class LearnerConfig:
     train: TrainConfig = field(default_factory=lambda: TrainConfig(steps=1500))
     restarts: int = 2
+    train_boundary_fraction: float = 0.25
+    validation_boundary_fraction: float = 0.5
     search_size: int = 3
     search_budget: int = 2_000_000
 
@@ -117,11 +119,12 @@ class Learner:
         probe: Probe | None = None,
     ) -> LearningOutcome:
         stream = ExampleStream(source, plan.arity, rng)
-        validation = stream.extend(ExampleSet(plan.validation_width), plan.validation_examples)
+        validation = stream.extend(ExampleSet(plan.validation_width), plan.validation_examples,
+                                   self.config.validation_boundary_fraction)
         train = ExampleSet(plan.train_width)
         history: list[dict] = []
         for round_no, total in enumerate(plan.rounds, start=1):
-            stream.extend(train, total)
+            stream.extend(train, total, self.config.train_boundary_fraction)
             attempt = self._attempt(plan, train, validation)
             entry = {
                 "round": round_no,
@@ -159,13 +162,15 @@ class Learner:
     def _reuse(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt | None:
         if plan.output is not OutputWidth.SAME:
             return None
-        expr = search_composition(self.registry.operators(), plan.arity, [train, validation],
-                                  self.config.search_size, self.config.search_budget)
-        if expr is None:
+        found = find_composition(self.registry.operators(), plan.arity, [train, validation],
+                                 self.config.search_size, self.config.search_budget)
+        if found is None:
             return None
-        program = compile_expression(expr, plan.arity, self.registry.key_of)
+        expr, headroom = found
+        program = compile_expression(expr, plan.arity, self.registry.key_of, headroom)
         provenance = program_provenance(program, "composition search")
-        return self._score(Attempt("reuse", render(expr)), plan, provenance, train, validation)
+        room = f" with {headroom} extra bit(s)" if headroom else ""
+        return self._score(Attempt("reuse", render(expr) + room), plan, provenance, train, validation)
 
     def _loop(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt | None:
         if plan.output is not OutputWidth.SAME:
@@ -175,12 +180,14 @@ class Learner:
         primitives = find_primitives(operators)
         if primitives is None:  # the registry cannot yet extract bits
             return None
+        library = [BitFold.from_data(c.provenance["fold"]) for c in self.registry
+                   if c.provenance.get("fold") and c.plan.arity == plan.arity]
         fold = search_bit_fold(operators, plan.arity, [train, validation],
-                               self.config.search_size, self.config.search_budget)
+                               self.config.search_size, self.config.search_budget, library=library)
         if fold is None:
             return None
         program = compile_bit_fold(fold, self.registry.key_of, primitives)
-        provenance = program_provenance(program, "loop search")
+        provenance = program_provenance(program, "loop search", fold=fold.to_data())
         return self._score(Attempt("loop", fold.describe()), plan, provenance, train, validation)
 
     def _learn_unit(self, plan: LearningPlan, train: ExampleSet, validation: ExampleSet) -> Attempt:

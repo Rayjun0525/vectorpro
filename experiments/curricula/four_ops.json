@@ -1,0 +1,24 @@
+{
+  "curriculum": "four_ops",
+  "note": "The four arithmetic operations and remainder, learned from examples only. Helper plans (dadd, ge, gemask, csub) are ordinary building blocks a planner would list; none of them names a structure.",
+  "plans": [
+    {"name": "and", "description": "bitwise and of two numbers",          "arity": 2, "output": "W"},
+    {"name": "or",  "description": "bitwise or of two numbers",           "arity": 2, "output": "W"},
+    {"name": "xor", "description": "bitwise exclusive or of two numbers", "arity": 2, "output": "W"},
+    {"name": "add", "description": "sum of two numbers with carry out",   "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "sub", "description": "difference x0 - x1 with borrow out",  "arity": 2, "output": "W+1", "tags": ["arithmetic"]},
+    {"name": "lt",  "description": "whether x0 is less than x1",          "arity": 2, "output": "1"},
+    {"name": "shl", "description": "shift a number left by one bit",      "arity": 1, "output": "W"},
+    {"name": "shr", "description": "shift a number right by one bit",     "arity": 1, "output": "W"},
+
+    {"name": "dadd",   "description": "two times x0 plus x1",                     "arity": 2, "output": "W"},
+    {"name": "ge",     "description": "1 if x0 is at least x1, else 0",           "arity": 2, "output": "W"},
+    {"name": "gemask", "description": "all ones if x0 is at least x1, else 0",    "arity": 2, "output": "W"},
+    {"name": "csub",   "description": "x0 - x1 if x0 is at least x1, else x0",    "arity": 2, "output": "W"},
+
+    {"name": "mul", "description": "product of two numbers, wrapping",            "arity": 2, "output": "W", "tags": ["arithmetic"]},
+    {"name": "mod", "description": "remainder of x0 by x1 (x0 if x1 is 0)",       "arity": 2, "output": "W", "tags": ["arithmetic"]},
+    {"name": "div", "description": "quotient of x0 by x1 (all ones if x1 is 0)",  "arity": 2, "output": "W", "tags": ["arithmetic"]},
+    {"name": "avg", "description": "floor of the mean of two numbers",            "arity": 2, "output": "W", "tags": ["arithmetic"]}
+  ]
+}

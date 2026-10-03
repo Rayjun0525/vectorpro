@@ -28,7 +28,7 @@ src/vectorpro/
     program.py     VectorProgram: a program's whole logic as tensors
     kernel.py      task-agnostic fetch-execute kernel; ProgramExecutable
     assembler.py   assemble / compile_expression (writing) and disassemble (reading)
-    skeletons.py   generic loop skeletons (BitFold) and their compilation to vector programs
+    skeletons.py   generic loop skeletons (BitFold, with companions) compiled to vector programs
   programs/        Python-wired compositions used by M0–M1b experiments (legacy):
                    Fold, Window, ShiftAddMultiply, RestoringDivide, ExpressionProgram
   expr.py          expression AST shared by programs (execution) and tasks (reference)
@@ -43,9 +43,9 @@ src/vectorpro/
   data.py          operand sets, splits, edge cases
   learning/        the learning loop (M2):
     plan.py        LearningPlan: plain-data plan (what an LLM would emit)
-    examples.py    target sources, example streams; the learner's only view of targets
+    examples.py    target sources, example streams (with boundary inputs); the learner's only view
     search.py      size-ordered composition search (any arity, constants, behaviour dedup)
-    loops.py       loop search: bit-fold bodies; bit-extraction capabilities found by behaviour
+    loops.py       loop search: bit-fold bodies, companion loops from the library; primitives by behaviour
     learner.py     per round: reuse, else learn a unit, else learn a loop
     registry.py    capabilities with address vectors; resolves calls, search, explain, save/load
 experiments/       declare specs or curricula, write JSON to results/
@@ -77,6 +77,7 @@ python experiments/arithmetic.py                  # M1b
 python experiments/learning_loop.py               # M2
 python experiments/vector_programs.py             # M2b
 python experiments/loop_learning.py               # M2c
+python experiments/four_ops.py                    # M2d
 ```
 
 ## M0 result: addition width generalization
@@ -296,6 +297,59 @@ Results sections record the code at their milestone. Rerunning an earlier
 experiment with later code can do better: with M2c's search, M2's `max` and
 `mul` become learnable.
 
+## M2d result: all four arithmetic operations learned from examples
+
+`div` was the last operation still needing a hand-written program (M2b). It
+is now learned from examples, together with everything it builds on
+(`python experiments/four_ops.py`, `experiments/curricula/four_ops.json`,
+seeds 20261002–4). Three machine-level additions, none task-specific:
+
+- **Register headroom.** A program may compute on registers wider than `W`
+  bits and return the low `W` bits, like a carry bit. Compositions and folds
+  are tried at 0 and 1 extra bits.
+- **Companion loops.** A loop can run alongside a loop the registry already
+  learned, with only its own update searched. The update has the form
+  `acc ← g(acc, h)` where `h` does not read `acc`. So `h` is enumerated with
+  exact deduplication on the companion's real trajectory, and every
+  `(g, h)` pair is tried in one batch.
+- **Boundary examples.** Example draws include equal operands and
+  0, 1, top-bit and all-ones values. Without them, `ge` was accepted as
+  `x1 lt x0` (wrong only when `x0 = x1`) on one seed, because no random
+  example had equal operands.
+
+The 16 plans are all learned on every seed, and every capability is 100% at
+8, 16 and 32 bits:
+
+| plan | how | what was found | examples |
+|---|---|---|---|
+| and, or, xor, add, sub, lt, shr | new unit | map / scans | 8–16 |
+| shl, dadd (`2·x0 + x1`) | composition | `x add x`, `x0 add (x0 add x1)` | 8 |
+| ge, gemask, csub | composition | `(x0 lt x1) lt one`, `ones add (x0 lt x1)`, `x0 sub (x1 and gemask(x0, x1))` | 8 |
+| **avg** | composition, **1 extra bit** | `shr(x0 add x1)` | 8 |
+| **mul** | loop | `acc ← acc dadd (x0 and mask)` over x1, high→low | 8 |
+| **mod** | loop | `acc ← (acc dadd bit) csub x1` over x0, high→low | 8 |
+| **div** | loop **with the mod loop as companion** | `acc ← acc dadd ((c1 dadd bit) ge x1)`, `c1 ← (c1 dadd bit) csub x1` | 8 |
+
+That is restoring long division, found from 8 examples. Division by zero
+gives all ones and the remainder gives the dividend, matching RISC-V,
+without special handling.
+
+**Unseen programs.** 60 random expression trees per seed over the learned
+`+ - * / %` are compiled into vector programs and run at 32 bits (48 random
+and 16 small inputs each, so division by zero occurs). Results: **60/60 expressions and 3,840/3,840 samples exact on every seed**.
+
+**Controls.** 255 of the 256 single re-routings of the learned `div` program
+change its behaviour. The remaining one moves a read of the constant zero to an
+unused register that also holds zero. Compiled folds now skip unused
+bit-extraction steps and compute shared sub-expressions once, which removed
+the dead code an earlier run exposed (348/376). On every seed, the kernel
+names no capability and the registry reloads identically.
+
+**Honest scope.** The helper plans (`dadd`, `ge`, `gemask`, `csub`) are
+listed in the curriculum. Nothing in them names a structure, but choosing
+these stepping stones is planning knowledge that a person or a language model
+supplies. Loops inside loops are still not searched.
+
 ## Roadmap
 
 | | milestone |
@@ -306,7 +360,8 @@ experiment with later code can do better: with M2c's search, M2's `max` and
 | M2 | learning loop: plans → reuse/learn → searchable, explainable registry ✅ |
 | M2b | all logic in vector programs: address-vector calls, routing and control tensors, task-agnostic kernel ✅ |
 | M2c | learn loop programs from examples: generic bit fold, wider composition search ✅ |
-| M2d | multi-accumulator folds (div), nested loops, faster search; LLM-written plans |
+| M2d | four arithmetic operations from examples: headroom, companion loops, boundary examples ✅ |
+| M2e | LLM-written plans (requirements → curricula and target sources); nested loops; faster search |
 | M3 | structure discovery beyond a fixed candidate set; capability search by behaviour vectors |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |
 | M5 | synthesizer, effect log for native calls, cost vs native/interpreter |

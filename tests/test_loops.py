@@ -159,3 +159,46 @@ def test_learner_finds_loop_when_reuse_and_units_fail():
     outcome = learner.learn(plan, lambda o, w: bin(o[0]).count("1"), random.Random(1))
     assert outcome.learned and outcome.history[-1]["strategy"] == "loop"
     assert reg.run("popcount_l", [(0xFFFF,), (0x8001,)], 16) == [16, 2]
+
+
+def register_composition(reg, name, expr, arity=2, headroom=0):
+    register_program(reg, name, compile_expression(expr, arity, reg.key_of, headroom), arity)
+
+
+def division_registry():
+    """Exact units plus the helper compositions division builds on."""
+    reg = exact_registry()
+    x0, x1 = Var(0), Var(1)
+    register_composition(reg, "dadd", BinOp("add", x0, BinOp("add", x0, x1)))
+    register_composition(reg, "ge", BinOp("lt", BinOp("lt", x0, x1), Const("one")))
+    register_composition(reg, "gemask", BinOp("add", Const("ones"), BinOp("lt", x0, x1)))
+    register_composition(reg, "csub", Call("mux", (x0, BinOp("sub", x0, x1), BinOp("gemask", x0, x1))))
+    return reg
+
+
+def test_headroom_composition_finds_average():
+    from vectorpro.learning.search import find_composition
+    reg = exact_registry()
+    found = find_composition(reg.operators(), 2, example_sets(lambda o, w: (o[0] + o[1]) >> 1, 2))
+    assert found is not None and found[1] == 1  # needs one extra bit for the carry
+    expr, headroom = found
+    register_composition(reg, "avg_t", expr, headroom=headroom)
+    ops = [(255, 255), (200, 100), (1, 2)]
+    assert reg.run("avg_t", ops, 8) == [255, 150, 1]
+
+
+def test_division_is_found_beside_a_learned_remainder_loop():
+    reg = division_registry()
+    ops = [op for op in reg.operators() if not op.loops]
+    mod_fn = lambda o, w: o[0] % o[1] if o[1] else o[0]  # noqa: E731
+    div_fn = lambda o, w: o[0] // o[1] if o[1] else mask(w)  # noqa: E731
+    mod_fold = search_bit_fold(ops, 2, example_sets(mod_fn, 2), headrooms=(0,))
+    assert mod_fold is not None and not mod_fold.companions
+
+    div_fold = search_bit_fold(ops, 2, example_sets(div_fn, 2), headrooms=(), library=[mod_fold])
+    assert div_fold is not None and len(div_fold.companions) == 1
+    program = compile_bit_fold(div_fold, reg.key_of, find_primitives(ops))
+    register_program(reg, "div_t", program, arity=2)
+    tuples = [(random.Random(i).getrandbits(16), random.Random(-i).getrandbits(16) >> (i % 16))
+              for i in range(80)] + [(5, 0), (0, 0), (65535, 1), (65535, 65535)]
+    assert reg.run("div_t", tuples, 16) == [div_fn(t, 16) for t in tuples]
