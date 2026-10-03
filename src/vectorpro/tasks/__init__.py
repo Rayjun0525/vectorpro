@@ -1,4 +1,29 @@
-from vectorpro.tasks.arithmetic import FULL_ADDER, Addition, ModularSum
+from vectorpro.tasks.arithmetic import (
+    FULL_ADDER,
+    FULL_SUBTRACTOR,
+    LESS_THAN,
+    Addition,
+    LessThan,
+    ModularSum,
+    Multiplication,
+    Subtraction,
+)
 from vectorpro.tasks.base import LocalRule, Task
+from vectorpro.tasks.bitwise import AND, OR, XOR, Bitwise
 
-__all__ = ["FULL_ADDER", "Addition", "LocalRule", "ModularSum", "Task"]
+__all__ = [
+    "AND",
+    "FULL_ADDER",
+    "FULL_SUBTRACTOR",
+    "LESS_THAN",
+    "OR",
+    "XOR",
+    "Addition",
+    "Bitwise",
+    "LessThan",
+    "LocalRule",
+    "ModularSum",
+    "Multiplication",
+    "Subtraction",
+    "Task",
+]
