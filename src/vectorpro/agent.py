@@ -147,6 +147,23 @@ def small_case_schema(arity, minimum=2, maximum=4):
         "type": "object", "properties": properties, "required": list(properties), "additionalProperties": False}}
 
 
+def binding_tools(tools, intent):
+    """Restrict literal-copy binding, without interpreting an operation or computing answers."""
+    numbers = list(dict.fromkeys(int(s) for s in re.findall(r"(?<!\d)[+-]?\d+(?!\d)", intent)))
+    result = json.loads(json.dumps(tools))
+    if numbers:
+        for item in result:
+            if not item["function"]["name"].startswith("prepare_"):
+                continue
+            for name, field in item["function"]["parameters"]["properties"].items():
+                if field.get("type") == "integer":
+                    options = [n for n in numbers if name != "width" or 1 <= n <= 32]
+                    field["enum"] = options or [16]
+                    if name == "width":
+                        field["description"] = "The explicitly requested execution width, not an operand or validation width"
+    return result
+
+
 def small_cases(rows, arity, minimum=2, maximum=4):
     if not isinstance(rows, list) or not minimum <= len(rows) <= maximum:
         raise ValueError(f"provide {minimum}..{maximum} distinct small cases")
@@ -197,6 +214,16 @@ at least four training cases and two DISJOINT validation cases. Do not copy
 another stored function's answers or pretend that the nearest function is the goal.
 No code, recipes, execution or answers for the omitted actual request inputs.
 If you cannot provide correct evidence, ask_user. Never claim success on error.
+"""
+
+BINDING_GUIDE = """Extract the ACTUAL requested inputs into one prepare_N tool.
+Read the original request literally. Do not compute the answer or replace inputs
+with outputs, defaults, examples, schema names, or references to tool results.
+Use the register width explicitly requested by the user. If unspecified use 16.
+For paths copy actual filenames; for numeric inputs copy actual integers, preserving
+the operand roles in the tool description. Example/validation inputs are separate.
+Caller evidence is checked by the backend after preparation; do not recreate it.
+Choose ask_user only when the actual request is missing a required input or goal.
 """
 
 
@@ -514,6 +541,7 @@ class AgentSession:
         self._caller_evidence, self._caller_types = None, None
         self._verification_attempted = False
         small_messages = None
+        binding_messages = None
         if self.catalog is not None and evidence is not None:
             from vectorpro.semantic_catalog import operand_types
             try:
@@ -535,6 +563,12 @@ class AgentSession:
         events = []
         for _ in range(self.max_calls):
             offered_tools = self.available_tools()
+            binding = any(t["function"]["name"].startswith("prepare_") for t in offered_tools)
+            if binding and binding_messages is None:
+                binding_messages = [{"role": "system", "content": BINDING_GUIDE},
+                                    {"role": "user", "content": intent}]
+            if binding:
+                offered_tools = binding_tools(offered_tools, intent)
             compact = any(t["function"]["name"] in ("check_small", "teach_small") for t in offered_tools)
             if compact and small_messages is None:
                 goal = intent
@@ -545,13 +579,15 @@ class AgentSession:
                     goal = re.sub(r"(?<!\d)" + str(self._proposed["width"]) + r"(?!\d)", "execution_width", goal)
                 small_messages = [{"role": "system", "content": SMALL_GUIDE},
                                   {"role": "user", "content": "Operation intent (examples still use 4 bits):\n" + goal}]
-            model_messages = small_messages if compact else self.messages
+            model_messages = binding_messages if binding else small_messages if compact else self.messages
             message = self.model.complete(model_messages, offered_tools)
             if message.get("role") != "assistant":
                 raise ValueError("model must return an assistant message")
             self.messages.append(message)
             if compact:
                 small_messages.append(message)
+            if binding:
+                binding_messages.append(message)
             calls = message.get("tool_calls") or []
             if not calls:
                 if self.catalog is not None and not any(e["result"].get("status") == "executed" for e in events):
@@ -565,7 +601,19 @@ class AgentSession:
                 if call["function"]["name"] not in {t["function"]["name"] for t in offered_tools}:
                     raise ValueError("tool is not available in the current request phase")
                 args = json.loads(call["function"]["arguments"])
+                offered = next(t for t in offered_tools if t["function"]["name"] == call["function"]["name"])
+                for field, schema in offered["function"]["parameters"].get("properties", {}).items():
+                    if "enum" in schema and args.get(field) not in schema["enum"]:
+                        raise ValueError(f"{field} must copy a number from the actual request: {schema['enum']}")
                 result = self.call(call["function"]["name"], args)
+                if (self.catalog is not None and result.get("status") == "proposed"
+                        and getattr(self, "_caller_evidence", None)):
+                    supplied = self._caller_evidence
+                    if "numeric_validation" in supplied:
+                        result = self.call("verify_numeric", supplied["numeric_validation"])
+                    else:
+                        result = self.call("verify_state", {"cases": supplied["state_validation"]})
+                    result = {**result, "verification_source": "caller", "request": self._proposed}
             except (ValueError, KeyError, TypeError, OSError, RuntimeError) as error:
                 result = {"status": "error", "message": str(error)}
             events.append({"name": call["function"]["name"], "result": result})
@@ -573,6 +621,14 @@ class AgentSession:
             self.messages.append(feedback)
             if compact:
                 small_messages.append(feedback)
+            if binding:
+                binding_messages.append(feedback)
+            if self.catalog is not None and result.get("status") == "executed":
+                # The single bound request is complete. A model cannot undo success,
+                # re-execute it, or replace the authoritative result with prose.
+                return {"status": "executed", "outputs": result["outputs"],
+                        "capability": result["capability"], "request": self._proposed,
+                        "tools": events}
             if evidence is not None and (call["function"]["name"].startswith("prepare_") or call["function"]["name"] in ("propose_request", "propose_numeric_request", "propose_file_request")) and result.get("status") == "proposed":
                 self.messages.append({"role": "user", "content": "Separate validation evidence from the caller (virtual only; DO NOT change the already proposed request):\n" + evidence})
                 evidence = None
@@ -606,7 +662,7 @@ def main(argv=None):
     result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning).run(
         args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
-    return 0 if result["status"] == "answered" else 2
+    return 0 if result["status"] in ("answered", "executed") else 2
 
 
 if __name__ == "__main__":

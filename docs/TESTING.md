@@ -31,6 +31,27 @@ Gemma GGUF가 누락됐으면 `nerdctl exec vectorpro-test python experiments/se
 
 ## 변경별 검증
 
+최신 후속 입력/완료 변경 전체 회귀는 **183 passed, 338.79초**, 관련 테스트는
+29 passed, 17.28초다. 실제 모델 추론과 병행했으므로 이전 시간과 직접 비교하지 않는다.
+모호한 caller 근거의 자동 승인 방지, 마지막 허용 턴의 정상 종료, 실제 인자/근거
+분리, 성공 후 모델 추가 호출 없음 및 숫자 선택지에 출력값을 넣지 않음을 확인한다.
+새 첫 평가 7/8은 실제 폭/인자/완료 상태를 포함한다. 한국어 파일 경로 추출 실패
+1건은 원본 불변을 확인했고 결과를 보고 다시 튜닝하지 않았다. 원문은
+`results/gemma_binding/first-use`, 소스/데이터 SHA와 한계는 `verification.json`에 있다.
+최초 실행에는 `--evaluation-kind first-use`를 명시했고 위 재현에는 기본 replay를
+사용한다. 구분 옵션이 새로운 미사용 평가임을 자동으로 증명해 주지는 않는다.
+
+후속 입력 준비/자동 caller 검증/완료 반환은 새 8건의 폭·입력·완료 상태까지 검사한다.
+기대 출력/인자는 평가기에만 전달하며 모델에는 원래 요청과 명시적 caller 근거만
+사용한다. 재현은 새 결과 경로를 지정한다.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/local_small_llm.py --catalog results/catalog_retrieval/final/program.pt --root results/gemma_binding/reproduction --constrain-tools --evaluation experiments/requests/gemma_binding_first_use.json --max-calls 6
+```
+
+이미 사용한 평가 요청을 재실행하면 새 독립 평가가 아니다. 기존 실패 재사용 개발
+기록은 `results/gemma_binding/development`, `literal-development`로 분리한다.
+
 Gemma 교체 후 전체 회귀는 **181 passed, 374.36초**다. 관련 어댑터/프로토콜
 범위는 27 passed, 10.14초다. 실제 모델 테스트와 병행한 실행 시간이므로
 이전 시간과 직접 성능 비교하지 않는다. 테스트는 모두 같은 컨테이너에서 실행했다.

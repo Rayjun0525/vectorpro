@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true,
+    "terminal_status": true
+  },
+  "response": {
+    "status": "executed",
+    "outputs": [
+      10219
+    ],
+    "capability": "sub",
+    "request": {
+      "query": "register width 16",
+      "width": 16,
+      "operands": [
+        [
+          10490,
+          271
+        ]
+      ]
+    },
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.1738719642162323
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.19978897273540497
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.1738719642162323
+            }
+          ],
+          "status": "matched",
+          "name": "sub",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+          "verification_source": "caller",
+          "request": {
+            "query": "register width 16",
+            "width": 16,
+            "operands": [
+              [
+                10490,
+                271
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            10219
+          ],
+          "capability": "sub",
+          "history": []
+        }
+      }
+    ]
+  }
+}

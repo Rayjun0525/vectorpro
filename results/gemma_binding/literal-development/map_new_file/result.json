@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true,
+    "terminal_status": true
+  },
+  "response": {
+    "status": "executed",
+    "outputs": [
+      4
+    ],
+    "capability": "map",
+    "request": {
+      "query": "find functions with argument roles for a simple operation, no execution",
+      "width": 16,
+      "operands": [
+        [
+          {
+            "utf8": "payload.dat"
+          },
+          11
+        ]
+      ]
+    },
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.1721540242433548
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.1721540242433548
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.17175337672233582
+            }
+          ],
+          "status": "matched",
+          "name": "map",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+          "verification_source": "caller",
+          "request": {
+            "query": "find functions with argument roles for a simple operation, no execution",
+            "width": 16,
+            "operands": [
+              [
+                {
+                  "utf8": "payload.dat"
+                },
+                11
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            4
+          ],
+          "capability": "map",
+          "history": []
+        }
+      }
+    ]
+  }
+}

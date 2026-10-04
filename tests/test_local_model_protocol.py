@@ -1,6 +1,7 @@
 import json
 
 from experiments.local_small_llm import gemma_messages, native_message
+from vectorpro.agent import binding_tools
 
 
 def test_gemma_framing_preserves_bound_inputs_and_separate_evidence():
@@ -27,3 +28,14 @@ def test_gemma_plain_reply_and_tool_result_do_not_invent_calls():
     output = '<tool_call>{"name":"ask_user","arguments":{"question":"목표는?"}}</tool_call>'
     call = native_message(output)["tool_calls"][0]["function"]
     assert call["name"] == "ask_user" and json.loads(call["arguments"]) == {"question": "목표는?"}
+
+
+def test_binding_schema_uses_request_literals_without_computing_answers():
+    tools = [{"function":{"name":"prepare_0","parameters":{"properties":{
+        "width":{"type":"integer"},"x0":{"type":"integer"},"x1":{"type":"integer"}}}}}]
+    revised = binding_tools(tools, "Take 37 away from 313 at width 16")
+    fields = revised[0]["function"]["parameters"]["properties"]
+    assert fields["x0"]["enum"] == [37,313,16]
+    assert 276 not in fields["x0"]["enum"] and 0 not in fields["x1"]["enum"]
+    assert fields["width"]["enum"] == [16]
+    assert "enum" not in tools[0]["function"]["parameters"]["properties"]["x0"]

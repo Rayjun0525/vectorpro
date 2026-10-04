@@ -151,8 +151,9 @@ def test_llm_loop_extracts_operands_then_exposes_only_verified_execution(tmp_pat
                 assert "execute_resolved" not in names
                 return message("search_goal", {"query": "XOR"})
             if self.turn == 2:
-                candidates = json.loads(messages[-1]["content"])["candidates"]
-                index = next(i for i, c in enumerate(candidates) if c["name"] == "xor")
+                assert messages[-1]["content"] == "Compute the XOR of 12345 and 4567 at width 16"
+                chosen = next(t for t in tools if t["function"]["description"].startswith("Prepare xor:"))
+                index = int(chosen["function"]["name"].split("_")[1])
                 return message(f"prepare_{index}", {"width": 16, "x0": 12345, "x1": 4567})
             if self.turn == 3:
                 assert "12345" not in json.dumps(messages) and "4567" not in json.dumps(messages)
@@ -164,10 +165,10 @@ def test_llm_loop_extracts_operands_then_exposes_only_verified_execution(tmp_pat
             if self.turn == 4:
                 assert "execute_resolved" in names
                 return message("execute_resolved", {})
-            return {"role": "assistant", "content": "Done"}
+            raise AssertionError("must stop after execution without another model turn")
     session.model = Model()
     result = session.run("Compute the XOR of 12345 and 4567 at width 16")
-    assert result["status"] == "answered"
+    assert result["status"] == "executed" and session.model.turn == 4
     assert result["tools"][-1]["result"]["outputs"] == [8686]
 
 
@@ -182,6 +183,7 @@ def test_model_text_cannot_claim_execution_without_tools(tmp_path):
 
 def test_evidence_arrives_after_request_and_cannot_replace_requested_mask(tmp_path):
     runtime, catalog, session = setup(tmp_path)
+    session.max_calls = 3  # execution on the final permitted turn still completes
     (tmp_path / "native.bin").write_bytes(b"\x00\x07\xff\x80")
     candidate = next(c for c in catalog.contracts if c["name"] == "map")
     catalog.search_goal = lambda query, limit=5, types=None: [{**candidate, "description": "Map file bytes", "score": 1.0}]
@@ -199,24 +201,44 @@ def test_evidence_arrives_after_request_and_cannot_replace_requested_mask(tmp_pa
                 assert "probe.bin" not in json.dumps(messages)
                 return message("prepare_0", {"width": 16, "x0": "native.bin", "x1": 53})
             if self.turn == 3:
-                assert messages[-1]["role"] == "user" and "probe.bin" in messages[-1]["content"]
-                return message("propose_file_request", {"query": "mask file", "width": 16,
-                                "paths": ["native.bin"], "values": [1]})  # not offered in this phase
-            if self.turn == 4:
-                assert json.loads(messages[-1]["content"])["status"] == "error"
-                changed = file_request()["state_validation"]
-                changed[0]["after"]["probe.bin"] = "0007"
-                return message("verify_state", {"cases": changed})
-            if self.turn == 5:
-                assert "copy caller" in json.loads(messages[-1]["content"])["message"]
-                return message("verify_state", {"cases": file_request()["state_validation"]})
-            if self.turn == 6:
+                result = json.loads(messages[-1]["content"])
+                assert result["status"] == "matched" and result["verification_source"] == "caller"
+                assert result["request"]["operands"] == [[{"utf8": "native.bin"}, 53]]
+                assert [t["function"]["name"] for t in tools] == ["execute_resolved"]
                 return message("execute_resolved", {})
-            return {"role": "assistant", "content": "Done"}
+            raise AssertionError("must not request a model summary or second write")
     session.model = Model()
     response = session.run("Mask native.bin with 53", evidence=json.dumps(file_request()["state_validation"]))
-    assert response["status"] == "answered"
+    assert response["status"] == "executed" and session.model.turn == 3
+    assert response["request"]["width"] == 16
     assert (tmp_path / "native.bin").read_bytes() == b"\x35\x32\xca\xb5"
+
+
+def test_automatic_caller_verification_cannot_authorize_ambiguous_evidence(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    evidence = {"width":4,"operands":[[0,0],[1,0]],"targets":[0,1]}
+    class Model:
+        def __init__(self): self.turn = 0
+        def complete(self, messages, tools):
+            self.turn += 1
+            if self.turn == 1:
+                name, args = "search_goal", {"query":"numeric request"}
+            elif self.turn == 2:
+                assert "targets" not in json.dumps(messages)
+                name, args = "prepare_0", {"width":8,"x0":7,"x1":3}
+            elif self.turn == 3:
+                assert json.loads(messages[-1]["content"])["status"] == "needs_evidence"
+                assert "execute_resolved" not in [t["function"]["name"] for t in tools]
+                name, args = "execute_resolved", {}
+            else:
+                assert json.loads(messages[-1]["content"])["status"] == "error"
+                name, args = "ask_user", {"question":"Please provide distinguishing examples"}
+            return {"role":"assistant","tool_calls":[{"id":"test","function":{"name":name,"arguments":json.dumps(args)}}]}
+    session.model = Model()
+    response = session.run("Compute with 7 and 3 at width 8", evidence=json.dumps(evidence))
+    assert response["status"] == "needs_input" and session._resolved is None
+    assert not any(e["result"].get("status") == "executed" for e in response["tools"])
+    assert runtime.host.events == []
 
 
 def test_execution_only_sessions_reject_teaching_even_if_model_hallucinates_tool(tmp_path):

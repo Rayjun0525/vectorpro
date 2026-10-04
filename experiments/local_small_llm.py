@@ -32,6 +32,10 @@ def evaluate_case(case, response, runtime, native_root, initial_registry):
     checks = {"files": snapshot(native_root) == expected["files"]}
     if expected["status"] == "executed":
         checks["output"] = any(e.get("outputs") == expected["outputs"] for e in executed)
+        checks["terminal_status"] = response["status"] == "executed"
+        if "request" in expected:
+            actual = response.get("request") or {}
+            checks["request_binding"] = all(actual.get(k) == v for k, v in expected["request"].items())
     else:
         checks["question"] = response["status"] == "needs_input"
         checks["no_native_effects"] = not executed and runtime.host.events == []
@@ -105,6 +109,8 @@ def main():
     parser.add_argument("--constrain-tools", action="store_true", help="Use JSON-schema constrained decoding for tool turns; model still chooses tool and arguments")
     parser.add_argument("--max-tokens", type=int, default=512, help="bound generated output per model turn")
     parser.add_argument("--evaluation", type=Path, help="data-only cases; expected outputs are never passed to the model")
+    parser.add_argument("--evaluation-kind", choices=("replay", "first-use"), default="replay",
+                        help="record a genuinely new frozen evaluation explicitly; repeated requests remain replay")
     parser.add_argument("--max-calls", type=int, default=8)
     args = parser.parse_args()
     evaluation = json.loads(args.evaluation.read_text(encoding="utf-8")) if args.evaluation else None
@@ -289,7 +295,9 @@ def main():
     summary["evaluation_protocol"] = "development scenarios reused during adapter improvements; not independent held-out accuracy"
     if evaluation:
         summary["dataset_protocol"] = evaluation["protocol"]
-        summary["evaluation_protocol"] = "Gemma model replacement replay of existing fixed requests; not new independent held-out accuracy"
+        summary["evaluation_protocol"] = ("first-use frozen requests after development; no retuning on results"
+            if args.evaluation_kind == "first-use" else "replay of existing fixed requests; not new independent held-out accuracy")
+        summary["evaluation_kind"] = args.evaluation_kind
         summary["evaluation_file"] = str(args.evaluation)
         summary["evaluation_sha256"] = hashlib.sha256(args.evaluation.read_bytes()).hexdigest()
     summary["max_calls"] = args.max_calls

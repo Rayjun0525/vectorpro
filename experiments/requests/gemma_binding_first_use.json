@@ -1,0 +1,298 @@
+{
+  "protocol": "new fixed binding requests frozen before first inference; no retuning on this evaluation",
+  "cases": [
+    {
+      "name": "xor_width8",
+      "intent": "Use an 8-bit register to XOR 255 with 129. Use a stored function; no learning.",
+      "before": {},
+      "expect": {
+        "status": "executed",
+        "files": {},
+        "outputs": [
+          126
+        ],
+        "request": {
+          "width": 8,
+          "operands": [
+            [
+              255,
+              129
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "width": 4,
+        "operands": [
+          [
+            3,
+            6
+          ],
+          [
+            9,
+            4
+          ]
+        ],
+        "targets": [
+          5,
+          13
+        ]
+      }
+    },
+    {
+      "name": "xor_korean8",
+      "intent": "119와 54를 비트별 XOR로 계산해줘. 실행 폭은 8비트, 학습은 하지 마.",
+      "before": {},
+      "expect": {
+        "status": "executed",
+        "files": {},
+        "outputs": [
+          65
+        ],
+        "request": {
+          "width": 8,
+          "operands": [
+            [
+              119,
+              54
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "width": 4,
+        "operands": [
+          [
+            3,
+            6
+          ],
+          [
+            9,
+            4
+          ]
+        ],
+        "targets": [
+          5,
+          13
+        ]
+      }
+    },
+    {
+      "name": "subtract_roles",
+      "intent": "Subtract 37 from 313 using a 16-bit register. Use a stored function, without teaching.",
+      "before": {},
+      "expect": {
+        "status": "executed",
+        "files": {},
+        "outputs": [
+          276
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              313,
+              37
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "width": 4,
+        "operands": [
+          [
+            12,
+            5
+          ],
+          [
+            14,
+            3
+          ]
+        ],
+        "targets": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "name": "subtract_korean",
+      "intent": "31000에서 701을 빼줘. 16비트로 실행하고 새로 학습하지 마.",
+      "before": {},
+      "expect": {
+        "status": "executed",
+        "files": {},
+        "outputs": [
+          30299
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              31000,
+              701
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "width": 4,
+        "operands": [
+          [
+            12,
+            5
+          ],
+          [
+            14,
+            3
+          ]
+        ],
+        "targets": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "name": "map_binding",
+      "intent": "XOR each byte of image.bin with 19. Save to image.bin using width 16. Keep spare.bin unchanged; do not learn.",
+      "before": {
+        "image.bin": "0080ff42",
+        "spare.bin": "1100"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "image.bin": "1393ec51",
+          "spare.bin": "1100"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "image.bin"
+              },
+              19
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "example.bin"
+              },
+              3
+            ],
+            "before": {
+              "example.bin": "0010"
+            },
+            "after": {
+              "example.bin": "0313"
+            },
+            "output": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "fill_binding",
+      "intent": "결과.bin의 모든 바이트를 값 23으로 채워서 같은 파일에 저장해줘. 실행 폭은 16비트, 학습하지 마.",
+      "before": {
+        "결과.bin": "00ee12"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "결과.bin": "171717"
+        },
+        "outputs": [
+          3
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "결과.bin"
+              },
+              23
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "example.bin"
+              },
+              4
+            ],
+            "before": {
+              "example.bin": "0077"
+            },
+            "after": {
+              "example.bin": "0404"
+            },
+            "output": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "unsupported_binding",
+      "intent": "Multiply 13 by 9 at width 16. Do not learn; ask for learning evidence if unsupported.",
+      "before": {},
+      "expect": {
+        "status": "unsupported",
+        "files": {}
+      },
+      "allow_learning": false,
+      "evidence": {
+        "width": 4,
+        "operands": [
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          8,
+          15
+        ]
+      }
+    },
+    {
+      "name": "missing_goal",
+      "intent": "Inspect task.bin later; I have not chosen what operation or result I want. Ask me for the missing goal.",
+      "before": {
+        "task.bin": "00ffa1"
+      },
+      "expect": {
+        "status": "clarify",
+        "files": {
+          "task.bin": "00ffa1"
+        }
+      },
+      "allow_learning": false
+    }
+  ]
+}

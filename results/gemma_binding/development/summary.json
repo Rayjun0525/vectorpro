@@ -1,0 +1,499 @@
+{
+  "model": "ggml-org/gemma-3-1b-it-GGUF",
+  "revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+  "quantization": "Q8_0",
+  "model_bytes": 1069306368,
+  "model_sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5",
+  "chat_protocol": "Gemma native template with explicit JSON tool schemas",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "xor_new_english": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          99
+        ],
+        "capability": "xor",
+        "request": {
+          "query": "bitwise exclusive-OR of 73 and 42",
+          "width": 8,
+          "operands": [
+            [
+              73,
+              42
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5989994406700134
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5989994406700134
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.33058881759643555
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "bitwise exclusive-OR of 73 and 42",
+                "width": 8,
+                "operands": [
+                  [
+                    73,
+                    42
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                99
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "sub_new_english": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          10219
+        ],
+        "capability": "sub",
+        "request": {
+          "query": "register width 16",
+          "width": 16,
+          "operands": [
+            [
+              10490,
+              271
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1738719642162323
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.19978897273540497
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1738719642162323
+                }
+              ],
+              "status": "matched",
+              "name": "sub",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "register width 16",
+                "width": 16,
+                "operands": [
+                  [
+                    10490,
+                    271
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                10219
+              ],
+              "capability": "sub",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "map_new_file": {
+      "passed": false,
+      "checks": {
+        "files": false,
+        "output": true,
+        "terminal_status": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "map",
+        "request": {
+          "query": "find functions with argument roles for a simple operation, no execution",
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "payload.dat"
+              },
+              0
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.1721540242433548
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.1721540242433548
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.17175337672233582
+                }
+              ],
+              "status": "matched",
+              "name": "map",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "find functions with argument roles for a simple operation, no execution",
+                "width": 16,
+                "operands": [
+                  [
+                    {
+                      "utf8": "payload.dat"
+                    },
+                    0
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "map",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "fill_new_file": {
+      "passed": false,
+      "checks": {
+        "files": false,
+        "output": true,
+        "terminal_status": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          3
+        ],
+        "capability": "fill",
+        "request": {
+          "query": "find functions with argument roles for a simple operation involving a width of 16.",
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "data.bin"
+              },
+              0
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.24430078268051147
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.24430078268051147
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2356807142496109
+                }
+              ],
+              "status": "matched",
+              "name": "fill",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "find functions with argument roles for a simple operation involving a width of 16.",
+                "width": 16,
+                "operands": [
+                  [
+                    {
+                      "utf8": "data.bin"
+                    },
+                    0
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                3
+              ],
+              "capability": "fill",
+              "history": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true,
+  "max_tokens_per_turn": 512,
+  "evaluation_protocol": "Gemma model replacement replay of existing fixed requests; not new independent held-out accuracy",
+  "dataset_protocol": "first-use fixed requests, operands and caller examples; frozen before inference after development; do not retune on these results",
+  "evaluation_file": "experiments/requests/catalog_agent_holdout_v2.json",
+  "evaluation_sha256": "9bc1c6729a9085c35ad3c3f69c5aeaf8be7ce77a90a87448074c03d4cbc20e0e",
+  "max_calls": 6
+}
