@@ -350,6 +350,123 @@ listed in the curriculum. Nothing in them names a structure, but choosing
 these stepping stones is planning knowledge that a person or a language model
 supplies. Loops inside loops are still not searched.
 
+## Unified runtime and host execution foundation
+
+`VectorRuntime` accepts a structured request directly. Known capability names
+execute immediately without consulting a teacher. Unknown names enter learning
+when a `LearningPlan` and example source are supplied, then execute on acceptance.
+Without that evidence the runtime returns `needs_learning_examples`; failed
+learning returns `learning_failed` without registering or executing a candidate.
+
+```python
+from pathlib import Path
+from vectorpro.runtime import VectorRuntime
+from vectorpro.learning import LearningPlan, OutputWidth
+
+runtime = VectorRuntime(seed=0)
+result = runtime.request(
+    "add", [(7, 3)], 8,
+    plan=LearningPlan("add", "sum with carry", 2, OutputWidth.PLUS_ONE),
+    source=lambda operands, width: sum(operands),
+)
+# If learning succeeds, result.status == "learned_and_executed".
+# Subsequent requests use the stored capability without a source.
+runtime.save(Path("program.json"))
+restored = VectorRuntime.load(Path("program.json"))
+```
+
+The single data file stores capability address vectors, learned tables, vector
+programs and address/learning-sampler RNG states. It contains no Python source,
+file handles or absolute host paths. Python, PyTorch and vectorpro are still
+required to run it; standalone OS installers and LLM request interpretation
+are not implemented. Old registries and programs remain loadable.
+
+`HostContext(root)` adds transient byte-buffer handles and a relative-path file
+backend. `runtime.provide_host_operations()` provides `buffer.new`,
+`buffer.length`, `buffer.get`, `buffer.set`, `file.read`, and `file.write` as
+execution primitives. These primitives are supplied, not learned. The root is
+explicitly provided by the application; handles and buffers are recreated on
+loading, rather than persisted in a program file.
+
+Vector instructions now have a `calls` tensor independently of their write
+destination: an operation can execute with its result discarded. Branch-only
+steps have no call. This allows file writes and buffer mutation to actually
+happen. Old programs infer call flags from their write destinations. Effectful
+programs use one execution lane, produce an ordered host event log, and are
+excluded from arithmetic composition search and example lookup so that learning
+does not mutate files while trying candidates. OS errors and buffer bounds
+errors propagate explicitly; completed effects are not rolled back on failure.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/runtime_requests.py
+```
+
+The demo learns addition, handles a known request, then runs an assembled tensor
+workflow that reads two file bytes, adds them, updates a buffer and writes it
+back. It saves one program file and repeats both computation and I/O after a
+reload. The workflow itself is supplied: learning stateful I/O procedures and
+ingesting binary execution traces remain future work. The native backend uses
+Python's cross-platform file APIs but has only been tested in the existing
+Linux container.
+
+## Data-only requests and command-line execution
+
+The runtime also learns from finite JSON input/output examples via
+`ExampleLesson`, without a Python target callback. Lessons contain separate
+training and validation sets and a shape/budget plan; they contain no program.
+Inputs, output ranges, duplicate examples, validation counts, and train/validation
+overlap are checked before learning. Candidates must match every supplied
+training example as well as the validation set. Exhausted data produces a
+learning failure rather than invented targets. Acceptance remains agreement
+with supplied examples, not proof of correctness for all inputs.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m vectorpro --program results/request_cli/program.json --request experiments/requests/learn_xor.json
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m vectorpro --program results/request_cli/program.json --request experiments/requests/run_xor.json
+```
+
+The first request teaches a new capability and persists it in the single program
+file on success. The second supplies only a name, numeric inputs and width and
+executes the stored function. A known name bypasses learning. After installation,
+`vectorpro` is also available as a console command. Exit status 0 means executed,
+2 means missing evidence or learning failure, and 1 means an explicit error.
+Program data is not overwritten by a failed request. This CLI is a structured
+interface for a later LLM adapter; it does not interpret natural language.
+
+For file/buffer requests, supply `--host-root` and encode operands as
+`{"utf8": "relative/path"}` or `{"hex": "000102"}`. The CLI creates fresh handles
+in that host context, rather than storing machine-specific handles in the file.
+`"output_format": "hex"` exposes returned buffer bytes. Supported operations
+remain the host primitives described above.
+
+## Initial model: learning stateful procedures
+
+The initial-model contract is in `docs/INITIAL_MODEL.md`. `StateLesson` describes
+input types, initial file snapshots, exact target file snapshots, and optional
+numeric return values. It supplies no operation sequence. The bounded learner
+searches generic typed host calls and argument routing, executes candidates only
+in fresh `MemoryHostContext` instances, then checks separate validation cases.
+An accepted procedure is an ordinary `VectorProgram` in the same saved file.
+
+JSON requests can carry `state_lesson`; file contents are hex strings. The
+example `experiments/requests/learn_transfer.json` teaches a transfer procedure
+from state changes. It contains no read/write instruction recipe. Native
+execution still requires `--host-root` and fresh path-buffer inputs. For example,
+after preparing `input.bin` in a chosen host root:
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m vectorpro --program results/stateful_model/program.json --request experiments/requests/learn_transfer.json --host-root results/stateful_model
+```
+
+The current state search learns straight-line procedures within explicit step
+and candidate budgets. Its primitive type catalog is provided execution/search
+machinery. Stateful branches, variable-length loops and CPU-trace ingestion are
+not yet searched. There is no task-name dispatch in the learner: the same search
+also learns how to observe a byte without changing files. Arithmetic learning
+continues to use the existing unit/composition/bit-fold strategies. LLM intent
+interpretation is a future adapter, not a dependency for acquired functions.
+
 ## Roadmap
 
 | | milestone |

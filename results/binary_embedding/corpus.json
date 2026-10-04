@@ -1,0 +1,3394 @@
+[
+  {
+    "index": 0,
+    "template": 0,
+    "variant": 0,
+    "family": 0,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "445e86becf1f9bb1cb7ecb853f16ec67c864c020b45addb028e1235587ae389b",
+    "code_hex": "4080f76c40887c24fd488d4424fd0fb64424fd346c4080f60d40887424fe488d4c24fe0fb64c24fe80f10d00c180f16f884c24ff488d4424ff0fb64424ff346fc3",
+    "constants": [
+      [
+        108
+      ],
+      [
+        13
+      ],
+      [
+        111
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 108u8);\nlet a = a ^ 108u8;\nlet b = black_box(b ^ 13u8);\nlet b = b ^ 13u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 111u8);\nlet z = z ^ 111u8;\nz\n}\n"
+  },
+  {
+    "index": 1,
+    "template": 0,
+    "variant": 0,
+    "family": 0,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "d80f38f62c268294529a389452ec7e52feda96edc3a692432028c750d93fb868",
+    "code_hex": "4080f76c40887c24fd488d4424fd0fb64424fd346c4080f60d40887424fe488d4c24fe0fb64c24fe80f10d28c8346f884424ff488d4424ff0fb64424ff346fc3",
+    "constants": [
+      [
+        108
+      ],
+      [
+        13
+      ],
+      [
+        111
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 108u8);\nlet a = a ^ 108u8;\nlet b = black_box(b ^ 13u8);\nlet b = b ^ 13u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 111u8);\nlet z = z ^ 111u8;\nz\n}\n"
+  },
+  {
+    "index": 2,
+    "template": 0,
+    "variant": 0,
+    "family": 0,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "2cf2fc6063fe2c11597ed39541f2f9d12b5d3c86ab79d4ee4c3fc79956248e98",
+    "code_hex": "4080f76c40887c24fd488d4424fd0fb64c24fd80f16c4080f60d40887424fe488d4424fe0fb64424fe340df6e1346f884424ff488d4424ff0fb64424ff346fc3",
+    "constants": [
+      [
+        108
+      ],
+      [
+        13
+      ],
+      [
+        111
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 108u8);\nlet a = a ^ 108u8;\nlet b = black_box(b ^ 13u8);\nlet b = b ^ 13u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 111u8);\nlet z = z ^ 111u8;\nz\n}\n"
+  },
+  {
+    "index": 3,
+    "template": 0,
+    "variant": 0,
+    "family": 0,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 75,
+    "sha256": "ddf684fdd56163c4a6470a730de998882ee80c8c5ead6d502a59459b0f609cdb",
+    "code_hex": "4080f76c40887c24fd488d4424fd0fb64c24fd4080f60d40887424fe488d4424fe0fb65424feb09080fa0d740d80f20d80f16c0fb6c1f6f2346f884424ff488d4424ff0fb64424ff346fc3",
+    "constants": [
+      [
+        108
+      ],
+      [
+        13
+      ],
+      [
+        111
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 108u8);\nlet a = a ^ 108u8;\nlet b = black_box(b ^ 13u8);\nlet b = b ^ 13u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 111u8);\nlet z = z ^ 111u8;\nz\n}\n"
+  },
+  {
+    "index": 4,
+    "template": 0,
+    "variant": 1,
+    "family": 1,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "114737977376703db41f45d4a2ebfaa8f9954fec6c894a5541c64a60cde48efa",
+    "code_hex": "4080f76840887c24fd488d4424fd0fb64424fd34684080f6d140887424fe488d4c24fe0fb64c24fe80f1d100c180f19f884c24ff488d4424ff0fb64424ff349fc3",
+    "constants": [
+      [
+        104
+      ],
+      [
+        209
+      ],
+      [
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 104u8);\nlet a = a ^ 104u8;\nlet b = black_box(b ^ 209u8);\nlet b = b ^ 209u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nz\n}\n"
+  },
+  {
+    "index": 5,
+    "template": 0,
+    "variant": 1,
+    "family": 1,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "44e7fd12df0e39c7c40c71d10b7994ba78e3e1883845cb1e53f82517fa65b511",
+    "code_hex": "4080f76840887c24fd488d4424fd0fb64424fd34684080f6d140887424fe488d4c24fe0fb64c24fe80f1d128c8349f884424ff488d4424ff0fb64424ff349fc3",
+    "constants": [
+      [
+        104
+      ],
+      [
+        209
+      ],
+      [
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 104u8);\nlet a = a ^ 104u8;\nlet b = black_box(b ^ 209u8);\nlet b = b ^ 209u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nz\n}\n"
+  },
+  {
+    "index": 6,
+    "template": 0,
+    "variant": 1,
+    "family": 1,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "bc6afe1de239104c521849fefda3873d902dcf2fa523ce63f3b40d7299718dcc",
+    "code_hex": "4080f76840887c24fd488d4424fd0fb64c24fd80f1684080f6d140887424fe488d4424fe0fb64424fe34d1f6e1349f884424ff488d4424ff0fb64424ff349fc3",
+    "constants": [
+      [
+        104
+      ],
+      [
+        209
+      ],
+      [
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 104u8);\nlet a = a ^ 104u8;\nlet b = black_box(b ^ 209u8);\nlet b = b ^ 209u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nz\n}\n"
+  },
+  {
+    "index": 7,
+    "template": 0,
+    "variant": 1,
+    "family": 1,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 75,
+    "sha256": "07549a1c969c6e0c90fc26ecb74ad5fd4fe565a9349691e34978701cc8a80d3e",
+    "code_hex": "4080f76840887c24fd488d4424fd0fb64c24fd4080f6d140887424fe488d4424fe0fb65424feb06080fad1740d80f2d180f1680fb6c1f6f2349f884424ff488d4424ff0fb64424ff349fc3",
+    "constants": [
+      [
+        104
+      ],
+      [
+        209
+      ],
+      [
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 104u8);\nlet a = a ^ 104u8;\nlet b = black_box(b ^ 209u8);\nlet b = b ^ 209u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nz\n}\n"
+  },
+  {
+    "index": 8,
+    "template": 0,
+    "variant": 2,
+    "family": 2,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "648d496e0dd3007a1b168b8b66b544d4c4c55a6fb9b2c5aa912da6861267ae8a",
+    "code_hex": "4080f7b640887c24fd488d4424fd0fb64424fd34b64080f6ed40887424fe488d4c24fe0fb64c24fe80f1ed00c180f104884c24ff488d4424ff0fb64424ff3404c3",
+    "constants": [
+      [
+        182
+      ],
+      [
+        237
+      ],
+      [
+        4
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 182u8);\nlet a = a ^ 182u8;\nlet b = black_box(b ^ 237u8);\nlet b = b ^ 237u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 4u8);\nlet z = z ^ 4u8;\nz\n}\n"
+  },
+  {
+    "index": 9,
+    "template": 0,
+    "variant": 2,
+    "family": 2,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "30f8e530a179089b8e8cf8509291265e6e10496eb729e6525d74c71ac49d0c4e",
+    "code_hex": "4080f7b640887c24fd488d4424fd0fb64424fd34b64080f6ed40887424fe488d4c24fe0fb64c24fe80f1ed28c83404884424ff488d4424ff0fb64424ff3404c3",
+    "constants": [
+      [
+        182
+      ],
+      [
+        237
+      ],
+      [
+        4
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 182u8);\nlet a = a ^ 182u8;\nlet b = black_box(b ^ 237u8);\nlet b = b ^ 237u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 4u8);\nlet z = z ^ 4u8;\nz\n}\n"
+  },
+  {
+    "index": 10,
+    "template": 0,
+    "variant": 2,
+    "family": 2,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "2592103f15211599715ad3a84f81ef6f2179421923493cfeaf6dc550afdbf14b",
+    "code_hex": "4080f7b640887c24fd488d4424fd0fb64c24fd80f1b64080f6ed40887424fe488d4424fe0fb64424fe34edf6e13404884424ff488d4424ff0fb64424ff3404c3",
+    "constants": [
+      [
+        182
+      ],
+      [
+        237
+      ],
+      [
+        4
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 182u8);\nlet a = a ^ 182u8;\nlet b = black_box(b ^ 237u8);\nlet b = b ^ 237u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 4u8);\nlet z = z ^ 4u8;\nz\n}\n"
+  },
+  {
+    "index": 11,
+    "template": 0,
+    "variant": 2,
+    "family": 2,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 75,
+    "sha256": "6349484e0ef6204b666758106dcc3c1384a937eb2b2e0093a7343305d5220407",
+    "code_hex": "4080f7b640887c24fd488d4424fd0fb64c24fd4080f6ed40887424fe488d4424fe0fb65424feb0fb80faed740d80f2ed80f1b60fb6c1f6f23404884424ff488d4424ff0fb64424ff3404c3",
+    "constants": [
+      [
+        182
+      ],
+      [
+        237
+      ],
+      [
+        4
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 182u8);\nlet a = a ^ 182u8;\nlet b = black_box(b ^ 237u8);\nlet b = b ^ 237u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 4u8);\nlet z = z ^ 4u8;\nz\n}\n"
+  },
+  {
+    "index": 12,
+    "template": 0,
+    "variant": 3,
+    "family": 3,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "160e19f0e77ef3de3fc549040ae46c8e4202b226d5e5385ee12d04d2b384ca8a",
+    "code_hex": "4080f71740887c24fd488d4424fd0fb64424fd34174080f6f440887424fe488d4c24fe0fb64c24fe80f1f400c180f1f2884c24ff488d4424ff0fb64424ff34f2c3",
+    "constants": [
+      [
+        23
+      ],
+      [
+        244
+      ],
+      [
+        242
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 23u8);\nlet a = a ^ 23u8;\nlet b = black_box(b ^ 244u8);\nlet b = b ^ 244u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 242u8);\nlet z = z ^ 242u8;\nz\n}\n"
+  },
+  {
+    "index": 13,
+    "template": 0,
+    "variant": 3,
+    "family": 3,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "4f5cd9c074e17c216171544a924396eac9d209de485157ae7fced40d8cd4c14a",
+    "code_hex": "4080f71740887c24fd488d4424fd0fb64424fd34174080f6f440887424fe488d4c24fe0fb64c24fe80f1f428c834f2884424ff488d4424ff0fb64424ff34f2c3",
+    "constants": [
+      [
+        23
+      ],
+      [
+        244
+      ],
+      [
+        242
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 23u8);\nlet a = a ^ 23u8;\nlet b = black_box(b ^ 244u8);\nlet b = b ^ 244u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 242u8);\nlet z = z ^ 242u8;\nz\n}\n"
+  },
+  {
+    "index": 14,
+    "template": 0,
+    "variant": 3,
+    "family": 3,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "e533a3b004de10de09f0e1de8b297ca82a875bbda06e010917153f765e893a57",
+    "code_hex": "4080f71740887c24fd488d4424fd0fb64c24fd80f1174080f6f440887424fe488d4424fe0fb64424fe34f4f6e134f2884424ff488d4424ff0fb64424ff34f2c3",
+    "constants": [
+      [
+        23
+      ],
+      [
+        244
+      ],
+      [
+        242
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 23u8);\nlet a = a ^ 23u8;\nlet b = black_box(b ^ 244u8);\nlet b = b ^ 244u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 242u8);\nlet z = z ^ 242u8;\nz\n}\n"
+  },
+  {
+    "index": 15,
+    "template": 0,
+    "variant": 3,
+    "family": 3,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 75,
+    "sha256": "595adc5c65509cda75f70d1de9cf9bdf8a75f36b65fb409c9f1bbcf9e7993cfe",
+    "code_hex": "4080f71740887c24fd488d4424fd0fb64c24fd4080f6f440887424fe488d4424fe0fb65424feb00d80faf4740d80f2f480f1170fb6c1f6f234f2884424ff488d4424ff0fb64424ff34f2c3",
+    "constants": [
+      [
+        23
+      ],
+      [
+        244
+      ],
+      [
+        242
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 23u8);\nlet a = a ^ 23u8;\nlet b = black_box(b ^ 244u8);\nlet b = b ^ 244u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 242u8);\nlet z = z ^ 242u8;\nz\n}\n"
+  },
+  {
+    "index": 16,
+    "template": 1,
+    "variant": 0,
+    "family": 4,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "a002bb2581c738912bc670bbd9d555d68f96e8018a5a25e7bb02f3114ff913c3",
+    "code_hex": "4080c7a340887c24fd488d4424fd0fb64424fd4080c64240887424fe488d4c24fe024424fe04b7884424ff488d4424ff0fb64424ff0464c3",
+    "constants": [
+      [
+        163
+      ],
+      [
+        66
+      ],
+      [
+        156
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(163u8));\nlet a = a.wrapping_sub(163u8);\nlet b = black_box(b.wrapping_add(66u8));\nlet b = b.wrapping_sub(66u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(156u8));\nlet z = z.wrapping_sub(156u8);\nz\n}\n"
+  },
+  {
+    "index": 17,
+    "template": 1,
+    "variant": 0,
+    "family": 4,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "4df39a242f8b3ad9c7cdeefe56aa1ad0be148e4036fd31d45315bb2b855df0b0",
+    "code_hex": "4080c7a340887c24fd488d4424fd0fb64424fd4080c64240887424fe488d4c24fe2a4424fe043b884424ff488d4424ff0fb64424ff0464c3",
+    "constants": [
+      [
+        163
+      ],
+      [
+        66
+      ],
+      [
+        156
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(163u8));\nlet a = a.wrapping_sub(163u8);\nlet b = black_box(b.wrapping_add(66u8));\nlet b = b.wrapping_sub(66u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(156u8));\nlet z = z.wrapping_sub(156u8);\nz\n}\n"
+  },
+  {
+    "index": 18,
+    "template": 1,
+    "variant": 0,
+    "family": 4,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "fae26174b77af5ed94e6022ec5843eb9bab5bc801bbd7606037084110e0639dd",
+    "code_hex": "4080c7a340887c24fd488d4424fd0fb64c24fd80c15d4080c64240887424fe488d4424fe0fb64424fe04bef6e1049c884424ff488d4424ff0fb64424ff0464c3",
+    "constants": [
+      [
+        163
+      ],
+      [
+        66
+      ],
+      [
+        156
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(163u8));\nlet a = a.wrapping_sub(163u8);\nlet b = black_box(b.wrapping_add(66u8));\nlet b = b.wrapping_sub(66u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(156u8));\nlet z = z.wrapping_sub(156u8);\nz\n}\n"
+  },
+  {
+    "index": 19,
+    "template": 1,
+    "variant": 0,
+    "family": 4,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 73,
+    "sha256": "a31c59f2d56a227665ec6600d4d55865326b79608ec2b225c625b839fc1d50a6",
+    "code_hex": "4080c7a340887c24fd488d4424fd0fb64424fd4080c64240887424fe488d4c24fe0fb64c24fe80c1be740b045d0fb6c0f6f1049ceb02b09b884424ff488d4424ff0fb64424ff0464c3",
+    "constants": [
+      [
+        163
+      ],
+      [
+        66
+      ],
+      [
+        156
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(163u8));\nlet a = a.wrapping_sub(163u8);\nlet b = black_box(b.wrapping_add(66u8));\nlet b = b.wrapping_sub(66u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(156u8));\nlet z = z.wrapping_sub(156u8);\nz\n}\n"
+  },
+  {
+    "index": 20,
+    "template": 1,
+    "variant": 1,
+    "family": 5,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "042ed4bd22a6f4e8b384ec7a63a6adc1d181d240c72b2b4d1c20e485b47f08a0",
+    "code_hex": "4080c7f340887c24fd488d4424fd0fb64424fd4080c63740887424fe488d4c24fe024424fe04cf884424ff488d4424ff0fb64424ff0407c3",
+    "constants": [
+      [
+        243
+      ],
+      [
+        55
+      ],
+      [
+        249
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(243u8));\nlet a = a.wrapping_sub(243u8);\nlet b = black_box(b.wrapping_add(55u8));\nlet b = b.wrapping_sub(55u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(249u8));\nlet z = z.wrapping_sub(249u8);\nz\n}\n"
+  },
+  {
+    "index": 21,
+    "template": 1,
+    "variant": 1,
+    "family": 5,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "2deefc67b11a822c627a5a1b0ca1c4019aa6a947c70415e11a17dc25b1e4fe60",
+    "code_hex": "4080c7f340887c24fd488d4424fd0fb64424fd4080c63740887424fe488d4c24fe2a4424fe043d884424ff488d4424ff0fb64424ff0407c3",
+    "constants": [
+      [
+        243
+      ],
+      [
+        55
+      ],
+      [
+        249
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(243u8));\nlet a = a.wrapping_sub(243u8);\nlet b = black_box(b.wrapping_add(55u8));\nlet b = b.wrapping_sub(55u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(249u8));\nlet z = z.wrapping_sub(249u8);\nz\n}\n"
+  },
+  {
+    "index": 22,
+    "template": 1,
+    "variant": 1,
+    "family": 5,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "dad711ca6c97e9afa2ecd4fafe23b22f6f28c7944dfc609652ea4a3f8a6be1cb",
+    "code_hex": "4080c7f340887c24fd488d4424fd0fb64c24fd80c10d4080c63740887424fe488d4424fe0fb64424fe04c9f6e104f9884424ff488d4424ff0fb64424ff0407c3",
+    "constants": [
+      [
+        243
+      ],
+      [
+        55
+      ],
+      [
+        249
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(243u8));\nlet a = a.wrapping_sub(243u8);\nlet b = black_box(b.wrapping_add(55u8));\nlet b = b.wrapping_sub(55u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(249u8));\nlet z = z.wrapping_sub(249u8);\nz\n}\n"
+  },
+  {
+    "index": 23,
+    "template": 1,
+    "variant": 1,
+    "family": 5,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 73,
+    "sha256": "d344eb8b0c5a8bb80e8e3802d5d4275148348455724408480c0cd8a151836e20",
+    "code_hex": "4080c7f340887c24fd488d4424fd0fb64424fd4080c63740887424fe488d4c24fe0fb64c24fe80c1c9740b040d0fb6c0f6f104f9eb02b0f8884424ff488d4424ff0fb64424ff0407c3",
+    "constants": [
+      [
+        243
+      ],
+      [
+        55
+      ],
+      [
+        249
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(243u8));\nlet a = a.wrapping_sub(243u8);\nlet b = black_box(b.wrapping_add(55u8));\nlet b = b.wrapping_sub(55u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(249u8));\nlet z = z.wrapping_sub(249u8);\nz\n}\n"
+  },
+  {
+    "index": 24,
+    "template": 1,
+    "variant": 2,
+    "family": 6,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "fba493969f20388f24d56dfa9a080e577f73ab79c2718468eda1633d8ce05714",
+    "code_hex": "4080c7d640887c24fd488d4424fd0fb64424fd4080c6eb40887424fe488d4c24fe024424fe04a0884424ff488d4424ff0fb64424ff049fc3",
+    "constants": [
+      [
+        214
+      ],
+      [
+        235
+      ],
+      [
+        97
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(214u8));\nlet a = a.wrapping_sub(214u8);\nlet b = black_box(b.wrapping_add(235u8));\nlet b = b.wrapping_sub(235u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(97u8));\nlet z = z.wrapping_sub(97u8);\nz\n}\n"
+  },
+  {
+    "index": 25,
+    "template": 1,
+    "variant": 2,
+    "family": 6,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "46cc5971c9cdb19bba1478663f45794521c030d80d128e8033023784d9c7220b",
+    "code_hex": "4080c7d640887c24fd488d4424fd0fb64424fd4080c6eb40887424fe488d4c24fe2a4424fe0476884424ff488d4424ff0fb64424ff049fc3",
+    "constants": [
+      [
+        214
+      ],
+      [
+        235
+      ],
+      [
+        97
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(214u8));\nlet a = a.wrapping_sub(214u8);\nlet b = black_box(b.wrapping_add(235u8));\nlet b = b.wrapping_sub(235u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(97u8));\nlet z = z.wrapping_sub(97u8);\nz\n}\n"
+  },
+  {
+    "index": 26,
+    "template": 1,
+    "variant": 2,
+    "family": 6,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "0d334317eb09d4c6c1d7c9b85a7de28625c12bb10b05479a9e205314049d159d",
+    "code_hex": "4080c7d640887c24fd488d4424fd0fb64c24fd80c12a4080c6eb40887424fe488d4424fe0fb64424fe0415f6e10461884424ff488d4424ff0fb64424ff049fc3",
+    "constants": [
+      [
+        214
+      ],
+      [
+        235
+      ],
+      [
+        97
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(214u8));\nlet a = a.wrapping_sub(214u8);\nlet b = black_box(b.wrapping_add(235u8));\nlet b = b.wrapping_sub(235u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(97u8));\nlet z = z.wrapping_sub(97u8);\nz\n}\n"
+  },
+  {
+    "index": 27,
+    "template": 1,
+    "variant": 2,
+    "family": 6,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 73,
+    "sha256": "eb0e6371c2c620b56bd7086403ee7a26dbcc950640230f62542efb3fc0d02cde",
+    "code_hex": "4080c7d640887c24fd488d4424fd0fb64424fd4080c6eb40887424fe488d4c24fe0fb64c24fe80c115740b042a0fb6c0f6f10461eb02b060884424ff488d4424ff0fb64424ff049fc3",
+    "constants": [
+      [
+        214
+      ],
+      [
+        235
+      ],
+      [
+        97
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(214u8));\nlet a = a.wrapping_sub(214u8);\nlet b = black_box(b.wrapping_add(235u8));\nlet b = b.wrapping_sub(235u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(97u8));\nlet z = z.wrapping_sub(97u8);\nz\n}\n"
+  },
+  {
+    "index": 28,
+    "template": 1,
+    "variant": 3,
+    "family": 7,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "a307f27db21961d458b7b095ec5c05db6f3e5e24460a206cf06e99694e69d092",
+    "code_hex": "4080c70340887c24fd488d4424fd0fb64424fd4080c68d40887424fe488d4c24fe024424fe0487884424ff488d4424ff0fb64424ff04e9c3",
+    "constants": [
+      [
+        3
+      ],
+      [
+        141
+      ],
+      [
+        23
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(3u8));\nlet a = a.wrapping_sub(3u8);\nlet b = black_box(b.wrapping_add(141u8));\nlet b = b.wrapping_sub(141u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(23u8));\nlet z = z.wrapping_sub(23u8);\nz\n}\n"
+  },
+  {
+    "index": 29,
+    "template": 1,
+    "variant": 3,
+    "family": 7,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 56,
+    "sha256": "b220660a88c053422586f5d357f9aeba48a92cb48655b4611f3af62aeeb6c2ad",
+    "code_hex": "4080c70340887c24fd488d4424fd0fb64424fd4080c68d40887424fe488d4c24fe2a4424fe04a1884424ff488d4424ff0fb64424ff04e9c3",
+    "constants": [
+      [
+        3
+      ],
+      [
+        141
+      ],
+      [
+        23
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(3u8));\nlet a = a.wrapping_sub(3u8);\nlet b = black_box(b.wrapping_add(141u8));\nlet b = b.wrapping_sub(141u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(23u8));\nlet z = z.wrapping_sub(23u8);\nz\n}\n"
+  },
+  {
+    "index": 30,
+    "template": 1,
+    "variant": 3,
+    "family": 7,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 64,
+    "sha256": "3125a02b10fe91dbce3f527f07b12f2900429d6f09e09551ba896a616ededab9",
+    "code_hex": "4080c70340887c24fd488d4424fd0fb64c24fd80c1fd4080c68d40887424fe488d4424fe0fb64424fe0473f6e10417884424ff488d4424ff0fb64424ff04e9c3",
+    "constants": [
+      [
+        3
+      ],
+      [
+        141
+      ],
+      [
+        23
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(3u8));\nlet a = a.wrapping_sub(3u8);\nlet b = black_box(b.wrapping_add(141u8));\nlet b = b.wrapping_sub(141u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(23u8));\nlet z = z.wrapping_sub(23u8);\nz\n}\n"
+  },
+  {
+    "index": 31,
+    "template": 1,
+    "variant": 3,
+    "family": 7,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 73,
+    "sha256": "4c3137b8bc382eb078a7df15dceb90bac3d8bed321fccf6786dd9dd9b297dba2",
+    "code_hex": "4080c70340887c24fd488d4424fd0fb64424fd4080c68d40887424fe488d4c24fe0fb64c24fe80c173740b04fd0fb6c0f6f10417eb02b016884424ff488d4424ff0fb64424ff04e9c3",
+    "constants": [
+      [
+        3
+      ],
+      [
+        141
+      ],
+      [
+        23
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(3u8));\nlet a = a.wrapping_sub(3u8);\nlet b = black_box(b.wrapping_add(141u8));\nlet b = b.wrapping_sub(141u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(23u8));\nlet z = z.wrapping_sub(23u8);\nz\n}\n"
+  },
+  {
+    "index": 32,
+    "template": 2,
+    "variant": 0,
+    "family": 8,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "580e75a96517cf8b9ec5b7671b5511516af345027d7e7bc3145ff25083dadc56",
+    "code_hex": "40c0c70440887c24fd488d4424fd0fb64424fdc0c00440c0c60440887424fe488d4c24fe0fb64c24fec0c10400c1c0c105884c24ff488d4424ff0fb64424ffc0c003c3",
+    "constants": [
+      [
+        157
+      ],
+      [
+        115
+      ],
+      [
+        165
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(5));\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 33,
+    "template": 2,
+    "variant": 0,
+    "family": 8,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "49f49611be1973b2955510150279f80620bead07ce412d18dbc9f3dd26ba25d2",
+    "code_hex": "40c0c70440887c24fd488d4424fd0fb64424fdc0c00440c0c60440887424fe488d4c24fe0fb64c24fec0c10428c8c0c005884424ff488d4424ff0fb64424ffc0c003c3",
+    "constants": [
+      [
+        157
+      ],
+      [
+        115
+      ],
+      [
+        165
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(5));\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 34,
+    "template": 2,
+    "variant": 0,
+    "family": 8,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "b53a3eab1c4375be7695296c1ce7f851b4c4f3f655f80385fa96d7deb73829cd",
+    "code_hex": "40c0c70440887c24fd488d4424fd0fb64c24fdc0c10440c0c60440887424fe488d4424fe0fb64424fec0c004f6e1c0c005884424ff488d4424ff0fb64424ffc0c003c3",
+    "constants": [
+      [
+        157
+      ],
+      [
+        115
+      ],
+      [
+        165
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(5));\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 35,
+    "template": 2,
+    "variant": 0,
+    "family": 8,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 78,
+    "sha256": "89b201584b26d6a8c1dab81bd3fd5eb9517211bfba9a1cb1ff3ab6469b0c96e2",
+    "code_hex": "40c0c70440887c24fd488d4424fd0fb64424fd40c0c60440887424fe488d4c24fe0fb64c24fe84c9740dc0c104c0c0040fb6c0f6f1eb02b0ffc0c005884424ff488d4424ff0fb64424ffc0c003c3",
+    "constants": [
+      [
+        157
+      ],
+      [
+        115
+      ],
+      [
+        165
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(5));\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 36,
+    "template": 2,
+    "variant": 1,
+    "family": 9,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "d390f0fcc2179b37abc84480c54afe148370327b115840d7ac1b3db92fbfec9e",
+    "code_hex": "40c0c70540887c24fd488d4424fd0fb64424fdc0c00340d0ce40887424fe488d4c24fe0fb64c24fed0c100c1c0c106884c24ff488d4424ff0fb64424ffc0c002c3",
+    "constants": [
+      [
+        60
+      ],
+      [
+        6
+      ],
+      [
+        12
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(5));\nlet a = a.rotate_right(5);\nlet b = black_box(b.rotate_left(7));\nlet b = b.rotate_right(7);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nz\n}\n"
+  },
+  {
+    "index": 37,
+    "template": 2,
+    "variant": 1,
+    "family": 9,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "33156982b6ff1ced6effd0966a36fc2844b3b39f2eb2b93164fcb0fd79fcd6a0",
+    "code_hex": "40c0c70540887c24fd488d4424fd0fb64424fdc0c00340d0ce40887424fe488d4c24fe0fb64c24fed0c128c8c0c006884424ff488d4424ff0fb64424ffc0c002c3",
+    "constants": [
+      [
+        60
+      ],
+      [
+        6
+      ],
+      [
+        12
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(5));\nlet a = a.rotate_right(5);\nlet b = black_box(b.rotate_left(7));\nlet b = b.rotate_right(7);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nz\n}\n"
+  },
+  {
+    "index": 38,
+    "template": 2,
+    "variant": 1,
+    "family": 9,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "31e961d8379f141287fea2d6c8387cbe7fa33936d132fbd4a685fb11421914d2",
+    "code_hex": "40c0c70540887c24fd488d4424fd0fb64c24fdc0c10340d0ce40887424fe488d4424fe0fb64424fed0c0f6e1c0c006884424ff488d4424ff0fb64424ffc0c002c3",
+    "constants": [
+      [
+        60
+      ],
+      [
+        6
+      ],
+      [
+        12
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(5));\nlet a = a.rotate_right(5);\nlet b = black_box(b.rotate_left(7));\nlet b = b.rotate_right(7);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nz\n}\n"
+  },
+  {
+    "index": 39,
+    "template": 2,
+    "variant": 1,
+    "family": 9,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 76,
+    "sha256": "3d04b58572c498e764f121e47fb1cf2e13c0c9c7dd6cb4224496cf94b66ac3aa",
+    "code_hex": "40c0c70540887c24fd488d4424fd0fb64424fd40d0ce40887424fe488d4c24fe0fb64c24fe84c9740cd0c1c0c0030fb6c0f6f1eb02b0ffc0c006884424ff488d4424ff0fb64424ffc0c002c3",
+    "constants": [
+      [
+        60
+      ],
+      [
+        6
+      ],
+      [
+        12
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(5));\nlet a = a.rotate_right(5);\nlet b = black_box(b.rotate_left(7));\nlet b = b.rotate_right(7);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nz\n}\n"
+  },
+  {
+    "index": 40,
+    "template": 2,
+    "variant": 2,
+    "family": 10,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "462baafe501b8927df3765f16b75d63450e8313d0ff143dcc98625c2163f83ce",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fdc0c00540c0c60440887424fe488d4c24fe0fb64c24fec0c10400c1c0c104884c24ff488d4424ff0fb64424ffc0c004c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        213
+      ],
+      [
+        213
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(4));\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 41,
+    "template": 2,
+    "variant": 2,
+    "family": 10,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "5c562ba3b1c5067e61b57cadd86d94ded26bf353fa38d0617b7e1a5b1d259937",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fdc0c00540c0c60440887424fe488d4c24fe0fb64c24fec0c10428c8c0c004884424ff488d4424ff0fb64424ffc0c004c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        213
+      ],
+      [
+        213
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(4));\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 42,
+    "template": 2,
+    "variant": 2,
+    "family": 10,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 67,
+    "sha256": "cce3f0d20a9888b6b37058fd2c7afe2fecebbcb85111f97d82384eb44f61b289",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64c24fdc0c10540c0c60440887424fe488d4424fe0fb64424fec0c004f6e1c0c004884424ff488d4424ff0fb64424ffc0c004c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        213
+      ],
+      [
+        213
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(4));\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 43,
+    "template": 2,
+    "variant": 2,
+    "family": 10,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 78,
+    "sha256": "6972ec38cd6df59a7448e07e05f98fd6fd094d9be13ae99a17bcaa920e0453fb",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fd40c0c60440887424fe488d4c24fe0fb64c24fe84c9740dc0c104c0c0050fb6c0f6f1eb02b0ffc0c004884424ff488d4424ff0fb64424ffc0c004c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        213
+      ],
+      [
+        213
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(4));\nlet b = b.rotate_right(4);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(4));\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 44,
+    "template": 2,
+    "variant": 3,
+    "family": 11,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "f9b9c762f8388a72df2a943a5eb76dee305658fb3f4d69bca9593befbbae44bd",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fdc0c00540c0c60340887424fe488d4c24fe0fb64c24fec0c10500c1d0c9884c24ff488d4424ff0fb64424ffd0c0c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        65
+      ],
+      [
+        27
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(7));\nlet z = z.rotate_right(7);\nz\n}\n"
+  },
+  {
+    "index": 45,
+    "template": 2,
+    "variant": 3,
+    "family": 11,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "5c44b58d6c40ab124550f25e0c79101248959b698f0d431dec9774097b8d6349",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fdc0c00540c0c60340887424fe488d4c24fe0fb64c24fec0c10528c8d0c8884424ff488d4424ff0fb64424ffd0c0c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        65
+      ],
+      [
+        27
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(7));\nlet z = z.rotate_right(7);\nz\n}\n"
+  },
+  {
+    "index": 46,
+    "template": 2,
+    "variant": 3,
+    "family": 11,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "4021b392af1833759a88d1d0711b4f38c23c6043b1d0fa5b789142671d22e98c",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64c24fdc0c10540c0c60340887424fe488d4424fe0fb64424fec0c005f6e1d0c8884424ff488d4424ff0fb64424ffd0c0c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        65
+      ],
+      [
+        27
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(7));\nlet z = z.rotate_right(7);\nz\n}\n"
+  },
+  {
+    "index": 47,
+    "template": 2,
+    "variant": 3,
+    "family": 11,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 76,
+    "sha256": "678fbe9a3da23ae9c2588c6fac5e772cab17a0fff4824fae378867808a73a38d",
+    "code_hex": "40c0c70340887c24fd488d4424fd0fb64424fd40c0c60340887424fe488d4c24fe0fb64c24fe84c9740dc0c105c0c0050fb6c0f6f1eb02b0ffd0c8884424ff488d4424ff0fb64424ffd0c0c3",
+    "constants": [
+      [
+        226
+      ],
+      [
+        65
+      ],
+      [
+        27
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(7));\nlet z = z.rotate_right(7);\nz\n}\n"
+  },
+  {
+    "index": 48,
+    "template": 3,
+    "variant": 0,
+    "family": 12,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 86,
+    "sha256": "60ad72d496c51019c295ccee5b1c055760cd5b321f47c808ca74c3a42f99a9bc",
+    "code_hex": "89f8c1e00429c740887c24fd488d4424fd0fb64424fd89c1c1e10401c18d0476c1e00329f0884424fe488d4424fe0fb64424fe6bc0a700c80fb6c08d04808d0480884424ff488d4424ff0fb64424ff8d0c808d04c8c3",
+    "constants": [
+      [
+        241
+      ],
+      [
+        23
+      ],
+      [
+        25
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(241u8));\nlet a = a.wrapping_mul(17u8);\nlet b = black_box(b.wrapping_mul(23u8));\nlet b = b.wrapping_mul(167u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(25u8));\nlet z = z.wrapping_mul(41u8);\nz\n}\n"
+  },
+  {
+    "index": 49,
+    "template": 3,
+    "variant": 0,
+    "family": 12,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 86,
+    "sha256": "7787568ed1d5df191ace6a736c05b3e08e9174ec1f24193444012511f4cca277",
+    "code_hex": "89f8c1e00429c740887c24fd488d4424fd0fb64424fd89c1c1e10401c18d0476c1e00329f0884424fe488d4424fe0fb64424fe6bc05900c80fb6c08d04808d0480884424ff488d4424ff0fb64424ff8d0c808d04c8c3",
+    "constants": [
+      [
+        241
+      ],
+      [
+        23
+      ],
+      [
+        25
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(241u8));\nlet a = a.wrapping_mul(17u8);\nlet b = black_box(b.wrapping_mul(23u8));\nlet b = b.wrapping_mul(167u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(25u8));\nlet z = z.wrapping_mul(41u8);\nz\n}\n"
+  },
+  {
+    "index": 50,
+    "template": 3,
+    "variant": 0,
+    "family": 12,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 74,
+    "sha256": "4b1b532908644ebcbf029689b5a8eb23b7e053f575e17f5c1f669a706d13e639",
+    "code_hex": "89f8c1e00429c740887c24fd488d4424fd0fb64424fd8d0c76c1e10329f1884c24fe488d4c24fef66424fe0fb6c089c1c1e10629c1884c24ff488d4424ff0fb64424ff8d0c808d04c8c3",
+    "constants": [
+      [
+        241
+      ],
+      [
+        23
+      ],
+      [
+        25
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(241u8));\nlet a = a.wrapping_mul(17u8);\nlet b = black_box(b.wrapping_mul(23u8));\nlet b = b.wrapping_mul(167u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(25u8));\nlet z = z.wrapping_mul(41u8);\nz\n}\n"
+  },
+  {
+    "index": 51,
+    "template": 3,
+    "variant": 0,
+    "family": 12,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 103,
+    "sha256": "40469a6b21454020ed87a3cfcc98b49af76be0250776bb57c2c2780039e883bc",
+    "code_hex": "89f8c1e00429c740887c24fd488d4424fd0fb64424fd8d0c76c1e10329f1884c24fe488d4c24fe0fb64c24fe84c974200fb6c96bc9a70fb6c089c2c1e20401c20fb6c2f6f10fb6c08d04808d0480eb02b0e7884424ff488d4424ff0fb64424ff8d0c808d04c8c3",
+    "constants": [
+      [
+        241
+      ],
+      [
+        23
+      ],
+      [
+        25
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(241u8));\nlet a = a.wrapping_mul(17u8);\nlet b = black_box(b.wrapping_mul(23u8));\nlet b = b.wrapping_mul(167u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(25u8));\nlet z = z.wrapping_mul(41u8);\nz\n}\n"
+  },
+  {
+    "index": 52,
+    "template": 3,
+    "variant": 1,
+    "family": 13,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 66,
+    "sha256": "8aed7f8fc52f4f5d24ce4ac17bc5fbfdcd44baa88dded901a86983b38a3441b5",
+    "code_hex": "6bc7e3884424fd488d4424fd0fb64424fd6bc0cb6bce8d884c24fe488d4c24fe0fb64c24fe6bc94500c10fb6c16bc0b9884424ff488d4424ff0fb64424ff6bc089c3",
+    "constants": [
+      [
+        227
+      ],
+      [
+        141
+      ],
+      [
+        185
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(227u8));\nlet a = a.wrapping_mul(203u8);\nlet b = black_box(b.wrapping_mul(141u8));\nlet b = b.wrapping_mul(69u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(185u8));\nlet z = z.wrapping_mul(137u8);\nz\n}\n"
+  },
+  {
+    "index": 53,
+    "template": 3,
+    "variant": 1,
+    "family": 13,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 66,
+    "sha256": "8e236655ad549007621b2cd7041942bd3455495d9fcf86444cbfae36b91570bf",
+    "code_hex": "6bc7e3884424fd488d4424fd0fb64424fd6bc0cb6bce8d884c24fe488d4c24fe0fb64c24fe6bc9bb00c10fb6c16bc0b9884424ff488d4424ff0fb64424ff6bc089c3",
+    "constants": [
+      [
+        227
+      ],
+      [
+        141
+      ],
+      [
+        185
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(227u8));\nlet a = a.wrapping_mul(203u8);\nlet b = black_box(b.wrapping_mul(141u8));\nlet b = b.wrapping_mul(69u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(185u8));\nlet z = z.wrapping_mul(137u8);\nz\n}\n"
+  },
+  {
+    "index": 54,
+    "template": 3,
+    "variant": 1,
+    "family": 13,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 61,
+    "sha256": "5db5c2e7e37c70421d3a02b78d8bbf97c17f886081bd5e4a8693c0888c43ad24",
+    "code_hex": "6bc7e3884424fd488d4424fd0fb64424fd6bce8d884c24fe488d4c24fef66424fe0fb6c089c1c1e10629c1884c24ff488d4424ff0fb64424ff6bc089c3",
+    "constants": [
+      [
+        227
+      ],
+      [
+        141
+      ],
+      [
+        185
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(227u8));\nlet a = a.wrapping_mul(203u8);\nlet b = black_box(b.wrapping_mul(141u8));\nlet b = b.wrapping_mul(69u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(185u8));\nlet z = z.wrapping_mul(137u8);\nz\n}\n"
+  },
+  {
+    "index": 55,
+    "template": 3,
+    "variant": 1,
+    "family": 13,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 83,
+    "sha256": "ef6ff2912b5f8959dc028616fd4bcedca3257ae0df11544259853599c8d776cc",
+    "code_hex": "6bc7e3884424fd488d4424fd0fb64424fd6bce8d884c24fe488d4c24fe0fb64c24fe84c974190fb6c96bc9450fb6c06bc0cb0fb6c0f6f10fb6c06bc0b9eb02b047884424ff488d4424ff0fb64424ff6bc089c3",
+    "constants": [
+      [
+        227
+      ],
+      [
+        141
+      ],
+      [
+        185
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(227u8));\nlet a = a.wrapping_mul(203u8);\nlet b = black_box(b.wrapping_mul(141u8));\nlet b = b.wrapping_mul(69u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(185u8));\nlet z = z.wrapping_mul(137u8);\nz\n}\n"
+  },
+  {
+    "index": 56,
+    "template": 3,
+    "variant": 2,
+    "family": 14,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 81,
+    "sha256": "6e644e3a93e4f00953d77b0bb421a29570f066b5d2ee6e2b888b81344880fbd2",
+    "code_hex": "8d04ff8d0440884424fd488d4424fd0fb64424fd8d0cc08d044889f1c1e10629ce40887424fe488d4c24fe0fb64c24fe89cac1e20601ca00c20fb6c26bc06d884424ff488d4424ff0fb64424ff6bc065c3",
+    "constants": [
+      [
+        27
+      ],
+      [
+        193
+      ],
+      [
+        109
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(27u8));\nlet a = a.wrapping_mul(19u8);\nlet b = black_box(b.wrapping_mul(193u8));\nlet b = b.wrapping_mul(65u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(109u8));\nlet z = z.wrapping_mul(101u8);\nz\n}\n"
+  },
+  {
+    "index": 57,
+    "template": 3,
+    "variant": 2,
+    "family": 14,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 83,
+    "sha256": "7e7bcbc4face13b7876733b67a8aac1a1a9652f23266dc23aa229bd804070b10",
+    "code_hex": "8d04ff8d0440884424fd488d4424fd0fb64424fd8d0cc08d044889f1c1e10629ce40887424fe488d4c24fe0fb64c24fe89cac1e20601caf7da00c20fb6c26bc06d884424ff488d4424ff0fb64424ff6bc065c3",
+    "constants": [
+      [
+        27
+      ],
+      [
+        193
+      ],
+      [
+        109
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(27u8));\nlet a = a.wrapping_mul(19u8);\nlet b = black_box(b.wrapping_mul(193u8));\nlet b = b.wrapping_mul(65u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(109u8));\nlet z = z.wrapping_mul(101u8);\nz\n}\n"
+  },
+  {
+    "index": 58,
+    "template": 3,
+    "variant": 2,
+    "family": 14,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 65,
+    "sha256": "92763108b9c8d8bb5deb4ac39864e5ebcc84e2ac5d13bcaf38a2854d6d767572",
+    "code_hex": "8d04ff8d0440884424fd488d4424fd0fb64424fd89f1c1e10629ce40887424fe488d4c24fef66424fe0fb6c06bc0d7884424ff488d4424ff0fb64424ff6bc065c3",
+    "constants": [
+      [
+        27
+      ],
+      [
+        193
+      ],
+      [
+        109
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(27u8));\nlet a = a.wrapping_mul(19u8);\nlet b = black_box(b.wrapping_mul(193u8));\nlet b = b.wrapping_mul(65u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(109u8));\nlet z = z.wrapping_mul(101u8);\nz\n}\n"
+  },
+  {
+    "index": 59,
+    "template": 3,
+    "variant": 2,
+    "family": 14,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 98,
+    "sha256": "ff7f29d39604d16c220e8b4f4bf250fa19df709e60f7ea03afe784314d935a73",
+    "code_hex": "8d04ff8d0440884424fd488d4424fd0fb64424fd89f1c1e10629ce40887424fe488d4c24fe0fb64c24fe84c974200fb6c989cac1e20601ca0fb6c08d0cc08d04480fb6c0f6f20fb6c06bc06deb02b093884424ff488d4424ff0fb64424ff6bc065c3",
+    "constants": [
+      [
+        27
+      ],
+      [
+        193
+      ],
+      [
+        109
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(27u8));\nlet a = a.wrapping_mul(19u8);\nlet b = black_box(b.wrapping_mul(193u8));\nlet b = b.wrapping_mul(65u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(109u8));\nlet z = z.wrapping_mul(101u8);\nz\n}\n"
+  },
+  {
+    "index": 60,
+    "template": 3,
+    "variant": 3,
+    "family": 15,
+    "label": 0,
+    "operation": "add",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 66,
+    "sha256": "54c591b54d4741f79e1b7628eba3628b9fab6b59b75eebaafbd67c358607956e",
+    "code_hex": "6bc791884424fd488d4424fd0fb64424fd6bc0716bceb3884c24fe488d4c24fe0fb64c24fe6bc97b00c10fb6c16bc06b884424ff488d4424ff0fb64424ff6bc043c3",
+    "constants": [
+      [
+        145
+      ],
+      [
+        178
+      ],
+      [
+        107
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(145u8));\nlet a = a.wrapping_mul(113u8);\nlet b = black_box(b.wrapping_mul(179u8));\nlet b = b.wrapping_mul(123u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(107u8));\nlet z = z.wrapping_mul(67u8);\nz\n}\n"
+  },
+  {
+    "index": 61,
+    "template": 3,
+    "variant": 3,
+    "family": 15,
+    "label": 1,
+    "operation": "sub",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 66,
+    "sha256": "887db349fe31327e85bf18bafd748e314cbe0186323fa3868fcda9c5f8795da7",
+    "code_hex": "6bc791884424fd488d4424fd0fb64424fd6bc0716bceb3884c24fe488d4c24fe0fb64c24fe6bc98500c10fb6c16bc06b884424ff488d4424ff0fb64424ff6bc043c3",
+    "constants": [
+      [
+        145
+      ],
+      [
+        178
+      ],
+      [
+        107
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(145u8));\nlet a = a.wrapping_mul(113u8);\nlet b = black_box(b.wrapping_mul(179u8));\nlet b = b.wrapping_mul(123u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(107u8));\nlet z = z.wrapping_mul(67u8);\nz\n}\n"
+  },
+  {
+    "index": 62,
+    "template": 3,
+    "variant": 3,
+    "family": 15,
+    "label": 2,
+    "operation": "mul",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 57,
+    "sha256": "77d810b8a87fcc4f3aa07f9a1520c487ca2904f40309bc1bc74f6bd4b12b0e67",
+    "code_hex": "6bc791884424fd488d4424fd0fb64424fd6bceb3884c24fe488d4c24fef66424fe0fb6c06bc059884424ff488d4424ff0fb64424ff6bc043c3",
+    "constants": [
+      [
+        145
+      ],
+      [
+        178
+      ],
+      [
+        107
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(145u8));\nlet a = a.wrapping_mul(113u8);\nlet b = black_box(b.wrapping_mul(179u8));\nlet b = b.wrapping_mul(123u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(107u8));\nlet z = z.wrapping_mul(67u8);\nz\n}\n"
+  },
+  {
+    "index": 63,
+    "template": 3,
+    "variant": 3,
+    "family": 15,
+    "label": 3,
+    "operation": "div",
+    "split": "train",
+    "opt_level": 1,
+    "byte_length": 83,
+    "sha256": "4ae6e841de6a8352670ecbb2e59c69938df656ebd4c61d1e129df90162072591",
+    "code_hex": "6bc791884424fd488d4424fd0fb64424fd6bceb3884c24fe488d4c24fe0fb64c24fe84c974190fb6c96bc97b0fb6c06bc0710fb6c0f6f10fb6c06bc06beb02b095884424ff488d4424ff0fb64424ff6bc043c3",
+    "constants": [
+      [
+        145
+      ],
+      [
+        178
+      ],
+      [
+        107
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(145u8));\nlet a = a.wrapping_mul(113u8);\nlet b = black_box(b.wrapping_mul(179u8));\nlet b = b.wrapping_mul(123u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(107u8));\nlet z = z.wrapping_mul(67u8);\nz\n}\n"
+  },
+  {
+    "index": 64,
+    "template": 4,
+    "variant": 0,
+    "family": 16,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 121,
+    "sha256": "f2598b22659c9bca720a77415472dcfd993a2eb256caa21467ee21922f664883",
+    "code_hex": "4080f79940887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64424fb04d934994080f6a340887424fc488d4c24fc0fb64c24fc80c1a6884c24fd488d4c24fd0fb64c24fd80c15a80f1a300c180f1e1884c24fe488d4424fe0fb64424fe04c3884424ff488d4424ff0fb64424ff043d34e1c3",
+    "constants": [
+      [
+        153,
+        39
+      ],
+      [
+        163,
+        166
+      ],
+      [
+        225,
+        195
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 153u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 153u8;\nlet b = black_box(b ^ 163u8);\nlet b = black_box(b.wrapping_add(166u8));\nlet b = b.wrapping_sub(166u8);\nlet b = b ^ 163u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 225u8);\nlet z = black_box(z.wrapping_add(195u8));\nlet z = z.wrapping_sub(195u8);\nlet z = z ^ 225u8;\nz\n}\n"
+  },
+  {
+    "index": 65,
+    "template": 4,
+    "variant": 0,
+    "family": 16,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 120,
+    "sha256": "6a2dbad142dac33b55db611b8a701be60ef51278d14f1e99d49c238f8d537a46",
+    "code_hex": "4080f79940887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64424fb04d934994080f6a340887424fc488d4c24fc0fb64c24fc80c1a6884c24fd488d4c24fd0fb64c24fd80c15a80f1a328c834e1884424fe488d4424fe0fb64424fe04c3884424ff488d4424ff0fb64424ff043d34e1c3",
+    "constants": [
+      [
+        153,
+        39
+      ],
+      [
+        163,
+        166
+      ],
+      [
+        225,
+        195
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 153u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 153u8;\nlet b = black_box(b ^ 163u8);\nlet b = black_box(b.wrapping_add(166u8));\nlet b = b.wrapping_sub(166u8);\nlet b = b ^ 163u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 225u8);\nlet z = black_box(z.wrapping_add(195u8));\nlet z = z.wrapping_sub(195u8);\nlet z = z ^ 225u8;\nz\n}\n"
+  },
+  {
+    "index": 66,
+    "template": 4,
+    "variant": 0,
+    "family": 16,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "beaafd885de63a2f4f9712eba22a49dd3d096fbfc4656e3d5f82694eafe27c19",
+    "code_hex": "4080f79940887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64c24fb80c1d980f1994080f6a340887424fc488d4424fc0fb64424fc04a6884424fd488d4424fd0fb64424fd045a34a3f6e134e1884424fe488d4424fe0fb64424fe04c3884424ff488d4424ff0fb64424ff043d34e1c3",
+    "constants": [
+      [
+        153,
+        39
+      ],
+      [
+        163,
+        166
+      ],
+      [
+        225,
+        195
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 153u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 153u8;\nlet b = black_box(b ^ 163u8);\nlet b = black_box(b.wrapping_add(166u8));\nlet b = b.wrapping_sub(166u8);\nlet b = b ^ 163u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 225u8);\nlet z = black_box(z.wrapping_add(195u8));\nlet z = z.wrapping_sub(195u8);\nlet z = z ^ 225u8;\nz\n}\n"
+  },
+  {
+    "index": 67,
+    "template": 4,
+    "variant": 0,
+    "family": 16,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "1f82702a0068ed443f2a8105adcbe0e40f606e064f084591138bed72804421fb",
+    "code_hex": "4080f79940887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64c24fb4080f6a340887424fc488d4424fc0fb64424fc04a6884424fd488d4424fd0fb65424fd80c25ab01e80faa3741080f2a380c1d980f1990fb6c1f6f234e1884424fe488d4424fe0fb64424fe04c3884424ff488d4424ff0fb64424ff043d34e1c3",
+    "constants": [
+      [
+        153,
+        39
+      ],
+      [
+        163,
+        166
+      ],
+      [
+        225,
+        195
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 153u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 153u8;\nlet b = black_box(b ^ 163u8);\nlet b = black_box(b.wrapping_add(166u8));\nlet b = b.wrapping_sub(166u8);\nlet b = b ^ 163u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 225u8);\nlet z = black_box(z.wrapping_add(195u8));\nlet z = z.wrapping_sub(195u8);\nlet z = z ^ 225u8;\nz\n}\n"
+  },
+  {
+    "index": 68,
+    "template": 4,
+    "variant": 1,
+    "family": 17,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 121,
+    "sha256": "730fc4f8cc5b1c5fa12b8f568a126dfb87da94a76284354a1573a4c9263f23bf",
+    "code_hex": "4080f7c840887c24fa488d4424fa0fb64424fa04cb884424fb488d4424fb0fb64424fb043534c84080f66540887424fc488d4c24fc0fb64c24fc80c1bd884c24fd488d4c24fd0fb64c24fd80c14380f16500c180f109884c24fe488d4424fe0fb64424fe04de884424ff488d4424ff0fb64424ff04223409c3",
+    "constants": [
+      [
+        200,
+        203
+      ],
+      [
+        101,
+        189
+      ],
+      [
+        9,
+        222
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 200u8);\nlet a = black_box(a.wrapping_add(203u8));\nlet a = a.wrapping_sub(203u8);\nlet a = a ^ 200u8;\nlet b = black_box(b ^ 101u8);\nlet b = black_box(b.wrapping_add(189u8));\nlet b = b.wrapping_sub(189u8);\nlet b = b ^ 101u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 9u8);\nlet z = black_box(z.wrapping_add(222u8));\nlet z = z.wrapping_sub(222u8);\nlet z = z ^ 9u8;\nz\n}\n"
+  },
+  {
+    "index": 69,
+    "template": 4,
+    "variant": 1,
+    "family": 17,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 120,
+    "sha256": "6a856d790a1449f9b2c451b89eb60d40e9903190c08d3d0ee8d7e5b89434d73e",
+    "code_hex": "4080f7c840887c24fa488d4424fa0fb64424fa04cb884424fb488d4424fb0fb64424fb043534c84080f66540887424fc488d4c24fc0fb64c24fc80c1bd884c24fd488d4c24fd0fb64c24fd80c14380f16528c83409884424fe488d4424fe0fb64424fe04de884424ff488d4424ff0fb64424ff04223409c3",
+    "constants": [
+      [
+        200,
+        203
+      ],
+      [
+        101,
+        189
+      ],
+      [
+        9,
+        222
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 200u8);\nlet a = black_box(a.wrapping_add(203u8));\nlet a = a.wrapping_sub(203u8);\nlet a = a ^ 200u8;\nlet b = black_box(b ^ 101u8);\nlet b = black_box(b.wrapping_add(189u8));\nlet b = b.wrapping_sub(189u8);\nlet b = b ^ 101u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 9u8);\nlet z = black_box(z.wrapping_add(222u8));\nlet z = z.wrapping_sub(222u8);\nlet z = z ^ 9u8;\nz\n}\n"
+  },
+  {
+    "index": 70,
+    "template": 4,
+    "variant": 1,
+    "family": 17,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "c827dbdbd75cca908f7ac35774b38645f64d350f6bcec9e13e31dab9b75e98d7",
+    "code_hex": "4080f7c840887c24fa488d4424fa0fb64424fa04cb884424fb488d4424fb0fb64c24fb80c13580f1c84080f66540887424fc488d4424fc0fb64424fc04bd884424fd488d4424fd0fb64424fd04433465f6e13409884424fe488d4424fe0fb64424fe04de884424ff488d4424ff0fb64424ff04223409c3",
+    "constants": [
+      [
+        200,
+        203
+      ],
+      [
+        101,
+        189
+      ],
+      [
+        9,
+        222
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 200u8);\nlet a = black_box(a.wrapping_add(203u8));\nlet a = a.wrapping_sub(203u8);\nlet a = a ^ 200u8;\nlet b = black_box(b ^ 101u8);\nlet b = black_box(b.wrapping_add(189u8));\nlet b = b.wrapping_sub(189u8);\nlet b = b ^ 101u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 9u8);\nlet z = black_box(z.wrapping_add(222u8));\nlet z = z.wrapping_sub(222u8);\nlet z = z ^ 9u8;\nz\n}\n"
+  },
+  {
+    "index": 71,
+    "template": 4,
+    "variant": 1,
+    "family": 17,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "144d4d610c1fa6d1f3381afafa7d8a713c2da6d3b8d04f5c21f2531fa3352325",
+    "code_hex": "4080f7c840887c24fa488d4424fa0fb64424fa04cb884424fb488d4424fb0fb64c24fb4080f66540887424fc488d4424fc0fb64424fc04bd884424fd488d4424fd0fb65424fd80c243b0f680fa65741080f26580c13580f1c80fb6c1f6f23409884424fe488d4424fe0fb64424fe04de884424ff488d4424ff0fb64424ff04223409c3",
+    "constants": [
+      [
+        200,
+        203
+      ],
+      [
+        101,
+        189
+      ],
+      [
+        9,
+        222
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 200u8);\nlet a = black_box(a.wrapping_add(203u8));\nlet a = a.wrapping_sub(203u8);\nlet a = a ^ 200u8;\nlet b = black_box(b ^ 101u8);\nlet b = black_box(b.wrapping_add(189u8));\nlet b = b.wrapping_sub(189u8);\nlet b = b ^ 101u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 9u8);\nlet z = black_box(z.wrapping_add(222u8));\nlet z = z.wrapping_sub(222u8);\nlet z = z ^ 9u8;\nz\n}\n"
+  },
+  {
+    "index": 72,
+    "template": 4,
+    "variant": 2,
+    "family": 18,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 121,
+    "sha256": "50cc3c63bafa58cb8e1217ecaaeb4df950b7a0445dd67635d77a67f66a23de6c",
+    "code_hex": "4080f7e040887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64424fb04d934e04080f6a740887424fc488d4c24fc0fb64c24fc80c1f8884c24fd488d4c24fd0fb64c24fd80c10880f1a700c180f17c884c24fe488d4424fe0fb64424fe0432884424ff488d4424ff0fb64424ff04ce347cc3",
+    "constants": [
+      [
+        224,
+        39
+      ],
+      [
+        167,
+        248
+      ],
+      [
+        124,
+        50
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 224u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 224u8;\nlet b = black_box(b ^ 167u8);\nlet b = black_box(b.wrapping_add(248u8));\nlet b = b.wrapping_sub(248u8);\nlet b = b ^ 167u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 124u8);\nlet z = black_box(z.wrapping_add(50u8));\nlet z = z.wrapping_sub(50u8);\nlet z = z ^ 124u8;\nz\n}\n"
+  },
+  {
+    "index": 73,
+    "template": 4,
+    "variant": 2,
+    "family": 18,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 120,
+    "sha256": "8d522b55afc8e47c03f3f0e3cc3828ac9b4f82baabf61a9bff391f7a231b90f2",
+    "code_hex": "4080f7e040887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64424fb04d934e04080f6a740887424fc488d4c24fc0fb64c24fc80c1f8884c24fd488d4c24fd0fb64c24fd80c10880f1a728c8347c884424fe488d4424fe0fb64424fe0432884424ff488d4424ff0fb64424ff04ce347cc3",
+    "constants": [
+      [
+        224,
+        39
+      ],
+      [
+        167,
+        248
+      ],
+      [
+        124,
+        50
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 224u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 224u8;\nlet b = black_box(b ^ 167u8);\nlet b = black_box(b.wrapping_add(248u8));\nlet b = b.wrapping_sub(248u8);\nlet b = b ^ 167u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 124u8);\nlet z = black_box(z.wrapping_add(50u8));\nlet z = z.wrapping_sub(50u8);\nlet z = z ^ 124u8;\nz\n}\n"
+  },
+  {
+    "index": 74,
+    "template": 4,
+    "variant": 2,
+    "family": 18,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "7a3fe1edffa269f2a9e07bc9598836d24ef0192fb729003867b1368730cf27a7",
+    "code_hex": "4080f7e040887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64c24fb80c1d980f1e04080f6a740887424fc488d4424fc0fb64424fc04f8884424fd488d4424fd0fb64424fd040834a7f6e1347c884424fe488d4424fe0fb64424fe0432884424ff488d4424ff0fb64424ff04ce347cc3",
+    "constants": [
+      [
+        224,
+        39
+      ],
+      [
+        167,
+        248
+      ],
+      [
+        124,
+        50
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 224u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 224u8;\nlet b = black_box(b ^ 167u8);\nlet b = black_box(b.wrapping_add(248u8));\nlet b = b.wrapping_sub(248u8);\nlet b = b ^ 167u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 124u8);\nlet z = black_box(z.wrapping_add(50u8));\nlet z = z.wrapping_sub(50u8);\nlet z = z ^ 124u8;\nz\n}\n"
+  },
+  {
+    "index": 75,
+    "template": 4,
+    "variant": 2,
+    "family": 18,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "862425d916be35e41432a12b85978d92d97e9d5943ac332245eb9085524489b2",
+    "code_hex": "4080f7e040887c24fa488d4424fa0fb64424fa0427884424fb488d4424fb0fb64c24fb4080f6a740887424fc488d4424fc0fb64424fc04f8884424fd488d4424fd0fb65424fd80c208b08380faa7741080f2a780c1d980f1e00fb6c1f6f2347c884424fe488d4424fe0fb64424fe0432884424ff488d4424ff0fb64424ff04ce347cc3",
+    "constants": [
+      [
+        224,
+        39
+      ],
+      [
+        167,
+        248
+      ],
+      [
+        124,
+        50
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 224u8);\nlet a = black_box(a.wrapping_add(39u8));\nlet a = a.wrapping_sub(39u8);\nlet a = a ^ 224u8;\nlet b = black_box(b ^ 167u8);\nlet b = black_box(b.wrapping_add(248u8));\nlet b = b.wrapping_sub(248u8);\nlet b = b ^ 167u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 124u8);\nlet z = black_box(z.wrapping_add(50u8));\nlet z = z.wrapping_sub(50u8);\nlet z = z ^ 124u8;\nz\n}\n"
+  },
+  {
+    "index": 76,
+    "template": 4,
+    "variant": 3,
+    "family": 19,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 121,
+    "sha256": "9bc06a03dd9b89b935656fc2998a0beffa0562e74ff6a712068baef6fbd0625d",
+    "code_hex": "4080f77240887c24fa488d4424fa0fb64424fa040a884424fb488d4424fb0fb64424fb04f634724080f6b040887424fc488d4c24fc0fb64c24fc80c115884c24fd488d4c24fd0fb64c24fd80c1eb80f1b000c180f1f4884c24fe488d4424fe0fb64424fe0416884424ff488d4424ff0fb64424ff04ea34f4c3",
+    "constants": [
+      [
+        114,
+        10
+      ],
+      [
+        176,
+        21
+      ],
+      [
+        244,
+        22
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 114u8);\nlet a = black_box(a.wrapping_add(10u8));\nlet a = a.wrapping_sub(10u8);\nlet a = a ^ 114u8;\nlet b = black_box(b ^ 176u8);\nlet b = black_box(b.wrapping_add(21u8));\nlet b = b.wrapping_sub(21u8);\nlet b = b ^ 176u8;\nlet z = a.wrapping_add(b);\nlet z = black_box(z ^ 244u8);\nlet z = black_box(z.wrapping_add(22u8));\nlet z = z.wrapping_sub(22u8);\nlet z = z ^ 244u8;\nz\n}\n"
+  },
+  {
+    "index": 77,
+    "template": 4,
+    "variant": 3,
+    "family": 19,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 120,
+    "sha256": "941c640b3612377dc74c8c04f19a15f3decae61d594e69839caf61069a0dc2ca",
+    "code_hex": "4080f77240887c24fa488d4424fa0fb64424fa040a884424fb488d4424fb0fb64424fb04f634724080f6b040887424fc488d4c24fc0fb64c24fc80c115884c24fd488d4c24fd0fb64c24fd80c1eb80f1b028c834f4884424fe488d4424fe0fb64424fe0416884424ff488d4424ff0fb64424ff04ea34f4c3",
+    "constants": [
+      [
+        114,
+        10
+      ],
+      [
+        176,
+        21
+      ],
+      [
+        244,
+        22
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 114u8);\nlet a = black_box(a.wrapping_add(10u8));\nlet a = a.wrapping_sub(10u8);\nlet a = a ^ 114u8;\nlet b = black_box(b ^ 176u8);\nlet b = black_box(b.wrapping_add(21u8));\nlet b = b.wrapping_sub(21u8);\nlet b = b ^ 176u8;\nlet z = a.wrapping_sub(b);\nlet z = black_box(z ^ 244u8);\nlet z = black_box(z.wrapping_add(22u8));\nlet z = z.wrapping_sub(22u8);\nlet z = z ^ 244u8;\nz\n}\n"
+  },
+  {
+    "index": 78,
+    "template": 4,
+    "variant": 3,
+    "family": 19,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "b02279d9c0ed79cfb2b1b6012fd5a71557ccd2bdd599877c75f1198273879a76",
+    "code_hex": "4080f77240887c24fa488d4424fa0fb64424fa040a884424fb488d4424fb0fb64c24fb80c1f680f1724080f6b040887424fc488d4424fc0fb64424fc0415884424fd488d4424fd0fb64424fd04eb34b0f6e134f4884424fe488d4424fe0fb64424fe0416884424ff488d4424ff0fb64424ff04ea34f4c3",
+    "constants": [
+      [
+        114,
+        10
+      ],
+      [
+        176,
+        21
+      ],
+      [
+        244,
+        22
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 114u8);\nlet a = black_box(a.wrapping_add(10u8));\nlet a = a.wrapping_sub(10u8);\nlet a = a ^ 114u8;\nlet b = black_box(b ^ 176u8);\nlet b = black_box(b.wrapping_add(21u8));\nlet b = b.wrapping_sub(21u8);\nlet b = b ^ 176u8;\nlet z = a.wrapping_mul(b);\nlet z = black_box(z ^ 244u8);\nlet z = black_box(z.wrapping_add(22u8));\nlet z = z.wrapping_sub(22u8);\nlet z = z ^ 244u8;\nz\n}\n"
+  },
+  {
+    "index": 79,
+    "template": 4,
+    "variant": 3,
+    "family": 19,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "59213c93d621a4b26e0b6b65cb4093f0585bf0e8df71ae08e84a9298287b0554",
+    "code_hex": "4080f77240887c24fa488d4424fa0fb64424fa040a884424fb488d4424fb0fb64c24fb4080f6b040887424fc488d4424fc0fb64424fc0415884424fd488d4424fd0fb65424fd80c2ebb00b80fab0741080f2b080c1f680f1720fb6c1f6f234f4884424fe488d4424fe0fb64424fe0416884424ff488d4424ff0fb64424ff04ea34f4c3",
+    "constants": [
+      [
+        114,
+        10
+      ],
+      [
+        176,
+        21
+      ],
+      [
+        244,
+        22
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a ^ 114u8);\nlet a = black_box(a.wrapping_add(10u8));\nlet a = a.wrapping_sub(10u8);\nlet a = a ^ 114u8;\nlet b = black_box(b ^ 176u8);\nlet b = black_box(b.wrapping_add(21u8));\nlet b = b.wrapping_sub(21u8);\nlet b = b ^ 176u8;\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z ^ 244u8);\nlet z = black_box(z.wrapping_add(22u8));\nlet z = z.wrapping_sub(22u8);\nlet z = z ^ 244u8;\nz\n}\n"
+  },
+  {
+    "index": 80,
+    "template": 5,
+    "variant": 0,
+    "family": 20,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "849b145276222d3dafdfb0989aed377b2f8f74cfa468f391f048f8013b2255b2",
+    "code_hex": "40c0c70440887c24fa488d4424fa0fb64424fa34d0884424fb488d4424fb0fb64424fb34d0c0c00440c0c60440887424fc488d4c24fc0fb64c24fc80f1f3884c24fd488d4c24fd0fb64c24fd80f1f3c0c10400c1c0c102884c24fe488d4424fe0fb64424fe343c884424ff488d4424ff0fb64424ff343cc0c006c3",
+    "constants": [
+      [
+        101,
+        208
+      ],
+      [
+        185,
+        243
+      ],
+      [
+        99,
+        60
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = black_box(a ^ 208u8);\nlet a = a ^ 208u8;\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = black_box(b ^ 243u8);\nlet b = b ^ 243u8;\nlet b = b.rotate_right(4);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 60u8);\nlet z = z ^ 60u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 81,
+    "template": 5,
+    "variant": 0,
+    "family": 20,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "f6e86a3be574f5aa690b915c4209f36a96d7faf647fac924c4600247e1db8c58",
+    "code_hex": "40c0c70440887c24fa488d4424fa0fb64424fa34d0884424fb488d4424fb0fb64424fb34d0c0c00440c0c60440887424fc488d4c24fc0fb64c24fc80f1f3884c24fd488d4c24fd0fb64c24fd80f1f3c0c10428c8c0c002884424fe488d4424fe0fb64424fe343c884424ff488d4424ff0fb64424ff343cc0c006c3",
+    "constants": [
+      [
+        101,
+        208
+      ],
+      [
+        185,
+        243
+      ],
+      [
+        99,
+        60
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = black_box(a ^ 208u8);\nlet a = a ^ 208u8;\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = black_box(b ^ 243u8);\nlet b = b ^ 243u8;\nlet b = b.rotate_right(4);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 60u8);\nlet z = z ^ 60u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 82,
+    "template": 5,
+    "variant": 0,
+    "family": 20,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "6449241040dbb58f38d2b0f2aec440fac8f1ff7f9ea01e964b01eb001daf469a",
+    "code_hex": "40c0c70440887c24fa488d4424fa0fb64424fa34d0884424fb488d4424fb0fb64c24fb80f1d0c0c10440c0c60440887424fc488d4424fc0fb64424fc34f3884424fd488d4424fd0fb64424fd34f3c0c004f6e1c0c002884424fe488d4424fe0fb64424fe343c884424ff488d4424ff0fb64424ff343cc0c006c3",
+    "constants": [
+      [
+        101,
+        208
+      ],
+      [
+        185,
+        243
+      ],
+      [
+        99,
+        60
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = black_box(a ^ 208u8);\nlet a = a ^ 208u8;\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = black_box(b ^ 243u8);\nlet b = b ^ 243u8;\nlet b = b.rotate_right(4);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 60u8);\nlet z = z ^ 60u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 83,
+    "template": 5,
+    "variant": 0,
+    "family": 20,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 133,
+    "sha256": "4111c7abdc44dc1f198371efb5bfe645c46678490510f61a46dedb95a39f4220",
+    "code_hex": "40c0c70440887c24fa488d4424fa0fb64424fa34d0884424fb488d4424fb40c0c6040fb64c24fb40887424fc488d4424fc0fb64424fc34f3884424fd488d4424fd0fb65424fdb0ff80faf3741180f2f3c0c20480f1d0c0c1040fb6c1f6f2c0c002884424fe488d4424fe0fb64424fe343c884424ff488d4424ff0fb64424ff343cc0c006c3",
+    "constants": [
+      [
+        101,
+        208
+      ],
+      [
+        185,
+        243
+      ],
+      [
+        99,
+        60
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(4));\nlet a = black_box(a ^ 208u8);\nlet a = a ^ 208u8;\nlet a = a.rotate_right(4);\nlet b = black_box(b.rotate_left(4));\nlet b = black_box(b ^ 243u8);\nlet b = b ^ 243u8;\nlet b = b.rotate_right(4);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 60u8);\nlet z = z ^ 60u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 84,
+    "template": 5,
+    "variant": 1,
+    "family": 21,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "a38143040ba6637f4a99e3c368f3bf90a2e2f5a17e7882e1fa93becc31fb1659",
+    "code_hex": "40c0c70640887c24fa488d4424fa0fb64424fa34df884424fb488d4424fb0fb64424fb34dfc0c00240c0c60540887424fc488d4c24fc0fb64c24fc80f130884c24fd488d4c24fd0fb64c24fd80f130c0c10300c1c0c102884c24fe488d4424fe0fb64424fe3408884424ff488d4424ff0fb64424ff3408c0c006c3",
+    "constants": [
+      [
+        61,
+        223
+      ],
+      [
+        193,
+        48
+      ],
+      [
+        197,
+        8
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(6));\nlet a = black_box(a ^ 223u8);\nlet a = a ^ 223u8;\nlet a = a.rotate_right(6);\nlet b = black_box(b.rotate_left(5));\nlet b = black_box(b ^ 48u8);\nlet b = b ^ 48u8;\nlet b = b.rotate_right(5);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 8u8);\nlet z = z ^ 8u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 85,
+    "template": 5,
+    "variant": 1,
+    "family": 21,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "aa9e4b1cf213d4ab7be9d767ed90388a3decee17e7a4ba05843dfd67d574afc1",
+    "code_hex": "40c0c70640887c24fa488d4424fa0fb64424fa34df884424fb488d4424fb0fb64424fb34dfc0c00240c0c60540887424fc488d4c24fc0fb64c24fc80f130884c24fd488d4c24fd0fb64c24fd80f130c0c10328c8c0c002884424fe488d4424fe0fb64424fe3408884424ff488d4424ff0fb64424ff3408c0c006c3",
+    "constants": [
+      [
+        61,
+        223
+      ],
+      [
+        193,
+        48
+      ],
+      [
+        197,
+        8
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(6));\nlet a = black_box(a ^ 223u8);\nlet a = a ^ 223u8;\nlet a = a.rotate_right(6);\nlet b = black_box(b.rotate_left(5));\nlet b = black_box(b ^ 48u8);\nlet b = b ^ 48u8;\nlet b = b.rotate_right(5);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 8u8);\nlet z = z ^ 8u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 86,
+    "template": 5,
+    "variant": 1,
+    "family": 21,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "7ac852669a1c9e86d0ab053b6df892eb7130cd0498a4cad8e9c150769ff9ae60",
+    "code_hex": "40c0c70640887c24fa488d4424fa0fb64424fa34df884424fb488d4424fb0fb64c24fb80f1dfc0c10240c0c60540887424fc488d4424fc0fb64424fc3430884424fd488d4424fd0fb64424fd3430c0c003f6e1c0c002884424fe488d4424fe0fb64424fe3408884424ff488d4424ff0fb64424ff3408c0c006c3",
+    "constants": [
+      [
+        61,
+        223
+      ],
+      [
+        193,
+        48
+      ],
+      [
+        197,
+        8
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(6));\nlet a = black_box(a ^ 223u8);\nlet a = a ^ 223u8;\nlet a = a.rotate_right(6);\nlet b = black_box(b.rotate_left(5));\nlet b = black_box(b ^ 48u8);\nlet b = b ^ 48u8;\nlet b = b.rotate_right(5);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 8u8);\nlet z = z ^ 8u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 87,
+    "template": 5,
+    "variant": 1,
+    "family": 21,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 133,
+    "sha256": "52619bcf639a72f05b5dbccb2cc4708418ff9804fd0a8b45b2679b265e659599",
+    "code_hex": "40c0c70640887c24fa488d4424fa0fb64424fa34df884424fb488d4424fb40c0c6050fb64c24fb40887424fc488d4424fc0fb64424fc3430884424fd488d4424fd0fb65424fdb0ff80fa30741180f230c0c20380f1dfc0c1020fb6c1f6f2c0c002884424fe488d4424fe0fb64424fe3408884424ff488d4424ff0fb64424ff3408c0c006c3",
+    "constants": [
+      [
+        61,
+        223
+      ],
+      [
+        193,
+        48
+      ],
+      [
+        197,
+        8
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(6));\nlet a = black_box(a ^ 223u8);\nlet a = a ^ 223u8;\nlet a = a.rotate_right(6);\nlet b = black_box(b.rotate_left(5));\nlet b = black_box(b ^ 48u8);\nlet b = b ^ 48u8;\nlet b = b.rotate_right(5);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(2));\nlet z = black_box(z ^ 8u8);\nlet z = z ^ 8u8;\nlet z = z.rotate_right(2);\nz\n}\n"
+  },
+  {
+    "index": 88,
+    "template": 5,
+    "variant": 2,
+    "family": 22,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "11cf9cb70c654bdc6551aeaba47ed489cfa47ebc8d32e2d3c764a388c9147c76",
+    "code_hex": "40c0c70340887c24fa488d4424fa0fb64424fa34af884424fb488d4424fb0fb64424fb34afc0c00540c0c60640887424fc488d4c24fc0fb64c24fc80f136884c24fd488d4c24fd0fb64c24fd80f136c0c10200c1c0c105884c24fe488d4424fe0fb64424fe3415884424ff488d4424ff0fb64424ff3415c0c003c3",
+    "constants": [
+      [
+        86,
+        175
+      ],
+      [
+        117,
+        54
+      ],
+      [
+        186,
+        21
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = black_box(a ^ 175u8);\nlet a = a ^ 175u8;\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(6));\nlet b = black_box(b ^ 54u8);\nlet b = b ^ 54u8;\nlet b = b.rotate_right(6);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(5));\nlet z = black_box(z ^ 21u8);\nlet z = z ^ 21u8;\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 89,
+    "template": 5,
+    "variant": 2,
+    "family": 22,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "7d8b068de91fdcd38bf094849ec79b5177fec9f22b80144a312399dc9df68706",
+    "code_hex": "40c0c70340887c24fa488d4424fa0fb64424fa34af884424fb488d4424fb0fb64424fb34afc0c00540c0c60640887424fc488d4c24fc0fb64c24fc80f136884c24fd488d4c24fd0fb64c24fd80f136c0c10228c8c0c005884424fe488d4424fe0fb64424fe3415884424ff488d4424ff0fb64424ff3415c0c003c3",
+    "constants": [
+      [
+        86,
+        175
+      ],
+      [
+        117,
+        54
+      ],
+      [
+        186,
+        21
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = black_box(a ^ 175u8);\nlet a = a ^ 175u8;\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(6));\nlet b = black_box(b ^ 54u8);\nlet b = b ^ 54u8;\nlet b = b.rotate_right(6);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(5));\nlet z = black_box(z ^ 21u8);\nlet z = z ^ 21u8;\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 90,
+    "template": 5,
+    "variant": 2,
+    "family": 22,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "b020719eb024ffc4023971d6e4020ea53ddfb812fb8c4cd46a45018b870fd6ac",
+    "code_hex": "40c0c70340887c24fa488d4424fa0fb64424fa34af884424fb488d4424fb0fb64c24fb80f1afc0c10540c0c60640887424fc488d4424fc0fb64424fc3436884424fd488d4424fd0fb64424fd3436c0c002f6e1c0c005884424fe488d4424fe0fb64424fe3415884424ff488d4424ff0fb64424ff3415c0c003c3",
+    "constants": [
+      [
+        86,
+        175
+      ],
+      [
+        117,
+        54
+      ],
+      [
+        186,
+        21
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = black_box(a ^ 175u8);\nlet a = a ^ 175u8;\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(6));\nlet b = black_box(b ^ 54u8);\nlet b = b ^ 54u8;\nlet b = b.rotate_right(6);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(5));\nlet z = black_box(z ^ 21u8);\nlet z = z ^ 21u8;\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 91,
+    "template": 5,
+    "variant": 2,
+    "family": 22,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 133,
+    "sha256": "e970332c75bc20907c57b605247a5377ff92c3ccb708a0a49892b2ba67b80294",
+    "code_hex": "40c0c70340887c24fa488d4424fa0fb64424fa34af884424fb488d4424fb40c0c6060fb64c24fb40887424fc488d4424fc0fb64424fc3436884424fd488d4424fd0fb65424fdb0ff80fa36741180f236c0c20280f1afc0c1050fb6c1f6f2c0c005884424fe488d4424fe0fb64424fe3415884424ff488d4424ff0fb64424ff3415c0c003c3",
+    "constants": [
+      [
+        86,
+        175
+      ],
+      [
+        117,
+        54
+      ],
+      [
+        186,
+        21
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(3));\nlet a = black_box(a ^ 175u8);\nlet a = a ^ 175u8;\nlet a = a.rotate_right(3);\nlet b = black_box(b.rotate_left(6));\nlet b = black_box(b ^ 54u8);\nlet b = b ^ 54u8;\nlet b = b.rotate_right(6);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(5));\nlet z = black_box(z ^ 21u8);\nlet z = z ^ 21u8;\nlet z = z.rotate_right(5);\nz\n}\n"
+  },
+  {
+    "index": 92,
+    "template": 5,
+    "variant": 3,
+    "family": 23,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "ce3daae0d33133299ae91df229596950b047f093dac8eddb96ea5c21728ca629",
+    "code_hex": "40d0c740887c24fa488d4424fa0fb64424fa3473884424fb488d4424fb0fb64424fb3473d0c840d0c640887424fc488d4c24fc0fb64c24fc80f1e8884c24fd488d4c24fd0fb64c24fd80f1e8d0c900c1c0c104884c24fe488d4424fe0fb64424fe34ea884424ff488d4424ff0fb64424ff34eac0c004c3",
+    "constants": [
+      [
+        84,
+        115
+      ],
+      [
+        224,
+        232
+      ],
+      [
+        192,
+        234
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(1));\nlet a = black_box(a ^ 115u8);\nlet a = a ^ 115u8;\nlet a = a.rotate_right(1);\nlet b = black_box(b.rotate_left(1));\nlet b = black_box(b ^ 232u8);\nlet b = b ^ 232u8;\nlet b = b.rotate_right(1);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.rotate_left(4));\nlet z = black_box(z ^ 234u8);\nlet z = z ^ 234u8;\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 93,
+    "template": 5,
+    "variant": 3,
+    "family": 23,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "d4ef8a9d95ebea81671bc137abddd2a18fe76a630dd9c19368503b226b8f40e3",
+    "code_hex": "40d0c740887c24fa488d4424fa0fb64424fa3473884424fb488d4424fb0fb64424fb3473d0c840d0c640887424fc488d4c24fc0fb64c24fc80f1e8884c24fd488d4c24fd0fb64c24fd80f1e8d0c928c8c0c004884424fe488d4424fe0fb64424fe34ea884424ff488d4424ff0fb64424ff34eac0c004c3",
+    "constants": [
+      [
+        84,
+        115
+      ],
+      [
+        224,
+        232
+      ],
+      [
+        192,
+        234
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(1));\nlet a = black_box(a ^ 115u8);\nlet a = a ^ 115u8;\nlet a = a.rotate_right(1);\nlet b = black_box(b.rotate_left(1));\nlet b = black_box(b ^ 232u8);\nlet b = b ^ 232u8;\nlet b = b.rotate_right(1);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.rotate_left(4));\nlet z = black_box(z ^ 234u8);\nlet z = z ^ 234u8;\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 94,
+    "template": 5,
+    "variant": 3,
+    "family": 23,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 118,
+    "sha256": "95e43fc6d727f591875dc5f95d8acea7df23732e6514f70bbbe0a61cae70954b",
+    "code_hex": "40d0c740887c24fa488d4424fa0fb64424fa3473884424fb488d4424fb0fb64c24fb80f173d0c940d0c640887424fc488d4424fc0fb64424fc34e8884424fd488d4424fd0fb64424fd34e8d0c8f6e1c0c004884424fe488d4424fe0fb64424fe34ea884424ff488d4424ff0fb64424ff34eac0c004c3",
+    "constants": [
+      [
+        84,
+        115
+      ],
+      [
+        224,
+        232
+      ],
+      [
+        192,
+        234
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(1));\nlet a = black_box(a ^ 115u8);\nlet a = a ^ 115u8;\nlet a = a.rotate_right(1);\nlet b = black_box(b.rotate_left(1));\nlet b = black_box(b ^ 232u8);\nlet b = b ^ 232u8;\nlet b = b.rotate_right(1);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.rotate_left(4));\nlet z = black_box(z ^ 234u8);\nlet z = z ^ 234u8;\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 95,
+    "template": 5,
+    "variant": 3,
+    "family": 23,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 129,
+    "sha256": "f5a73174e1b1a1c65fc45b47f20238375ed050e33ea5eea73bfb9ab513c2d025",
+    "code_hex": "40d0c740887c24fa488d4424fa0fb64424fa3473884424fb488d4424fb40d0c60fb64c24fb40887424fc488d4424fc0fb64424fc34e8884424fd488d4424fd0fb65424fdb0ff80fae8740f80f2e8d0ca80f173d0c90fb6c1f6f2c0c004884424fe488d4424fe0fb64424fe34ea884424ff488d4424ff0fb64424ff34eac0c004c3",
+    "constants": [
+      [
+        84,
+        115
+      ],
+      [
+        224,
+        232
+      ],
+      [
+        192,
+        234
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.rotate_left(1));\nlet a = black_box(a ^ 115u8);\nlet a = a ^ 115u8;\nlet a = a.rotate_right(1);\nlet b = black_box(b.rotate_left(1));\nlet b = black_box(b ^ 232u8);\nlet b = b ^ 232u8;\nlet b = b.rotate_right(1);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.rotate_left(4));\nlet z = black_box(z ^ 234u8);\nlet z = z ^ 234u8;\nlet z = z.rotate_right(4);\nz\n}\n"
+  },
+  {
+    "index": 96,
+    "template": 6,
+    "variant": 0,
+    "family": 24,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 118,
+    "sha256": "5a2ec1fc20bc256aa4bc484fb83cd27db55893968ca0fbdee3a7e83102eacbbc",
+    "code_hex": "4080c7f240887c24fa488d4424fa0fb64424fad0c8884424fb488d4424fb0fb64424fbd0c04080c68540887424fc488d4c24fc0fb64c24fcc0c106884c24fd488d4c24fd0fb64c24fdc0c10200c180c190884c24fe488d4424fe0fb64424fec0c006884424ff488d4424ff0fb64424ffc0c00204f9c3",
+    "constants": [
+      [
+        242,
+        223
+      ],
+      [
+        133,
+        131
+      ],
+      [
+        7,
+        229
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(242u8));\nlet a = black_box(a.rotate_left(7));\nlet a = a.rotate_right(7);\nlet a = a.wrapping_sub(242u8);\nlet b = black_box(b.wrapping_add(133u8));\nlet b = black_box(b.rotate_left(6));\nlet b = b.rotate_right(6);\nlet b = b.wrapping_sub(133u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(7u8));\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nlet z = z.wrapping_sub(7u8);\nz\n}\n"
+  },
+  {
+    "index": 97,
+    "template": 6,
+    "variant": 0,
+    "family": 24,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 117,
+    "sha256": "eb69001cd5b1aa9eb2d94d8382c888102aacd7d84cdc47833c72c0276eac6e52",
+    "code_hex": "4080c7f240887c24fa488d4424fa0fb64424fad0c8884424fb488d4424fb0fb64424fbd0c04080c68540887424fc488d4c24fc0fb64c24fcc0c106884c24fd488d4c24fd0fb64c24fdc0c10228c8049a884424fe488d4424fe0fb64424fec0c006884424ff488d4424ff0fb64424ffc0c00204f9c3",
+    "constants": [
+      [
+        242,
+        223
+      ],
+      [
+        133,
+        131
+      ],
+      [
+        7,
+        229
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(242u8));\nlet a = black_box(a.rotate_left(7));\nlet a = a.rotate_right(7);\nlet a = a.wrapping_sub(242u8);\nlet b = black_box(b.wrapping_add(133u8));\nlet b = black_box(b.rotate_left(6));\nlet b = b.rotate_right(6);\nlet b = b.wrapping_sub(133u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(7u8));\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nlet z = z.wrapping_sub(7u8);\nz\n}\n"
+  },
+  {
+    "index": 98,
+    "template": 6,
+    "variant": 0,
+    "family": 24,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "0a4196bbe510724dfe3ba61f24944ebd877ca631be442e90dce0e041487719d1",
+    "code_hex": "4080c7f240887c24fa488d4424fa0fb64424fad0c8884424fb488d4424fb0fb64c24fbd0c14080c68540887424fc488d4424fc0fb64424fcc0c006884424fd488d4424fd0fb64424fdc0c00280c10e047bf6e10407884424fe488d4424fe0fb64424fec0c006884424ff488d4424ff0fb64424ffc0c00204f9c3",
+    "constants": [
+      [
+        242,
+        223
+      ],
+      [
+        133,
+        131
+      ],
+      [
+        7,
+        229
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(242u8));\nlet a = black_box(a.rotate_left(7));\nlet a = a.rotate_right(7);\nlet a = a.wrapping_sub(242u8);\nlet b = black_box(b.wrapping_add(133u8));\nlet b = black_box(b.rotate_left(6));\nlet b = b.rotate_right(6);\nlet b = b.wrapping_sub(133u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(7u8));\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nlet z = z.wrapping_sub(7u8);\nz\n}\n"
+  },
+  {
+    "index": 99,
+    "template": 6,
+    "variant": 0,
+    "family": 24,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "9084b8e96358f591e82aa03409e23b8b1827574fd04b1e952f8d6058c0482e4a",
+    "code_hex": "4080c7f240887c24fa488d4424fa0fb64424fad0c8884424fb488d4424fb0fb64424fb4080c68540887424fc488d4c24fc0fb64c24fcc0c106884c24fd488d4c24fd0fb64c24fdc0c10280c17b740dd0c0040e0fb6c0f6f10407eb02b006884424fe488d4424fe0fb64424fec0c006884424ff488d4424ff0fb64424ffc0c00204f9c3",
+    "constants": [
+      [
+        242,
+        223
+      ],
+      [
+        133,
+        131
+      ],
+      [
+        7,
+        229
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(242u8));\nlet a = black_box(a.rotate_left(7));\nlet a = a.rotate_right(7);\nlet a = a.wrapping_sub(242u8);\nlet b = black_box(b.wrapping_add(133u8));\nlet b = black_box(b.rotate_left(6));\nlet b = b.rotate_right(6);\nlet b = b.wrapping_sub(133u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(7u8));\nlet z = black_box(z.rotate_left(6));\nlet z = z.rotate_right(6);\nlet z = z.wrapping_sub(7u8);\nz\n}\n"
+  },
+  {
+    "index": 100,
+    "template": 6,
+    "variant": 1,
+    "family": 25,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 118,
+    "sha256": "e49672c13981be5e744b5a8ec6d0fc7ba523a6c1a2180bdbb17ce493155b8d48",
+    "code_hex": "4080c77f40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fbc0c0064080c69540887424fc488d4c24fc0fb64c24fcc0c103884c24fd488d4c24fd0fb64c24fdc0c10500c180c194884c24fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c80458c3",
+    "constants": [
+      [
+        127,
+        246
+      ],
+      [
+        149,
+        93
+      ],
+      [
+        168,
+        168
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(127u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(127u8);\nlet b = black_box(b.wrapping_add(149u8));\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet b = b.wrapping_sub(149u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(168u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(168u8);\nz\n}\n"
+  },
+  {
+    "index": 101,
+    "template": 6,
+    "variant": 1,
+    "family": 25,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 117,
+    "sha256": "98efd1992d4c6e4f3b84ba016c4bfcea1e5ea14f4a4eff100934a56ecc54d72e",
+    "code_hex": "4080c77f40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fbc0c0064080c69540887424fc488d4c24fc0fb64c24fcc0c103884c24fd488d4c24fd0fb64c24fdc0c10528c804be884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c80458c3",
+    "constants": [
+      [
+        127,
+        246
+      ],
+      [
+        149,
+        93
+      ],
+      [
+        168,
+        168
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(127u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(127u8);\nlet b = black_box(b.wrapping_add(149u8));\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet b = b.wrapping_sub(149u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(168u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(168u8);\nz\n}\n"
+  },
+  {
+    "index": 102,
+    "template": 6,
+    "variant": 1,
+    "family": 25,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "f175aac640f541049af9b720fc96295b40a566fe9f4a8fe3750e94b2ad649701",
+    "code_hex": "4080c77f40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64c24fbc0c1064080c69540887424fc488d4424fc0fb64424fcc0c003884424fd488d4424fd0fb64424fdc0c00580c181046bf6e104a8884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c80458c3",
+    "constants": [
+      [
+        127,
+        246
+      ],
+      [
+        149,
+        93
+      ],
+      [
+        168,
+        168
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(127u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(127u8);\nlet b = black_box(b.wrapping_add(149u8));\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet b = b.wrapping_sub(149u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(168u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(168u8);\nz\n}\n"
+  },
+  {
+    "index": 103,
+    "template": 6,
+    "variant": 1,
+    "family": 25,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "fb2b3f508aebc995844b6feec2a3cad4f821d5909e72fb1bb7cbe84ad1defb90",
+    "code_hex": "4080c77f40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fb4080c69540887424fc488d4c24fc0fb64c24fcc0c103884c24fd488d4c24fd0fb64c24fdc0c10580c16b740ec0c00604810fb6c0f6f104a8eb02b0a7884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c80458c3",
+    "constants": [
+      [
+        127,
+        246
+      ],
+      [
+        149,
+        93
+      ],
+      [
+        168,
+        168
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(127u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(127u8);\nlet b = black_box(b.wrapping_add(149u8));\nlet b = black_box(b.rotate_left(3));\nlet b = b.rotate_right(3);\nlet b = b.wrapping_sub(149u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(168u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(168u8);\nz\n}\n"
+  },
+  {
+    "index": 104,
+    "template": 6,
+    "variant": 2,
+    "family": 26,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 118,
+    "sha256": "7b7977e03b0530291ad4c91894a85a5fa43a5c8f9ec960cd5022d12ebae95a0a",
+    "code_hex": "4080c72d40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fbc0c0064080c6ee40887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10600c180c120884c24fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c804c5c3",
+    "constants": [
+      [
+        45,
+        43
+      ],
+      [
+        238,
+        211
+      ],
+      [
+        59,
+        7
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(45u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(45u8);\nlet b = black_box(b.wrapping_add(238u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(238u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(59u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(59u8);\nz\n}\n"
+  },
+  {
+    "index": 105,
+    "template": 6,
+    "variant": 2,
+    "family": 26,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 117,
+    "sha256": "d97e0d15bbf6a15370a4cdb881c15f84caa41df8b8d80b01fef635d42a50d9a4",
+    "code_hex": "4080c72d40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fbc0c0064080c6ee40887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10628c804fc884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c804c5c3",
+    "constants": [
+      [
+        45,
+        43
+      ],
+      [
+        238,
+        211
+      ],
+      [
+        59,
+        7
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(45u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(45u8);\nlet b = black_box(b.wrapping_add(238u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(238u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(59u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(59u8);\nz\n}\n"
+  },
+  {
+    "index": 106,
+    "template": 6,
+    "variant": 2,
+    "family": 26,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 122,
+    "sha256": "bcc310496e082d3876a202266770ff43848c27e52e315e0cd0cec1a05aaefabd",
+    "code_hex": "4080c72d40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64c24fbc0c1064080c6ee40887424fc488d4424fc0fb64424fcc0c002884424fd488d4424fd0fb64424fdc0c00680c1d30412f6e1043b884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c804c5c3",
+    "constants": [
+      [
+        45,
+        43
+      ],
+      [
+        238,
+        211
+      ],
+      [
+        59,
+        7
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(45u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(45u8);\nlet b = black_box(b.wrapping_add(238u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(238u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(59u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(59u8);\nz\n}\n"
+  },
+  {
+    "index": 107,
+    "template": 6,
+    "variant": 2,
+    "family": 26,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "6c30d59dcf326d75fbc7a3662fedf1a6b94c51454b5823e7738e939f6b387ed5",
+    "code_hex": "4080c72d40887c24fa488d4424fa0fb64424fac0c002884424fb488d4424fb0fb64424fb4080c6ee40887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10680c112740ec0c00604d30fb6c0f6f1043beb02b03a884424fe488d4424fe0fb64424fed0c0884424ff488d4424ff0fb64424ffd0c804c5c3",
+    "constants": [
+      [
+        45,
+        43
+      ],
+      [
+        238,
+        211
+      ],
+      [
+        59,
+        7
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(45u8));\nlet a = black_box(a.rotate_left(2));\nlet a = a.rotate_right(2);\nlet a = a.wrapping_sub(45u8);\nlet b = black_box(b.wrapping_add(238u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(238u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(59u8));\nlet z = black_box(z.rotate_left(1));\nlet z = z.rotate_right(1);\nlet z = z.wrapping_sub(59u8);\nz\n}\n"
+  },
+  {
+    "index": 108,
+    "template": 6,
+    "variant": 3,
+    "family": 27,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 120,
+    "sha256": "b6b6ef35a035093061ba32140688cabb616c248c86c7b93df951a68c39f933ab",
+    "code_hex": "4080c7c040887c24fa488d4424fa0fb64424fac0c003884424fb488d4424fb0fb64424fbc0c0054080c68940887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10600c180c18f884c24fe488d4424fe0fb64424fec0c002884424ff488d4424ff0fb64424ffc0c0060428c3",
+    "constants": [
+      [
+        192,
+        65
+      ],
+      [
+        137,
+        50
+      ],
+      [
+        216,
+        43
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(192u8));\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet a = a.wrapping_sub(192u8);\nlet b = black_box(b.wrapping_add(137u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(137u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_add(216u8));\nlet z = black_box(z.rotate_left(2));\nlet z = z.rotate_right(2);\nlet z = z.wrapping_sub(216u8);\nz\n}\n"
+  },
+  {
+    "index": 109,
+    "template": 6,
+    "variant": 3,
+    "family": 27,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "81d8547fb1f74cfaf32713babfc5d5a0725d84d554d2c44f357a324da3509e3d",
+    "code_hex": "4080c7c040887c24fa488d4424fa0fb64424fac0c003884424fb488d4424fb0fb64424fbc0c0054080c68940887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10628c804a1884424fe488d4424fe0fb64424fec0c002884424ff488d4424ff0fb64424ffc0c0060428c3",
+    "constants": [
+      [
+        192,
+        65
+      ],
+      [
+        137,
+        50
+      ],
+      [
+        216,
+        43
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(192u8));\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet a = a.wrapping_sub(192u8);\nlet b = black_box(b.wrapping_add(137u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(137u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_add(216u8));\nlet z = black_box(z.rotate_left(2));\nlet z = z.rotate_right(2);\nlet z = z.wrapping_sub(216u8);\nz\n}\n"
+  },
+  {
+    "index": 110,
+    "template": 6,
+    "variant": 3,
+    "family": 27,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 124,
+    "sha256": "ebccf2a5461b8636e5c78e8eb92e8b63199aa9a93713e996a717c709a855ca3c",
+    "code_hex": "4080c7c040887c24fa488d4424fa0fb64424fac0c003884424fb488d4424fb0fb64c24fbc0c1054080c68940887424fc488d4424fc0fb64424fcc0c002884424fd488d4424fd0fb64424fdc0c00680c1400477f6e104d8884424fe488d4424fe0fb64424fec0c002884424ff488d4424ff0fb64424ffc0c0060428c3",
+    "constants": [
+      [
+        192,
+        65
+      ],
+      [
+        137,
+        50
+      ],
+      [
+        216,
+        43
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(192u8));\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet a = a.wrapping_sub(192u8);\nlet b = black_box(b.wrapping_add(137u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(137u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_add(216u8));\nlet z = black_box(z.rotate_left(2));\nlet z = z.rotate_right(2);\nlet z = z.wrapping_sub(216u8);\nz\n}\n"
+  },
+  {
+    "index": 111,
+    "template": 6,
+    "variant": 3,
+    "family": 27,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 133,
+    "sha256": "6241bcfc022af2df38d1475849bb528ea6e6beb266a46c4dbe0862af4b2b6620",
+    "code_hex": "4080c7c040887c24fa488d4424fa0fb64424fac0c003884424fb488d4424fb0fb64424fb4080c68940887424fc488d4c24fc0fb64c24fcc0c102884c24fd488d4c24fd0fb64c24fdc0c10680c177740ec0c00504400fb6c0f6f104d8eb02b0d7884424fe488d4424fe0fb64424fec0c002884424ff488d4424ff0fb64424ffc0c0060428c3",
+    "constants": [
+      [
+        192,
+        65
+      ],
+      [
+        137,
+        50
+      ],
+      [
+        216,
+        43
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_add(192u8));\nlet a = black_box(a.rotate_left(3));\nlet a = a.rotate_right(3);\nlet a = a.wrapping_sub(192u8);\nlet b = black_box(b.wrapping_add(137u8));\nlet b = black_box(b.rotate_left(2));\nlet b = b.rotate_right(2);\nlet b = b.wrapping_sub(137u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_add(216u8));\nlet z = black_box(z.rotate_left(2));\nlet z = z.rotate_right(2);\nlet z = z.wrapping_sub(216u8);\nz\n}\n"
+  },
+  {
+    "index": 112,
+    "template": 7,
+    "variant": 0,
+    "family": 28,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 139,
+    "sha256": "d579638e3b7ff9a284db7faae33a683deb2e07547915a5939b0e1b900e6a9434",
+    "code_hex": "89f8c1e00529f8884424fa488d4424fa0fb64424fa34fb884424fb488d4424fb0fb64424fb34fb0fb6c089c1c1e10501c1f7d96bc691884424fc488d4424fc0fb64424fc3442884424fd488d4424fd0fb64424fd34420fb6c06bc07100c80fb6c06bc0bd884424fe488d4424fe0fb64424fe3465884424ff488d4424ff0fb64424ff34650fb6c06bc095c3",
+    "constants": [
+      [
+        31,
+        251
+      ],
+      [
+        145,
+        66
+      ],
+      [
+        188,
+        101
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(31u8));\nlet a = black_box(a ^ 251u8);\nlet a = a ^ 251u8;\nlet a = a.wrapping_mul(223u8);\nlet b = black_box(b.wrapping_mul(145u8));\nlet b = black_box(b ^ 66u8);\nlet b = b ^ 66u8;\nlet b = b.wrapping_mul(113u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(189u8));\nlet z = black_box(z ^ 101u8);\nlet z = z ^ 101u8;\nlet z = z.wrapping_mul(149u8);\nz\n}\n"
+  },
+  {
+    "index": 113,
+    "template": 7,
+    "variant": 0,
+    "family": 28,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 139,
+    "sha256": "ece9a26a847216a94a0803ea2a0beb129fa63d1bf6c3d8f6729af0861f5e8889",
+    "code_hex": "89f8c1e00529f8884424fa488d4424fa0fb64424fa34fb884424fb488d4424fb0fb64424fb34fb0fb6c089c1c1e10501c1f7d96bc691884424fc488d4424fc0fb64424fc3442884424fd488d4424fd0fb64424fd34420fb6c06bc08f00c80fb6c06bc0bd884424fe488d4424fe0fb64424fe3465884424ff488d4424ff0fb64424ff34650fb6c06bc095c3",
+    "constants": [
+      [
+        31,
+        251
+      ],
+      [
+        145,
+        66
+      ],
+      [
+        188,
+        101
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(31u8));\nlet a = black_box(a ^ 251u8);\nlet a = a ^ 251u8;\nlet a = a.wrapping_mul(223u8);\nlet b = black_box(b.wrapping_mul(145u8));\nlet b = black_box(b ^ 66u8);\nlet b = b ^ 66u8;\nlet b = b.wrapping_mul(113u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(189u8));\nlet z = black_box(z ^ 101u8);\nlet z = z ^ 101u8;\nlet z = z.wrapping_mul(149u8);\nz\n}\n"
+  },
+  {
+    "index": 114,
+    "template": 7,
+    "variant": 0,
+    "family": 28,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 123,
+    "sha256": "c59288237a6f8ea3732b788cb08b908026cccab902f718360ef06a70c5d5fb66",
+    "code_hex": "89f8c1e00529f8884424fa488d4424fa0fb64424fa34fb884424fb488d4424fb0fb64424fb34fb6bce91884c24fc488d4c24fc0fb64c24fc80f142884c24fd488d4c24fd0fb64c24fd80f142f6e10fb6c06bc0f3884424fe488d4424fe0fb64424fe3465884424ff488d4424ff0fb64424ff34650fb6c06bc095c3",
+    "constants": [
+      [
+        31,
+        251
+      ],
+      [
+        145,
+        66
+      ],
+      [
+        188,
+        101
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(31u8));\nlet a = black_box(a ^ 251u8);\nlet a = a ^ 251u8;\nlet a = a.wrapping_mul(223u8);\nlet b = black_box(b.wrapping_mul(145u8));\nlet b = black_box(b ^ 66u8);\nlet b = b ^ 66u8;\nlet b = b.wrapping_mul(113u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(189u8));\nlet z = black_box(z ^ 101u8);\nlet z = z ^ 101u8;\nlet z = z.wrapping_mul(149u8);\nz\n}\n"
+  },
+  {
+    "index": 115,
+    "template": 7,
+    "variant": 0,
+    "family": 28,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 151,
+    "sha256": "99cfb81128a395a3f1c7f6a263f447cf9cb915b8ae36f13abdf37d32445238c1",
+    "code_hex": "89f8c1e00529f8884424fa488d4424fa0fb64424fa34fb884424fb488d4424fb0fb64424fb6bce91884c24fc488d4c24fc0fb64c24fc80f142884c24fd488d4c24fd0fb65424fdb14380fa42742280f2420fb6ca6bc97134fb0fb6c089c2c1e20501c2f7da0fb6c2f6f10fb6c06bc8bd884c24fe488d4424fe0fb64424fe3465884424ff488d4424ff0fb64424ff34650fb6c06bc095c3",
+    "constants": [
+      [
+        31,
+        251
+      ],
+      [
+        145,
+        66
+      ],
+      [
+        188,
+        101
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(31u8));\nlet a = black_box(a ^ 251u8);\nlet a = a ^ 251u8;\nlet a = a.wrapping_mul(223u8);\nlet b = black_box(b.wrapping_mul(145u8));\nlet b = black_box(b ^ 66u8);\nlet b = b ^ 66u8;\nlet b = b.wrapping_mul(113u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(189u8));\nlet z = black_box(z ^ 101u8);\nlet z = z ^ 101u8;\nlet z = z.wrapping_mul(149u8);\nz\n}\n"
+  },
+  {
+    "index": 116,
+    "template": 7,
+    "variant": 1,
+    "family": 29,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 134,
+    "sha256": "c447e65e4527be3797c59b97e5a3fb58dc39d8f8e0a90683e01169c7ee590bdf",
+    "code_hex": "6bc7b1884424fa488d4424fa0fb64424fa3492884424fb488d4424fb0fb64424fb34920fb6c08d04c08d04c06bcef5884c24fc488d4c24fc0fb64c24fc80f194884c24fd488d4c24fd0fb64c24fd80f1940fb6c96bc95d00c10fb6c16bc027884424fe488d4424fe0fb64424fe3492884424ff488d4424ff0fb64424ff34920fb6c06bc097c3",
+    "constants": [
+      [
+        176,
+        146
+      ],
+      [
+        245,
+        148
+      ],
+      [
+        39,
+        146
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(177u8));\nlet a = black_box(a ^ 146u8);\nlet a = a ^ 146u8;\nlet a = a.wrapping_mul(81u8);\nlet b = black_box(b.wrapping_mul(245u8));\nlet b = black_box(b ^ 148u8);\nlet b = b ^ 148u8;\nlet b = b.wrapping_mul(93u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(39u8));\nlet z = black_box(z ^ 146u8);\nlet z = z ^ 146u8;\nlet z = z.wrapping_mul(151u8);\nz\n}\n"
+  },
+  {
+    "index": 117,
+    "template": 7,
+    "variant": 1,
+    "family": 29,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 134,
+    "sha256": "209116f7daf6ee94498b55e07741e223c794311e0149121e3faf5d92edb2dd4a",
+    "code_hex": "6bc7b1884424fa488d4424fa0fb64424fa3492884424fb488d4424fb0fb64424fb34920fb6c08d04c08d04c06bcef5884c24fc488d4c24fc0fb64c24fc80f194884c24fd488d4c24fd0fb64c24fd80f1940fb6c96bc9a300c10fb6c16bc027884424fe488d4424fe0fb64424fe3492884424ff488d4424ff0fb64424ff34920fb6c06bc097c3",
+    "constants": [
+      [
+        176,
+        146
+      ],
+      [
+        245,
+        148
+      ],
+      [
+        39,
+        146
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(177u8));\nlet a = black_box(a ^ 146u8);\nlet a = a ^ 146u8;\nlet a = a.wrapping_mul(81u8);\nlet b = black_box(b.wrapping_mul(245u8));\nlet b = black_box(b ^ 148u8);\nlet b = b ^ 148u8;\nlet b = b.wrapping_mul(93u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(39u8));\nlet z = black_box(z ^ 146u8);\nlet z = z ^ 146u8;\nlet z = z.wrapping_mul(151u8);\nz\n}\n"
+  },
+  {
+    "index": 118,
+    "template": 7,
+    "variant": 1,
+    "family": 29,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "9e27bdcaf6eab310b337607aca14122e39f67ad8f6798ad6f9daa35cafa12232",
+    "code_hex": "6bc7b1884424fa488d4424fa0fb64424fa3492884424fb488d4424fb0fb64424fb34926bcef5884c24fc488d4c24fc0fb64c24fc80f194884c24fd488d4c24fd0fb64c24fd80f194f6e10fb6c06bc09b884424fe488d4424fe0fb64424fe3492884424ff488d4424ff0fb64424ff34920fb6c06bc097c3",
+    "constants": [
+      [
+        176,
+        146
+      ],
+      [
+        245,
+        148
+      ],
+      [
+        39,
+        146
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(177u8));\nlet a = black_box(a ^ 146u8);\nlet a = a ^ 146u8;\nlet a = a.wrapping_mul(81u8);\nlet b = black_box(b.wrapping_mul(245u8));\nlet b = black_box(b ^ 148u8);\nlet b = b ^ 148u8;\nlet b = b.wrapping_mul(93u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(39u8));\nlet z = black_box(z ^ 146u8);\nlet z = z ^ 146u8;\nlet z = z.wrapping_mul(151u8);\nz\n}\n"
+  },
+  {
+    "index": 119,
+    "template": 7,
+    "variant": 1,
+    "family": 29,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 144,
+    "sha256": "7f8ea8dc3755932a81222e161c816a83de002dc2e36dd8c22f5e3fdc7f471258",
+    "code_hex": "6bc7b1884424fa488d4424fa0fb64424fa3492884424fb488d4424fb0fb64424fb6bcef5884c24fc488d4c24fc0fb64c24fc80f194884c24fd488d4c24fd0fb65424fdb1d980fa94741f80f2940fb6ca6bc95d34920fb6c08d04c08d04c00fb6c0f6f10fb6c06bc827884c24fe488d4424fe0fb64424fe3492884424ff488d4424ff0fb64424ff34920fb6c06bc097c3",
+    "constants": [
+      [
+        176,
+        146
+      ],
+      [
+        245,
+        148
+      ],
+      [
+        39,
+        146
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(177u8));\nlet a = black_box(a ^ 146u8);\nlet a = a ^ 146u8;\nlet a = a.wrapping_mul(81u8);\nlet b = black_box(b.wrapping_mul(245u8));\nlet b = black_box(b ^ 148u8);\nlet b = b ^ 148u8;\nlet b = b.wrapping_mul(93u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(39u8));\nlet z = black_box(z ^ 146u8);\nlet z = z ^ 146u8;\nlet z = z.wrapping_mul(151u8);\nz\n}\n"
+  },
+  {
+    "index": 120,
+    "template": 7,
+    "variant": 2,
+    "family": 30,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 131,
+    "sha256": "f6a87625ae1d1ec923b7da28d09913ae08631cec845d5bba2840e1eacca0aba1",
+    "code_hex": "6bc765884424fa488d4424fa0fb64424fa3408884424fb488d4424fb0fb64424fb34080fb6c06bc06d6bcee5884c24fc488d4c24fc0fb64c24fc80f14e884c24fd488d4c24fd0fb64c24fd80f14e0fb6c96bc9ed00c10fb6c16bc075884424fe488d4424fe0fb64424fe349f884424ff488d4424ff0fb64424ff349f0fb6c06bc0ddc3",
+    "constants": [
+      [
+        101,
+        8
+      ],
+      [
+        229,
+        78
+      ],
+      [
+        117,
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(101u8));\nlet a = black_box(a ^ 8u8);\nlet a = a ^ 8u8;\nlet a = a.wrapping_mul(109u8);\nlet b = black_box(b.wrapping_mul(229u8));\nlet b = black_box(b ^ 78u8);\nlet b = b ^ 78u8;\nlet b = b.wrapping_mul(237u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(117u8));\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nlet z = z.wrapping_mul(221u8);\nz\n}\n"
+  },
+  {
+    "index": 121,
+    "template": 7,
+    "variant": 2,
+    "family": 30,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 134,
+    "sha256": "99e05f506cf1068fc9ee9ccea5faea8145d12123d7bc9ddad377d1ed264ea71c",
+    "code_hex": "6bc765884424fa488d4424fa0fb64424fa3408884424fb488d4424fb0fb64424fb34080fb6c06bc06d6bcee5884c24fc488d4c24fc0fb64c24fc80f14e884c24fd488d4c24fd0fb64c24fd80f14e0fb6c98d14c98d0c5100c10fb6c16bc075884424fe488d4424fe0fb64424fe349f884424ff488d4424ff0fb64424ff349f0fb6c06bc0ddc3",
+    "constants": [
+      [
+        101,
+        8
+      ],
+      [
+        229,
+        78
+      ],
+      [
+        117,
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(101u8));\nlet a = black_box(a ^ 8u8);\nlet a = a ^ 8u8;\nlet a = a.wrapping_mul(109u8);\nlet b = black_box(b.wrapping_mul(229u8));\nlet b = black_box(b ^ 78u8);\nlet b = b ^ 78u8;\nlet b = b.wrapping_mul(237u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(117u8));\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nlet z = z.wrapping_mul(221u8);\nz\n}\n"
+  },
+  {
+    "index": 122,
+    "template": 7,
+    "variant": 2,
+    "family": 30,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "972f0125ad67f00c9645384291e87fade446cee0c695a2b6a9e1f2bb8e451d24",
+    "code_hex": "6bc765884424fa488d4424fa0fb64424fa3408884424fb488d4424fb0fb64424fb34086bcee5884c24fc488d4c24fc0fb64c24fc80f14e884c24fd488d4c24fd0fb64c24fd80f14ef6e10fb6c06bc07d884424fe488d4424fe0fb64424fe349f884424ff488d4424ff0fb64424ff349f0fb6c06bc0ddc3",
+    "constants": [
+      [
+        101,
+        8
+      ],
+      [
+        229,
+        78
+      ],
+      [
+        117,
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(101u8));\nlet a = black_box(a ^ 8u8);\nlet a = a ^ 8u8;\nlet a = a.wrapping_mul(109u8);\nlet b = black_box(b.wrapping_mul(229u8));\nlet b = black_box(b ^ 78u8);\nlet b = b ^ 78u8;\nlet b = b.wrapping_mul(237u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(117u8));\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nlet z = z.wrapping_mul(221u8);\nz\n}\n"
+  },
+  {
+    "index": 123,
+    "template": 7,
+    "variant": 2,
+    "family": 30,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 141,
+    "sha256": "3e331c09ea59e0e2fba7b0eb488982af2091de9e318d8743714fe70e573ba443",
+    "code_hex": "6bc765884424fa488d4424fa0fb64424fa3408884424fb488d4424fb0fb64424fb6bcee5884c24fc488d4c24fc0fb64c24fc80f14e884c24fd488d4c24fd0fb65424fdb18b80fa4e741c80f24e0fb6ca6bc9ed34080fb6c06bc06d0fb6c0f6f10fb6c06bc875884c24fe488d4424fe0fb64424fe349f884424ff488d4424ff0fb64424ff349f0fb6c06bc0ddc3",
+    "constants": [
+      [
+        101,
+        8
+      ],
+      [
+        229,
+        78
+      ],
+      [
+        117,
+        159
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(101u8));\nlet a = black_box(a ^ 8u8);\nlet a = a ^ 8u8;\nlet a = a.wrapping_mul(109u8);\nlet b = black_box(b.wrapping_mul(229u8));\nlet b = black_box(b ^ 78u8);\nlet b = b ^ 78u8;\nlet b = b.wrapping_mul(237u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(117u8));\nlet z = black_box(z ^ 159u8);\nlet z = z ^ 159u8;\nlet z = z.wrapping_mul(221u8);\nz\n}\n"
+  },
+  {
+    "index": 124,
+    "template": 7,
+    "variant": 3,
+    "family": 31,
+    "label": 0,
+    "operation": "add",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 138,
+    "sha256": "55c4d13434a6e16db8503f73d2da7d57de67e614e2b67d85912edc8a3ffd7556",
+    "code_hex": "6bc735884424fa488d4424fa0fb64424fa340c884424fb488d4424fb0fb64424fb340c0fb6c08d0cc08d0c4901c001c86bce5f884c24fc488d4c24fc0fb64c24fc80f12e884c24fd488d4c24fd0fb64c24fd80f12e0fb6c96bc99f00c10fb6c18d0440884424fe488d4424fe0fb64424fe345b884424ff488d4424ff0fb64424ff345b0fb6c06bc0abc3",
+    "constants": [
+      [
+        53,
+        12
+      ],
+      [
+        94,
+        46
+      ],
+      [
+        3,
+        91
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(53u8));\nlet a = black_box(a ^ 12u8);\nlet a = a ^ 12u8;\nlet a = a.wrapping_mul(29u8);\nlet b = black_box(b.wrapping_mul(95u8));\nlet b = black_box(b ^ 46u8);\nlet b = b ^ 46u8;\nlet b = b.wrapping_mul(159u8);\nlet z = a.wrapping_add(b);\nlet z = black_box(z.wrapping_mul(3u8));\nlet z = black_box(z ^ 91u8);\nlet z = z ^ 91u8;\nlet z = z.wrapping_mul(171u8);\nz\n}\n"
+  },
+  {
+    "index": 125,
+    "template": 7,
+    "variant": 3,
+    "family": 31,
+    "label": 1,
+    "operation": "sub",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 138,
+    "sha256": "6b8a62c5d4865393167e522a2c8f6bec04a23d0e58095fd21f928460bbed1164",
+    "code_hex": "6bc735884424fa488d4424fa0fb64424fa340c884424fb488d4424fb0fb64424fb340c0fb6c08d0cc08d0c4901c001c86bce5f884c24fc488d4c24fc0fb64c24fc80f12e884c24fd488d4c24fd0fb64c24fd80f12e0fb6c96bc96100c10fb6c18d0440884424fe488d4424fe0fb64424fe345b884424ff488d4424ff0fb64424ff345b0fb6c06bc0abc3",
+    "constants": [
+      [
+        53,
+        12
+      ],
+      [
+        94,
+        46
+      ],
+      [
+        3,
+        91
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(53u8));\nlet a = black_box(a ^ 12u8);\nlet a = a ^ 12u8;\nlet a = a.wrapping_mul(29u8);\nlet b = black_box(b.wrapping_mul(95u8));\nlet b = black_box(b ^ 46u8);\nlet b = b ^ 46u8;\nlet b = b.wrapping_mul(159u8);\nlet z = a.wrapping_sub(b);\nlet z = black_box(z.wrapping_mul(3u8));\nlet z = black_box(z ^ 91u8);\nlet z = z ^ 91u8;\nlet z = z.wrapping_mul(171u8);\nz\n}\n"
+  },
+  {
+    "index": 126,
+    "template": 7,
+    "variant": 3,
+    "family": 31,
+    "label": 2,
+    "operation": "mul",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 119,
+    "sha256": "6a4e860562d90bae289b717544e1cbf4fbfe2e42561467d0de66d8fa8c18fe69",
+    "code_hex": "6bc735884424fa488d4424fa0fb64424fa340c884424fb488d4424fb0fb64424fb340c6bce5f884c24fc488d4c24fc0fb64c24fc80f12e884c24fd488d4c24fd0fb64c24fd80f12ef6e10fb6c08d04c0884424fe488d4424fe0fb64424fe345b884424ff488d4424ff0fb64424ff345b0fb6c06bc0abc3",
+    "constants": [
+      [
+        53,
+        12
+      ],
+      [
+        94,
+        46
+      ],
+      [
+        3,
+        91
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(53u8));\nlet a = black_box(a ^ 12u8);\nlet a = a ^ 12u8;\nlet a = a.wrapping_mul(29u8);\nlet b = black_box(b.wrapping_mul(95u8));\nlet b = black_box(b ^ 46u8);\nlet b = b ^ 46u8;\nlet b = b.wrapping_mul(159u8);\nlet z = a.wrapping_mul(b);\nlet z = black_box(z.wrapping_mul(3u8));\nlet z = black_box(z ^ 91u8);\nlet z = z ^ 91u8;\nlet z = z.wrapping_mul(171u8);\nz\n}\n"
+  },
+  {
+    "index": 127,
+    "template": 7,
+    "variant": 3,
+    "family": 31,
+    "label": 3,
+    "operation": "div",
+    "split": "test",
+    "opt_level": 3,
+    "byte_length": 148,
+    "sha256": "de6e99a95e1c3fc9148885292ee8a46098496f492fa841f0ea483ac1c2dbf296",
+    "code_hex": "6bc735884424fa488d4424fa0fb64424fa340c884424fb488d4424fb0fb64424fb6bce5f884c24fc488d4c24fc0fb64c24fc80f12e884c24fd488d4c24fd0fb65424fdb1fd80fa2e742380f22e0fb6ca6bc99f340c0fb6c08d14c08d145201c001d00fb6c0f6f10fb6c08d0c40884c24fe488d4424fe0fb64424fe345b884424ff488d4424ff0fb64424ff345b0fb6c06bc0abc3",
+    "constants": [
+      [
+        53,
+        12
+      ],
+      [
+        94,
+        46
+      ],
+      [
+        3,
+        91
+      ]
+    ],
+    "source": "#![no_std]\nuse core::hint::black_box;\n#[no_mangle]\npub extern \"C\" fn f(a: u8, b: u8) -> u8 {\nlet a = black_box(a.wrapping_mul(53u8));\nlet a = black_box(a ^ 12u8);\nlet a = a ^ 12u8;\nlet a = a.wrapping_mul(29u8);\nlet b = black_box(b.wrapping_mul(95u8));\nlet b = black_box(b ^ 46u8);\nlet b = b ^ 46u8;\nlet b = b.wrapping_mul(159u8);\nlet z = if b == 0 { 255u8 } else { a / b };\nlet z = black_box(z.wrapping_mul(3u8));\nlet z = black_box(z ^ 91u8);\nlet z = z ^ 91u8;\nlet z = z.wrapping_mul(171u8);\nz\n}\n"
+  }
+]

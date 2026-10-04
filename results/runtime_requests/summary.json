@@ -1,0 +1,104 @@
+{
+  "unknown": {
+    "status": "needs_learning_examples",
+    "outputs": null,
+    "capability": null,
+    "history": []
+  },
+  "learned": {
+    "status": "learned_and_executed",
+    "outputs": [
+      10
+    ],
+    "capability": "add",
+    "history": [
+      {
+        "round": 1,
+        "train_examples": 8,
+        "strategy": "learn",
+        "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+        "train_accuracy": 1.0,
+        "validation_accuracy": 0.5625,
+        "accepted": false
+      },
+      {
+        "round": 2,
+        "train_examples": 16,
+        "strategy": "learn",
+        "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+        "train_accuracy": 1.0,
+        "validation_accuracy": 0.5625,
+        "accepted": false
+      },
+      {
+        "round": 3,
+        "train_examples": 32,
+        "strategy": "learn",
+        "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+        "train_accuracy": 1.0,
+        "validation_accuracy": 1.0,
+        "accepted": true
+      }
+    ]
+  },
+  "known": {
+    "status": "executed",
+    "outputs": [
+      300
+    ],
+    "capability": "add",
+    "history": []
+  },
+  "file_request": {
+    "status": "executed",
+    "outputs": [
+      10
+    ],
+    "capability": "sum_file",
+    "history": []
+  },
+  "effect_log": [
+    {
+      "operation": "file.read",
+      "arguments": [
+        1
+      ],
+      "result": 3
+    },
+    {
+      "operation": "buffer.get",
+      "arguments": [
+        3,
+        0
+      ],
+      "result": 7
+    },
+    {
+      "operation": "buffer.get",
+      "arguments": [
+        3,
+        1
+      ],
+      "result": 3
+    },
+    {
+      "operation": "buffer.set",
+      "arguments": [
+        3,
+        0,
+        10
+      ],
+      "result": 10
+    },
+    {
+      "operation": "file.write",
+      "arguments": [
+        2,
+        3
+      ],
+      "result": 2
+    }
+  ],
+  "reload_identical": true,
+  "io_workflow_learned": false
+}

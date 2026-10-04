@@ -1,0 +1,187 @@
+{
+  "experiment": "binary_embedding_side_experiment",
+  "seed": 20261004,
+  "environment": {
+    "rustc": "rustc 1.85.1 (4eb161250 2025-03-15) (built from a source tarball)",
+    "gcc": "14.2.0",
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "machine": "x86_64",
+    "system": "Linux",
+    "rust_host": "rustc 1.85.1 (4eb161250 2025-03-15) (built from a source tarball)\nbinary: rustc\ncommit-hash: 4eb161250e340c8f48f66e2b929ef4a5bed7c181\ncommit-date: 2025-03-15\nhost: x86_64-unknown-linux-gnu\nrelease: 1.85.1\nLLVM version: 19.1.7"
+  },
+  "corpus": {
+    "functions": 128,
+    "train_functions": 64,
+    "test_functions": 64,
+    "train_templates": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "test_templates": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "train_opt_level": 1,
+    "test_opt_level": 3,
+    "duplicate_codes_across_split": 0,
+    "native_reference_checks": 8388608,
+    "unique_code_counts": {
+      "train": 64,
+      "test": 64
+    }
+  },
+  "model": {
+    "embedding": "byte histogram + hashed adjacent-byte histogram",
+    "dimensions": 1280,
+    "regression": "centered kernel ridge",
+    "alpha": 0.01,
+    "test_tuning": false
+  },
+  "primary": {
+    "accuracy": 0.8125,
+    "correct": 52,
+    "total": 64,
+    "confusion_matrix_true_rows_predicted_columns": [
+      [
+        12,
+        3,
+        1,
+        0
+      ],
+      [
+        0,
+        15,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        16,
+        0
+      ],
+      [
+        0,
+        0,
+        7,
+        9
+      ]
+    ],
+    "operation_order": [
+      "add",
+      "sub",
+      "mul",
+      "div"
+    ],
+    "per_template_accuracy": {
+      "4": 0.8125,
+      "5": 0.75,
+      "6": 1.0,
+      "7": 0.6875
+    },
+    "template_bootstrap_95_percent_interval": [
+      0.71875,
+      0.9375
+    ],
+    "permutation_test": {
+      "observed_correct": 52,
+      "permutations": 331776,
+      "one_sided_p": 1.2056327160493826e-05,
+      "null": "operator-label permutations shared within each wrapper-template block"
+    }
+  },
+  "length_only_control": {
+    "accuracy": 0.25,
+    "correct": 16,
+    "total": 64,
+    "confusion_matrix_true_rows_predicted_columns": [
+      [
+        0,
+        0,
+        0,
+        16
+      ],
+      [
+        0,
+        0,
+        0,
+        16
+      ],
+      [
+        0,
+        0,
+        0,
+        16
+      ],
+      [
+        0,
+        0,
+        0,
+        16
+      ]
+    ],
+    "operation_order": [
+      "add",
+      "sub",
+      "mul",
+      "div"
+    ],
+    "per_template_accuracy": {
+      "4": 0.25,
+      "5": 0.25,
+      "6": 0.25,
+      "7": 0.25
+    },
+    "template_bootstrap_95_percent_interval": [
+      0.25,
+      0.25
+    ],
+    "permutation_test": {
+      "observed_correct": 16,
+      "permutations": 331776,
+      "one_sided_p": 1.0,
+      "null": "operator-label permutations shared within each wrapper-template block"
+    }
+  },
+  "shuffled_training_label_control": {
+    "repetitions": 1000,
+    "mean_accuracy": 0.243828125,
+    "accuracy_95_percent_range": [
+      0.09375,
+      0.421875
+    ]
+  },
+  "exploratory_table_decoder": {
+    "exact_output_accuracy": 0.7664794921875,
+    "correct_outputs": 12558,
+    "total_outputs": 16384,
+    "bit_accuracy": 0.9242477416992188,
+    "fully_correct_tables": 43,
+    "total_tables": 64,
+    "scope": "inputs 0..15; all these numeric inputs appear in training tables"
+  },
+  "exploratory_length_table_decoder": {
+    "exact_output_accuracy": 0.29296875,
+    "correct_outputs": 4800,
+    "total_outputs": 16384,
+    "bit_accuracy": 0.684814453125,
+    "fully_correct_tables": 16,
+    "total_tables": 64,
+    "scope": "inputs 0..15; all these numeric inputs appear in training tables"
+  },
+  "saved_tensor_predictor_reload_identical": true,
+  "limitations": [
+    "Only four arithmetic behaviours and one compiler/architecture/OS.",
+    "Fixed embedding; regression weights are learned, not machine semantics.",
+    "Opcode/length signatures can explain classification success.",
+    "Finite table transfer does not test unseen numeric inputs or arbitrary execution.",
+    "Four held-out template blocks limit population-level inference.",
+    "Template and optimization changes are not isolated.",
+    "Native reference checks validate the corpus, not independent learned successes."
+  ]
+}

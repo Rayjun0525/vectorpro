@@ -1,0 +1,17 @@
+{
+  "name": "transfer",
+  "width": 16,
+  "operands": [[{"utf8": "input.bin"}, {"utf8": "output.bin"}]],
+  "state_lesson": {
+    "input_types": ["path", "path"],
+    "max_steps": 2,
+    "training": [
+      {"inputs": ["a", "b"], "before": {"a": "616263"}, "after": {"a": "616263", "b": "616263"}, "output": 3},
+      {"inputs": ["c", "d"], "before": {"c": "00ff"}, "after": {"c": "00ff", "d": "00ff"}, "output": 2}
+    ],
+    "validation": [
+      {"inputs": ["empty", "out"], "before": {"empty": "", "out": "6f6c64"}, "after": {"empty": "", "out": ""}, "output": 0},
+      {"inputs": ["long", "new"], "before": {"long": "6c6f6e676572", "new": "78"}, "after": {"long": "6c6f6e676572", "new": "6c6f6e676572"}, "output": 6}
+    ]
+  }
+}

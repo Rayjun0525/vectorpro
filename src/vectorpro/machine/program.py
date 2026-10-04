@@ -49,13 +49,16 @@ class VectorProgram:
     init: torch.Tensor        # (R, len(CONSTANTS))
     output: torch.Tensor      # (R,)
     headroom: torch.Tensor = field(default_factory=lambda: torch.zeros(1))  # (1,) extra bits
+    calls: torch.Tensor | None = None  # (S,) execute call even when its output is discarded
 
     def __post_init__(self) -> None:
         s, r = self.n_steps, self.n_registers
+        if self.calls is None:
+            object.__setattr__(self, "calls", (self.writes[:, r] < 0.5).float())
         expected = {
             "reads": (s, MAX_ARGS, r), "writes": (s, r + 1), "cond": (s, r + 1),
             "next_true": (s, s + 1), "next_false": (s, s + 1),
-            "init": (r, len(CONSTANTS)), "output": (r,), "headroom": (1,),
+            "init": (r, len(CONSTANTS)), "output": (r,), "headroom": (1,), "calls": (s,),
         }
         for name, shape in expected.items():
             if tuple(getattr(self, name).shape) != shape:

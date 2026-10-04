@@ -86,6 +86,7 @@ def assemble(
         init=torch.stack([_one_hot(CONSTANTS.index(registers[n]), len(CONSTANTS)) for n in names]),
         output=_one_hot(reg[output], n_regs),
         headroom=torch.tensor([float(headroom)]),
+        calls=torch.tensor([float(ins.op is not None) for ins in instrs]),
     )
 
 
@@ -135,10 +136,11 @@ def disassemble(program: VectorProgram, resolver: Resolver) -> list[str]:
         lines.append(f"{reg_name(r)} = {start}")
     for s in range(n_steps):
         dest = int(program.writes[s].argmax())
-        if dest < n_regs:
+        if program.calls[s] > 0.5:
             op = resolver.resolve(program.keys[s])
             args = ", ".join(reg_name(int(program.reads[s, k].argmax())) for k in range(op.arity))
-            text = f"{reg_name(dest)} = {resolver.name_of(program.keys[s])}({args})"
+            prefix = f"{reg_name(dest)} = " if dest < n_regs else "discard "
+            text = f"{prefix}{resolver.name_of(program.keys[s])}({args})"
         else:
             text = "(test only)"
         test = int(program.cond[s].argmax())

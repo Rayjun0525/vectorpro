@@ -20,6 +20,11 @@ from vectorpro.quantize import HardThreshold, Quantizer
 class BitExecutable(ABC):
     arity: int
 
+    @property
+    def effects(self) -> bool:
+        """Whether execution can observe or change external state."""
+        return any(child.effects for child in self.children())
+
     @abstractmethod
     def output_width(self, width: int) -> int: ...
 

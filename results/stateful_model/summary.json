@@ -1,0 +1,20 @@
+{
+  "status": "learned_and_executed",
+  "history": [
+    {
+      "strategy": "state search",
+      "steps": 2,
+      "candidates": 43,
+      "training_cases": 2,
+      "validation_cases": 2,
+      "accepted": true
+    }
+  ],
+  "heldout_cases": 20,
+  "heldout_correct": 20,
+  "native_output_hex": "0900ff2a",
+  "reload_identical": true,
+  "procedure_authored": false,
+  "explanation": "transfer: learned state transformation\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    r5 = zero\n    @0: r4 = file.read(r0)\n    @1: r5 = file.write(r1, r4)\n    result = r5\n  learned from 2 training cases and 2 validation cases; 2 steps, 43 candidates",
+  "scope": "bounded straight-line state example synthesis; no LLM or CPU trace ingestion"
+}

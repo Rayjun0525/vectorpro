@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from typing import Callable, Sequence
 
 from vectorpro.tasks.base import Task
+from vectorpro.learning.plan import LearningPlan
 
 Operands = tuple[int, ...]
 TargetSource = Callable[[Operands, int], int]
@@ -29,6 +30,50 @@ class ExampleSet:
             return float("nan")
         got = run(self.operands, self.width)
         return sum(g == t for g, t in zip(got, self.targets)) / len(self.operands)
+
+
+@dataclass
+class ExampleLesson:
+    """Finite, data-only training and validation sets; no executable teacher."""
+    training: ExampleSet
+    validation: ExampleSet
+
+    def validate(self, plan: LearningPlan) -> None:
+        if not plan.rounds or any(type(n) is not int or n <= 0 for n in plan.rounds):
+            raise ValueError("rounds must contain positive example counts")
+        if any(a >= b for a, b in zip(plan.rounds, plan.rounds[1:])):
+            raise ValueError("round counts must be strictly increasing")
+        if plan.arity < 1 or plan.train_width < 1 or plan.validation_width < 1:
+            raise ValueError("plan arity and widths must be positive")
+        for examples, width in ((self.training, plan.train_width),
+                                (self.validation, plan.validation_width)):
+            if examples.width != width or not examples.operands:
+                raise ValueError("example sets must be nonempty and match plan widths")
+            if len(examples.operands) != len(examples.targets):
+                raise ValueError("every input must have exactly one target")
+            if len(set(examples.operands)) != len(examples):
+                raise ValueError("duplicate example inputs are not allowed")
+            for operands, target in zip(examples.operands, examples.targets):
+                if len(operands) != plan.arity or any(type(x) is not int or not 0 <= x < 1 << width
+                                                    for x in operands):
+                    raise ValueError("example inputs must match arity and unsigned width")
+                if type(target) is not int or not 0 <= target < 1 << plan.output(width):
+                    raise ValueError("example targets must fit the output width")
+        if plan.validation_examples < 1 or len(self.validation) < plan.validation_examples:
+            raise ValueError("insufficient validation examples for the plan")
+        if self.training.width == self.validation.width and set(self.training.operands) & set(self.validation.operands):
+            raise ValueError("training and validation inputs must be disjoint")
+
+    def to_dict(self) -> dict:
+        return {name: {"width": examples.width, "operands": examples.operands, "targets": examples.targets}
+                for name, examples in (("training", self.training), ("validation", self.validation))}
+
+    @classmethod
+    def from_dict(cls, data: dict) -> ExampleLesson:
+        def build(name):
+            record = data[name]
+            return ExampleSet(record["width"], [tuple(row) for row in record["operands"]], list(record["targets"]))
+        return cls(build("training"), build("validation"))
 
 
 class ExampleStream:

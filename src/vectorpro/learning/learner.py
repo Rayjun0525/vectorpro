@@ -23,7 +23,7 @@ from typing import Callable
 from vectorpro.cells import CellSignature, MLPCell
 from vectorpro.execution import BitExecutable
 from vectorpro.expr import render
-from vectorpro.learning.examples import ExampleSet, ExampleStream, ExampleTask, TargetSource
+from vectorpro.learning.examples import ExampleLesson, ExampleSet, ExampleStream, ExampleTask, TargetSource
 from vectorpro.learning.plan import LearningPlan, OutputWidth
 from vectorpro.learning.registry import (
     Capability,
@@ -139,6 +139,41 @@ class Learner:
                 entry["probe"] = probe(attempt.executable)
             history.append(entry)
             if attempt.accepted:
+                capability = Capability(plan, attempt.executable, attempt.provenance, history)
+                self.registry.add(capability)
+                return LearningOutcome(plan, capability, history)
+        return LearningOutcome(plan, None, history)
+
+    def learn_examples(self, plan: LearningPlan, lesson: ExampleLesson,
+                       rng: random.Random) -> LearningOutcome:
+        """Learn from finite input/output data without querying a target function."""
+        lesson.validate(plan)
+        if plan.name in self.registry:
+            raise ValueError(f"capability {plan.name!r} already registered")
+        order = list(range(len(lesson.training)))
+        rng.shuffle(order)
+        history = []
+        previous_count = 0
+        for round_no, total in enumerate(plan.rounds, start=1):
+            indices = order[:total]
+            if len(indices) == previous_count:
+                break  # the finite dataset is exhausted; never fabricate labels
+            previous_count = len(indices)
+            train = ExampleSet(lesson.training.width,
+                               [lesson.training.operands[i] for i in indices],
+                               [lesson.training.targets[i] for i in indices])
+            attempt = self._attempt(plan, train, lesson.validation)
+            provided_accuracy = (lesson.training.accuracy(attempt.executable)
+                                 if attempt.executable is not None else 0.0)
+            accepted = attempt.accepted and provided_accuracy == 1.0
+            history.append({"round": round_no, "train_examples": len(train),
+                            "validation_examples": len(lesson.validation),
+                            "strategy": attempt.strategy, "structure": attempt.structure,
+                            "train_accuracy": attempt.train_accuracy,
+                            "validation_accuracy": attempt.validation_accuracy,
+                            "provided_train_accuracy": provided_accuracy,
+                            "accepted": accepted, "source": "example data"})
+            if accepted:
                 capability = Capability(plan, attempt.executable, attempt.provenance, history)
                 self.registry.add(capability)
                 return LearningOutcome(plan, capability, history)

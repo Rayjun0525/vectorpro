@@ -53,8 +53,12 @@ def run(
     loaded = program.inputs.sum(dim=0)  # (R,) 1 where an operand is loaded
     regs = regs * (1 - loaded)[None, :, None] + torch.einsum("ar,baw->brw", program.inputs, operands)
 
-    discard = program.writes[:, n_regs] > 0.5
-    ops = [None if discard[s] else resolver.resolve(program.keys[s]) for s in range(n_steps)]
+    ops = [resolver.resolve(program.keys[s]) if program.calls[s] > 0.5 else None
+           for s in range(n_steps)]
+    if batch != 1 and getattr(resolver, "has_effects", True) and any(
+        op is not None and op.effects for op in ops
+    ):
+        raise ValueError("effectful programs require a single execution lane")
 
     pc = torch.zeros(batch, n_steps + 1)
     pc[:, 0] = 1
@@ -108,8 +112,8 @@ class ProgramExecutable(BitExecutable):
         return result.output
 
     def children(self) -> Sequence[BitExecutable]:
-        discard = self.program.writes[:, -1] > 0.5
-        called = [self.resolver.resolve(k) for k, d in zip(self.program.keys, discard) if not d]
+        called = [self.resolver.resolve(k) for k, call in zip(self.program.keys, self.program.calls)
+                  if call > 0.5]
         return list({id(c): c for c in called}.values())
 
     def compiled(self) -> ProgramExecutable:
