@@ -35,6 +35,10 @@ HOST_TYPES = {"buffer.new": (("value",), "buffer"),
               "directory.remove": (("path",), "value"),
               "directory.list": (("path",), "buffer")}
 HOST_TYPES.update({"list.length": (("buffer",), "value"),
+                   "process.run": (("buffer", "buffer"), "buffer"),
+                   "process.stdout": (("buffer",), "buffer"),
+                   "process.stderr": (("buffer",), "buffer"),
+                   "process.code": (("buffer",), "value"),
                    "record.pack": (("buffer", "value"), "buffer"),
                    "record.buffer": (("buffer",), "buffer"),
                    "record.value": (("buffer",), "value"),
@@ -137,6 +141,14 @@ class HostContext:
             parent = MemoryHostContext.normalize(bytes(self.buffers[args[0]]).decode("utf-8"))
             child = MemoryHostContext.normalize(bytes(self.buffers[args[1]]).decode("utf-8"))
             result = self.put(MemoryHostContext.normalize(parent + "/" + child).encode("utf-8"))
+        elif operation == "process.run":
+            result = self.put(self._run_process(bytes(self.buffers[args[0]]), bytes(self.buffers[args[1]])))
+        elif operation in ("process.stdout", "process.stderr", "process.code"):
+            from vectorpro.process_host import decode
+            value = decode(bytes(self.buffers[args[0]]))
+            field = operation.split(".")[1]
+            # Negative POSIX signal exits are represented as 128 + signal.
+            result = (value["code"] if value["code"] >= 0 else 128 - value["code"]) if field == "code" else self.put(bytes.fromhex(value[field]))
         elif operation in ("record.pack", "record.buffer", "record.value"):
             if operation == "record.pack":
                 if not 0 <= args[1] < 1 << 64:
@@ -193,6 +205,10 @@ class HostContext:
         with path.open("rb") as stream:
             return stream.read(self.max_buffer_bytes + 1)
 
+    def _run_process(self, request, stdin):
+        from vectorpro.process_host import run
+        return run(self, request, stdin)
+
     def _write_file(self, path: Path, data: bytearray) -> int:
         return path.write_bytes(data)
 
@@ -238,7 +254,20 @@ class HostContext:
 
 
 class MemoryHostContext(HostContext):
-    """Fresh, isolated file state for synthesis; never invokes native file I/O."""
+    """Fresh isolated state; process calls replay exact recorded evidence only."""
+    def _run_process(self, request, stdin):
+        from vectorpro.process_host import specification, encode
+        specification(request, None)
+        index = getattr(self, "process_index", 0)
+        fixtures = getattr(self, "processes", ())
+        if index >= len(fixtures):
+            raise ValueError("process execution requires recorded evidence in memory")
+        fixture = fixtures[index]
+        if bytes.fromhex(fixture["request"]) != request or bytes.fromhex(fixture["stdin"]) != stdin:
+            raise ValueError("process call does not match recorded evidence")
+        self.process_index = index + 1
+        return encode(bytes.fromhex(fixture["stdout"]), bytes.fromhex(fixture["stderr"]), fixture["code"])
+
     def __init__(self, files: dict[str, bytes], max_buffer_bytes: int = 16 * 1024 * 1024,
                  directories=None):
         super().__init__(Path("/"), max_buffer_bytes)

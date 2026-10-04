@@ -5,6 +5,8 @@
 문법의 경계와 재현은 [STRUCTURED_DATA.md](docs/STRUCTURED_DATA.md)를 참고한다.
 버퍼와 숫자를 함께 반환하고 다음 학습 기능에 전달하는 초기 레코드 기반은
 [RECORD_RESULTS.md](docs/RECORD_RESULTS.md)에 있다.
+프로세스 입력·출력·종료 코드와 학습된 출력 저장 절차는
+[PROCESS_RESULTS.md](docs/PROCESS_RESULTS.md)를 참고한다.
 
 실제 Gemma로 반복 작업의 비용을 비교했다. 정확한 구조화 입력의 텐서 직접 호출은
 LLM 사용 0회였지만, 자연어 인자 준비는 오류가 많았고 Python 직접 함수가 더 빨랐다.

@@ -13,6 +13,10 @@ from vectorpro.machine import VectorProgram
 from vectorpro.tensor_codec import encode_tree, decode_tree
 
 HOST_TEXT = {
+    "process.run": "Execute argv with input bytes and return captured streams and exit code.",
+    "process.stdout": "Extract stdout bytes from a process result.",
+    "process.stderr": "Extract stderr bytes from a process result.",
+    "process.code": "Extract the process exit code; signals map to 128 plus signal.",
     "record.pack": "Pack a byte buffer and unsigned value into a portable binary record.",
     "record.buffer": "Extract the byte buffer from a portable binary record.",
     "record.value": "Extract the unsigned value from a portable binary record.",

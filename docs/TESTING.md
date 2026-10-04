@@ -3,6 +3,8 @@
 목록/문자열/JSON 연산과 학습된 순회 검증은 [STRUCTURED_DATA.md](STRUCTURED_DATA.md)를 참고한다.
 버퍼 출력의 실제 바이트 검증과 레코드 결과 전달은
 [RECORD_RESULTS.md](RECORD_RESULTS.md), `tests/test_record_results.py`를 참고한다.
+프로세스 호출의 기록 재생 학습·native 실행은 `tests/test_process_results.py`와
+[PROCESS_RESULTS.md](PROCESS_RESULTS.md)를 참고한다.
 조건부 선택·학습 산술 집계는 `tests/test_list_selection.py`와
 `experiments/list_selection.py`로 재현한다. 시뮬레이션과 텐서의 분기·결과를 버리는
 쓰기·전체 상태 거부·시간 중단 일치도 검사한다. native 미사용 목록 4개를 검증한다.

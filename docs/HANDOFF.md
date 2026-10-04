@@ -7,6 +7,39 @@
 
 ## 현재 구현
 
+### 프로세스 실행 결과와 학습된 stdout 전달 (2026-10-05)
+
+opt-in process.run/stdout/stderr/code를 추가했다. argv 직접 실행, stdin,
+cwd/env, 동기 stdout/stderr 캡처, 종료 코드, 시간/출력 한도를 제공한다.
+POSIX 새 그룹 정리와 임시 파일 캡처를 사용한다. 상세 경계는 PROCESS_RESULTS.md.
+기존 저장 형식·계약·커널은 유지한다. 프로세스의 알고리즘을 학습한 것은 아니다.
+
+상태 사례의 processes는 정확한 request/stdin/stdout/stderr/code 관찰이다.
+학습에서는 새 MemoryHostContext가 기록만 재생하고 순서/입력 불일치와 기록
+미소비를 거절한다. Popen을 실패하도록 바꾼 테스트에서 학습 격리를 확인했다.
+caller 기록의 독립 신뢰성 인증과 프로세스 파일 변경 모델링은 아직 없다.
+
+입력과 동일한 출력만 주면 stdin 우회 후보가 통과할 수 있어 tr의 다른 출력으로
+근거를 구성했다. 실제 tr 동작을 따로 확인했다. 요청/입력만 주고 stdout을 파일에
+저장하는 절차를 학습했다(1340후보/3호출). 프로세스 관찰이 있는 순차 후보만
+버퍼 생산자 우선+메모리 사전 제거를 사용한다. 기존 일반 제어 탐색은 유지한다.
+사전 제거를 일반 제어에도 적용한 초안은 기존 guarded_map 탐색 시간이 소모돼
+회귀가 실패했으며 적용 범위를 좁힌 뒤 해당 회귀와 프로세스 테스트 11개가
+통과했다(70.06초). 일반 재료 순서/후보·시간 한도를 바꾸지 않았다.
+최종 전체 회귀 **281 passed, 243.35초**. 재현 명령은 PROCESS_RESULTS.md.
+
+기존 record_results 프로그램에 축적해 저장·재로딩했다. 별도 native 실행은
+새 cat 요청, 빈/바이너리/한글/4096바이트, 전체 파일 상태 **4/4** 통과했다.
+실행 파일 없음·시간/출력 제한·신호 종료·stderr·종료7·cwd/env도 확인했다.
+틀린 검증 기록은 등록 실패하고 기존 기능과 native 상태를 보존한다.
+채택 자료: results/process_results_verified_ordered. 두 예비 한도 실패는
+process_results_verified, process_results_verified_final의 EXCLUDED.json에 보존했다.
+재현 명령: [PROCESS_RESULTS.md](PROCESS_RESULTS.md). 컨테이너/이미지는 추가하지 않았다.
+
+현재는 단일 프로세스 입출력과 결과 전달의 초기 기반이다. 다음은 다른 프로세스의
+stdin으로 잇는 학습·검증과 동시 파이프, 실패 분기·파일 변경 관찰, 네트워크다.
+Windows 프로세스/자식 트리와 macOS는 미검증이다.
+
 ### 버퍼와 숫자의 결과 전달 기반 (2026-10-05)
 
 opt-in `record.pack/buffer/value`와 명시적 상태 `output_type: buffer`를 추가했다.

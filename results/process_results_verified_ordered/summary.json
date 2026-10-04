@@ -1,0 +1,291 @@
+{
+  "learning": {
+    "status": "registered",
+    "registered": true,
+    "contract": {
+      "version": 1,
+      "name": "capture_to_file",
+      "description": "Execute argv with input bytes and return captured streams and exit code. Extract stdout bytes from a process result. save Extract stdout bytes from a process result. to input path",
+      "input_types": [
+        "buffer",
+        "buffer",
+        "path"
+      ],
+      "argument_roles": [
+        "hexadecimal buffer bytes",
+        "hexadecimal buffer bytes",
+        "relative file path"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "request",
+          "type": "buffer",
+          "role": "request",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          },
+          "role_source": "draft declaration, not independent proof"
+        },
+        {
+          "name": "stdin",
+          "type": "buffer",
+          "role": "stdin",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          },
+          "role_source": "draft declaration, not independent proof"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination",
+          "schema": {
+            "type": "string"
+          },
+          "role_source": "draft declaration, not independent proof"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.5240426063537598,
+          -0.1364137977361679,
+          -0.18595421314239502,
+          -0.12169823050498962,
+          0.13262201845645905,
+          0.22958524525165558,
+          0.06286782771348953,
+          -0.16832564771175385,
+          0.000262396497419104,
+          -0.02213512919843197,
+          0.017355013638734818,
+          -0.06221883371472359,
+          -0.11972785741090775,
+          -0.020240727812051773,
+          0.2083486169576645,
+          0.033402036875486374,
+          -0.13435114920139313,
+          0.04644593968987465,
+          0.016520565375685692,
+          0.4176185131072998,
+          -0.20201651751995087,
+          0.17177879810333252,
+          -0.0651090145111084,
+          -0.009571636095643044,
+          -0.04600777477025986,
+          -0.010272469371557236,
+          0.08952534943819046,
+          -0.15095345675945282,
+          -0.21900705993175507,
+          -0.2309814691543579,
+          0.2845038175582886,
+          -0.07776632159948349
+        ],
+        "requires_host": true,
+        "operations": [
+          "file.write",
+          "process.run",
+          "process.stdout"
+        ],
+        "digest": "95a5f2491caf8b8a3ae78c4c834c3e457770b6b1c69de88e430e47c16f095303"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "strategy": "state search",
+            "steps": 3,
+            "candidates": 1340,
+            "control": "sequence",
+            "tensor_steps": 3,
+            "training_cases": 2,
+            "validation_cases": 2,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+      "id": "vp1:76b840cce36d98b351ddf76cf7c38ecc3a72c284002db62d82ae0c9c091e2219"
+    },
+    "history": [
+      {
+        "strategy": "state search",
+        "steps": 3,
+        "candidates": 1340,
+        "control": "sequence",
+        "tensor_steps": 3,
+        "training_cases": 2,
+        "validation_cases": 2,
+        "accepted": true
+      }
+    ],
+    "evidence_source": "caller_examples",
+    "intent_independently_verified": false
+  },
+  "native": [
+    {
+      "bytes": 0,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:76b840cce36d98b351ddf76cf7c38ecc3a72c284002db62d82ae0c9c091e2219",
+        "contract_version": 1,
+        "capability": "capture_to_file",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "process.run",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 0
+          }
+        ]
+      }
+    },
+    {
+      "bytes": 4,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:76b840cce36d98b351ddf76cf7c38ecc3a72c284002db62d82ae0c9c091e2219",
+        "contract_version": 1,
+        "capability": "capture_to_file",
+        "outputs": [
+          4
+        ],
+        "effects": [
+          {
+            "operation": "process.run",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 4
+          }
+        ]
+      }
+    },
+    {
+      "bytes": 13,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:76b840cce36d98b351ddf76cf7c38ecc3a72c284002db62d82ae0c9c091e2219",
+        "contract_version": 1,
+        "capability": "capture_to_file",
+        "outputs": [
+          13
+        ],
+        "effects": [
+          {
+            "operation": "process.run",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 13
+          }
+        ]
+      }
+    },
+    {
+      "bytes": 4096,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:76b840cce36d98b351ddf76cf7c38ecc3a72c284002db62d82ae0c9c091e2219",
+        "contract_version": 1,
+        "capability": "capture_to_file",
+        "outputs": [
+          4096
+        ],
+        "effects": [
+          {
+            "operation": "process.run",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 4096
+          }
+        ]
+      }
+    }
+  ]
+}

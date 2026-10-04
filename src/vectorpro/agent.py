@@ -53,6 +53,11 @@ proposals, not independent proof of the human's intent or general correctness.
 For buffer results set state_lesson.output_type='buffer' and example output to hex bytes;
 the draft output type must agree. record.pack combines bytes and a value, and
 record.buffer/record.value extract them without passing transient handles between calls.
+process.run takes a JSON request buffer (argv, optional cwd/env/timeout) and stdin bytes.
+It returns stdout/stderr/code in a portable result buffer. State cases may include
+processes:[{request:hex,stdin:hex,stdout:hex,stderr:hex,code:int}] as exact recorded
+observations. Learning never launches a process and must consume every observation.
+Do not invent observed responses or claim external program algorithms were learned.
 execute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.
 Only supplied host-root files are accessible. ask_user takes {question:string}.
 Trust tool statuses; learned means checked examples, learning_failed means no solution.

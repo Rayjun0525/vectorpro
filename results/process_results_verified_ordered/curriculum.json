@@ -1,0 +1,142 @@
+{
+  "draft": {
+    "version": 1,
+    "name": "capture_to_file",
+    "description": "Run supplied process and save its stdout",
+    "parameters": [
+      {
+        "name": "request",
+        "type": "buffer",
+        "role": "request"
+      },
+      {
+        "name": "stdin",
+        "type": "buffer",
+        "role": "stdin"
+      },
+      {
+        "name": "destination",
+        "type": "path",
+        "role": "destination"
+      }
+    ],
+    "output": {
+      "type": "value",
+      "width": "W"
+    },
+    "allowed_operations": [
+      "process.run",
+      "process.stdout",
+      "file.write"
+    ]
+  },
+  "state_lesson": {
+    "input_types": [
+      "buffer",
+      "buffer",
+      "path"
+    ],
+    "max_steps": 3,
+    "candidate_budget": 20000,
+    "training": [
+      {
+        "inputs": [
+          "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+          "616263",
+          "a"
+        ],
+        "before": {
+          "keep": "aa"
+        },
+        "after": {
+          "keep": "aa",
+          "a": "414243"
+        },
+        "output": 3,
+        "processes": [
+          {
+            "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "stdin": "616263",
+            "stdout": "414243",
+            "stderr": "",
+            "code": 0
+          }
+        ]
+      },
+      {
+        "inputs": [
+          "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c22656e76223a7b2244454d4f223a2274776f227d7d",
+          "6c6f6e6765720064617461",
+          "b"
+        ],
+        "before": {
+          "keep": "aa"
+        },
+        "after": {
+          "keep": "aa",
+          "b": "4c4f4e4745520044415441"
+        },
+        "output": 11,
+        "processes": [
+          {
+            "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c22656e76223a7b2244454d4f223a2274776f227d7d",
+            "stdin": "6c6f6e6765720064617461",
+            "stdout": "4c4f4e4745520044415441",
+            "stderr": "",
+            "code": 0
+          }
+        ]
+      }
+    ],
+    "validation": [
+      {
+        "inputs": [
+          "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c2274696d656f7574223a327d",
+          "",
+          "empty"
+        ],
+        "before": {
+          "keep": "aa"
+        },
+        "after": {
+          "keep": "aa",
+          "empty": ""
+        },
+        "output": 0,
+        "processes": [
+          {
+            "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c2274696d656f7574223a327d",
+            "stdin": "",
+            "stdout": "",
+            "stderr": "",
+            "code": 0
+          }
+        ]
+      },
+      {
+        "inputs": [
+          "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c22656e76223a7b2244454d4f223a2276616c69646174696f6e227d7d",
+          "ff006d6f72650a",
+          "binary"
+        ],
+        "before": {
+          "keep": "aa"
+        },
+        "after": {
+          "keep": "aa",
+          "binary": "ff004d4f52450a"
+        },
+        "output": 7,
+        "processes": [
+          {
+            "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d2c22656e76223a7b2244454d4f223a2276616c69646174696f6e227d7d",
+            "stdin": "ff006d6f72650a",
+            "stdout": "ff004d4f52450a",
+            "stderr": "",
+            "code": 0
+          }
+        ]
+      }
+    ]
+  }
+}

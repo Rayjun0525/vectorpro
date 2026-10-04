@@ -45,6 +45,10 @@ learned numeric capabilities and previously learned state procedures with stored
 type contracts. Numeric calls receive values, not path/buffer handles; their
 results use the vector machine's W-bit register fitting semantics. Real execution uses fresh
 OS data, not saved example outputs. Learning never accesses the native filesystem.
+Process calls in memory use exact caller-supplied request/stdin/stdout/stderr/exit
+observations, never launch native processes, and reject unrecorded calls. These
+observations are evidence rather than independent correctness certificates.
+See [PROCESS_RESULTS.md](PROCESS_RESULTS.md) for provided semantics and limits.
 
 Stateful search defaults to straight-line sequences. With `control_flow: true`,
 it also enumerates one zero/nonzero guard over a contiguous region or one while
