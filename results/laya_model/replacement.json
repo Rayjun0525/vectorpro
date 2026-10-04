@@ -1,0 +1,58 @@
+{
+  "model": {
+    "repo": "convaiinnovations/laya",
+    "revision": "7b928d828b7b0e022f929d9bd2e44165aa270148",
+    "subfolder": "multilingual",
+    "sdk": "laya==0.3.26",
+    "retired": [
+      {
+        "path": "/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf",
+        "bytes": 1069306368
+      },
+      {
+        "path": "/opt/vectorpro-models/gemma-download.json",
+        "bytes": 272
+      }
+    ],
+    "files": [
+      {
+        "path": "encoder/config.json",
+        "bytes": 1938,
+        "sha256": "83f6916d13ef0f556ac461f28308dc2bffa7ebeadee8ec9e2db5812020ea5bb4"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 643835514,
+        "sha256": "9d628fd971b700382ac6f65920a86f149777b2e748e0c955fb3b19695aa8f204"
+      },
+      {
+        "path": "rl_agent_config.json",
+        "bytes": 472,
+        "sha256": "25061739243b617ad88d1219ba6f8a9c86c5881ca28df024fa2d9b3b2fcc30c6"
+      },
+      {
+        "path": "tokenizer/tokenizer.json",
+        "bytes": 34363188,
+        "sha256": "609d8f4c067cd3950f88594c5a802616cea245823836ef5848ee4fc40aab5b6f"
+      },
+      {
+        "path": "tokenizer/tokenizer_config.json",
+        "bytes": 524,
+        "sha256": "6c6b2d8e3c84ce0e671c129cd6b374b235d6f9863042a5836358d00a89bbb5a1"
+      }
+    ],
+    "installed_bytes": 678201636,
+    "logical_bytes_saved": 391105004
+  },
+  "execution_cases": 11,
+  "successful_execution_cases": 0,
+  "coarse_total_passed": 3,
+  "coarse_total": 14,
+  "decisions": 22,
+  "truncated_decisions": 0,
+  "native_effects": false,
+  "teaching": false,
+  "focused_tests": "32 passed in 11.06s",
+  "initial_attempt_error": "laya==0.3.26 wheel lacks laya.backends; omit backend keyword, use fast=False compile=False",
+  "limitation": "memory-only standalone decision replay, not AgentSession; 3 coarse passes are needs_input due missing literals, not proof of semantic unsupported detection; no tuning after replay"
+}

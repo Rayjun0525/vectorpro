@@ -13,20 +13,22 @@ nerdctl ps -a --filter name=vectorpro-test
 중지돼 있으면 `nerdctl start vectorpro-test`로 재사용한다. 컨테이너가 없으면
 테스트를 멈추고 환경 손실을 알린다. 새 컨테이너·이미지를 만들거나 컨테이너를
 삭제하지 않는다. 현재 컨테이너에는 PyTorch, llama-cpp-python 0.3.36,
-transformers 4.57.6 및 두 모델이 이미 설치돼 있다.
+transformers 4.57.6, laya 0.3.26 및 아래 모델이 설치돼 있다.
 
 | 자원 | 컨테이너 내부 위치 |
 |---|---|
-| 실제 소형 LLM | `/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf` |
+| 실제 결정 모델 | `/opt/vectorpro-models/laya-multilingual/` |
 | 다국어 검색 인코더 | `/opt/vectorpro-models/multilingual-minilm/` |
 | 실험의 원본 프로그램 | `/workspace/results/initial_model/program.json` |
 
 모델은 저장소에 포함하지 않는다. MiniLM 파일만 누락됐으면
 `nerdctl exec vectorpro-test python experiments/setup_retrieval_model.py`로 같은
 컨테이너에 내려받는다. 기존 download.json이 있으면 기록된 revision을 재사용한다.
-Gemma GGUF가 누락됐으면 `nerdctl exec vectorpro-test python experiments/setup_gemma_model.py`로
-고정 revision을 내려받고 SHA-256을 확인한다. Qwen 가중치는 사용자 요청으로 제거했다.
-이전 Qwen 결과는 역사적 기록이며 다시 다운로드하지 않는다.
+Laya 재설치는 `nerdctl exec vectorpro-test python experiments/setup_laya_model.py`로
+고정 revision과 SHA-256을 확인한다. Gemma/Qwen 가중치는 사용자 요청으로 제거했다.
+이전 결과와 아래 Gemma 명령은 역사적 기록이다. 자동으로 다시 다운로드하지 않는다.
+Gemma 전용 runner는 이제 명시적 `--model`이 필요하다. 현재 Laya 명령은
+[LAYA.md](LAYA.md)에 있다.
 원본 프로그램 재생성 방법은 README의 initial-model 절에 있다.
 
 ## 변경별 검증

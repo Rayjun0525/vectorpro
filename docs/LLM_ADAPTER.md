@@ -1,5 +1,10 @@
 # LLM 학습 어댑터
 
+현재 환경은 사용자 요청으로 Gemma를 제거하고 Laya multilingual을 설치했다.
+Laya는 생성형 ChatModel이 아니라 별도 결정 모델 시험으로 연결했다.
+설치·실측·한계는 [LAYA.md](LAYA.md)에 있다. 아래 Gemma/Qwen 설명은 이전 기록이며
+가중치를 자동 복원하지 않는다. Gemma runner는 이제 명시적 `--model`이 필요하다.
+
 ## 후속: 요청 경로의 원문 보존
 
 경로 인자는 카탈로그 계약의 `path` 타입에서 식별한다. 원래 요청에서 따옴표로

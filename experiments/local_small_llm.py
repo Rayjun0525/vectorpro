@@ -101,7 +101,7 @@ def gemma_messages(messages, tools):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default="/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf")
+    parser.add_argument("--model", required=True, help="historical Gemma runner; weights were retired, supply an explicitly installed GGUF")
     parser.add_argument("--root", type=Path, default=Path("results/local_small_llm"))
     parser.add_argument("--scenarios", nargs="+")
     parser.add_argument("--catalog", type=Path, help="use a tensor program and the evidence-gated catalog tool loop")
