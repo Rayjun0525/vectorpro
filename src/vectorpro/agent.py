@@ -44,6 +44,8 @@ before/after are complete file snapshots; unchanged files must remain in after.
 before_directories/after_directories list empty or explicit relative directory paths.
 File parents are inferred; unchanged empty directories must remain in after_directories.
 buffer_loops searches indexed fill/map grammar; acquired numeric stepping is needed.
+list_loops searches a reverse list iterator with a typed argument-expression body;
+it requires an acquired decrement operation. Buffer example inputs are hexadecimal.
 max_steps counts calls. Validation is separate; model-generated examples are evidence
 proposals, not independent proof of the human's intent or general correctness.
 execute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.

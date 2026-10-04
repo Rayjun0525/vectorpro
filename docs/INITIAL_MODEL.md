@@ -26,6 +26,11 @@ Independent held-out cases measure generalization and do not guide search.
 
 ## Execution and learning boundary
 
+Structured input buffers use hexadecimal evidence. Optional `list_loops` supplies
+a reverse list iterator with a searched typed argument-expression body and one
+terminal value/effect call. This is a bounded grammar, not unrestricted list
+program discovery. See [STRUCTURED_DATA.md](STRUCTURED_DATA.md).
+
 The runtime provides generic buffer/file primitives and their input/output
 types, analogous to a machine's instruction semantics. It does not provide task
 recipes. The stateful learner enumerates typed call sequences and argument

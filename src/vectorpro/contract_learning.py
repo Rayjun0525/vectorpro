@@ -67,7 +67,7 @@ def numeric_lesson(data):
 def state_lesson(data):
     from vectorpro.learning.stateful import StateLesson
     allowed={"input_types","training","validation","width","max_steps","candidate_budget",
-             "control_flow","time_budget_seconds","buffer_loops","execution_budget"}
+             "control_flow","time_budget_seconds","buffer_loops","execution_budget","list_loops"}
     if not isinstance(data,dict) or set(data)-allowed or not {"input_types","training","validation"}<=set(data):
         raise ValueError("state evidence accepts only types/examples and bounded search settings")
     for field,minimum,maximum in (("width",1,32),("max_steps",1,8),("candidate_budget",1,20000),
@@ -84,6 +84,11 @@ def state_lesson(data):
             if (not isinstance(case,dict) or set(case)-{"inputs","before","after","output","operations","before_directories","after_directories"}
                     or not {"inputs","before","after"}<=set(case)):
                 raise ValueError("state cases accept only inputs/snapshots/output/operation observations")
+            if not isinstance(case["inputs"], list) or not 1 <= len(case["inputs"]) <= 3:
+                raise ValueError("state cases need 1..3 inputs")
+            buffers = [v for v, kind in zip(case["inputs"], data["input_types"]) if kind == "buffer"]
+            if any(not isinstance(v, str) for v in buffers) or sum(len(v) for v in buffers) > 131072:
+                raise ValueError("buffer evidence exceeds input byte limit")
             for field in ("before_directories", "after_directories"):
                 if field in case and (not isinstance(case[field], list) or len(case[field]) > 32
                                      or any(not isinstance(p, str) for p in case[field])):

@@ -1,4 +1,1 @@
-# Preserve exact native test bytes, including files containing only tabs/newlines.
-results/**/*.bin binary
-results/**/*.dat binary
-results/**/*.pt binary
+results/structured_data_verified/native-*/** -text

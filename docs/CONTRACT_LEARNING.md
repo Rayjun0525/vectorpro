@@ -24,6 +24,8 @@
 디렉터리 상태는 `before_directories/after_directories` 상대 경로 목록으로 표현한다.
 전체 파일 및 디렉터리 집합을 비교한다. [LINUX_TARGET.md](LINUX_TARGET.md)를 참고한다.
 숫자 예제는 `training/validation` 각각에 `width/operands/targets`를 제공한다.
+상태 예제의 `buffer` 입력은 hex이며 `list_loops`는 제한된 목록 반복 탐색을 활성화한다.
+허용 호스트 작업은 후보 탐색에도 적용하고 채택 후 다시 확인한다.
 
 학습은 복제 레지스트리와 메모리 호스트에서 진행한다. 예제를 통과해도 타입·폭이나
 허용 호스트 작업 조건을 어기면 등록하지 않는다. 실패 시 실제 파일, 버퍼, 기존

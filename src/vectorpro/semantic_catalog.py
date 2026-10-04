@@ -13,6 +13,13 @@ from vectorpro.machine import VectorProgram
 from vectorpro.tensor_codec import encode_tree, decode_tree
 
 HOST_TEXT = {
+    "list.length": "Count items of a NUL-terminated byte list. 목록 항목 개수.",
+    "list.get": "Extract one byte-list item by zero-based index. 목록 항목 추출.",
+    "list.append": "Return a new byte list with an appended item. 목록 항목 추가.",
+    "path.join": "Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합.",
+    "text.concat": "Concatenate two valid UTF-8 texts. 문자열 결합.",
+    "json.get": "Read an object field or array index from JSON bytes and return JSON bytes. 구조화 필드 조회.",
+    "json.text": "Decode a JSON string as UTF-8 bytes. JSON 문자열 추출.",
     "buffer.new": "Allocate, create a new byte array in memory with the requested size. 지정한 길이의 새 메모리 바이트 버퍼 생성 할당.",
     "buffer.length": "Measure buffer size, count how many bytes a memory buffer contains. 메모리 버퍼 길이 크기 바이트 개수 확인.",
     "buffer.get": "Read, retrieve, fetch one byte from a memory buffer at a position or offset. 버퍼의 특정 인덱스 위치에서 바이트 하나 읽기.",
@@ -83,7 +90,9 @@ def document(registry, name, visited=()):
             registers[destination] = expr
     has_guard = bool((program.cond.argmax(dim=1) < program.n_registers).any())
     prefix = []
-    if program.has_loop:
+    if prov.get("control") == "list-iteration":
+        prefix.append("Iterate over list items using acquired argument routing and calls.")
+    elif program.has_loop:
         prefix.append("Repeat indexed operations over the bytes in a file buffer.")
     elif has_guard:
         prefix.append("Conditionally execute when a flag is nonzero; otherwise skip.")

@@ -1,5 +1,7 @@
 # 테스트와 결과 확인
 
+목록/문자열/JSON 연산과 학습된 순회 검증은 [STRUCTURED_DATA.md](STRUCTURED_DATA.md)를 참고한다.
+
 실제 Gemma의 호출·토큰·지연·성공률 비용 비교는 [AGENT_COST.md](AGENT_COST.md)를 참고한다.
 
 리눅스 파일시스템 기반의 상태 학습·native 검증은

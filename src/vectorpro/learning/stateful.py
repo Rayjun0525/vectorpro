@@ -9,6 +9,7 @@ from time import monotonic
 from vectorpro.host import HOST_TYPES, MemoryHostContext
 from vectorpro.learning.plan import LearningPlan, OutputWidth
 from vectorpro.learning.buffer_loops import buffer_loop_candidates
+from vectorpro.learning.list_loops import list_loop_candidates
 from vectorpro.learning.registry import Capability, Registry, program_provenance
 from vectorpro.machine import HALT, Instr, assemble
 from vectorpro.machine.program import MAX_ARGS
@@ -40,9 +41,11 @@ class StateLesson:
     time_budget_seconds: float = 60.0
     buffer_loops: bool = False
     execution_budget: int | None = None
+    list_loops: bool = False
+    allowed_operations: tuple[str, ...] | None = None
 
     def validate(self):
-        if not self.input_types or any(t not in ("path", "value") for t in self.input_types):
+        if not self.input_types or any(t not in ("path", "value", "buffer") for t in self.input_types):
             raise ValueError("state inputs must declare path/value types")
         if self.width < 1 or self.max_steps < 1 or self.candidate_budget < 1:
             raise ValueError("state widths and search budgets must be positive")
@@ -50,6 +53,10 @@ class StateLesson:
             raise ValueError("control_flow must be boolean")
         if type(self.buffer_loops) is not bool:
             raise ValueError("buffer_loops must be boolean")
+        if type(self.list_loops) is not bool:
+            raise ValueError("list_loops must be boolean")
+        if self.allowed_operations is not None and any(op not in HOST_TYPES for op in self.allowed_operations):
+            raise ValueError("unknown allowed host operation")
         if self.execution_budget is not None and (type(self.execution_budget) is not int or self.execution_budget < 1):
             raise ValueError("execution budget must be a positive integer")
         if (type(self.time_budget_seconds) not in (int, float)
@@ -65,6 +72,9 @@ class StateLesson:
                     if not isinstance(value, str):
                         raise ValueError("path inputs must be strings")
                     MemoryHostContext.normalize(value)
+                elif kind == "buffer":
+                    if not isinstance(value, str) or len(value) % 2 or any(c not in "0123456789abcdefABCDEF" for c in value):
+                        raise ValueError("buffer state inputs require hexadecimal byte pairs")
                 elif type(value) is not int or not 0 <= value < 1 << self.width:
                     raise ValueError("numeric state inputs must fit register width")
             for files in (case.before, case.after):
@@ -97,7 +107,7 @@ class StateLesson:
         return cls(tuple(data["input_types"]), cases("training"), cases("validation"),
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
                    data.get("control_flow", False), data.get("time_budget_seconds", 60.0),
-                   data.get("buffer_loops", False), data.get("execution_budget"))
+                   data.get("buffer_loops", False), data.get("execution_budget"), data.get("list_loops", False))
 
 
 @dataclass
@@ -108,7 +118,7 @@ class StateOutcome:
 
 def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
     context = MemoryHostContext(case.before, directories=case.before_directories)
-    inputs = tuple(context.put(value.encode("utf-8")) if kind == "path" else value
+    inputs = tuple(context.put(value.encode("utf-8")) if kind == "path" else context.put(bytes.fromhex(value)) if kind == "buffer" else value
                    for value, kind in zip(case.inputs, lesson.input_types))
     try:
         with context.activate():
@@ -188,6 +198,10 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
         if cap.plan.arity > MAX_ARGS:
             continue
         provenance = cap.provenance
+        if lesson.allowed_operations is not None and cap.executable.effects:
+            from vectorpro.contracts import _closure, _operations
+            if set(_operations(_closure(registry, cap.name))) - set(lesson.allowed_operations):
+                continue
         if provenance.get("kind") == "host":
             signature = HOST_TYPES[provenance["operation"]]
         elif "input_types" in provenance and "output_type" in provenance:
@@ -202,7 +216,7 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
     types = {f"x{i}": t for i, t in enumerate(lesson.input_types)} | {"zero": "value", "one": "value"}
     frontier = [((), types, ())]
     tried = 0
-    if lesson.buffer_loops:
+    if lesson.buffer_loops or lesson.list_loops:
         def step_valid(op, args):
             if timed_out() or registry.get(op).executable.effects:
                 return False
@@ -214,7 +228,10 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
             except (ValueError, RuntimeError):
                 return False
 
-        for instructions, registers, output, control in buffer_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid):
+        from itertools import chain
+        candidates = chain(buffer_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid) if lesson.buffer_loops else (),
+                           list_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid, timed_out) if lesson.list_loops else ())
+        for instructions, registers, output, control in candidates:
             if timed_out() or tried >= lesson.candidate_budget:
                 reason = "time budget" if timed_out() else "candidate budget"
                 return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": reason}])

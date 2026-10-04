@@ -9,6 +9,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
+import json
 
 import torch
 
@@ -33,6 +34,14 @@ HOST_TYPES = {"buffer.new": (("value",), "buffer"),
               "directory.create": (("path",), "value"),
               "directory.remove": (("path",), "value"),
               "directory.list": (("path",), "buffer")}
+HOST_TYPES.update({"list.length": (("buffer",), "value"),
+                   "list.get": (("buffer", "value"), "buffer"),
+                   "list.append": (("buffer", "buffer"), "buffer"),
+                   "path.join": (("path", "buffer"), "path"),
+                   "text.concat": (("buffer", "buffer"), "buffer"),
+                   "json.get": (("buffer", "buffer"), "buffer"),
+                   "json.text": (("buffer",), "buffer")})
+ARITIES.update({name: len(signature[0]) for name, signature in HOST_TYPES.items()})
 
 
 @dataclass
@@ -69,7 +78,8 @@ class HostContext:
         return path
 
     def invoke(self, operation: str, args: tuple[int, ...], width: int) -> int:
-        if operation in ("buffer.new", "file.read", "directory.list") and self._next_handle >= 1 << width:
+        if (operation in HOST_TYPES and HOST_TYPES[operation][1] in ("buffer", "path")
+                and self._next_handle >= 1 << width):
             raise ValueError("register width cannot represent another buffer handle")
         if operation == "buffer.new":
             if args[0] > self.max_buffer_bytes:
@@ -105,6 +115,52 @@ class HostContext:
         elif operation == "directory.list":
             data = self._list_directory(self._path(args[0]))
             result = self.put(data)
+        elif operation in ("list.length", "list.get", "list.append"):
+            data = bytes(self.buffers[args[0]])
+            if data and not data.endswith(b"\0"):
+                raise ValueError("lists require NUL-terminated items")
+            items = data[:-1].split(b"\0") if data else []
+            if operation == "list.length":
+                result = len(items)
+            elif operation == "list.get":
+                result = self.put(items[args[1]])
+            else:
+                value = bytes(self.buffers[args[1]])
+                if b"\0" in value:
+                    raise ValueError("list items cannot contain NUL")
+                result = self.put(data + value + b"\0")
+        elif operation == "path.join":
+            parent = MemoryHostContext.normalize(bytes(self.buffers[args[0]]).decode("utf-8"))
+            child = MemoryHostContext.normalize(bytes(self.buffers[args[1]]).decode("utf-8"))
+            result = self.put(MemoryHostContext.normalize(parent + "/" + child).encode("utf-8"))
+        elif operation == "text.concat":
+            left, right = (bytes(self.buffers[h]).decode("utf-8") for h in args)
+            result = self.put((left + right).encode("utf-8"))
+        elif operation in ("json.get", "json.text"):
+            def reject_constant(value):
+                raise ValueError("JSON must be finite")
+            def distinct(pairs):
+                value = {}
+                for key, item in pairs:
+                    if key in value:
+                        raise ValueError("duplicate JSON fields")
+                    value[key] = item
+                return value
+            value = json.loads(bytes(self.buffers[args[0]]).decode("utf-8"),
+                               parse_constant=reject_constant, object_pairs_hook=distinct)
+            if operation == "json.get":
+                key = bytes(self.buffers[args[1]]).decode("utf-8")
+                if isinstance(value, dict):
+                    value = value[key]
+                elif isinstance(value, list) and key.isascii() and key.isdecimal():
+                    value = value[int(key)]
+                else:
+                    raise ValueError("JSON get requires an object field or nonnegative list index")
+                result = self.put(json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode("utf-8"))
+            else:
+                if not isinstance(value, str):
+                    raise ValueError("JSON text requires a string")
+                result = self.put(value.encode("utf-8"))
         else:
             raise ValueError(f"unknown host operation {operation!r}")
         if not 0 <= result < 1 << width:

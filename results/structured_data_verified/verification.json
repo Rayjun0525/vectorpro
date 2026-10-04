@@ -1,0 +1,1580 @@
+{
+  "learned": [
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "batch_copy",
+        "description": "Iterate over list items using acquired argument routing and calls. Apply operations to two separate files. Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회. Count items of a NUL-terminated byte list. 목록 항목 개수. Subtract the second number from the first number; integer difference with borrow. Applied to Count items of a NUL-terminated byte list. 목록 항목 개수. and constant 1 Extract one byte-list item by zero-based index. 목록 항목 추출. Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. file bytes read from Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. save file bytes read from Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. to Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합.",
+        "input_types": [
+          "path",
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.08693093061447144,
+            -0.10031989216804504,
+            -0.10103180259466171,
+            0.15515969693660736,
+            0.03340544551610947,
+            0.004758254159241915,
+            0.2720981538295746,
+            -0.11553563177585602,
+            -0.12314163893461227,
+            0.09491308033466339,
+            -0.19905783236026764,
+            0.1823703497648239,
+            0.11769799143075943,
+            0.19950026273727417,
+            -0.0707649290561676,
+            0.13029175996780396,
+            -0.1302223801612854,
+            0.05735976621508598,
+            -0.2570347189903259,
+            -0.393741637468338,
+            0.005755745340138674,
+            -0.05447867512702942,
+            -0.06076272204518318,
+            -0.009054656140506268,
+            0.1342979371547699,
+            0.10870867967605591,
+            0.5403637290000916,
+            -0.2656576335430145,
+            0.08132506906986237,
+            -0.04552680253982544,
+            0.05333787202835083,
+            0.1865641176700592
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.list",
+            "file.read",
+            "file.write",
+            "list.get",
+            "list.length",
+            "path.join"
+          ],
+          "digest": "a87da9b49264dd0f766f0bffdeb456804782b00a6f0d3e82fbbe173bf2e419d3"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 8,
+              "tensor_steps": 10,
+              "candidates": 462,
+              "control": "list-iteration",
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:d9c5f5d2d0dfc8d850804927a3a988d2bec6c3d543f58a35ef05c7030d5a0a95"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 8,
+          "tensor_steps": 10,
+          "candidates": 462,
+          "control": "list-iteration",
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "save_field",
+        "description": "Read an object field or array index from JSON bytes and return JSON bytes. 구조화 필드 조회. Decode a JSON string as UTF-8 bytes. JSON 문자열 추출. save Decode a JSON string as UTF-8 bytes. JSON 문자열 추출. to input path",
+        "input_types": [
+          "buffer",
+          "buffer",
+          "path"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes",
+          "hexadecimal buffer bytes",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "record",
+            "type": "buffer",
+            "role": "JSON bytes",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "key",
+            "type": "buffer",
+            "role": "field UTF-8 bytes",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.0018577126320451498,
+            -0.17843006551265717,
+            0.17520909011363983,
+            -0.07904363423585892,
+            -0.04674210399389267,
+            0.1428847759962082,
+            -0.19824396073818207,
+            0.41731002926826477,
+            -0.13698312640190125,
+            -0.08504708856344223,
+            -0.08868003636598587,
+            -0.03551819175481796,
+            0.3965936601161957,
+            -0.024475298821926117,
+            -0.18231065571308136,
+            0.03194505721330643,
+            -0.0919620469212532,
+            -0.10106594860553741,
+            -0.16444188356399536,
+            -0.13421596586704254,
+            -0.01699857972562313,
+            0.19711977243423462,
+            0.23464950919151306,
+            -0.052436526864767075,
+            -0.14115996658802032,
+            -0.030354272574186325,
+            -0.38942810893058777,
+            0.12896662950515747,
+            0.05111164599657059,
+            0.04100985452532768,
+            0.22978061437606812,
+            -0.24695880711078644
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.write",
+            "json.get",
+            "json.text"
+          ],
+          "digest": "96f9e82173e9af2dd2fb78ceb3da0eecbc48b6a3dff47d8671d909d15b031aa8"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 3,
+              "candidates": 11868,
+              "control": "sequence",
+              "tensor_steps": 3,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:4dd716ee7d4af2445cb855b18228ec44d4c53b72aa7051c4d15f87764cdedf0b"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 3,
+          "candidates": 11868,
+          "control": "sequence",
+          "tensor_steps": 3,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    }
+  ],
+  "heldout": [
+    {
+      "items": 0,
+      "batch": {
+        "status": "executed",
+        "contract_id": "vp1:d9c5f5d2d0dfc8d850804927a3a988d2bec6c3d543f58a35ef05c7030d5a0a95",
+        "contract_version": 1,
+        "capability": "batch_copy",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              3
+            ],
+            "result": 0
+          }
+        ]
+      },
+      "field": {
+        "status": "executed",
+        "contract_id": "vp1:4dd716ee7d4af2445cb855b18228ec44d4c53b72aa7051c4d15f87764cdedf0b",
+        "contract_version": 1,
+        "capability": "save_field",
+        "outputs": [
+          11
+        ],
+        "effects": [
+          {
+            "operation": "json.get",
+            "arguments": [
+              4,
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "json.text",
+            "arguments": [
+              7
+            ],
+            "result": 8
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              6,
+              8
+            ],
+            "result": 11
+          }
+        ]
+      },
+      "files": {
+        "keep": "707265736572766564",
+        "metadata.txt": "ec838820eab2b0eab3bc0a"
+      },
+      "directories": [
+        "source",
+        "target"
+      ],
+      "passed": true
+    },
+    {
+      "items": 1,
+      "batch": {
+        "status": "executed",
+        "contract_id": "vp1:d9c5f5d2d0dfc8d850804927a3a988d2bec6c3d543f58a35ef05c7030d5a0a95",
+        "contract_version": 1,
+        "capability": "batch_copy",
+        "outputs": [
+          1
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              0
+            ],
+            "result": 4
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              4
+            ],
+            "result": 6
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              6,
+              7
+            ],
+            "result": 1
+          }
+        ]
+      },
+      "field": {
+        "status": "executed",
+        "contract_id": "vp1:4dd716ee7d4af2445cb855b18228ec44d4c53b72aa7051c4d15f87764cdedf0b",
+        "contract_version": 1,
+        "capability": "save_field",
+        "outputs": [
+          11
+        ],
+        "effects": [
+          {
+            "operation": "json.get",
+            "arguments": [
+              8,
+              9
+            ],
+            "result": 11
+          },
+          {
+            "operation": "json.text",
+            "arguments": [
+              11
+            ],
+            "result": 12
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              10,
+              12
+            ],
+            "result": 11
+          }
+        ]
+      },
+      "files": {
+        "keep": "707265736572766564",
+        "metadata.txt": "ec838820eab2b0eab3bc0a",
+        "source/새 파일-0": "00",
+        "target/새 파일-0": "00"
+      },
+      "directories": [
+        "source",
+        "target"
+      ],
+      "passed": true
+    },
+    {
+      "items": 7,
+      "batch": {
+        "status": "executed",
+        "contract_id": "vp1:d9c5f5d2d0dfc8d850804927a3a988d2bec6c3d543f58a35ef05c7030d5a0a95",
+        "contract_version": 1,
+        "capability": "batch_copy",
+        "outputs": [
+          1
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              3
+            ],
+            "result": 7
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              6
+            ],
+            "result": 4
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              4
+            ],
+            "result": 6
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              6,
+              7
+            ],
+            "result": 7
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 8
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              8
+            ],
+            "result": 9
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              8
+            ],
+            "result": 10
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              9
+            ],
+            "result": 11
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              10,
+              11
+            ],
+            "result": 6
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              4
+            ],
+            "result": 12
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              12
+            ],
+            "result": 13
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              12
+            ],
+            "result": 14
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              13
+            ],
+            "result": 15
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              14,
+              15
+            ],
+            "result": 5
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              3
+            ],
+            "result": 16
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              16
+            ],
+            "result": 17
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              16
+            ],
+            "result": 18
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              17
+            ],
+            "result": 19
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              18,
+              19
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              2
+            ],
+            "result": 20
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              20
+            ],
+            "result": 21
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              20
+            ],
+            "result": 22
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              21
+            ],
+            "result": 23
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              22,
+              23
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              1
+            ],
+            "result": 24
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              24
+            ],
+            "result": 25
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              24
+            ],
+            "result": 26
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              25
+            ],
+            "result": 27
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              26,
+              27
+            ],
+            "result": 2
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              0
+            ],
+            "result": 28
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              28
+            ],
+            "result": 29
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              28
+            ],
+            "result": 30
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              29
+            ],
+            "result": 31
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              30,
+              31
+            ],
+            "result": 1
+          }
+        ]
+      },
+      "field": {
+        "status": "executed",
+        "contract_id": "vp1:4dd716ee7d4af2445cb855b18228ec44d4c53b72aa7051c4d15f87764cdedf0b",
+        "contract_version": 1,
+        "capability": "save_field",
+        "outputs": [
+          11
+        ],
+        "effects": [
+          {
+            "operation": "json.get",
+            "arguments": [
+              32,
+              33
+            ],
+            "result": 35
+          },
+          {
+            "operation": "json.text",
+            "arguments": [
+              35
+            ],
+            "result": 36
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              34,
+              36
+            ],
+            "result": 11
+          }
+        ]
+      },
+      "files": {
+        "keep": "707265736572766564",
+        "metadata.txt": "ec838820eab2b0eab3bc0a",
+        "source/새 파일-0": "00",
+        "source/새 파일-1": "0101",
+        "source/새 파일-2": "020202",
+        "source/새 파일-3": "03030303",
+        "source/새 파일-4": "0404040404",
+        "source/새 파일-5": "050505050505",
+        "source/새 파일-6": "06060606060606",
+        "target/새 파일-0": "00",
+        "target/새 파일-1": "0101",
+        "target/새 파일-2": "020202",
+        "target/새 파일-3": "03030303",
+        "target/새 파일-4": "0404040404",
+        "target/새 파일-5": "050505050505",
+        "target/새 파일-6": "06060606060606"
+      },
+      "directories": [
+        "source",
+        "target"
+      ],
+      "passed": true
+    },
+    {
+      "items": 17,
+      "batch": {
+        "status": "executed",
+        "contract_id": "vp1:d9c5f5d2d0dfc8d850804927a3a988d2bec6c3d543f58a35ef05c7030d5a0a95",
+        "contract_version": 1,
+        "capability": "batch_copy",
+        "outputs": [
+          1
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              3
+            ],
+            "result": 17
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              16
+            ],
+            "result": 4
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              4
+            ],
+            "result": 6
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              6,
+              7
+            ],
+            "result": 10
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              15
+            ],
+            "result": 8
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              8
+            ],
+            "result": 9
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              8
+            ],
+            "result": 10
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              9
+            ],
+            "result": 11
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              10,
+              11
+            ],
+            "result": 9
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              14
+            ],
+            "result": 12
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              12
+            ],
+            "result": 13
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              12
+            ],
+            "result": 14
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              13
+            ],
+            "result": 15
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              14,
+              15
+            ],
+            "result": 8
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              13
+            ],
+            "result": 16
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              16
+            ],
+            "result": 17
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              16
+            ],
+            "result": 18
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              17
+            ],
+            "result": 19
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              18,
+              19
+            ],
+            "result": 7
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              12
+            ],
+            "result": 20
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              20
+            ],
+            "result": 21
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              20
+            ],
+            "result": 22
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              21
+            ],
+            "result": 23
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              22,
+              23
+            ],
+            "result": 6
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              11
+            ],
+            "result": 24
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              24
+            ],
+            "result": 25
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              24
+            ],
+            "result": 26
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              25
+            ],
+            "result": 27
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              26,
+              27
+            ],
+            "result": 5
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              10
+            ],
+            "result": 28
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              28
+            ],
+            "result": 29
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              28
+            ],
+            "result": 30
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              29
+            ],
+            "result": 31
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              30,
+              31
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              9
+            ],
+            "result": 32
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              32
+            ],
+            "result": 33
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              32
+            ],
+            "result": 34
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              33
+            ],
+            "result": 35
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              34,
+              35
+            ],
+            "result": 3
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              8
+            ],
+            "result": 36
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              36
+            ],
+            "result": 37
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              36
+            ],
+            "result": 38
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              37
+            ],
+            "result": 39
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              38,
+              39
+            ],
+            "result": 17
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              7
+            ],
+            "result": 40
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              40
+            ],
+            "result": 41
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              40
+            ],
+            "result": 42
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              41
+            ],
+            "result": 43
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              42,
+              43
+            ],
+            "result": 16
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              6
+            ],
+            "result": 44
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              44
+            ],
+            "result": 45
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              44
+            ],
+            "result": 46
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              45
+            ],
+            "result": 47
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              46,
+              47
+            ],
+            "result": 15
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              5
+            ],
+            "result": 48
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              48
+            ],
+            "result": 49
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              48
+            ],
+            "result": 50
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              49
+            ],
+            "result": 51
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              50,
+              51
+            ],
+            "result": 14
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              4
+            ],
+            "result": 52
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              52
+            ],
+            "result": 53
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              52
+            ],
+            "result": 54
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              53
+            ],
+            "result": 55
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              54,
+              55
+            ],
+            "result": 13
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              3
+            ],
+            "result": 56
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              56
+            ],
+            "result": 57
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              56
+            ],
+            "result": 58
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              57
+            ],
+            "result": 59
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              58,
+              59
+            ],
+            "result": 12
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              2
+            ],
+            "result": 60
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              60
+            ],
+            "result": 61
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              60
+            ],
+            "result": 62
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              61
+            ],
+            "result": 63
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              62,
+              63
+            ],
+            "result": 11
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              1
+            ],
+            "result": 64
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              64
+            ],
+            "result": 65
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              64
+            ],
+            "result": 66
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              65
+            ],
+            "result": 67
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              66,
+              67
+            ],
+            "result": 2
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              3,
+              0
+            ],
+            "result": 68
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              68
+            ],
+            "result": 69
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              68
+            ],
+            "result": 70
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              69
+            ],
+            "result": 71
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              70,
+              71
+            ],
+            "result": 1
+          }
+        ]
+      },
+      "field": {
+        "status": "executed",
+        "contract_id": "vp1:4dd716ee7d4af2445cb855b18228ec44d4c53b72aa7051c4d15f87764cdedf0b",
+        "contract_version": 1,
+        "capability": "save_field",
+        "outputs": [
+          11
+        ],
+        "effects": [
+          {
+            "operation": "json.get",
+            "arguments": [
+              72,
+              73
+            ],
+            "result": 75
+          },
+          {
+            "operation": "json.text",
+            "arguments": [
+              75
+            ],
+            "result": 76
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              74,
+              76
+            ],
+            "result": 11
+          }
+        ]
+      },
+      "files": {
+        "keep": "707265736572766564",
+        "metadata.txt": "ec838820eab2b0eab3bc0a",
+        "source/새 파일-0": "00",
+        "source/새 파일-1": "0101",
+        "source/새 파일-10": "0a0a0a0a0a0a0a0a0a0a0a",
+        "source/새 파일-11": "0b0b0b0b0b0b0b0b0b0b0b0b",
+        "source/새 파일-12": "0c0c0c0c0c0c0c0c0c0c0c0c0c",
+        "source/새 파일-13": "0d0d0d0d0d0d0d0d0d0d0d0d0d0d",
+        "source/새 파일-14": "0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e",
+        "source/새 파일-15": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+        "source/새 파일-16": "1010101010101010101010101010101010",
+        "source/새 파일-2": "020202",
+        "source/새 파일-3": "03030303",
+        "source/새 파일-4": "0404040404",
+        "source/새 파일-5": "050505050505",
+        "source/새 파일-6": "06060606060606",
+        "source/새 파일-7": "0707070707070707",
+        "source/새 파일-8": "080808080808080808",
+        "source/새 파일-9": "09090909090909090909",
+        "target/새 파일-0": "00",
+        "target/새 파일-1": "0101",
+        "target/새 파일-10": "0a0a0a0a0a0a0a0a0a0a0a",
+        "target/새 파일-11": "0b0b0b0b0b0b0b0b0b0b0b0b",
+        "target/새 파일-12": "0c0c0c0c0c0c0c0c0c0c0c0c0c",
+        "target/새 파일-13": "0d0d0d0d0d0d0d0d0d0d0d0d0d0d",
+        "target/새 파일-14": "0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e",
+        "target/새 파일-15": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+        "target/새 파일-16": "1010101010101010101010101010101010",
+        "target/새 파일-2": "020202",
+        "target/새 파일-3": "03030303",
+        "target/새 파일-4": "0404040404",
+        "target/새 파일-5": "050505050505",
+        "target/새 파일-6": "06060606060606",
+        "target/새 파일-7": "0707070707070707",
+        "target/새 파일-8": "080808080808080808",
+        "target/새 파일-9": "09090909090909090909"
+      },
+      "directories": [
+        "source",
+        "target"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 4,
+  "program_sha256": "4c55808398c4e5b031ab1019c184d70c3fd18c79b9260e36597151f1dc7abe81",
+  "llm_imported": false,
+  "encoder_imported": false,
+  "scope": "flat files only, reverse list iterator with a searched typed expression body; not general list processing"
+}

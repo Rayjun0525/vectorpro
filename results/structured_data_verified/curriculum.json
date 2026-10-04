@@ -1,0 +1,251 @@
+[
+  {
+    "draft": {
+      "version": 1,
+      "name": "batch_copy",
+      "description": "Copy all files of a flat directory",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.list",
+        "list.length",
+        "list.get",
+        "path.join",
+        "file.read",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path",
+        "path"
+      ],
+      "list_loops": true,
+      "max_steps": 8,
+      "candidate_budget": 20000,
+      "execution_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "src",
+            "out"
+          ],
+          "before": {
+            "src/a": "616263",
+            "src/b": "ff",
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "src/a": "616263",
+            "src/b": "ff",
+            "keep": "707265736572766564",
+            "out/a": "616263",
+            "out/b": "ff"
+          },
+          "before_directories": [
+            "src",
+            "out"
+          ],
+          "after_directories": [
+            "src",
+            "out"
+          ]
+        },
+        {
+          "inputs": [
+            "in",
+            "to"
+          ],
+          "before": {
+            "in/z": "646966666572656e74",
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "in/z": "646966666572656e74",
+            "keep": "707265736572766564",
+            "to/z": "646966666572656e74"
+          },
+          "before_directories": [
+            "in",
+            "to"
+          ],
+          "after_directories": [
+            "in",
+            "to"
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "empty",
+            "result"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "before_directories": [
+            "empty",
+            "result"
+          ],
+          "after_directories": [
+            "empty",
+            "result"
+          ]
+        },
+        {
+          "inputs": [
+            "unicode",
+            "copy"
+          ],
+          "before": {
+            "unicode/새 파일": "",
+            "unicode/q": "6c6f6e676572006279746573",
+            "unicode/line\nbreak": "78",
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "unicode/새 파일": "",
+            "unicode/q": "6c6f6e676572006279746573",
+            "unicode/line\nbreak": "78",
+            "keep": "707265736572766564",
+            "copy/새 파일": "",
+            "copy/q": "6c6f6e676572006279746573",
+            "copy/line\nbreak": "78"
+          },
+          "before_directories": [
+            "unicode",
+            "copy"
+          ],
+          "after_directories": [
+            "unicode",
+            "copy"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "save_field",
+      "description": "Write a JSON string field to a file",
+      "parameters": [
+        {
+          "name": "record",
+          "type": "buffer",
+          "role": "JSON bytes"
+        },
+        {
+          "name": "key",
+          "type": "buffer",
+          "role": "field UTF-8 bytes"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "json.get",
+        "json.text",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "buffer",
+        "buffer",
+        "path"
+      ],
+      "max_steps": 3,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "7b22636f6e74656e74223a2022616263227d",
+            "636f6e74656e74",
+            "a"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "a": "616263"
+          },
+          "output": 3
+        },
+        {
+          "inputs": [
+            "7b22636f6e74656e74223a20226c696e655c6e627265616b227d",
+            "636f6e74656e74",
+            "b"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "b": "6c696e650a627265616b"
+          },
+          "output": 10
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "7b22636f6e74656e74223a2022227d",
+            "636f6e74656e74",
+            "c"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "c": ""
+          },
+          "output": 0
+        },
+        {
+          "inputs": [
+            "7b22636f6e74656e74223a20225c75643535635c7561653030227d",
+            "636f6e74656e74",
+            "d"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "d": "ed959ceab880"
+          },
+          "output": 6
+        }
+      ]
+    }
+  }
+]

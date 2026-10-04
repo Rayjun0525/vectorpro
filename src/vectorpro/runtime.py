@@ -92,7 +92,8 @@ class VectorRuntime:
             state=parse_state(state_lesson)
             if list(state.input_types)!=kinds:
                 raise ValueError("state evidence input types must exactly match the draft")
-            state=replace(state,time_budget_seconds=min(state.time_budget_seconds,time_budget_seconds))
+            state=replace(state,time_budget_seconds=min(state.time_budget_seconds,time_budget_seconds),
+                          allowed_operations=tuple(draft["allowed_operations"]))
             examples=plan=None
         config=self.learner.config
         bounded=replace(config, search_budget=min(config.search_budget,50000), search_size=min(config.search_size,3),
