@@ -8,6 +8,8 @@
 - [초기모델 명세](docs/INITIAL_MODEL.md)
 - [작업 인수인계](docs/HANDOFF.md)
 - [구현·실험 안내](README.md)
+- [LLM 어댑터와 근거의 한계](docs/LLM_ADAPTER.md)
+- [다른 OS의 동일 파일 검증 절차](docs/PORTABILITY.md)
 
 특히 **기존 `vectorpro-test` 컨테이너 하나를 `nerdctl exec`로 재사용**한다.
 새 컨테이너나 이미지를 만들지 않는다. 작업별 절차를 사람이 작성해 놓고 학습

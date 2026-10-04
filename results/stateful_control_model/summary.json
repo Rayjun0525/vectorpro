@@ -1,0 +1,34 @@
+{
+  "branch": [
+    {
+      "strategy": "state search",
+      "steps": 2,
+      "candidates": 1041,
+      "control": "branch",
+      "tensor_steps": 3,
+      "training_cases": 2,
+      "validation_cases": 2,
+      "accepted": true
+    }
+  ],
+  "loop": [
+    {
+      "strategy": "state search",
+      "steps": 2,
+      "candidates": 147,
+      "control": "while",
+      "tensor_steps": 3,
+      "training_cases": 3,
+      "validation_cases": 2,
+      "accepted": true
+    }
+  ],
+  "held_out_branch": 100,
+  "held_out_loop": 100,
+  "native_and_reload": true,
+  "task_program_authored": false,
+  "branch_program": "conditional: learned state transformation\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = one\n    r5 = zero\n    r6 = zero\n    @0: (test only); if r2 != 0 goto @1 else halt\n    @1: r5 = file.read(r0)\n    @2: r6 = file.write(r1, r5)\n    result = r6\n  learned from 2 training cases and 2 validation cases; 2 steps, 1041 candidates",
+  "loop_program": "repeat: learned state transformation\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    r5 = zero\n    @0: (test only); if r1 != 0 goto @1 else halt\n    @1: r1 = advance(r1)\n    @2: r5 = file.read(r0); if r1 != 0 goto @1 else halt\n    result = r1\n  learned from 3 training cases and 2 validation cases; 2 steps, 147 candidates",
+  "scope": "one guard or one numeric-feedback while region; optional observed host-effect traces",
+  "trace_note": "Repeated reads leave the same final files; demonstrated effects supply otherwise missing evidence."
+}

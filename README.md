@@ -444,7 +444,9 @@ remain the host primitives described above.
 
 The initial-model contract is in `docs/INITIAL_MODEL.md`. `StateLesson` describes
 input types, initial file snapshots, exact target file snapshots, and optional
-numeric return values. It supplies no operation sequence. The bounded learner
+numeric return values. Optional `operations` traces list observed host effects
+when final files alone do not distinguish behaviours. These are demonstrations,
+not instruction recipes or argument routing. The bounded learner
 searches generic typed host calls and argument routing, executes candidates only
 in fresh `MemoryHostContext` instances, then checks separate validation cases.
 An accepted procedure is an ordinary `VectorProgram` in the same saved file.
@@ -460,12 +462,71 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m 
 ```
 
 The current state search learns straight-line procedures within explicit step
-and candidate budgets. Its primitive type catalog is provided execution/search
-machinery. Stateful branches, variable-length loops and CPU-trace ingestion are
-not yet searched. There is no task-name dispatch in the learner: the same search
-also learns how to observe a byte without changing files. Arithmetic learning
+and candidate budgets. With `control_flow: true`, it also searches a zero/nonzero
+guard or one while region with numeric result feedback. `max_steps` counts calls;
+guards add tensor steps, and every variant counts toward the candidate budget.
+`time_budget_seconds` defaults to 60 and limits total state learning time. The
+deadline is checked between candidates/cases and before registration. An active
+candidate is not preempted; its existing kernel clock budget still applies.
+The kernel clock budget rejects loops that do not halt. Nested/multiple control
+regions and general mutable-variable routing remain outside this grammar.
+Its primitive type catalog is provided execution/search machinery. CPU-trace
+ingestion is not implemented. There is no task-name dispatch in the learner: the same search
+also learns how to observe a byte without changing files. State search can now
+call learned numeric units/programs and previously learned state procedures with
+`input_types` and `output_type` contracts. Numeric operands are typed as values;
+path/buffer handles are not passed as numeric arguments. Results fit the machine's
+W-bit registers, including truncation of a numeric capability's wider output.
+Older effectful programs without full type contracts remain executable but are
+not inferred as search operators. Arithmetic learning
 continues to use the existing unit/composition/bit-fold strategies. LLM intent
 interpretation is a future adapter, not a dependency for acquired functions.
+
+`experiments/stateful_numeric_learning.py` learns XOR from JSON examples, learns
+a first-byte observation procedure, then discovers a procedure combining both
+from state examples. Its instruction sequence is not authored. The demo checks
+native execution, reload, and 100 held-out file/operand cases.
+
+`experiments/stateful_control_learning.py` discovers conditional file copying
+from file-state examples and a variable-iteration read loop using an actually
+learned numeric step. Repeated reads leave the same final files, so this second
+lesson also supplies demonstrated host-effect traces. Neither lesson supplies
+branch targets, loop boundaries or register routes. Each procedure is checked
+on 100 held-out cases, native files and reload. This demonstrates the bounded
+control grammar, not arbitrary file-processing loops.
+
+The JSON example `experiments/requests/learn_conditional_transfer.json` uses
+the same `state_lesson` entry point with `control_flow: true`. It can also reuse
+an existing learned conditional procedure in the accumulated program file.
+
+## Initial-model integration
+
+`buffer_loops: true` enables a generic indexed-buffer fill/map search. The learner
+searches numeric bodies and source/destination routes using acquired functions;
+the iterator is an explicit supplied grammar, like BitFold. An acquired decrement
+is discovered by behaviour probes and called by vector address at runtime.
+`execution_budget` sets a persisted clock limit for larger files. This is bounded
+program synthesis, not arbitrary control-structure discovery.
+
+`experiments/initial_model.py` reuses previously learned sub/XOR tables and learns
+byte fill, XOR mapping, a conditional call to the acquired map loop and a sequence
+of two acquired loops. It checks 100 held-out cases per procedure, 2,048-byte
+files, native execution and reload. No observed effect trace is needed for these
+lessons: final file states distinguish the required mutations.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/initial_model.py
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python scripts/check_portability.py --program results/initial_model/program.json --output results/initial_model/portability-linux.json
+```
+
+The optional LLM adapter reads a tool guide and function schemas, looks up acquired
+capabilities, proposes data-only lessons, teaches in memory, executes known user
+requests, and asks for missing goals. Its bounded tool loop and Chat Completions
+HTTP transport accept a user-configured model/endpoint; no model download or new
+dependency is required. Acquired functions remain usable with the ordinary JSON
+CLI after the model is disconnected. See [LLM adapter guide](docs/LLM_ADAPTER.md).
+Protocol tests use scripted replies and a local HTTP fixture; live model quality
+and Windows/macOS execution are not inferred from those tests.
 
 ## Roadmap
 

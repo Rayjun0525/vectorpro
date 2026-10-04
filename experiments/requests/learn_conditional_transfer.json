@@ -1,0 +1,19 @@
+{
+  "name": "conditional_transfer",
+  "width": 16,
+  "operands": [[{"utf8": "native.bin"}, {"utf8": "target.bin"}, 1]],
+  "state_lesson": {
+    "input_types": ["path", "path", "value"],
+    "max_steps": 2,
+    "candidate_budget": 20000,
+    "control_flow": true,
+    "training": [
+      {"inputs": ["a", "b", 0], "before": {"a": "616263", "b": "6f6c64"}, "after": {"a": "616263", "b": "6f6c64"}, "output": 0},
+      {"inputs": ["c", "d", 1], "before": {"c": "78797a", "d": "6f6c64"}, "after": {"c": "78797a", "d": "78797a"}, "output": 3}
+    ],
+    "validation": [
+      {"inputs": ["e", "f", 0], "before": {"e": "6c6f6e67", "f": "6f6c64"}, "after": {"e": "6c6f6e67", "f": "6f6c64"}, "output": 0},
+      {"inputs": ["g", "h", 9], "before": {"g": "6e657700", "h": "6f6c64"}, "after": {"g": "6e657700", "h": "6e657700"}, "output": 4}
+    ]
+  }
+}

@@ -1,13 +1,17 @@
-"""Task-agnostic bounded search for typed, effectful vector call sequences."""
+"""Bounded typed vector-program search with optional guards and feedback loops."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from itertools import product
+import math
+from time import monotonic
 
 from vectorpro.host import HOST_TYPES, MemoryHostContext
 from vectorpro.learning.plan import LearningPlan, OutputWidth
+from vectorpro.learning.buffer_loops import buffer_loop_candidates
 from vectorpro.learning.registry import Capability, Registry, program_provenance
-from vectorpro.machine import Instr, assemble
+from vectorpro.machine import HALT, Instr, assemble
+from vectorpro.machine.program import MAX_ARGS
 
 
 @dataclass
@@ -16,6 +20,7 @@ class StateExample:
     before: dict[str, bytes]
     after: dict[str, bytes]
     output: int | None = None
+    operations: tuple[str, ...] | None = None
 
     def signature(self):
         return (self.inputs, tuple(sorted(self.before.items())))
@@ -28,12 +33,25 @@ class StateLesson:
     width: int = 16
     max_steps: int = 3
     candidate_budget: int = 5000
+    control_flow: bool = False
+    time_budget_seconds: float = 60.0
+    buffer_loops: bool = False
+    execution_budget: int | None = None
 
     def validate(self):
         if not self.input_types or any(t not in ("path", "value") for t in self.input_types):
             raise ValueError("state inputs must declare path/value types")
         if self.width < 1 or self.max_steps < 1 or self.candidate_budget < 1:
             raise ValueError("state widths and search budgets must be positive")
+        if type(self.control_flow) is not bool:
+            raise ValueError("control_flow must be boolean")
+        if type(self.buffer_loops) is not bool:
+            raise ValueError("buffer_loops must be boolean")
+        if self.execution_budget is not None and (type(self.execution_budget) is not int or self.execution_budget < 1):
+            raise ValueError("execution budget must be a positive integer")
+        if (type(self.time_budget_seconds) not in (int, float)
+                or not math.isfinite(self.time_budget_seconds) or self.time_budget_seconds <= 0):
+            raise ValueError("time budget must be a positive finite number")
         if not self.training or not self.validation:
             raise ValueError("state learning requires training and validation examples")
         for case in self.training + self.validation:
@@ -52,6 +70,8 @@ class StateLesson:
                         raise ValueError("state files require normalized paths and bytes")
             if case.output is not None and (type(case.output) is not int or not 0 <= case.output < 1 << self.width):
                 raise ValueError("state output must fit register width")
+            if case.operations is not None and any(op not in HOST_TYPES for op in case.operations):
+                raise ValueError("operation traces must contain host operation names")
         train = [c.signature() for c in self.training]
         validation = [c.signature() for c in self.validation]
         if len(set(train)) != len(train) or len(set(validation)) != len(validation) or set(train) & set(validation):
@@ -62,10 +82,13 @@ class StateLesson:
         def cases(name):
             return [StateExample(tuple(c["inputs"]),
                                  {p: bytes.fromhex(v) for p, v in c["before"].items()},
-                                 {p: bytes.fromhex(v) for p, v in c["after"].items()}, c.get("output"))
+                                 {p: bytes.fromhex(v) for p, v in c["after"].items()}, c.get("output"),
+                                 tuple(c["operations"]) if "operations" in c else None)
                     for c in data[name]]
         return cls(tuple(data["input_types"]), cases("training"), cases("validation"),
-                   data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000))
+                   data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
+                   data.get("control_flow", False), data.get("time_budget_seconds", 60.0),
+                   data.get("buffer_loops", False), data.get("execution_budget"))
 
 
 @dataclass
@@ -81,49 +104,157 @@ def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
     try:
         with context.activate():
             output = executable([inputs], lesson.width)[0]
-        return context.files == case.after and (case.output is None or output == case.output)
+        return (context.files == case.after and (case.output is None or output == case.output)
+                and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
     except (OSError, ValueError, KeyError, IndexError, RuntimeError):
         return False
+
+
+def control_candidates(instructions, input_types, result_types, enabled):
+    """One structured guard or while region; no operation/task-specific recipes.
+
+    A while region feeds a numeric call's result back into one of its numeric
+    operands. A pre-test also handles zero iterations. Other results retain
+    their register routes. Constants and handles are never feedback targets.
+    """
+    yield instructions, instructions[-1].dest, "sequence"
+    if not enabled:
+        return
+    size = len(instructions)
+    available = {f"x{i}": kind for i, kind in enumerate(input_types)}
+    for start in range(size):
+        for test, kind in available.items():
+            if kind != "value":
+                continue
+            for end in range(start, size):
+                for nonzero in (True, False):
+                    labeled = [replace(ins, label=f"s{i}") for i, ins in enumerate(instructions)]
+                    exit_label = f"s{end + 1}" if end + 1 < size else HALT
+                    guard = Instr(test=test, then=f"s{start}" if nonzero else exit_label,
+                                  otherwise=exit_label if nonzero else f"s{start}")
+                    labeled.insert(start, guard)
+                    yield tuple(labeled), instructions[-1].dest, "branch"
+            for update in range(start, size):
+                if result_types[update] != "value" or test not in instructions[update].args:
+                    continue
+                old = instructions[update].dest
+                for end in range(update, size):
+                    labeled = []
+                    for i, ins in enumerate(instructions):
+                        # Only downstream references see the updated value.
+                        args = tuple(test if a == old and i > update else a for a in ins.args)
+                        labeled.append(replace(ins, args=args, dest=test if i == update else ins.dest,
+                                               label=f"s{i}"))
+                    exit_label = f"s{end + 1}" if end + 1 < size else HALT
+                    labeled[end] = replace(labeled[end], test=test, then=f"s{start}", otherwise=exit_label)
+                    labeled.insert(start, Instr(test=test, then=f"s{start}", otherwise=exit_label))
+                    # The feedback value is also a defined result for zero iterations.
+                    yield tuple(labeled), test, "while"
+                    if instructions[-1].dest != old:
+                        yield tuple(labeled), instructions[-1].dest, "while"
+        available[instructions[start].dest] = result_types[start]
 
 
 def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateOutcome:
     lesson.validate()
     if name in registry:
         raise ValueError("cannot replace an existing state capability")
-    # Only generic host primitives actually provided by this machine are available.
-    operations = [(cap.name, HOST_TYPES[cap.provenance["operation"]]) for cap in registry
-                  if cap.provenance.get("kind") == "host"]
+    deadline = monotonic() + lesson.time_budget_seconds
+
+    def timed_out():
+        return monotonic() >= deadline
+
+    def matches(executable, cases):
+        for case in cases:
+            if timed_out() or not evaluate(executable, case, lesson):
+                return False
+        return not timed_out()
+    # Numeric capabilities are called as learned, never replaced by Python arithmetic.
+    # Typed state procedures can also be reused as one call (their internal steps
+    # still execute normally). Path/handle registers are not numeric arguments.
+    operations = []
+    for cap in registry:
+        if cap.plan.arity > MAX_ARGS:
+            continue
+        provenance = cap.provenance
+        if provenance.get("kind") == "host":
+            signature = HOST_TYPES[provenance["operation"]]
+        elif "input_types" in provenance and "output_type" in provenance:
+            signature = (tuple(provenance["input_types"]), provenance["output_type"])
+        elif not cap.executable.effects:
+            signature = (("value",) * cap.plan.arity, "value")
+        else:
+            continue  # Old effectful programs without a type contract cannot be inferred safely.
+        operations.append((cap.name, signature))
     plan = LearningPlan(name, "learned state transformation", len(lesson.input_types), OutputWidth.SAME)
     initial = {f"x{i}": "zero" for i in range(plan.arity)} | {"zero": "zero", "one": "one"}
     types = {f"x{i}": t for i, t in enumerate(lesson.input_types)} | {"zero": "value", "one": "value"}
-    frontier = [((), types)]
+    frontier = [((), types, ())]
     tried = 0
+    if lesson.buffer_loops:
+        def step_valid(op, args):
+            if timed_out() or registry.get(op).executable.effects:
+                return False
+            probes = sorted({1, 2, 3, min(17, (1 << lesson.width) - 1)})
+            probes = [n for n in probes if n < 1 << lesson.width]
+            rows = [tuple(n if arg == "index" else 1 for arg in args) for n in probes]
+            try:
+                return registry.get(op).run(rows, lesson.width) == [n - 1 for n in probes]
+            except (ValueError, RuntimeError):
+                return False
+
+        for instructions, registers, output, control in buffer_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid):
+            if timed_out() or tried >= lesson.candidate_budget:
+                reason = "time budget" if timed_out() else "candidate budget"
+                return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": reason}])
+            tried += 1
+            program = assemble(instructions, [f"x{i}" for i in range(plan.arity)], registers, output, registry.key_of)
+            provenance = program_provenance(program, "state example search", input_types=list(lesson.input_types),
+                                            output_type="value", teaching_width=lesson.width, control=control,
+                                            execution_budget=lesson.execution_budget)
+            executable = registry.build(plan, provenance)
+            if matches(executable, lesson.training) and matches(executable, lesson.validation):
+                history = [{"strategy": "state search", "steps": sum(i.op is not None for i in instructions),
+                            "tensor_steps": len(instructions), "candidates": tried, "control": control,
+                            "training_cases": len(lesson.training), "validation_cases": len(lesson.validation), "accepted": True}]
+                capability = Capability(plan, executable, provenance, history)
+                registry.add(capability)
+                return StateOutcome(capability, history)
     for depth in range(1, lesson.max_steps + 1):
         next_frontier = []
-        for prefix, available in frontier:
+        for prefix, available, prefix_types in frontier:
             for op, (arguments, result_type) in operations:
                 choices = [[r for r, t in available.items() if t == kind] for kind in arguments]
                 for args in product(*choices):
-                    if tried >= lesson.candidate_budget:
-                        return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "candidate budget"}])
-                    tried += 1
                     destination = f"t{depth}"
                     instructions = prefix + (Instr(op, tuple(args), destination),)
                     registers = initial | {f"t{i}": "zero" for i in range(1, depth + 1)}
-                    program = assemble(instructions, [f"x{i}" for i in range(plan.arity)],
-                                       registers, destination, registry.key_of)
-                    provenance = program_provenance(program, "state example search",
-                                                    input_types=list(lesson.input_types),
-                                                    teaching_width=lesson.width)
-                    executable = registry.build(plan, provenance)
-                    if all(evaluate(executable, c, lesson) for c in lesson.training):
-                        if all(evaluate(executable, c, lesson) for c in lesson.validation):
-                            history = [{"strategy": "state search", "steps": depth, "candidates": tried,
-                                        "training_cases": len(lesson.training), "validation_cases": len(lesson.validation),
-                                        "accepted": True}]
-                            capability = Capability(plan, executable, provenance, history)
-                            registry.add(capability)
-                            return StateOutcome(capability, history)
-                    next_frontier.append((instructions, available | {destination: result_type}))
+                    result_types = prefix_types + (result_type,)
+                    for candidate, output, control in control_candidates(
+                            instructions, lesson.input_types, result_types, lesson.control_flow):
+                        if timed_out():
+                            return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "time budget"}])
+                        if tried >= lesson.candidate_budget:
+                            return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "candidate budget"}])
+                        tried += 1
+                        program = assemble(candidate, [f"x{i}" for i in range(plan.arity)],
+                                           registers, output, registry.key_of)
+                        provenance = program_provenance(program, "state example search",
+                                                        input_types=list(lesson.input_types),
+                                                        output_type=(available | {destination: result_type})[output],
+                                                        teaching_width=lesson.width, control=control,
+                                                        execution_budget=lesson.execution_budget)
+                        executable = registry.build(plan, provenance)
+                        if matches(executable, lesson.training):
+                            if matches(executable, lesson.validation):
+                                history = [{"strategy": "state search", "steps": depth, "candidates": tried,
+                                            "control": control, "tensor_steps": len(candidate),
+                                            "training_cases": len(lesson.training), "validation_cases": len(lesson.validation),
+                                            "accepted": True}]
+                                capability = Capability(plan, executable, provenance, history)
+                                registry.add(capability)
+                                return StateOutcome(capability, history)
+                    next_frontier.append((instructions, available | {destination: result_type}, result_types))
         frontier = next_frontier
-    return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "step budget"}])
+    reason = "time budget" if timed_out() else "step budget"
+    return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": reason}])

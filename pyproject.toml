@@ -11,6 +11,7 @@ dependencies = ["numpy>=1.24", "torch>=2.1"]
 
 [project.scripts]
 vectorpro = "vectorpro.__main__:main"
+vectorpro-agent = "vectorpro.agent:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]

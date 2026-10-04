@@ -1,0 +1,33 @@
+{
+  "numeric_learning": [
+    {
+      "round": 1,
+      "train_examples": 8,
+      "validation_examples": 4,
+      "strategy": "learn",
+      "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+      "train_accuracy": 1.0,
+      "validation_accuracy": 1.0,
+      "provided_train_accuracy": 1.0,
+      "accepted": true,
+      "source": "example data"
+    }
+  ],
+  "state_learning": [
+    {
+      "strategy": "state search",
+      "steps": 2,
+      "candidates": 328,
+      "training_cases": 2,
+      "validation_cases": 2,
+      "accepted": true
+    }
+  ],
+  "native_output": 610,
+  "heldout_cases": 100,
+  "heldout_correct": 100,
+  "reload_identical": true,
+  "procedure_authored": false,
+  "explanation": "file_compute: learned state transformation\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = one\n    r4 = zero\n    r5 = zero\n    @0: r4 = observe(r0)\n    @1: r5 = combine(r1, r4)\n    result = r5\n  learned from 2 training cases and 2 validation cases; 2 steps, 328 candidates",
+  "scope": "straight-line reuse of learned arithmetic and typed state procedures"
+}

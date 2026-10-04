@@ -48,7 +48,10 @@ class HostContext:
         return handle
 
     def _path(self, handle: int) -> Path:
-        relative = Path(bytes(self.buffers[handle]).decode("utf-8"))
+        try:
+            relative = Path(MemoryHostContext.normalize(bytes(self.buffers[handle]).decode("utf-8")))
+        except ValueError as error:
+            raise ValueError("file path escapes the host root or is not a portable relative path") from error
         if relative.is_absolute():
             raise ValueError("file paths must be relative to the host root")
         path = (self.root / relative).resolve()

@@ -100,6 +100,26 @@ class VectorRuntime:
             outputs = capability.run(rows, width)
         return RequestResult(status, outputs, name, history)
 
+    def teach(self, name: str, *, plan=None, lesson=None, state_lesson=None) -> RequestResult:
+        """Acquire a capability in isolation, without running it on native inputs."""
+        if name in self.registry:
+            return RequestResult("already_known", capability=name)
+        if state_lesson is not None:
+            if plan is not None or lesson is not None:
+                raise ValueError("state teaching cannot include numeric lessons/plans")
+            from vectorpro.learning.stateful import learn_stateful
+            state_lesson.validate()
+            self.provide_host_operations()
+            outcome = learn_stateful(self.registry, name, state_lesson)
+            accepted = outcome.capability is not None
+        else:
+            if plan is None or lesson is None or plan.name != name:
+                raise ValueError("numeric teaching requires matching plan and examples")
+            outcome = self.learner.learn_examples(plan, lesson, self._rng)
+            accepted = outcome.learned
+        return RequestResult("learned" if accepted else "learning_failed",
+                             capability=name if accepted else None, history=outcome.history)
+
     def save(self, path: Path) -> None:
         """Atomically save all capability tensors in one portable data file."""
         path = Path(path)

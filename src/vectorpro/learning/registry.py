@@ -144,7 +144,8 @@ class Registry:
             table = TableCell(sig, torch.tensor(provenance["table"]))
             return FunctionUnit(plan.name, schema_from_spec(provenance["schema"]), table)
         if provenance["kind"] == "program":
-            return ProgramExecutable(VectorProgram.from_data(provenance["program"]), self)
+            return ProgramExecutable(VectorProgram.from_data(provenance["program"]), self,
+                                     budget=provenance.get("execution_budget"))
         if provenance["kind"] == "host":
             from vectorpro.host import HostExecutable
             return HostExecutable(provenance["operation"])

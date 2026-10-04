@@ -1,0 +1,76 @@
+{
+  "held_out": {
+    "fill": 100,
+    "map": 100,
+    "guarded_map": 100,
+    "pair_map": 100
+  },
+  "larger_files": 2048,
+  "native_and_reload": true,
+  "task_program_authored": false,
+  "effect_trace_required": false,
+  "numeric_library": "previously acquired sub/xor tables",
+  "grammar": "generic indexed-buffer fill/map plus learned-procedure composition",
+  "capabilities": {
+    "fill": {
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 5,
+          "tensor_steps": 6,
+          "candidates": 1,
+          "control": "buffer-fill",
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "listing": "fill: learned state transformation\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    r4 = zero\n    r5 = zero\n    r6 = zero\n    r7 = zero\n    r8 = zero\n    r9 = one\n    @0: r3 = file.read(r0)\n    @1: r4 = buffer.length(r3)\n    @2: (test only); if r4 != 0 goto @3 else @5\n    @3: r4 = sub(r4, r9)\n    @4: r5 = buffer.set(r3, r4, r1); if r4 != 0 goto @3 else @5\n    @5: r8 = file.write(r0, r3)\n    result = r8\n  learned from 2 training cases and 2 validation cases; 5 steps, 1 candidates"
+    },
+    "map": {
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 7,
+          "tensor_steps": 8,
+          "candidates": 12,
+          "control": "buffer-map",
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "listing": "map: learned state transformation\n  shape: 2 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = zero\n    r3 = zero\n    r4 = zero\n    r5 = zero\n    r6 = zero\n    r7 = zero\n    r8 = zero\n    r9 = one\n    @0: r3 = file.read(r0)\n    @1: r4 = buffer.length(r3)\n    @2: (test only); if r4 != 0 goto @3 else @7\n    @3: r4 = sub(r4, r9)\n    @4: r6 = buffer.get(r3, r4)\n    @5: r7 = xor(r6, r1)\n    @6: r5 = buffer.set(r3, r4, r7); if r4 != 0 goto @3 else @7\n    @7: r8 = file.write(r0, r3)\n    result = r8\n  learned from 2 training cases and 2 validation cases; 7 steps, 12 candidates"
+    },
+    "guarded_map": {
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 240,
+          "control": "branch",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "listing": "guarded_map: learned state transformation\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = one\n    r5 = zero\n    @0: (test only); if r2 != 0 goto @1 else halt\n    @1: r5 = map(r0, r1)\n    result = r5\n  learned from 2 training cases and 2 validation cases; 1 steps, 240 candidates"
+    },
+    "pair_map": {
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 2508,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "listing": "pair_map: learned state transformation\n  shape: 3 operand(s) of W bits -> W bits\n  vector program (state example search), disassembled from its tensors:\n    r0 = input x0\n    r1 = input x1\n    r2 = input x2\n    r3 = zero\n    r4 = one\n    r5 = zero\n    r6 = zero\n    @0: r5 = map(r0, r2)\n    @1: r6 = map(r1, r2)\n    result = r6\n  learned from 2 training cases and 2 validation cases; 2 steps, 2508 candidates"
+    }
+  }
+}
