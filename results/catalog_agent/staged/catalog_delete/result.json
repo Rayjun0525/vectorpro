@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "response": {
+    "status": "needs_input",
+    "question": "Please provide the correct inputs and validation for the request to delete input.bin. The correct validation should include input probe.bin, before contains probe.bin hex 0007, and after is the empty file snapshot. Please confirm if the request is correct.",
+    "tools": [
+      {
+        "name": "propose_request",
+        "result": {
+          "input_types": [
+            "path",
+            "buffer",
+            "buffer"
+          ],
+          "candidates": [],
+          "status": "needs_learning_examples",
+          "reason": "no compatible stored capability"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Please provide the correct inputs and validation for the request to delete input.bin. The correct validation should include input probe.bin, before contains probe.bin hex 0007, and after is the empty file snapshot. Please confirm if the request is correct."
+        }
+      }
+    ]
+  }
+}

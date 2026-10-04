@@ -1,0 +1,64 @@
+{
+  "passed": false,
+  "response": {
+    "status": "call_budget",
+    "tools": [
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation operands must fit their width"
+        }
+      }
+    ]
+  }
+}

@@ -12,6 +12,7 @@
 - [다른 OS의 동일 파일 검증 절차](docs/PORTABILITY.md)
 - [변경별 테스트와 재현 방법](docs/TESTING.md)
 - [텐서 카탈로그·검색 정확도 검증](docs/TENSOR_CATALOG.md)
+- [정식 텐서 저장·LLM 카탈로그 연결](docs/CATALOG_AGENT.md)
 
 특히 **기존 `vectorpro-test` 컨테이너 하나를 `nerdctl exec`로 재사용**한다.
 새 컨테이너나 이미지를 만들지 않는다. 작업별 절차를 사람이 작성해 놓고 학습

@@ -1,0 +1,338 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "catalog_xor": {
+      "passed": false,
+      "response": {
+        "status": "call_budget",
+        "tools": [
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation operands must fit their width"
+            }
+          }
+        ]
+      }
+    },
+    "catalog_sub": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct file path or buffer identifier for the buffer operation at width 16.",
+        "tools": [
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "input_types": [
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.14913247525691986
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 0"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct file path or buffer identifier for the buffer operation at width 16."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_file": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct hex value for the probe.bin file before the XOR operation to proceed.",
+        "tools": [
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 0"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct hex value for the probe.bin file before the XOR operation to proceed."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_unknown": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct inputs and outputs for the stored function to verify its correctness.",
+        "tools": [
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "operand rows must have identical types"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct inputs and outputs for the stored function to verify its correctness."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_delete": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct validation demonstration for deleting input.bin at width 16.",
+        "tools": [
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "state validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct validation demonstration for deleting input.bin at width 16."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_clarify": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "What do you want to do with input.bin? Please specify the transformation or desired output.",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What do you want to do with input.bin? Please specify the transformation or desired output."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_xor_self": {
+      "passed": false,
+      "response": {
+        "status": "call_budget",
+        "tools": [
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation examples need distinct inputs and one target each"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          }
+        ]
+      }
+    },
+    "catalog_korean": {
+      "passed": false,
+      "response": {
+        "status": "call_budget",
+        "tools": [
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          },
+          {
+            "name": "resolve_state",
+            "result": {
+              "status": "error",
+              "message": "non-hexadecimal number found in fromhex() arg at position 5"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt"
+}

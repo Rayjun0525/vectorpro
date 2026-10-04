@@ -1,0 +1,265 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "catalog_xor": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Provide the missing intent or evidence for the resolve_request.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "input_types": [
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.45910608768463135
+                }
+              ],
+              "status": "needs_evidence",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Provide the missing intent or evidence for the resolve_request."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_sub": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the missing intent or evidence for the request.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3989413380622864
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.15302392840385437
+                }
+              ],
+              "status": "needs_evidence",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the missing intent or evidence for the request."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_file": {
+      "passed": false,
+      "response": {
+        "status": "answered",
+        "text": "<tool_call>{\"name\": \"resolve_request\", \"arguments\": {\"query\": \"XOR each byte of input.bin with mask 53 at width 16 and save back to the same file.\", \"width\": 16, \"operands\": [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",
+        "tools": []
+      }
+    },
+    "catalog_unknown": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct validation examples at width 4: [1,3] gives 3 and [5,3] gives 15.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "input_types": [
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.24503199756145477
+                }
+              ],
+              "status": "needs_evidence",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct validation examples at width 4: [1,3] gives 3 and [5,3] gives 15."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_delete": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Do you have a function to delete input.bin? If not, please provide more details.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "status": "error",
+              "message": "operand rows must have identical types"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you have a function to delete input.bin? If not, please provide more details."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_clarify": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "What would you like to do with input.bin? Please specify your desired transformation or output.",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What would you like to do with input.bin? Please specify your desired transformation or output."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_xor_self": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Provide two correct numeric validation examples for the resolve_request.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "input_types": [
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.4834889769554138
+                }
+              ],
+              "status": "needs_evidence",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Provide two correct numeric validation examples for the resolve_request."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_korean": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "4비트에서 [1,3]의 정답 2, [5,3]의 정답 6이야.",
+        "tools": [
+          {
+            "name": "resolve_request",
+            "result": {
+              "input_types": [
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.42860934138298035
+                }
+              ],
+              "status": "needs_evidence",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "4비트에서 [1,3]의 정답 2, [5,3]의 정답 6이야."
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt"
+}

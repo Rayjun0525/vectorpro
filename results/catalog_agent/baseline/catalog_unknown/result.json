@@ -1,0 +1,38 @@
+{
+  "passed": false,
+  "response": {
+    "status": "needs_input",
+    "question": "Please provide the correct validation examples at width 4: [1,3] gives 3 and [5,3] gives 15.",
+    "tools": [
+      {
+        "name": "resolve_request",
+        "result": {
+          "input_types": [
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "buffer.new",
+              "input_types": [
+                "value"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Allocate, create a new byte array in memory with the requested size.",
+              "score": 0.24503199756145477
+            }
+          ],
+          "status": "needs_evidence",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Please provide the correct validation examples at width 4: [1,3] gives 3 and [5,3] gives 15."
+        }
+      }
+    ]
+  }
+}

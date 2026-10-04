@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "response": {
+    "status": "needs_input",
+    "question": "What would you like to do with input.bin? Please specify your request.",
+    "tools": [
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "What would you like to do with input.bin? Please specify your request."
+        }
+      }
+    ]
+  }
+}

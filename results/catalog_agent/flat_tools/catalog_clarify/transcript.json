@@ -1,0 +1,21 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the tensor catalog to satisfy the user's request. Call one actual tool at a time.\nFor numbers call resolve_numeric: query, width, inputs=[integers], validation_width,\nvalidation_inputs=[[integers],[integers]], validation_outputs=[correct answers].\nFor files/buffers call resolve_state: query, width, inputs=[portable operands], validation=[cases].\nPortable operands are JSON integers or {\"utf8\":\"relative/file\"} paths or {\"hex\":\"00ff\"} buffers.\nTypes are derived automatically from these values. Do not invent input_types or capability names.\nNumeric examples require at least two distinct inputs and correct answers.\nState cases are {inputs:[portable operands],before:{path:hex},after:{path:hex},output:integer}.\nSnapshots must include unchanged files too.\nExamples are only virtual verification, not native execution. Prefer evidence provided by the user.\nmatched: call execute_resolved with no arguments; inputs are already stored and verified.\nneeds_evidence: ask_user for missing intent or more discriminating examples.\nneeds_learning_examples: no compatible function was verified; ask for learning examples or teach\nwhen the user authorizes it. Never substitute the nearest function or claim success after failure.\nMissing goals: ask_user. Do not modify files before a successful matched result.\nLLM-created answers are proposals, not independent proof of intent. No source code or recipes.\n"
+      },
+      {
+        "role": "user",
+        "content": "Do something with input.bin. I have not chosen the transformation or desired output. Ask me what I want; leave files unchanged."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": {\"question\": \"What do you want to do with input.bin? Please specify the transformation or desired output.\"}} </tool_call>",
+    "usage": {
+      "prompt_tokens": 1091,
+      "completion_tokens": 41,
+      "total_tokens": 1132
+    },
+    "seconds": 3.5822641639988433
+  }
+]

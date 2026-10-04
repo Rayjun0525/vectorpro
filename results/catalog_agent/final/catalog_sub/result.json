@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "response": {
+    "status": "answered",
+    "text": "The result of subtracting 4567 from 12345 at width 16 is 7778.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.3989413380622864
+            },
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.15302392840385437
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.3989413380622864
+            },
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.15302392840385437
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "verify_numeric",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.3989413380622864
+            },
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.15302392840385437
+            }
+          ],
+          "status": "matched",
+          "name": "sub",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            7778
+          ],
+          "capability": "sub",
+          "history": []
+        }
+      }
+    ]
+  }
+}

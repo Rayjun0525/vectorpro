@@ -1,0 +1,194 @@
+{
+  "passed": true,
+  "response": {
+    "status": "answered",
+    "text": "16비트로 계산된 비트별 배타적 논리합은 8686입니다. 저장된 기능을 검증하고 실행했으며, 학습하지 않았습니다.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.41169285774230957
+            },
+            {
+              "name": "buffer.get",
+              "input_types": [
+                "buffer",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+              "score": 0.20658180117607117
+            },
+            {
+              "name": "buffer.length",
+              "input_types": [
+                "buffer"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Measure buffer size, count how many bytes a memory buffer contains.",
+              "score": 0.17971321940422058
+            },
+            {
+              "name": "guarded_map",
+              "input_types": [
+                "path",
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.17827123403549194
+            },
+            {
+              "name": "buffer.set",
+              "input_types": [
+                "buffer",
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Write, replace, update one byte in a memory buffer at a position or offset.",
+              "score": 0.1771787703037262
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.41169285774230957
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.1540813446044922
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "verify_numeric",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.41169285774230957
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.1540813446044922
+            }
+          ],
+          "status": "matched",
+          "name": "xor",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            8686
+          ],
+          "capability": "xor",
+          "history": []
+        }
+      }
+    ]
+  }
+}

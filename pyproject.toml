@@ -15,6 +15,7 @@ vectorpro-agent = "vectorpro.agent:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]
+catalog = ["transformers>=4.57,<5"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-04",
+  "container": "vectorpro-test",
+  "container_id": "98610c2e6eae",
+  "new_container": false,
+  "new_image": false,
+  "new_model_download": false,
+  "full_regression": {
+    "command": "nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q",
+    "passed": 173,
+    "seconds": 232.15
+  },
+  "prior_targeted_check": {
+    "command": "nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q tests/test_semantic_catalog.py tests/test_catalog_retrieval.py tests/test_agent.py",
+    "passed": 21,
+    "seconds": 15.61,
+    "not_added_to_full_count": true
+  },
+  "real_model_diagnostics": {
+    "eight_scenarios": "results/catalog_agent/final/summary.json",
+    "passed": 5,
+    "total": 8,
+    "followup": "results/catalog_agent/phase_verified/summary.json",
+    "followup_passed": 1,
+    "followup_total": 2,
+    "followup_file_passed": true,
+    "followup_self_generated_examples_passed": false,
+    "independent_holdout": false,
+    "combined_success_rate": null
+  },
+  "llm_free_tensor_cli": "results/catalog_agent/cli-smoke/result.json",
+  "limits": [
+    "Model-generated examples remain unreliable",
+    "Deletion scenario asked before validating support; strict criterion failed",
+    "Natural-language operand interpretation is not independently proved",
+    "External provider compatibility not tested",
+    "New tensor storage not retested on Windows or macOS"
+  ]
+}

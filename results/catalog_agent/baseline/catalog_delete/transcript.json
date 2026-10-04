@@ -1,0 +1,59 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the tensor catalog to satisfy the user's request. Call one actual tool at a time.\nStart with resolve_request: query describes the goal; width is the bit width;\noperands contains rows of JSON integers or {\"utf8\":\"relative/file\"} paths or {\"hex\":\"00ff\"} buffers.\nTypes are derived automatically from these values. Do not invent input_types or capability names.\nSupply numeric_validation={width,operands:[[integers]],targets:[integers]} with at least two\ndistinct correct examples, or state_validation=[{inputs:[portable operands],before:{path:hex},\nafter:{path:hex},output:integer}]. Snapshots must include unchanged files too.\nExamples are only virtual verification, not native execution. Prefer evidence provided by the user.\nmatched: execute the returned name with EXACTLY the same width/operands from resolve_request.\nneeds_evidence: ask_user for missing intent or more discriminating examples.\nneeds_learning_examples: no compatible function was verified; ask for learning examples or teach\nwhen the user authorizes it. Never substitute the nearest function or claim success after failure.\nMissing goals: ask_user. Do not modify files before a successful matched result.\nLLM-created answers are proposals, not independent proof of intent. No source code or recipes.\n"
+      },
+      {
+        "role": "user",
+        "content": "Delete input.bin. At width 16 a correct validation demonstration is: input probe.bin, before contains probe.bin hex 0007, after is the empty file snapshot. Resolve this request. Do not teach or substitute overwriting for deletion. Ask me if no stored function matches."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"resolve_request\", \"arguments\": {\"query\": \"Delete input.bin. At width 16 a correct validation demonstration is: input probe.bin, before contains probe.bin hex 0007, after is the empty file snapshot.\", \"width\": 16, \"operands\": [[16], [0, 7]]}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 999,
+      "completion_tokens": 74,
+      "total_tokens": 1073
+    },
+    "seconds": 11.952804621998439
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the tensor catalog to satisfy the user's request. Call one actual tool at a time.\nStart with resolve_request: query describes the goal; width is the bit width;\noperands contains rows of JSON integers or {\"utf8\":\"relative/file\"} paths or {\"hex\":\"00ff\"} buffers.\nTypes are derived automatically from these values. Do not invent input_types or capability names.\nSupply numeric_validation={width,operands:[[integers]],targets:[integers]} with at least two\ndistinct correct examples, or state_validation=[{inputs:[portable operands],before:{path:hex},\nafter:{path:hex},output:integer}]. Snapshots must include unchanged files too.\nExamples are only virtual verification, not native execution. Prefer evidence provided by the user.\nmatched: execute the returned name with EXACTLY the same width/operands from resolve_request.\nneeds_evidence: ask_user for missing intent or more discriminating examples.\nneeds_learning_examples: no compatible function was verified; ask for learning examples or teach\nwhen the user authorizes it. Never substitute the nearest function or claim success after failure.\nMissing goals: ask_user. Do not modify files before a successful matched result.\nLLM-created answers are proposals, not independent proof of intent. No source code or recipes.\n"
+      },
+      {
+        "role": "user",
+        "content": "Delete input.bin. At width 16 a correct validation demonstration is: input probe.bin, before contains probe.bin hex 0007, after is the empty file snapshot. Resolve this request. Do not teach or substitute overwriting for deletion. Ask me if no stored function matches."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "resolve_request",
+              "arguments": "{\"query\": \"Delete input.bin. At width 16 a correct validation demonstration is: input probe.bin, before contains probe.bin hex 0007, after is the empty file snapshot.\", \"width\": 16, \"operands\": [[16], [0, 7]]}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"error\", \"message\": \"operand rows must have identical types\"}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": {\"question\": \"Do you have a function to delete input.bin? If not, please provide more details.\"}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 1104,
+      "completion_tokens": 35,
+      "total_tokens": 1139
+    },
+    "seconds": 8.86114317800093
+  }
+]

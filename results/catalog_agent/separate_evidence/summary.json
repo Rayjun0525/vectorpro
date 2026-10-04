@@ -1,0 +1,579 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "catalog_xor": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The bitwise XOR of 12345 and 4567 at width 16 is 8686.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.6244543194770813
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.39677831530570984
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.6244543194770813
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.39677831530570984
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                8686
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "catalog_sub": {
+      "passed": false,
+      "response": {
+        "status": "answered",
+        "text": "The result of subtracting 4567 from 12345 at width 16 is 123294.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.5176050662994385
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.16617035865783691
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.5176050662994385
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.16617035865783691
+                }
+              ],
+              "status": "matched",
+              "name": "sub",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                123294
+              ],
+              "capability": "sub",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "catalog_file": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the missing intent or more discriminating examples for the file operation.",
+        "tools": [
+          {
+            "name": "propose_file_request",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.45940476655960083
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.45940476655960083
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the missing intent or more discriminating examples for the file operation."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_unknown": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "If the result of multiplying 5 and 3 is 15, check if it matches the expected output. If not, please provide the correct result.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3810025453567505
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.2586301267147064
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3810025453567505
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.2586301267147064
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "If the result of multiplying 5 and 3 is 15, check if it matches the expected output. If not, please provide the correct result."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_delete": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the input and output paths for the file operation to verify the intent.",
+        "tools": [
+          {
+            "name": "propose_file_request",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.21685677766799927
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.21685677766799927
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the input and output paths for the file operation to verify the intent."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_clarify": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "What would you like to do with input.bin? Please specify your desired transformation or output.",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What would you like to do with input.bin? Please specify your desired transformation or output."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_xor_self": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct numeric validation examples for the operands 12345 and 4567 at width 16.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5961307883262634
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.45452508330345154
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "status": "error",
+              "message": "validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct numeric validation examples for the operands 12345 and 4567 at width 16."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_korean": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "16비트로 계산된 비트별 배타적 논리합은 8686입니다. 저장된 기능을 검증하고 실행했으며, 학습하지 않았습니다.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5138611197471619
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3797316551208496
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5138611197471619
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3797316551208496
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                8686
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true
+}

@@ -556,7 +556,15 @@ disambiguation. These are finite prototype results, not universal accuracy.
 The actual Qwen tool-loop test passed known arithmetic, clarification and native
 file execution under constrained decoding. New-function example generation still
 failed; the later evidence-size guard rejected duplicate examples and asked for
-input. Search integration into that LLM loop remains future work.
+input. The optional catalog adapter now connects search, required typed arguments,
+isolated evidence verification and a single execution of the bound request. The
+runtime supports `.pt` alongside JSON; known named functions still run without an
+LLM or encoder. See [catalog adapter](docs/CATALOG_AGENT.md) for its evidence
+requirements and remaining intent/example-generation limitations.
+The final regression suite passed 173 tests. Real Qwen diagnostics passed 5/8;
+after further phase/schema constraints, the native file request passed while
+self-generated validation examples still failed. Those reused diagnostic sets
+are reported separately, not as independent accuracy.
 
 For prerequisites, commands, expected results and preserved output paths, see
 [testing instructions](docs/TESTING.md), [tensor catalog details](docs/TENSOR_CATALOG.md)

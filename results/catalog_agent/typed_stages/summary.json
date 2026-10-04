@@ -1,0 +1,319 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "catalog_xor": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The bitwise XOR of 12345 and 4567 at width 16 is 8686.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.7547945976257324
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.233162522315979
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.7547945976257324
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.233162522315979
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                8686
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "catalog_unknown": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct hexadecimal output for the multiplication of 5 and 3 at width 16.",
+        "tools": [
+          {
+            "name": "propose_numeric_request",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3810025453567505
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.2586301267147064
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "propose_file_request",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.033651866018772125
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct hexadecimal output for the multiplication of 5 and 3 at width 16."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_file": {
+      "passed": false,
+      "response": {
+        "status": "needs_input",
+        "question": "Please provide the correct isolated validation demonstration for the given example. Inputs are probe.bin and mask 1; before probe.bin is hex 0007, after it is 0106, return 2.",
+        "tools": [
+          {
+            "name": "propose_file_request",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.5240238904953003
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.44315314292907715
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "state validation types do not match requested operands"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Please provide the correct isolated validation demonstration for the given example. Inputs are probe.bin and mask 1; before probe.bin is hex 0007, after it is 0106, return 2."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_delete": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "Missing intent or more discriminating examples for the request? Please provide the missing intent or examples.",
+        "tools": [
+          {
+            "name": "propose_file_request",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.20324060320854187
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "input_types": [
+                "path"
+              ],
+              "candidates": [
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.20324060320854187
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Missing intent or more discriminating examples for the request? Please provide the missing intent or examples."
+            }
+          }
+        ]
+      }
+    },
+    "catalog_clarify": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "What would you like to do with input.bin? Please specify your desired transformation or output.",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What would you like to do with input.bin? Please specify your desired transformation or output."
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt"
+}

@@ -85,6 +85,77 @@ TOOLS = [tool("list_capabilities", "List acquired and provided capabilities with
               ("name", "width", "operands")),
          tool("ask_user", "Ask for missing intent/evidence and stop this turn", {"question": {"type": "string"}}, ("question",))]
 
+_EXECUTE_PROPERTIES = next(t["function"]["parameters"]["properties"] for t in TOOLS if t["function"]["name"] == "execute")
+RESOLVE_TOOL = tool("resolve_request", "Find typed candidates and verify supplied evidence in memory; NEVER executes on native files",
+    {"query": {"type": "string"}, "width": _EXECUTE_PROPERTIES["width"],
+     "operands": _EXECUTE_PROPERTIES["operands"], "numeric_validation": EXAMPLE_SCHEMA,
+     "state_validation": {"type": "array", "minItems": 1, "maxItems": 8,
+         "items": {"type": "object", "properties": {
+             "inputs": _EXECUTE_PROPERTIES["operands"]["items"],
+             "before": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-fA-F]*$"}},
+             "after": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-fA-F]*$"}},
+             "output": {"type": "integer"}}, "required": ["inputs", "before", "after"], "additionalProperties": False}}},
+    ("query", "width", "operands"))
+
+_NUMERIC_ROW = {"type": "array", "minItems": 1, "maxItems": 3, "items": {"type": "integer"}}
+RESOLVE_NUMERIC = tool("resolve_numeric", "Find a stored numeric function matching correct examples; no native execution",
+    {"query": {"type": "string"}, "width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "inputs": _NUMERIC_ROW, "validation_width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "validation_inputs": {"type": "array", "minItems": 2, "maxItems": 32, "items": _NUMERIC_ROW},
+     "validation_outputs": {"type": "array", "minItems": 2, "maxItems": 32, "items": {"type": "integer"}}},
+    ("query", "width", "inputs", "validation_width", "validation_inputs", "validation_outputs"))
+RESOLVE_STATE = tool("resolve_state", "Find a stored file/buffer procedure matching complete virtual file snapshots; no native execution",
+    {"query": {"type": "string"}, "width": _EXECUTE_PROPERTIES["width"],
+     "inputs": _EXECUTE_PROPERTIES["operands"]["items"],
+     "validation": RESOLVE_TOOL["function"]["parameters"]["properties"]["state_validation"]},
+    ("query", "width", "inputs", "validation"))
+EXECUTE_RESOLVED = tool("execute_resolved", "Execute the last uniquely matched request with its already verified inputs, once", {})
+PROPOSE_TOOL = tool("propose_request", "Step 1: extract ONLY the actual requested inputs and goal; do not include validation example inputs",
+    {"query": {"type": "string", "description": "Operation/goal in words, not an input number"},
+     "width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "inputs": {**_EXECUTE_PROPERTIES["operands"]["items"], "minItems": 1, "maxItems": 3,
+                "description": "All inputs of the actual operation, in order. JSON integers or {utf8:relative_path}."}},
+    ("query", "width", "inputs"))
+PROPOSE_NUMERIC = tool("propose_numeric_request", "Step 1 for NUMBERS: extract every actual numeric input, not the validation examples",
+    {"query": {"type": "string", "description": "Requested operation in words"},
+     "width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "inputs": {**_NUMERIC_ROW, "description": "All requested numbers in order, as JSON integers. Never strings or file paths."}},
+    ("query", "width", "inputs"))
+PROPOSE_FILE = tool("propose_file_request", "Step 1 for FILES: extract actual target paths and numeric parameters, not demonstration paths",
+    {"query": {"type": "string"}, "width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "paths": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"type": "string"}},
+     "values": {"type": "array", "minItems": 0, "maxItems": 2, "items": {"type": "integer"},
+                "description": "Actual mask/value/flag parameters; empty if none"}},
+    ("query", "width", "paths", "values"))
+VERIFY_NUMERIC = tool("verify_numeric", "Step 2: provide small correct validation examples ONLY, not the requested large inputs",
+    {"width": {"type": "integer", "minimum": 1, "maximum": 32},
+     "operands": {"type": "array", "minItems": 2, "maxItems": 32, "items": _NUMERIC_ROW},
+     "targets": {"type": "array", "minItems": 2, "maxItems": 32, "items": {"type": "integer"}}},
+    ("width", "operands", "targets"))
+VERIFY_STATE = tool("verify_state", "Step 2: provide complete before/after file snapshots as HEX byte strings",
+    {"cases": RESOLVE_TOOL["function"]["parameters"]["properties"]["state_validation"]}, ("cases",))
+SEARCH_GOAL = tool("search_goal", "Find candidate functions and their argument roles for the requested operation; no execution",
+                   {"query": {"type": "string"}}, ("query",))
+
+CATALOG_GUIDE = """Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.
+Ask the user only if the goal is missing, or verification says more evidence/learning is needed.
+Follow the steps:
+1. search_goal(query=operation in words).
+2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL
+request, following argument roles, not order of mention. Read the required fields carefully.
+Never drop a requested operand to fit a candidate with fewer inputs.
+3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;
+never change the already fixed request. Use verify_numeric(width,operands,targets) for
+two distinct correct examples, or verify_state(cases) for full before/after file snapshots.
+State example inputs use integers, {"utf8":"file"} paths or {"hex":"00ff"} buffers.
+Snapshots map actual filenames directly to HEX bytes, including unchanged files.
+Copy caller evidence accurately; model-generated answers are fallible proposals.
+4. On matched, execute_resolved({}) once. Report the actual returned output.
+On needs_evidence or needs_learning_examples, ask_user; never substitute another operation.
+If learning is enabled and authorized, teaching needs separate training and validation.
+On error, correct the failed arguments. No code, binaries, recipes or invented tool names.
+"""
+
 
 class ChatModel(Protocol):
     def complete(self, messages: list[dict], tools: list[dict]) -> dict: ...
@@ -107,13 +178,145 @@ class HTTPChatModel:
 
 class AgentSession:
     def __init__(self, runtime: VectorRuntime, model: ChatModel, program_path: Path | None = None,
-                 max_calls: int = 12):
+                 max_calls: int = 12, catalog=None, allow_learning: bool = True):
         if type(max_calls) is not int or max_calls < 1:
             raise ValueError("max_calls must be a positive integer")
         self.runtime, self.model, self.program_path, self.max_calls = runtime, model, program_path, max_calls
-        self.messages = [{"role": "system", "content": GUIDE}]
+        if catalog is not None and catalog.runtime is not runtime:
+            raise ValueError("catalog and session must use the same runtime")
+        self.catalog, self._resolved, self._resolution_status = catalog, None, None
+        self._proposed = None
+        self._goal, self._candidates = None, []
+        self.allow_learning = allow_learning
+        self.messages = [{"role": "system", "content": CATALOG_GUIDE if catalog else GUIDE}]
+        if not allow_learning:
+            self.messages[0]["content"] += "\nLearning is disabled in this session; never call teaching tools."
+
+    def available_tools(self):
+        if self.catalog is None:
+            return [t for t in TOOLS if self.allow_learning or t["function"]["name"] not in ("teach", "teach_numeric")]
+        permitted = {"ask_user"}
+        if self._resolved or (self._proposed and getattr(self, "_caller_evidence", None)
+                              and not getattr(self, "_verification_attempted", False)):
+            permitted.clear()  # already supplied evidence/verified inputs need no extra confirmation
+        if self._resolution_status == "needs_learning_examples" and self.allow_learning:
+            permitted.update(("teach", "teach_numeric"))
+        verification = []
+        if self._proposed and self._resolution_status not in ("matched", "needs_learning_examples"):
+            from vectorpro.semantic_catalog import operand_types
+            shape = operand_types(self._proposed["operands"])
+            verification = [VERIFY_NUMERIC if all(t == "value" for t in shape) else VERIFY_STATE]
+            if verification == [VERIFY_NUMERIC]:
+                numeric_tool = json.loads(json.dumps(VERIFY_NUMERIC))
+                properties = numeric_tool["function"]["parameters"]["properties"]
+                properties["operands"]["items"].update(minItems=len(shape), maxItems=len(shape))
+                supplied = getattr(self, "_caller_evidence", None)
+                if supplied and "numeric_validation" in supplied:
+                    count = len(supplied["numeric_validation"]["operands"])
+                    for field in ("operands", "targets"):
+                        properties[field].update(minItems=count, maxItems=count)
+                verification = [numeric_tool]
+            if verification == [VERIFY_STATE]:
+                state_tool = json.loads(json.dumps(VERIFY_STATE))
+                schemas = []
+                for kind in shape:
+                    schemas.append({"type": "integer"} if kind == "value" else {
+                        "type": "object", "properties": {"utf8" if kind == "path" else "hex": {"type": "string"}},
+                        "required": ["utf8" if kind == "path" else "hex"], "additionalProperties": False})
+                state_tool["function"]["parameters"]["properties"]["cases"]["items"]["properties"]["inputs"] = {
+                    "type": "array", "prefixItems": schemas, "items": False,
+                    "minItems": len(shape), "maxItems": len(shape)}
+                verification = [state_tool]
+        proposal_tools = []
+        if not self._proposed:
+            if not self._candidates:
+                proposal_tools = [SEARCH_GOAL]
+            else:
+                for index, candidate in enumerate(self._candidates):
+                    properties = {"width": {"type": "integer", "minimum": 1, "maximum": 32}}
+                    for i, (kind, role) in enumerate(zip(candidate["input_types"], candidate["argument_roles"])):
+                        properties[f"x{i}"] = {"type": "integer" if kind == "value" else "string",
+                            "description": role + "; actual request input, not validation example"}
+                    proposal_tools.append(tool(f"prepare_{index}", "Prepare " + candidate["name"] + ": " + candidate["description"],
+                                               properties, tuple(properties)))
+        return [*proposal_tools, *verification, *([EXECUTE_RESOLVED] if self._resolved else []),
+                *[t for t in TOOLS if t["function"]["name"] in permitted]]
 
     def call(self, name, args):
+        if name in ("teach", "teach_numeric") and not self.allow_learning:
+            raise ValueError("learning is disabled for this session")
+        if name == "search_goal":
+            if self.catalog is None:
+                raise ValueError("no tensor catalog configured")
+            self._resolved, self._proposed = None, None
+            self._goal = args["query"]
+            self._candidates = self.catalog.search_goal(self._goal, types=getattr(self, "_caller_types", None))
+            self._resolution_status = None if self._candidates else "needs_learning_examples"
+            return {"status": "candidates" if self._candidates else "needs_learning_examples", "candidates": self._candidates,
+                    "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"}
+        if name.startswith("prepare_"):
+            index = int(name.removeprefix("prepare_"))
+            if not 0 <= index < len(self._candidates):
+                raise ValueError("candidate is not available")
+            candidate = self._candidates[index]
+            if set(args) != {"width", *(f"x{i}" for i in range(len(candidate["input_types"])))}:
+                raise ValueError("provide width and every candidate input, without extra fields")
+            inputs = []
+            for i, kind in enumerate(candidate["input_types"]):
+                value = args[f"x{i}"]
+                inputs.append({"utf8": value} if kind == "path" else {"hex": value} if kind == "buffer" else value)
+            return self.call("propose_request", {"query": self._goal, "width": args["width"], "inputs": inputs})
+        if name == "propose_numeric_request":
+            from vectorpro.semantic_catalog import operand_types
+            if operand_types([args["inputs"]]) != ["value"] * len(args["inputs"]):
+                raise ValueError("numeric requests need JSON integer inputs")
+            return self.call("propose_request", args)
+        if name == "propose_file_request":
+            return self.call("propose_request", {"query": args["query"], "width": args["width"],
+                "inputs": [{"utf8": p} for p in args["paths"]] + args["values"]})
+        if name == "propose_request":
+            if self.catalog is None:
+                raise ValueError("no tensor catalog configured")
+            self._proposed = None
+            self._verification_attempted = False
+            proposal = {"query": args["query"], "width": args["width"], "operands": [args["inputs"]]}
+            result = self.call("resolve_request", proposal)
+            self._proposed = json.loads(json.dumps(proposal))
+            if result["status"] == "needs_evidence":
+                result = {**result, "status": "proposed", "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"}
+            return result
+        if name in ("verify_numeric", "verify_state"):
+            if self._proposed is None:
+                raise ValueError("first propose the actual requested inputs")
+            self._verification_attempted = True
+            key = "numeric_validation" if name == "verify_numeric" else "state_validation"
+            supplied = getattr(self, "_caller_evidence", None)
+            if supplied is not None and (key not in supplied or supplied[key] != (args if name == "verify_numeric" else args["cases"])):
+                raise ValueError("copy caller validation evidence exactly; do not change its inputs, answers or snapshots")
+            return self.call("resolve_request", {**self._proposed, key: args if name == "verify_numeric" else args["cases"]})
+        if name == "resolve_numeric":
+            return self.call("resolve_request", {"query": args["query"], "width": args["width"],
+                "operands": [args["inputs"]], "numeric_validation": {"width": args["validation_width"],
+                "operands": args["validation_inputs"], "targets": args["validation_outputs"]}})
+        if name == "resolve_state":
+            return self.call("resolve_request", {"query": args["query"], "width": args["width"],
+                "operands": [args["inputs"]], "state_validation": args["validation"]})
+        if name == "execute_resolved":
+            if args or self._resolved is None:
+                raise ValueError("execute_resolved needs no arguments and a uniquely matched request")
+            return self.call("execute", dict(self._resolved))
+        if name == "resolve_request":
+            if self.catalog is None:
+                raise ValueError("no tensor catalog configured")
+            self._resolved = None
+            self._resolution_status = None
+            result = self.catalog.resolve(args["query"], args["operands"], args["width"],
+                        args.get("numeric_validation"), args.get("state_validation"))
+            self._resolution_status = result["status"]
+            if result["status"] == "matched":
+                self._resolved = {"name": result["name"], "width": args["width"],
+                                  "operands": json.loads(json.dumps(args["operands"]))}
+            return result
         if name == "teach_numeric":
             if set(args) != {"name", "description", "output", "training", "validation"}:
                 raise ValueError("teach_numeric requires name, description, output, training, validation")
@@ -161,10 +364,15 @@ class AgentSession:
                         lesson=ExampleLesson.from_dict(data["lesson"]) if "lesson" in data else None,
                         state_lesson=state)
             if result.status == "learned":
+                self._resolved, self._resolution_status = None, None
                 self.runtime.registry.get(data["name"]).provenance["evidence_source"] = "LLM adapter supplied examples"
                 self.save()
             return asdict(result)
         if name == "execute":
+            if self.catalog is not None:
+                if self._resolved is None or args != self._resolved:
+                    raise ValueError("resolve_request must verify this exact name/width/operands before native execution")
+                self._resolved = None  # a verified request authorizes one execution only
             capability = self.runtime.registry.get(args["name"]) if args["name"] in self.runtime.registry else None
             if not args["operands"]:
                 raise ValueError("execute requires non-empty operands, e.g. [[12,3]]; list_capabilities is a separate tool")
@@ -194,32 +402,63 @@ class AgentSession:
         raise ValueError(f"unknown agent tool {name}")
 
     def save(self):
+        if self.catalog is not None:
+            self.catalog.refresh()
         if self.program_path is not None:
             self.runtime.save(self.program_path)
 
-    def run(self, intent: str):
-        self.messages.append({"role": "system", "content": "Available capabilities (names, arity and input types): " +
-                              json.dumps(self.call("list_capabilities", {}), ensure_ascii=False)})
+    def run(self, intent: str, *, evidence: str | None = None):
+        self._resolved, self._resolution_status = None, None
+        self._proposed = None
+        self._goal, self._candidates = None, []
+        self._caller_evidence, self._caller_types = None, None
+        self._verification_attempted = False
+        if self.catalog is not None and evidence is not None:
+            from vectorpro.semantic_catalog import operand_types
+            try:
+                supplied = json.loads(evidence)
+            except (ValueError, TypeError):
+                supplied = None  # free-form evidence can still be interpreted by the model
+            if isinstance(supplied, dict) and set(supplied) == {"width", "operands", "targets"}:
+                self._caller_types = operand_types(supplied["operands"])
+                self._caller_evidence = {"numeric_validation": supplied}
+            else:
+                cases = supplied.get("cases") if isinstance(supplied, dict) else supplied
+                if isinstance(cases, list) and cases and all(isinstance(c, dict) and "inputs" in c for c in cases):
+                    self._caller_types = operand_types([c["inputs"] for c in cases])
+                    self._caller_evidence = {"state_validation": cases}
+        if self.catalog is None:
+            self.messages.append({"role": "system", "content": "Available capabilities (names, arity and input types): " +
+                                  json.dumps(self.call("list_capabilities", {}), ensure_ascii=False)})
         self.messages.append({"role": "user", "content": intent})
         events = []
         for _ in range(self.max_calls):
-            message = self.model.complete(self.messages, TOOLS)
+            offered_tools = self.available_tools()
+            message = self.model.complete(self.messages, offered_tools)
             if message.get("role") != "assistant":
                 raise ValueError("model must return an assistant message")
             self.messages.append(message)
             calls = message.get("tool_calls") or []
             if not calls:
+                if self.catalog is not None and not any(e["result"].get("status") == "executed" for e in events):
+                    status = self._resolution_status if self._resolution_status in ("needs_evidence", "needs_learning_examples") else "not_executed"
+                    return {"status": status, "text": message.get("content"), "tools": events}
                 return {"status": "answered", "text": message.get("content"), "tools": events}
             if len(calls) != 1:
                 raise ValueError("agent accepts one sequential tool call per response")
             call = calls[0]
             try:
+                if call["function"]["name"] not in {t["function"]["name"] for t in offered_tools}:
+                    raise ValueError("tool is not available in the current request phase")
                 args = json.loads(call["function"]["arguments"])
                 result = self.call(call["function"]["name"], args)
             except (ValueError, KeyError, TypeError, OSError, RuntimeError) as error:
                 result = {"status": "error", "message": str(error)}
             events.append({"name": call["function"]["name"], "result": result})
             self.messages.append({"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result, ensure_ascii=False)})
+            if evidence is not None and (call["function"]["name"].startswith("prepare_") or call["function"]["name"] in ("propose_request", "propose_numeric_request", "propose_file_request")) and result.get("status") == "proposed":
+                self.messages.append({"role": "user", "content": "Separate validation evidence from the caller (virtual only; DO NOT change the already proposed request):\n" + evidence})
+                evidence = None
             if call["function"]["name"] == "ask_user" and result.get("status") == "needs_input":
                 return result | {"tools": events}
         return {"status": "call_budget", "tools": events}
@@ -233,13 +472,22 @@ def main(argv=None):
     parser.add_argument("--model", required=True)
     parser.add_argument("--api-key-env", default="VECTORPRO_LLM_API_KEY")
     parser.add_argument("--intent", required=True)
+    parser.add_argument("--encoder", type=Path, help="enable tensor-catalog resolution with a local multilingual MiniLM directory")
+    parser.add_argument("--no-learning", action="store_true", help="execution-only session; do not expose teaching tools")
+    parser.add_argument("--evidence-file", type=Path, help="caller evidence shown only after actual inputs have been proposed")
     args = parser.parse_args(argv)
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
     if host:
         runtime.provide_host_operations()
     model = HTTPChatModel(args.endpoint, args.model, os.environ.get(args.api_key_env))
-    result = AgentSession(runtime, model, args.program).run(args.intent)
+    catalog = None
+    if args.encoder:
+        from vectorpro.semantic_catalog import Encoder, TensorCatalog
+        identity = json.loads((args.encoder / "download.json").read_text())
+        catalog = TensorCatalog(runtime, Encoder(args.encoder), identity)
+    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning).run(
+        args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] == "answered" else 2
 

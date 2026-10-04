@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "response": {
+    "status": "needs_input",
+    "question": "Please provide the actual inputs and outputs for the multiplication operation at width 16.",
+    "tools": [
+      {
+        "name": "propose_request",
+        "result": {
+          "input_types": [
+            "path",
+            "buffer"
+          ],
+          "candidates": [
+            {
+              "name": "file.write",
+              "input_types": [
+                "path",
+                "buffer"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Write, save buffer contents from memory to a disk file; return bytes written.",
+              "score": 0.10424727946519852
+            }
+          ],
+          "status": "needs_evidence",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Please provide the actual inputs and outputs for the multiplication operation at width 16."
+        }
+      }
+    ]
+  }
+}

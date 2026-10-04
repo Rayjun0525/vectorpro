@@ -37,9 +37,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default="/opt/vectorpro-models/Qwen3-0.6B-Q8_0.gguf")
     parser.add_argument("--root", type=Path, default=Path("results/local_small_llm"))
-    parser.add_argument("--scenarios", nargs="+", default=["known", "clarify", "file", "learn"])
+    parser.add_argument("--scenarios", nargs="+")
+    parser.add_argument("--catalog", type=Path, help="use a tensor program and the evidence-gated catalog tool loop")
+    parser.add_argument("--encoder", default="/opt/vectorpro-models/multilingual-minilm")
     parser.add_argument("--constrain-tools", action="store_true", help="Use JSON-schema constrained decoding for tool turns; model still chooses tool and arguments")
+    parser.add_argument("--max-tokens", type=int, default=512, help="bound generated output per model turn")
     args = parser.parse_args()
+    if args.scenarios is None:
+        args.scenarios = (["catalog_xor", "catalog_sub", "catalog_file", "catalog_unknown",
+                           "catalog_delete", "catalog_clarify", "catalog_xor_self", "catalog_korean"]
+                          if args.catalog else ["known", "clarify", "file", "learn"])
+    encoder, identity = None, None
+    if args.catalog:
+        from vectorpro.semantic_catalog import Encoder, TensorCatalog
+        encoder = Encoder(args.encoder)
+        identity = json.loads((Path(args.encoder) / "download.json").read_text())
     import llama_cpp
     from llama_cpp.llama_chat_format import Jinja2ChatFormatter
     llm = llama_cpp.Llama(model_path=args.model, n_ctx=8192, n_threads=4, n_batch=256, verbose=False, seed=0)
@@ -66,7 +78,7 @@ def main():
                     json_grammar = llama_cpp.LlamaGrammar.from_json_schema(json.dumps(schema), verbose=False)._grammar
                     json_grammar = re.sub(r"(?m)^root ::=", "tool-json ::=", json_grammar)
                     grammar = llama_cpp.LlamaGrammar.from_string('root ::= "<tool_call>" tool-json "</tool_call>"\n' + json_grammar, verbose=False)
-                generated = llm.create_completion(formatted.prompt, max_tokens=1200, temperature=0,
+                generated = llm.create_completion(formatted.prompt, max_tokens=args.max_tokens, temperature=0,
                                                   stop=["<|im_end|>"], seed=0, grammar=grammar)
                 text = generated["choices"][0]["text"]
                 raw_calls.append({"messages": data["messages"], "raw_output": text,
@@ -92,30 +104,61 @@ def main():
         "known": "Use the acquired xor function to compute bitwise XOR of 12345 and 4567 at width 16. Do not teach a function. Use tools, then report the actual result.",
         "clarify": "Do something with input.bin. I have not decided what transformation or output I want. Ask me what is missing instead of modifying the file.",
         "file": "Use the acquired map function on input.bin with mask 53 at width 16. Do not teach anything. Change only this file and report the tool result.",
-        "learn": "Acquire a NEW function named tiny_nand: W-bit bitwise complement of AND of two inputs. Make your own numeric training and validation examples. Use a 4-bit training set and a distinct 8-bit validation set. Teach it using the documented tool, then execute tiny_nand on inputs 5 and 3 at width 8. Use the actual tools and do not claim learning without a successful teach result."}
+        "learn": "Acquire a NEW function named tiny_nand: W-bit bitwise complement of AND of two inputs. Make your own numeric training and validation examples. Use a 4-bit training set and a distinct 8-bit validation set. Teach it using the documented tool, then execute tiny_nand on inputs 5 and 3 at width 8. Use the actual tools and do not claim learning without a successful teach result.",
+        "catalog_xor": "Compute bitwise XOR of 12345 and 4567 at width 16. Correct validation examples at width 4: [1,3] gives 2 and [5,3] gives 6. Find a verified stored function, then execute the requested inputs. Do not teach.",
+        "catalog_sub": "Subtract 4567 from 12345 at width 16. Correct validation examples at width 4: [5,3] gives 2 and [9,4] gives 5. Resolve the request then execute it; do not teach.",
+        "catalog_file": 'ACTUAL REQUEST: XOR each byte of input.bin with mask 53 at width 16 and save to the same file.\nVIRTUAL VALIDATION ONLY: {"inputs":[{"utf8":"probe.bin"},1],"before":{"probe.bin":"0007"},"after":{"probe.bin":"0106"},"output":2}.\nUse the actual request paths/values in step 1 and this validation in step 2. Do not teach.',
+        "catalog_unknown": "Multiply 5 and 3 at width 16. Correct validation examples at width 4: [1,3] gives 3 and [5,3] gives 15. Check whether a stored function actually matches. Do not teach or substitute another operation. If none matches, ask me for learning evidence.",
+        "catalog_delete": "Delete input.bin. At width 16 a correct validation demonstration is: input probe.bin, before contains probe.bin hex 0007, after is the empty file snapshot. Resolve this request. Do not teach or substitute overwriting for deletion. Ask me if no stored function matches.",
+        "catalog_clarify": "Do something with input.bin. I have not chosen the transformation or desired output. Ask me what I want; leave files unchanged.",
+        "catalog_xor_self": "Compute bitwise exclusive OR of 12345 and 4567 at width 16. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach.",
+        "catalog_korean": "12345와 4567의 비트별 배타적 논리합을 16비트로 계산해줘. 검증 예제는 4비트에서 [1,3]의 정답 2, [5,3]의 정답 6이야. 학습하지 말고 저장된 기능을 검증한 다음 실제 입력을 실행해줘."}
+    catalog_intents = {
+        "catalog_xor": "Compute bitwise XOR of 12345 and 4567 at width 16. Resolve a stored function then execute it. Do not teach.",
+        "catalog_sub": "Subtract 4567 from 12345 at width 16. Resolve then execute it. Do not teach.",
+        "catalog_file": "XOR every byte of input.bin with mask 53 at width 16 and save to the same file. Resolve then execute. Do not teach.",
+        "catalog_unknown": "Multiply 5 and 3 at width 16. Check for a stored function. Do not teach or substitute another operation. Ask me if unsupported.",
+        "catalog_delete": "Delete input.bin at width 16. Do not teach or substitute another operation. Ask me if unsupported.",
+        "catalog_korean": "12345와 4567의 비트별 배타적 논리합을 16비트로 계산해줘. 저장된 기능을 검증하고 실행해줘. 학습하지 마."}
+    supplied_evidence = {
+        "catalog_xor": {"width": 4, "operands": [[1,3],[5,3]], "targets": [2,6]},
+        "catalog_korean": {"width": 4, "operands": [[1,3],[5,3]], "targets": [2,6]},
+        "catalog_sub": {"width": 4, "operands": [[5,3],[9,4]], "targets": [2,5]},
+        "catalog_unknown": {"width": 4, "operands": [[1,3],[5,3]], "targets": [3,15]},
+        "catalog_file": {"cases": [{"inputs":[{"utf8":"probe.bin"},1],"before":{"probe.bin":"0007"},"after":{"probe.bin":"0106"},"output":2}]},
+        "catalog_delete": {"cases": [{"inputs":[{"utf8":"probe.bin"}],"before":{"probe.bin":"0007"},"after":{}}]}}
     results = {}
     try:
         for name in args.scenarios:
             root = args.root / name
             root.mkdir(parents=True, exist_ok=True)
-            program = root / "program.json"
-            shutil.copyfile("results/initial_model/program.json", program)
+            program = root / ("program.pt" if args.catalog else "program.json")
+            shutil.copyfile(args.catalog or "results/initial_model/program.json", program)
             (root / "input.bin").write_bytes(b"\x00\x07\xff\x80")
             model = HTTPChatModel(f"http://127.0.0.1:{server.server_port}/v1/chat/completions", "Qwen3-0.6B-Q8_0", timeout=180)
             runtime = VectorRuntime.load(program, host=HostContext(root))
-            session = AgentSession(runtime, model, program, max_calls=8)
+            catalog = TensorCatalog(runtime, encoder, identity) if args.catalog else None
+            session = AgentSession(runtime, model, program, max_calls=8, catalog=catalog, allow_learning=not bool(args.catalog))
             start = len(raw_calls)
             print(f"running {name}", flush=True)
             try:
-                response = session.run(prompts[name])
+                response = session.run(catalog_intents.get(name, prompts[name]) if args.catalog else prompts[name],
+                    evidence=json.dumps(supplied_evidence[name]) if args.catalog and name in supplied_evidence else None)
                 tools = response.get("tools", [])
                 outputs = [e["result"].get("outputs") for e in tools if isinstance(e["result"], dict)]
-                if name == "known":
+                if name in ("known", "catalog_xor", "catalog_xor_self", "catalog_korean"):
                     passed = [12345 ^ 4567] in outputs and not any(e["name"] == "teach" for e in tools)
-                elif name == "clarify":
+                elif name in ("clarify", "catalog_clarify"):
                     passed = response["status"] == "needs_input" and (root / "input.bin").read_bytes() == b"\x00\x07\xff\x80"
-                elif name == "file":
+                elif name in ("file", "catalog_file"):
                     passed = [4] in outputs and (root / "input.bin").read_bytes() == b"\x35\x32\xca\xb5"
+                elif name == "catalog_sub":
+                    passed = [12345 - 4567] in outputs
+                elif name in ("catalog_unknown", "catalog_delete"):
+                    resolutions = [e["result"] for e in tools if e["name"] in ("resolve_request", "resolve_numeric", "resolve_state", "verify_numeric", "verify_state")]
+                    passed = (response["status"] == "needs_input" and any(r.get("status") == "needs_learning_examples" for r in resolutions)
+                              and not any(e["name"] in ("execute", "execute_resolved", "teach", "teach_numeric") for e in tools)
+                              and (root / "input.bin").read_bytes() == b"\x00\x07\xff\x80")
                 else:
                     passed = [254] in outputs and "tiny_nand" in runtime.registry
                     held_out = 0
@@ -143,6 +186,10 @@ def main():
                "llama_cpp_python": llama_cpp.__version__, "real_model_inference": True,
                "scripted_replies": False, "container": "vectorpro-test", "results": results}
     summary["constrained_tool_decoding"] = args.constrain_tools
+    summary["tensor_catalog"] = str(args.catalog) if args.catalog else None
+    summary["caller_evidence_delivered_after_input_extraction"] = bool(args.catalog)
+    summary["max_tokens_per_turn"] = args.max_tokens
+    summary["evaluation_protocol"] = "development scenarios reused during adapter improvements; not independent held-out accuracy"
     (args.root / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"passed": sum(r["passed"] for r in results.values()), "total": len(results)}), flush=True)
 

@@ -1,0 +1,64 @@
+{
+  "passed": false,
+  "response": {
+    "status": "call_budget",
+    "tools": [
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_numeric",
+        "result": {
+          "status": "error",
+          "message": "validation types do not match requested operands"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      },
+      {
+        "name": "resolve_state",
+        "result": {
+          "status": "error",
+          "message": "non-hexadecimal number found in fromhex() arg at position 5"
+        }
+      }
+    ]
+  }
+}

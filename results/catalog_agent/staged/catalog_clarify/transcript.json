@@ -1,0 +1,59 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the tensor catalog to satisfy the user's request. Call one actual tool at a time.\nStep 1: propose_request(query=goal words, width=bit width, inputs=ALL actual requested inputs).\nStep 2: verify_numeric(width=example bit width, operands=example input rows, targets=answers),\nor verify_state(cases=complete virtual file-state examples). Keep actual inputs and examples separate.\nPortable operands are JSON integers or {\"utf8\":\"relative/file\"} paths or {\"hex\":\"00ff\"} buffers.\nTypes are derived automatically from these values. Do not invent input_types or capability names.\nNumeric examples require at least two distinct inputs and correct answers.\nState cases are {inputs:[portable operands],before:{path:hex},after:{path:hex},output:integer}.\nSnapshots must include unchanged files too.\nExamples are only virtual verification, not native execution. Prefer evidence provided by the user.\nmatched: Step 3 call execute_resolved with no arguments; requested inputs are already stored.\nneeds_evidence: ask_user for missing intent or more discriminating examples.\nneeds_learning_examples: no compatible function was verified; ask for learning examples or teach\nwhen the user authorizes it. Never substitute the nearest function or claim success after failure.\nMissing goals: ask_user. Do not modify files before a successful matched result.\nLLM-created answers are proposals, not independent proof of intent. No source code or recipes.\n"
+      },
+      {
+        "role": "user",
+        "content": "Do something with input.bin. I have not chosen the transformation or desired output. Ask me what I want; leave files unchanged."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_request\", \"arguments\": {\"query\": \"Do something with input.bin\", \"width\": 32, \"inputs\": [{\"utf8\": \"input.bin\"}]}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 721,
+      "completion_tokens": 43,
+      "total_tokens": 764
+    },
+    "seconds": 4.617185449000317
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the tensor catalog to satisfy the user's request. Call one actual tool at a time.\nStep 1: propose_request(query=goal words, width=bit width, inputs=ALL actual requested inputs).\nStep 2: verify_numeric(width=example bit width, operands=example input rows, targets=answers),\nor verify_state(cases=complete virtual file-state examples). Keep actual inputs and examples separate.\nPortable operands are JSON integers or {\"utf8\":\"relative/file\"} paths or {\"hex\":\"00ff\"} buffers.\nTypes are derived automatically from these values. Do not invent input_types or capability names.\nNumeric examples require at least two distinct inputs and correct answers.\nState cases are {inputs:[portable operands],before:{path:hex},after:{path:hex},output:integer}.\nSnapshots must include unchanged files too.\nExamples are only virtual verification, not native execution. Prefer evidence provided by the user.\nmatched: Step 3 call execute_resolved with no arguments; requested inputs are already stored.\nneeds_evidence: ask_user for missing intent or more discriminating examples.\nneeds_learning_examples: no compatible function was verified; ask for learning examples or teach\nwhen the user authorizes it. Never substitute the nearest function or claim success after failure.\nMissing goals: ask_user. Do not modify files before a successful matched result.\nLLM-created answers are proposals, not independent proof of intent. No source code or recipes.\n"
+      },
+      {
+        "role": "user",
+        "content": "Do something with input.bin. I have not chosen the transformation or desired output. Ask me what I want; leave files unchanged."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "propose_request",
+              "arguments": "{\"query\": \"Do something with input.bin\", \"width\": 32, \"inputs\": [{\"utf8\": \"input.bin\"}]}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"path\"], \"candidates\": [{\"name\": \"file.read\", \"input_types\": [\"path\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Read, load file contents from disk into memory, returning a byte buffer.\", \"score\": 0.3062840402126312}], \"status\": \"needs_evidence\", \"reason\": \"similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots\"}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": {\"question\": \"What do you want to do with input.bin? Please specify the transformation or desired output.\"}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 1139,
+      "completion_tokens": 35,
+      "total_tokens": 1174
+    },
+    "seconds": 7.736981224999909
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "response": {
+    "status": "needs_input",
+    "question": "Is the operation 'Delete input.bin at width 16' supported?",
+    "tools": [
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Is the operation 'Delete input.bin at width 16' supported?"
+        }
+      }
+    ]
+  }
+}

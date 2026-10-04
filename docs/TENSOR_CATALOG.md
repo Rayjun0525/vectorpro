@@ -1,7 +1,8 @@
 # 텐서 카탈로그 번외 검증
 
 2026-10-04 사용자 요청으로 정확히 복원되는 정보와 의미 검색 벡터를 함께
-저장하는 작은 프로토타입을 검증했다. 기존 실행기 저장 형식은 변경하지 않는다.
+저장하는 작은 프로토타입을 검증했다. 아래는 당시 기록이다. 이후 정식 `.pt`
+런타임 저장과 LLM 연결을 추가했으며 [CATALOG_AGENT.md](CATALOG_AGENT.md)에 설명한다.
 
 ## 저장 구조
 
@@ -88,5 +89,5 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m 
 
 결과는 `results/catalog_retrieval/final/summary.json`, 평가 요청은
 `experiments/requests/retrieval_evaluation.json`이다. 앞선 단계 결과도 보존했다.
-남은 과제는 LLM/요청 어댑터의 타입 추출과 조회 연결, 타입은 같지만 지원하지
-않는 요청의 거절, 더 많은 기능/독립 요청 평가다. 이번 구현은 실험 단계다.
+이후 LLM/요청 어댑터의 타입 추출과 조회 연결, 예제 기반 미지원 요청 거절을
+구현했다. 현재 결과와 남은 한계는 [CATALOG_AGENT.md](CATALOG_AGENT.md) 참고.

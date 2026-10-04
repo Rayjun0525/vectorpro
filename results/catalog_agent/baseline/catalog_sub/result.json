@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "response": {
+    "status": "needs_input",
+    "question": "Please provide the missing intent or evidence for the request.",
+    "tools": [
+      {
+        "name": "resolve_request",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.3989413380622864
+            },
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.15302392840385437
+            }
+          ],
+          "status": "needs_evidence",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Please provide the missing intent or evidence for the request."
+        }
+      }
+    ]
+  }
+}

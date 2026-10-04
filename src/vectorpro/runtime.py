@@ -1,7 +1,7 @@
 """One entry point: execute known requests, otherwise learn from supplied targets.
 
-The runtime accepts structured requests; natural-language/LLM interpretation is
-an adapter to add later. Learning never guesses missing target semantics.
+The runtime accepts structured requests; optional natural-language/LLM interpretation
+lives in the agent adapter. Learning never guesses missing target semantics.
 """
 from __future__ import annotations
 
@@ -32,6 +32,7 @@ class VectorRuntime:
         self.learner = Learner(self.registry, config)
         self.host = host
         self._rng = random.Random(seed)
+        self._tensor_extras = {}
 
     def provide_host_operations(self) -> None:
         """Install primitive descriptions; these are execution machinery, not learned rules."""
@@ -128,10 +129,23 @@ class VectorRuntime:
                 "learning_rng_state": self._rng.getstate()}
         temporary = None
         try:
-            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
-                                             prefix=path.name + ".", delete=False) as stream:
-                temporary = Path(stream.name)
-                json.dump(data, stream)
+            if path.suffix == ".pt":
+                import torch
+                from vectorpro.tensor_codec import encode_tree
+                if self._tensor_extras:
+                    from vectorpro.semantic_catalog import fingerprint
+                    cached = self._tensor_extras.get("registry_digest")
+                    if cached is None or not torch.equal(cached, fingerprint(self.registry)):
+                        self._tensor_extras = {}  # changed registry: never persist a stale search index
+                with tempfile.NamedTemporaryFile(mode="wb", dir=path.parent,
+                                                 prefix=path.name + ".", delete=False) as stream:
+                    temporary = Path(stream.name)
+                    torch.save({"version": torch.tensor([1]), **encode_tree(data), **self._tensor_extras}, stream)
+            else:
+                with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                                 prefix=path.name + ".", delete=False) as stream:
+                    temporary = Path(stream.name)
+                    json.dump(data, stream)
             temporary.replace(path)
         finally:
             if temporary is not None:
@@ -140,10 +154,23 @@ class VectorRuntime:
     @classmethod
     def load(cls, path: Path, *, host: HostContext | None = None,
              config: LearnerConfig | None = None) -> VectorRuntime:
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        extras = {}
+        if Path(path).suffix == ".pt":
+            import torch
+            from vectorpro.tensor_codec import decode_tree
+            archive = torch.load(path, weights_only=True, map_location="cpu")
+            if not isinstance(archive, dict) or not all(isinstance(v, torch.Tensor) for v in archive.values()):
+                raise ValueError("tensor runtime payload must contain only tensors")
+            if archive.get("version", torch.tensor([])).tolist() != [1]:
+                raise ValueError("unsupported tensor runtime version")
+            data = decode_tree(archive)
+            extras = {k: v for k, v in archive.items() if k not in ("version", "nodes", "bytes", "floats")}
+        else:
+            data = json.loads(Path(path).read_text(encoding="utf-8"))
         if data.get("format") != "vectorpro-runtime" or data.get("version") != 1:
             raise ValueError("unsupported vector runtime file")
         runtime = cls(Registry.from_data(data["registry"]), config, host)
+        runtime._tensor_extras = extras
         state = data["learning_rng_state"]
         runtime._rng.setstate((state[0], tuple(state[1]), state[2]))
         return runtime

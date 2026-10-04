@@ -18,65 +18,7 @@ from vectorpro.runtime import VectorRuntime
 from vectorpro.agent import AgentSession
 
 
-def encode_tree(data):
-    tape, blob, floats = [], bytearray(), []
-
-    def visit(value):
-        if value is None:
-            tape.append([0, 0, 0])
-        elif isinstance(value, bool):
-            tape.append([1, int(value), 0])
-        elif isinstance(value, int):
-            tape.append([2, value, 0])
-        elif isinstance(value, float):
-            tape.append([3, len(floats), 0]); floats.append(value)
-        elif isinstance(value, str):
-            raw = value.encode("utf-8")
-            tape.append([4, len(blob), len(raw)]); blob.extend(raw)
-        elif isinstance(value, list):
-            tape.append([5, len(value), 0])
-            for child in value:
-                visit(child)
-        elif isinstance(value, dict):
-            tape.append([6, len(value), 0])
-            for key, child in value.items():
-                if not isinstance(key, str):
-                    raise ValueError("tree object keys must be strings")
-                visit(key); visit(child)
-        else:
-            raise ValueError(f"unsupported node {type(value)}")
-    visit(data)
-    return {"nodes": torch.tensor(tape, dtype=torch.int64),
-            "bytes": torch.tensor(list(blob), dtype=torch.uint8),
-            "floats": torch.tensor(floats, dtype=torch.float64)}
-
-
-def decode_tree(tree):
-    tape = tree["nodes"].tolist()
-    blob = bytes(tree["bytes"].tolist())
-    floats = tree["floats"].tolist()
-    cursor = 0
-
-    def read():
-        nonlocal cursor
-        tag, value, length = tape[cursor]; cursor += 1
-        if tag == 0: return None
-        if tag == 1: return bool(value)
-        if tag == 2: return value
-        if tag == 3: return floats[value]
-        if tag == 4: return blob[value:value + length].decode("utf-8")
-        if tag == 5: return [read() for _ in range(value)]
-        if tag == 6:
-            result = {}
-            for _ in range(value):
-                key = read(); result[key] = read()
-            return result
-        raise ValueError("unknown tensor node type")
-    result = read()
-    if cursor != len(tape):
-        raise ValueError("trailing tensor nodes")
-    return result
-
+from vectorpro.tensor_codec import encode_tree, decode_tree
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
