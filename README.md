@@ -1,11 +1,10 @@
 # vectorpro
 
-현재 로컬 결정 모델은 **Laya multilingual**이다. 사용자 요청으로 Gemma 가중치를
-제거했다. Laya는 계약/예제를 생성하는 대화 모델이 아니며, 기능·인자 후보 선택을
-메모리 환경에서 검증했다. 실행 요청 11건은 0건 성공했고, 후속 새 요청 진단에서도
-타입을 제공한 기능 선택은 17/48회, 정답 계약을 제공한 숫자 인자 선택은 27/64회였다.
-현재 체크포인트를 자동 실행 어댑터로 채택하지 않았다. 설치·결과·재현은
-[LAYA.md](docs/LAYA.md)를 참고한다.
+현재 로컬 LLM 기준은 **Gemma 3 1B Instruct Q8_0**이다. Laya 적합성 시험 후
+사용자 요청으로 Laya 가중치를 제거하고 Gemma를 복원했다. 기존 컨테이너 하나를
+재사용한다. 명시된 레지스터 폭이 하나인 요청은 그 폭만 도구 선택지로 제공한다.
+최적화 범위·검증·남은 과제는 [GEMMA_BASELINE.md](docs/GEMMA_BASELINE.md),
+Laya 과거 시험은 [LAYA.md](docs/LAYA.md)에 있다.
 
 Vector programs executed by learned, verifiable state-transition cells.
 

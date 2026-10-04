@@ -1,5 +1,9 @@
 # Laya 결정 모델 시험
 
+이 문서는 이전 시험 기록이다. 후속 사용자 요청으로 Laya 가중치를 제거하고
+Gemma를 복원했다. 현재 기준은 [GEMMA_BASELINE.md](GEMMA_BASELINE.md)이며
+아래 Laya 설치기는 Gemma를 제거하므로 현재 환경에서 실행하지 않는다.
+
 ## 후속 사용 적합성 판정
 
 현재 multilingual 체크포인트는 **프로젝트의 자동 요청 처리 모델로 채택하지 않는다.**

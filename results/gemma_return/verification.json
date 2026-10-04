@@ -1,0 +1,37 @@
+{
+  "model": {
+    "repo": "ggml-org/gemma-3-1b-it-GGUF",
+    "revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+    "quantization": "Q8_0",
+    "filename": "gemma-3-1b-it-Q8_0.gguf",
+    "bytes": 1069306368,
+    "sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5"
+  },
+  "source_agent_sha256": "ef276d6404287ae0d765531d86e5bf57c1ab5a29b0d6198f3f4ab209425de152",
+  "new_dataset_sha256": "f5aada00674bca7950e8bdc347b348b5b5a9787d88153391e530a56c22cd1c01",
+  "focused_tests": "32 passed in 7.99s",
+  "full_tests": "192 passed in 362.21s",
+  "path_replay": {
+    "passed": 5,
+    "total": 6,
+    "failed": "bare_korean_fill",
+    "actual_width": 31,
+    "actual_value": 16,
+    "native_target_changed_in_test_root": true
+  },
+  "known_limits": [
+    "limited explicit width grammar",
+    "integer and path roles still interpreted by model",
+    "caller-supplied evidence, not autonomous teaching",
+    "macOS deferred"
+  ],
+  "container": "vectorpro-test",
+  "new_image": false,
+  "new_width_first_use": {
+    "passed": 6,
+    "total": 6,
+    "dataset_sha256": "f5aada00674bca7950e8bdc347b348b5b5a9787d88153391e530a56c22cd1c01",
+    "evaluation_kind": "first-use",
+    "limitation": "six explicit-width requests with caller evidence; no tuning after first-use; not automatic teaching or global intent accuracy"
+  }
+}

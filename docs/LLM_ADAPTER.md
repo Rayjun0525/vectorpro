@@ -1,9 +1,9 @@
 # LLM 학습 어댑터
 
-현재 환경은 사용자 요청으로 Gemma를 제거하고 Laya multilingual을 설치했다.
-Laya는 생성형 ChatModel이 아니라 별도 결정 모델 시험으로 연결했다.
-설치·실측·한계는 [LAYA.md](LAYA.md)에 있다. 아래 Gemma/Qwen 설명은 이전 기록이며
-가중치를 자동 복원하지 않는다. Gemma runner는 이제 명시적 `--model`이 필요하다.
+현재 기준은 사용자 요청으로 복원한 Gemma 3 1B Instruct Q8_0이다.
+Laya 가중치는 제거하고 시험 기록은 [LAYA.md](LAYA.md)에 보존했다.
+명시적 폭 선택지 제한과 재현 명령은 [GEMMA_BASELINE.md](GEMMA_BASELINE.md)에 있다.
+로컬 runner는 Gemma를 기본값으로 사용하며 자동 다운로드하지 않는다.
 
 ## 후속: 요청 경로의 원문 보존
 

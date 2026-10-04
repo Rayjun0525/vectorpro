@@ -1,0 +1,97 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Replace every byte of folder/new2026.bin with 15 and save. Retain 보관.dat. Register width is 32 bits. No learning."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"search_goal\", \"arguments\": {\"query\": \"find functions and their argument roles for the requested operation; no execution\" , \"width\": 32}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 631,
+      "completion_tokens": 46,
+      "total_tokens": 677
+    },
+    "seconds": 12.836489285000425
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Extract the ACTUAL requested inputs into one prepare_N tool.\nRead the original request literally. Do not compute the answer or replace inputs\nwith outputs, defaults, examples, schema names, or references to tool results.\nUse the register width explicitly requested by the user. If unspecified use 16.\nFor paths copy actual filenames; for numeric inputs copy actual integers, preserving\nthe operand roles in the tool description. Example/validation inputs are separate.\nCaller evidence is checked by the backend after preparation; do not recreate it.\nChoose ask_user only when the actual request is missing a required input or goal.\n"
+      },
+      {
+        "role": "user",
+        "content": "Replace every byte of folder/new2026.bin with 15 and save. Retain 보관.dat. Register width is 32 bits. No learning."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"prepare_0\", \"arguments\": {\"width\": 32, \"x0\": \"folder/new2026.bin\", \"x1\": 15}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 525,
+      "completion_tokens": 50,
+      "total_tokens": 575
+    },
+    "seconds": 9.519104537001112
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Replace every byte of folder/new2026.bin with 15 and save. Retain 보관.dat. Register width is 32 bits. No learning."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "search_goal",
+              "arguments": "{\"query\": \"find functions and their argument roles for the requested operation; no execution\", \"width\": 32}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"candidates\", \"candidates\": [{\"name\": \"fill\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.\", \"score\": 0.25113940238952637}], \"next_step\": \"choose a prepare_N tool and bind the actual request inputs using its argument roles\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "prepare_0",
+              "arguments": "{\"width\": 32, \"x0\": \"folder/new2026.bin\", \"x1\": 15}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"path\", \"value\"], \"candidates\": [{\"name\": \"fill\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.\", \"score\": 0.25113940238952637}, {\"name\": \"map\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.\", \"score\": 0.2464737743139267}], \"status\": \"matched\", \"name\": \"fill\", \"evidence_source\": \"caller/LLM supplied, not an independent proof of intent\", \"verification_source\": \"caller\", \"request\": {\"query\": \"find functions and their argument roles for the requested operation; no execution\", \"width\": 32, \"operands\": [[{\"utf8\": \"folder/new2026.bin\"}, 15]]}}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"execute_resolved\", \"arguments\": {}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 1156,
+      "completion_tokens": 23,
+      "total_tokens": 1179
+    },
+    "seconds": 14.533172844996443
+  }
+]

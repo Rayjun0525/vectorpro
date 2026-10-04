@@ -1,8 +1,9 @@
 # 테스트와 결과 확인
 
-현재 Laya의 역할별 적합성 진단과 재현 명령은 [LAYA.md](LAYA.md)의
+이전 Laya의 역할별 적합성 진단과 재현 명령은 [LAYA.md](LAYA.md)의
 ‘후속 사용 적합성 판정’ 절을 참고한다. 새 요청 24개/순서 반복/정답 계약 제공
-인자 진단을 구분한다. 현재 모델은 자동 요청 처리에 채택하지 않았다.
+인자 진단을 구분한다. Laya는 자동 요청 처리에 채택하지 않았다. 현재 기준은
+Gemma이며 [GEMMA_BASELINE.md](GEMMA_BASELINE.md)를 참고한다.
 
 작업 디렉터리는 Windows 호스트의 프로젝트 루트다. 명령은 PowerShell에서
 실행하며 테스트 프로세스는 기존 `vectorpro-test` 안에서 실행한다.
@@ -21,18 +22,17 @@ transformers 4.57.6, laya 0.3.26 및 아래 모델이 설치돼 있다.
 
 | 자원 | 컨테이너 내부 위치 |
 |---|---|
-| 실제 결정 모델 | `/opt/vectorpro-models/laya-multilingual/` |
+| 실제 소형 LLM | `/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf` |
 | 다국어 검색 인코더 | `/opt/vectorpro-models/multilingual-minilm/` |
 | 실험의 원본 프로그램 | `/workspace/results/initial_model/program.json` |
 
 모델은 저장소에 포함하지 않는다. MiniLM 파일만 누락됐으면
 `nerdctl exec vectorpro-test python experiments/setup_retrieval_model.py`로 같은
 컨테이너에 내려받는다. 기존 download.json이 있으면 기록된 revision을 재사용한다.
-Laya 재설치는 `nerdctl exec vectorpro-test python experiments/setup_laya_model.py`로
-고정 revision과 SHA-256을 확인한다. Gemma/Qwen 가중치는 사용자 요청으로 제거했다.
-이전 결과와 아래 Gemma 명령은 역사적 기록이다. 자동으로 다시 다운로드하지 않는다.
-Gemma 전용 runner는 이제 명시적 `--model`이 필요하다. 현재 Laya 명령은
-[LAYA.md](LAYA.md)에 있다.
+Gemma 재설치는 `nerdctl exec vectorpro-test python experiments/setup_gemma_model.py`로
+고정 revision과 SHA-256을 확인한다. Laya/Qwen 가중치는 제거했으며 과거 결과는
+유지한다. Laya 설치기는 Gemma를 제거하는 이전 교체 작업이므로 현재 실행하지 않는다.
+로컬 runner의 기본 모델은 Gemma이며 추론 시 자동 다운로드하지 않는다.
 원본 프로그램 재생성 방법은 README의 initial-model 절에 있다.
 
 ## 변경별 검증

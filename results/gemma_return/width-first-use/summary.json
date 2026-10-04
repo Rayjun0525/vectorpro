@@ -1,0 +1,756 @@
+{
+  "model": "ggml-org/gemma-3-1b-it-GGUF",
+  "revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+  "quantization": "Q8_0",
+  "model_bytes": 1069306368,
+  "model_sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5",
+  "chat_protocol": "Gemma native template with explicit JSON tool schemas",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "fill_ko_width24": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "fill",
+        "request": {
+          "query": "write binary file",
+          "width": 24,
+          "operands": [
+            [
+              {
+                "utf8": "새 폴더/시험.bin"
+              },
+              21
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.3746066093444824
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.4101397395133972
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.3746066093444824
+                }
+              ],
+              "status": "matched",
+              "name": "fill",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "write binary file",
+                "width": 24,
+                "operands": [
+                  [
+                    {
+                      "utf8": "새 폴더/시험.bin"
+                    },
+                    21
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "fill",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "fill_en_register": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "fill",
+        "request": {
+          "query": "find functions that can perform a simple calculation involving two numbers, with a width of 16, and no execution.",
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "fresh bytes.bin"
+              },
+              19
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.2558603882789612
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.2558603882789612
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2488463819026947
+                }
+              ],
+              "status": "matched",
+              "name": "fill",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "find functions that can perform a simple calculation involving two numbers, with a width of 16, and no execution.",
+                "width": 16,
+                "operands": [
+                  [
+                    {
+                      "utf8": "fresh bytes.bin"
+                    },
+                    19
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "fill",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "fill_ko_equal": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "fill",
+        "request": {
+          "query": "read file data.bin, store in 32-bit binary format, save to file_data.dat, width: 16",
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "새자료.bin"
+              },
+              32
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.39291322231292725
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.4111563265323639
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.39291322231292725
+                }
+              ],
+              "status": "matched",
+              "name": "fill",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "read file data.bin, store in 32-bit binary format, save to file_data.dat, width: 16",
+                "width": 16,
+                "operands": [
+                  [
+                    {
+                      "utf8": "새자료.bin"
+                    },
+                    32
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "fill",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "fill_en_width32": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "fill",
+        "request": {
+          "query": "find functions and their argument roles for the requested operation; no execution",
+          "width": 32,
+          "operands": [
+            [
+              {
+                "utf8": "folder/new2026.bin"
+              },
+              15
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.25113940238952637
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.25113940238952637
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2464737743139267
+                }
+              ],
+              "status": "matched",
+              "name": "fill",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "find functions and their argument roles for the requested operation; no execution",
+                "width": 32,
+                "operands": [
+                  [
+                    {
+                      "utf8": "folder/new2026.bin"
+                    },
+                    15
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "fill",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "xor_ko_width24": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "map",
+        "request": {
+          "query": "xor_and_save_bin_bytes",
+          "width": 24,
+          "operands": [
+            [
+              {
+                "utf8": "새변환.bin"
+              },
+              13
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.5473604798316956
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.5473604798316956
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.47015154361724854
+                }
+              ],
+              "status": "matched",
+              "name": "map",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "xor_and_save_bin_bytes",
+                "width": 24,
+                "operands": [
+                  [
+                    {
+                      "utf8": "새변환.bin"
+                    },
+                    13
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "map",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "xor_en_width16": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true,
+        "terminal_status": true,
+        "request_binding": true
+      },
+      "response": {
+        "status": "executed",
+        "outputs": [
+          4
+        ],
+        "capability": "map",
+        "request": {
+          "query": "find functions and their argument roles for the requested operation; no execution",
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "new folder/test bytes.bin"
+              },
+              23
+            ]
+          ]
+        },
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2464737743139267
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.25113940238952637
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2464737743139267
+                }
+              ],
+              "status": "matched",
+              "name": "map",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+              "verification_source": "caller",
+              "request": {
+                "query": "find functions and their argument roles for the requested operation; no execution",
+                "width": 16,
+                "operands": [
+                  [
+                    {
+                      "utf8": "new folder/test bytes.bin"
+                    },
+                    23
+                  ]
+                ]
+              }
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "map",
+              "history": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true,
+  "max_tokens_per_turn": 512,
+  "evaluation_protocol": "first-use frozen requests after development; no retuning on results",
+  "dataset_protocol": "new width-binding requests frozen before first inference; caller evidence supplied, expected files never supplied to model",
+  "evaluation_kind": "first-use",
+  "evaluation_file": "experiments/requests/gemma_width_first_use.json",
+  "evaluation_sha256": "f5aada00674bca7950e8bdc347b348b5b5a9787d88153391e530a56c22cd1c01",
+  "max_calls": 12
+}

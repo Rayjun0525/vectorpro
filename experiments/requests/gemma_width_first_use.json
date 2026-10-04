@@ -1,0 +1,299 @@
+{
+  "protocol": "new width-binding requests frozen before first inference; caller evidence supplied, expected files never supplied to model",
+  "cases": [
+    {
+      "name": "fill_ko_width24",
+      "intent": "‘새 폴더/시험.bin’의 모든 바이트를 21로 채워줘. 보관.dat은 그대로 두고 레지스터 폭은 24비트야. 학습하지 마.",
+      "before": {
+        "새 폴더/시험.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "새 폴더/시험.bin": "15151515",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 24,
+          "operands": [
+            [
+              {
+                "utf8": "새 폴더/시험.bin"
+              },
+              21
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "fill_en_register",
+      "intent": "Fill all bytes of 'fresh bytes.bin' with 19. Keep 보관.dat unchanged. Use a 16-bit register. Do not learn.",
+      "before": {
+        "fresh bytes.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "fresh bytes.bin": "13131313",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "fresh bytes.bin"
+              },
+              19
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "fill_ko_equal",
+      "intent": "새자료.bin을 읽고 모든 바이트를 32로 채워 저장해줘. 보관.dat은 유지하고 폭=16비트로 실행해. 학습은 하지 마.",
+      "before": {
+        "새자료.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "새자료.bin": "20202020",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "새자료.bin"
+              },
+              32
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "fill_en_width32",
+      "intent": "Replace every byte of folder/new2026.bin with 15 and save. Retain 보관.dat. Register width is 32 bits. No learning.",
+      "before": {
+        "folder/new2026.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "folder/new2026.bin": "0f0f0f0f",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 32,
+          "operands": [
+            [
+              {
+                "utf8": "folder/new2026.bin"
+              },
+              15
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "xor_ko_width24",
+      "intent": "새변환.bin의 각 바이트에 13을 XOR하고 같은 파일에 저장해줘. 보관.dat은 그대로 두고 폭은 24비트야. 학습하지 마.",
+      "before": {
+        "새변환.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "새변환.bin": "0d1af26f",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 24,
+          "operands": [
+            [
+              {
+                "utf8": "새변환.bin"
+              },
+              13
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              3
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "0313fc"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "xor_en_width16",
+      "intent": "XOR every byte of 'new folder/test bytes.bin' with mask 23, then save back. Leave 보관.dat unchanged. Width: 16 bits. No learning.",
+      "before": {
+        "new folder/test bytes.bin": "0017ff62",
+        "보관.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "new folder/test bytes.bin": "1700e875",
+          "보관.dat": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "new folder/test bytes.bin"
+              },
+              23
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              3
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "0313fc"
+            },
+            "output": 3
+          }
+        ]
+      }
+    }
+  ]
+}

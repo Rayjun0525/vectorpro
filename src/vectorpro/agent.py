@@ -169,6 +169,15 @@ def binding_tools(tools, intent, candidates=None):
     for start, end, _ in paths:
         text[start:end] = " " * (end - start)
     numbers = list(dict.fromkeys(int(s) for s in re.findall(r"(?<!\d)[+-]?\d+(?!\d)", "".join(text))))
+    # Parse explicit register-width notation only, never an operation or its answer.
+    # Path spans were removed above, so data16-bit.bin cannot declare a width.
+    width_text = "".join(text)
+    declared = [int(m.group(1)) for m in re.finditer(
+        r"(?<![\w+-])(\d+)\s*(?:-\s*)?(?:bits?\s+registers?\b|비트\s*레지스터)", width_text, re.I)]
+    declared += [int(m.group(1)) for m in re.finditer(
+        r"(?:\b(?:register\s+)?width\b|(?:레지스터\s*)?폭)(?:\s*(?:is|은|는|:|=))?\s*(\d+)(?!\d)", width_text, re.I)]
+    declared = list(dict.fromkeys(declared))
+    explicit_width = declared[0] if len(declared) == 1 and 1 <= declared[0] <= 32 else None
     result = json.loads(json.dumps(tools))
     allowed = []
     for item in result:
@@ -180,6 +189,8 @@ def binding_tools(tools, intent, candidates=None):
             for name, field in function["parameters"]["properties"].items():
                 if field.get("type") == "integer" and numbers:
                     options = [n for n in numbers if name != "width" or 1 <= n <= 32]
+                    if name == "width" and explicit_width is not None:
+                        options = [explicit_width]
                     field["enum"] = options or [16]
                     if name == "width":
                         field["description"] = "The explicitly requested execution width, not an operand or validation width"
