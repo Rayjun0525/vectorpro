@@ -6,6 +6,10 @@
 최적화 범위·검증·남은 과제는 [GEMMA_BASELINE.md](docs/GEMMA_BASELINE.md),
 Laya 과거 시험은 [LAYA.md](docs/LAYA.md)에 있다.
 
+배운 기능은 공통 계약 ID와 이름 있는 typed 입력으로 LLM 없이 직접 호출할 수 있다.
+계약은 같은 프로그램 파일에 저장하며 카탈로그 어댑터도 이 계약을 사용한다.
+API/CLI/도구 schema/현재 한계는 [FUNCTION_CONTRACTS.md](docs/FUNCTION_CONTRACTS.md)를 참고한다.
+
 Vector programs executed by learned, verifiable state-transition cells.
 
 The goal: people state intent, a language model turns it into a **learning

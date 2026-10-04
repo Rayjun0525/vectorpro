@@ -7,6 +7,39 @@
 
 ## 현재 구현
 
+### 공통 기능 계약과 직접 호출 API
+
+`contracts.py`는 기존 타입/셀/벡터 프로그램/의존 기능에서 계약 v1을 추출한다.
+ID는 계약과 실행 의존 내용의 SHA 지문이며 재로딩/무관한 기능 추가에서 유지된다.
+계약/검증 기록/호스트 작업/주소 정보는 JSON 및 typed-tree `.pt`에 함께 저장한다.
+과거 파일에 contracts가 없으면 재구성하고 새 파일의 불일치 계약은 로딩 시 거절한다.
+기존 request API와 저장 format version 1은 유지했다.
+
+`VectorRuntime.contract(s)`로 조회하고 `call_contract(id, arguments, width, version=1)`로
+LLM/인코더 없이 정확한 ID의 기능을 호출한다. x0/x1 등 named slots, value/path/hex
+타입, 출력 타입, width 1..64, 실제 루트 경로/핸들 범위를 실행 전에 검사한다.
+primitive buffer 출력은 portable hex로 반환한다. 호스트 루트/실행 핸들은 저장하지 않는다.
+CLI actions contracts/call_contract와 tool_schema exporter를 추가했다.
+카탈로그는 같은 계약의 압축 projection을 사용해 작은 모델 프롬프트를 제한한다.
+카탈로그 어댑터의 근거 검증 뒤 단일 실행도 공통 API로 연결하며 검증 우회 도구를
+추가하지 않았다. legacy multi-lane/noncatalog 실행은 유지한다.
+
+관련 테스트 54 passed, 11.96초 후 경로 symlink/공통 API 검증 2건을 추가했다.
+최종 관련 **56 passed, 24.59초**, 전체 **207 passed, 285.05초**.
+전체 수집 이후 추가한 2건은 최종 관련 범위에서 검증했으며 전체 결과를 209로
+부풀리지 않는다. 전체 회귀와 실제 모델 추론을 병행한 시간으로 성능 비교는 아니다.
+단일 텐서/동일 ID를 서로 다른 native 루트 두 개에서 재학습 없이 실행해 숫자/XOR
+파일 변환/abc 쓰기/보존 파일/잘못된 입력 무변경을 확인했다. LLM/encoder import 없음.
+실제 Gemma 기존 요청 회귀 **2/2**. 새 자연어 정확도나 자동 학습 증명이 아니다.
+같은 기존 컨테이너 하나를 사용했으며 새 이미지/컨테이너 생성 없음.
+원문과 파일: `results/contracts_model`, 재현/한계: FUNCTION_CONTRACTS.md.
+
+현재는 공통 계약의 초기 통합을 완료한 단계다. LLM 계약 초안의 검증·학습·등록,
+정확한 입력 타입/숫자·경로 역할 해석, 독립 근거를 통한 자동 학습과 더 넓은
+자료구조/합성 계약이 남아 있다. 기존 효과 프로그램에 출력 타입이 없으면 새 API는
+거절하고 legacy API는 유지한다. Native 실행 도중의 rollback은 제공하지 않는다.
+macOS는 보류한다.
+
 ### Gemma 복원과 명시적 폭 최적화
 
 사용자 요청으로 Laya 모델 파일 목록과 절대 경로를 확인한 뒤 해당 모델

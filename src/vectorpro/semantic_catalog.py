@@ -185,10 +185,9 @@ class TensorCatalog:
             return
         self.names = [c.name for c in self.runtime.registry]
         self.documents = [document(self.runtime.registry, name) for name in self.names]
-        self.contracts = [{"name": c.name, "input_types": input_types(c),
-                           "argument_roles": argument_roles(c), "output_width": c.plan.output.value,
-                           "has_effects": bool(c.executable.effects)}
-                          for c in self.runtime.registry]
+        # One authoritative contract; compact projection keeps small-model prompts bounded.
+        fields = ("id", "version", "name", "input_types", "argument_roles", "output_width", "has_effects")
+        self.contracts = [{k: contract[k] for k in fields} for contract in self.runtime.contracts()]
         extras = self.runtime._tensor_extras
         try:
             meta = decode_tree({k: extras["catalog_" + k] for k in ("nodes", "bytes", "floats")})

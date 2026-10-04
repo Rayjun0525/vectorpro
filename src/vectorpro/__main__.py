@@ -33,6 +33,19 @@ def main(argv=None) -> int:
                    else VectorRuntime(host=host, seed=args.seed))
         if host is not None:
             runtime.provide_host_operations()
+        action = data.get("action")
+        if action in ("contracts", "call_contract"):
+            if set(data) - ({"action", "name"} if action == "contracts" else
+                            {"action", "contract_id", "arguments", "width", "version"}):
+                raise ValueError("contract requests cannot include legacy execution or teaching fields")
+            if action == "contracts":
+                response = {"status": "contracts", "contracts": [runtime.contract(data["name"])]
+                            if "name" in data else runtime.contracts()}
+            else:
+                response = runtime.call_contract(data["contract_id"], data["arguments"], data["width"],
+                                                 version=data.get("version", 1))
+            print(json.dumps(response, ensure_ascii=False))
+            return 0
         # Byte inputs allocate fresh transient handles; raw handles are not portable.
         operands = []
         for row in data["operands"]:

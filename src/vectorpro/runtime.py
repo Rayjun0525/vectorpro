@@ -45,6 +45,78 @@ class VectorRuntime:
             plan = LearningPlan(name, f"host primitive {name}", arity, OutputWidth.SAME)
             self.registry.add(Capability(plan, self.registry.build(plan, provenance), provenance))
 
+    def contract(self, name: str) -> dict:
+        """Export a stored function's common contract without a model or encoder."""
+        from vectorpro.contracts import build_contract
+        return build_contract(self.registry, name)
+
+    def contracts(self) -> list[dict]:
+        return [self.contract(c.name) for c in self.registry]
+
+    def call_contract(self, contract_id: str, arguments: dict, width: int, *, version: int = 1) -> dict:
+        """Strict named/typed, single-lane execution of an exact stored function ID.
+
+        No search, teaching, raw handles, LLM or inference of absent arguments.
+        Validate every portable argument before allocating transient buffers.
+        """
+        from vectorpro.host import MemoryHostContext
+        if type(version) is not int or version != 1:
+            raise ValueError("unsupported contract version")
+        contract = next((c for c in self.contracts() if c["id"] == contract_id), None)
+        if contract is None:
+            raise KeyError("unknown or stale contract ID; query contracts again")
+        if type(width) is not int or not 1 <= width <= 64:
+            raise ValueError("contract width must be an integer in 1..64")
+        fields = {p["name"] for p in contract["parameters"]}
+        if not isinstance(arguments, dict) or set(arguments) != fields:
+            raise ValueError("arguments must provide exactly the contract's named inputs")
+        if contract["output"]["type"] not in ("value", "path", "buffer"):
+            raise ValueError("legacy capability has no portable output type; use the legacy API")
+        portable = []
+        for parameter in contract["parameters"]:
+            value = arguments[parameter["name"]]
+            kind = parameter["type"]
+            if kind == "value":
+                if type(value) is not int or not 0 <= value < 1 << width:
+                    raise ValueError("numeric arguments must be unsigned integers fitting the register width")
+            else:
+                if not isinstance(value, str):
+                    raise ValueError("path/buffer inputs must be portable strings, never raw handles")
+                if kind == "path":
+                    MemoryHostContext.normalize(value)
+                    value = value.encode("utf-8")
+                else:
+                    if len(value) % 2 or any(c not in "0123456789abcdefABCDEF" for c in value):
+                        raise ValueError("buffer input must contain hexadecimal byte pairs")
+                    value = bytes.fromhex(value)
+                if self.host is None:
+                    raise ValueError("path/buffer inputs require a host context")
+                if len(value) > self.host.max_buffer_bytes:
+                    raise ValueError("portable input exceeds the host byte limit")
+            portable.append(value)
+        if contract["execution"]["requires_host"] and self.host is None:
+            raise ValueError("effectful contracts require a host context")
+        handles = sum(isinstance(v, bytes) for v in portable)
+        if handles and self.host._next_handle + handles - 1 >= 1 << width:
+            raise ValueError("register width cannot represent portable input handles")
+        # Native paths (including symlinks) are checked before the vector program runs.
+        for parameter, value in zip(contract["parameters"], portable):
+            if parameter["type"] == "path" and not isinstance(self.host, MemoryHostContext):
+                path = (self.host.root / value.decode("utf-8")).resolve()
+                if not path.is_relative_to(self.host.root):
+                    raise ValueError("file path escapes the host root")
+        rows = [tuple(self.host.put(v) if isinstance(v, bytes) else v for v in portable)]
+        event_start = len(self.host.events) if self.host else 0
+        result = self.request(contract["name"], rows, width)
+        outputs = result.outputs
+        if contract["output"]["type"] == "buffer":
+            outputs = [{"hex": bytes(self.host.buffers[h]).hex()} for h in outputs]
+        elif contract["output"]["type"] == "path":
+            outputs = [{"utf8": bytes(self.host.buffers[h]).decode("utf-8")} for h in outputs]
+        return {"status": result.status, "contract_id": contract_id, "contract_version": version,
+                "capability": result.capability, "outputs": outputs,
+                "effects": self.host.events[event_start:] if self.host else []}
+
     def request(self, name: str, operands: Sequence[Operands], width: int, *,
                 plan: LearningPlan | None = None, source: TargetSource | None = None,
                 lesson: ExampleLesson | None = None, state_lesson=None) -> RequestResult:
@@ -126,7 +198,7 @@ class VectorRuntime:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         data = {"format": "vectorpro-runtime", "version": 1, "registry": self.registry.to_data(),
-                "learning_rng_state": self._rng.getstate()}
+                "learning_rng_state": self._rng.getstate(), "contracts": self.contracts()}
         temporary = None
         try:
             if path.suffix == ".pt":
@@ -173,4 +245,6 @@ class VectorRuntime:
         runtime._tensor_extras = extras
         state = data["learning_rng_state"]
         runtime._rng.setstate((state[0], tuple(state[1]), state[2]))
+        if "contracts" in data and data["contracts"] != runtime.contracts():
+            raise ValueError("saved contracts do not match the stored implementations")
         return runtime

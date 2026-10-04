@@ -503,7 +503,8 @@ class AgentSession:
                      "input_types": c.provenance.get("input_types"), "output_type": c.provenance.get("output_type")}
                     for c in self.runtime.registry]
         if name == "describe_capability":
-            return {"description": self.runtime.registry.explain(args["name"])}
+            return {"description": self.runtime.registry.explain(args["name"]),
+                    "contract": self.runtime.contract(args["name"])}
         if name == "ask_user":
             return {"status": "needs_input", "question": args["question"]}
         if name == "teach":
@@ -543,6 +544,21 @@ class AgentSession:
                 raise ValueError("execute operands cannot be strings. Encode a file path as {\"utf8\":\"input.bin\"}; numbers must be JSON integers, e.g. 53, not \"53\". Retry execute with corrected types.")
             if capability and any(len(row) != capability.plan.arity for row in args["operands"]):
                 raise ValueError(f"{args['name']} requires {capability.plan.arity} operands per row; input types: {capability.provenance.get('input_types')}")
+            if self.catalog is not None and len(args["operands"]) == 1:
+                contract = self.runtime.contract(args["name"])
+                arguments = {}
+                for parameter, value in zip(contract["parameters"], args["operands"][0]):
+                    kind = parameter["type"]
+                    if kind == "value":
+                        arguments[parameter["name"]] = value
+                    else:
+                        key = "utf8" if kind == "path" else "hex"
+                        if not isinstance(value, dict) or set(value) != {key}:
+                            raise ValueError("portable argument does not match the shared contract type")
+                        arguments[parameter["name"]] = value[key]
+                result = self.runtime.call_contract(contract["id"], arguments, args["width"])
+                self.save()
+                return result
             operands = []
             for row in args["operands"]:
                 converted = []

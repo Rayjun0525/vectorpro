@@ -1,0 +1,189 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true,
+    "terminal_status": true,
+    "request_binding": true
+  },
+  "response": {
+    "status": "executed",
+    "outputs": [
+      4
+    ],
+    "capability": "fill",
+    "request": {
+      "query": "write binary file",
+      "width": 24,
+      "operands": [
+        [
+          {
+            "utf8": "새 폴더/시험.bin"
+          },
+          21
+        ]
+      ]
+    },
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "id": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38",
+              "version": 1,
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.3746066093444824
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+              "version": 1,
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.4101397395133972
+            },
+            {
+              "id": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38",
+              "version": 1,
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.3746066093444824
+            }
+          ],
+          "status": "matched",
+          "name": "fill",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+          "verification_source": "caller",
+          "request": {
+            "query": "write binary file",
+            "width": 24,
+            "operands": [
+              [
+                {
+                  "utf8": "새 폴더/시험.bin"
+                },
+                21
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "contract_id": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38",
+          "contract_version": 1,
+          "capability": "fill",
+          "outputs": [
+            4
+          ],
+          "effects": [
+            {
+              "operation": "file.read",
+              "arguments": [
+                1
+              ],
+              "result": 2
+            },
+            {
+              "operation": "buffer.length",
+              "arguments": [
+                2
+              ],
+              "result": 4
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                3,
+                21
+              ],
+              "result": 21
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                2,
+                21
+              ],
+              "result": 21
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                1,
+                21
+              ],
+              "result": 21
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                0,
+                21
+              ],
+              "result": 21
+            },
+            {
+              "operation": "file.write",
+              "arguments": [
+                1,
+                2
+              ],
+              "result": 4
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

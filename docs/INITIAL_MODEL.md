@@ -71,6 +71,16 @@ universal generalization. A found solution is correct on its checked cases.
 The same learning interface should later receive evidence from an LLM, human
 demonstration, or an instrumented existing program.
 
+## Common function contracts
+
+Acquired functions export versioned contracts from their stored types, tensors and
+dependencies. Contracts live in the same program file; legacy files derive them on
+load. Program callers use an exact content ID and named typed inputs without an
+LLM, encoder, similarity search or implicit teaching. The optional catalog adapter
+uses a compact projection of the same contract and retains evidence-gated execution.
+Contract generation/export is not acquisition of a new function or a correctness
+proof. See `docs/FUNCTION_CONTRACTS.md` for the v1 boundary and direct-call API.
+
 ## Optional LLM adapter and portability
 
 `vectorpro.agent` supplies function schemas/instructions, a bounded conversation

@@ -1,0 +1,29 @@
+{
+  "program_sha256": "d02415c5859ba630ab8204606a995c024c690b601fa7260e520f64cfb04ca0e6",
+  "contracts": 12,
+  "native_roots": 2,
+  "llm_imported": false,
+  "encoder_imported": false,
+  "full_tests": "207 passed in 285.05s",
+  "focused_tests": "56 passed in 24.59s",
+  "additional_tests_after_full_collection": 2,
+  "gemma_replay": {
+    "passed": 2,
+    "total": 2,
+    "kind": "existing fixed requests, no independent accuracy claim"
+  },
+  "source_sha256": {
+    "src/vectorpro/contracts.py": "f20acc924039f34bbaa02a5d5469ffa6564fca38364d3e834a1bec25035b1001",
+    "src/vectorpro/runtime.py": "964cb6820d4d7a15afb4044c86e04cf17247c196dfb201e5df8efe1153bf7fc7",
+    "src/vectorpro/agent.py": "fd09ec5b5f05ae4294071db4c1639119e022ff0c0503faba2e6f4b367e68d2e8",
+    "src/vectorpro/semantic_catalog.py": "ebbf25d9f199b7065557959cc53dbd913135f304417e68f03f9b846a96a78b9d"
+  },
+  "limits": [
+    "v1 single-lane named slots x0/x1, portable value/path/buffer only",
+    "existing learned functions, not new learning",
+    "legacy effectful functions without output types reject new API",
+    "no native rollback or new OS verification",
+    "contract IDs are content fingerprints, not signatures or universal correctness proofs"
+  ],
+  "container": "vectorpro-test"
+}

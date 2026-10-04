@@ -1,0 +1,221 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true,
+    "terminal_status": true,
+    "request_binding": true
+  },
+  "response": {
+    "status": "executed",
+    "outputs": [
+      4
+    ],
+    "capability": "map",
+    "request": {
+      "query": "find functions and their argument roles for the requested operation; no execution",
+      "width": 16,
+      "operands": [
+        [
+          {
+            "utf8": "new folder/test bytes.bin"
+          },
+          23
+        ]
+      ]
+    },
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+              "version": 1,
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2464737743139267
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "id": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38",
+              "version": 1,
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.25113940238952637
+            },
+            {
+              "id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+              "version": 1,
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2464737743139267
+            }
+          ],
+          "status": "matched",
+          "name": "map",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent",
+          "verification_source": "caller",
+          "request": {
+            "query": "find functions and their argument roles for the requested operation; no execution",
+            "width": 16,
+            "operands": [
+              [
+                {
+                  "utf8": "new folder/test bytes.bin"
+                },
+                23
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "contract_id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+          "contract_version": 1,
+          "capability": "map",
+          "outputs": [
+            4
+          ],
+          "effects": [
+            {
+              "operation": "file.read",
+              "arguments": [
+                1
+              ],
+              "result": 2
+            },
+            {
+              "operation": "buffer.length",
+              "arguments": [
+                2
+              ],
+              "result": 4
+            },
+            {
+              "operation": "buffer.get",
+              "arguments": [
+                2,
+                3
+              ],
+              "result": 98
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                3,
+                117
+              ],
+              "result": 117
+            },
+            {
+              "operation": "buffer.get",
+              "arguments": [
+                2,
+                2
+              ],
+              "result": 255
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                2,
+                232
+              ],
+              "result": 232
+            },
+            {
+              "operation": "buffer.get",
+              "arguments": [
+                2,
+                1
+              ],
+              "result": 23
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                1,
+                0
+              ],
+              "result": 0
+            },
+            {
+              "operation": "buffer.get",
+              "arguments": [
+                2,
+                0
+              ],
+              "result": 0
+            },
+            {
+              "operation": "buffer.set",
+              "arguments": [
+                2,
+                0,
+                23
+              ],
+              "result": 23
+            },
+            {
+              "operation": "file.write",
+              "arguments": [
+                1,
+                2
+              ],
+              "result": 4
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

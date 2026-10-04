@@ -1,0 +1,1489 @@
+{
+  "program_sha256": "d02415c5859ba630ab8204606a995c024c690b601fa7260e520f64cfb04ca0e6",
+  "contract_ids": {
+    "xor": "vp1:f6c0c3e5074c4a96e95076201d10ee0c518ea91af300d6e1445eb2f1cee1a0c0",
+    "map": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+    "fill": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38",
+    "file.write": "vp1:21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504b397"
+  },
+  "contracts": [
+    {
+      "version": 1,
+      "name": "sub",
+      "description": "Subtract the second number from the first number; integer difference with borrow.",
+      "input_types": [
+        "value",
+        "value"
+      ],
+      "argument_roles": [
+        "minuend: number to subtract FROM (left operand)",
+        "subtrahend: number to subtract (right operand)"
+      ],
+      "output_width": "W+1",
+      "has_effects": false,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "value",
+          "role": "minuend: number to subtract FROM (left operand)",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "subtrahend: number to subtract (right operand)",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W+1"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.19779422879219055,
+          -0.20245347917079926,
+          -0.04402313381433487,
+          -0.07622640579938889,
+          0.1491064727306366,
+          0.12157627940177917,
+          -0.05551899969577789,
+          -0.3716143071651459,
+          0.05661917105317116,
+          -0.22195015847682953,
+          0.06148712337017059,
+          0.054134801030159,
+          0.02105446718633175,
+          0.21743908524513245,
+          0.19620205461978912,
+          -0.04344329610466957,
+          -0.23764224350452423,
+          -0.29795128107070923,
+          0.09955254942178726,
+          0.13940826058387756,
+          0.10520767420530319,
+          -0.273208349943161,
+          -0.05997222289443016,
+          0.32554712891578674,
+          0.13179774582386017,
+          -0.10286369174718857,
+          -0.03046337142586708,
+          0.032234493643045425,
+          0.24409209191799164,
+          0.27869662642478943,
+          0.1662513166666031,
+          -0.1482221484184265
+        ],
+        "requires_host": false,
+        "operations": [],
+        "digest": "b9910d5b8e89135bb17e315de0b8c89f14d7e28485454878a3146b219dd55ef8"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "round": 1,
+            "train_examples": 8,
+            "strategy": "learn",
+            "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+            "train_accuracy": 1.0,
+            "validation_accuracy": 1.0,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:c79e46ae9e49c7a648da9aa17bbd77dfcc2c32eb7b59a851b4a51e0fcf4f8a08"
+    },
+    {
+      "version": 1,
+      "name": "xor",
+      "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+      "input_types": [
+        "value",
+        "value"
+      ],
+      "argument_roles": [
+        "numeric parameter",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": false,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.0999767854809761,
+          0.00514769833534956,
+          -0.08027642965316772,
+          0.040476519614458084,
+          0.07164372503757477,
+          0.018316198140382767,
+          0.10441024601459503,
+          0.07188168168067932,
+          -0.016670260578393936,
+          0.12912024557590485,
+          -0.04719824343919754,
+          0.00855553150177002,
+          0.08519450575113297,
+          0.3751196563243866,
+          -0.23934051394462585,
+          -0.25853392481803894,
+          -0.10967278480529785,
+          0.1422184854745865,
+          0.17195917665958405,
+          0.02897772751748562,
+          -0.03753069415688515,
+          -0.06383217871189117,
+          0.08852405101060867,
+          -0.06438668817281723,
+          -0.07270630449056625,
+          0.12123019248247147,
+          0.24782730638980865,
+          0.5557048320770264,
+          -0.24949006736278534,
+          -0.2010890692472458,
+          0.2965047061443329,
+          -0.08986568450927734
+        ],
+        "requires_host": false,
+        "operations": [],
+        "digest": "7507bdb4015dfa8c2f76a69d14fcc5c3ec62c5531c30b99822fe171e296fa62f"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "round": 1,
+            "train_examples": 8,
+            "strategy": "learn",
+            "structure": "same rule applied to every bit position independently (2 inputs per bit)",
+            "train_accuracy": 1.0,
+            "validation_accuracy": 1.0,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:f6c0c3e5074c4a96e95076201d10ee0c518ea91af300d6e1445eb2f1cee1a0c0"
+    },
+    {
+      "version": 1,
+      "name": "buffer.new",
+      "description": "Allocate, create a new byte array in memory with the requested size.",
+      "input_types": [
+        "value"
+      ],
+      "argument_roles": [
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "buffer",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.09713190793991089,
+          0.15697652101516724,
+          0.18954072892665863,
+          0.2200937271118164,
+          -0.2522237002849579,
+          0.4380519390106201,
+          -0.08072935044765472,
+          0.05725568160414696,
+          -0.2780150771141052,
+          -0.09380383044481277,
+          -0.08187505602836609,
+          -0.08526163548231125,
+          -0.18206094205379486,
+          0.19024431705474854,
+          -0.0240030400454998,
+          0.13748730719089508,
+          -0.01592819206416607,
+          0.11723271757364273,
+          -0.1430433839559555,
+          0.0001521732920082286,
+          0.14365403354167938,
+          -0.0682586058974266,
+          0.17736542224884033,
+          0.06111236289143562,
+          -0.04197562113404274,
+          0.3928828835487366,
+          -0.32107630372047424,
+          -0.008485019207000732,
+          -0.17830674350261688,
+          -0.16320960223674774,
+          0.005721606779843569,
+          0.12116345763206482
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.new"
+        ],
+        "digest": "6c58f712d5b9443c144f4f800c6357d2b9fb6eedd7e7934a84329a6a73826e57"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:f312877a746aa574e59e6a9275059ed19fd296002d6ef06897efc279ed3af166"
+    },
+    {
+      "version": 1,
+      "name": "buffer.length",
+      "description": "Measure buffer size, count how many bytes a memory buffer contains.",
+      "input_types": [
+        "buffer"
+      ],
+      "argument_roles": [
+        "hexadecimal buffer bytes"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "buffer",
+          "role": "hexadecimal buffer bytes",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.28188109397888184,
+          -0.23295071721076965,
+          0.05901234596967697,
+          0.08903567492961884,
+          -0.44757333397865295,
+          -0.2905484139919281,
+          -0.03909005969762802,
+          0.04794677719473839,
+          0.042290098965168,
+          0.01316813100129366,
+          0.057888906449079514,
+          0.07782357931137085,
+          0.07825832068920135,
+          -0.14820870757102966,
+          0.13381148874759674,
+          -0.1587275266647339,
+          -0.03747877478599548,
+          -0.41704392433166504,
+          -0.012487819418311119,
+          -0.005820716731250286,
+          0.16484667360782623,
+          0.0598006546497345,
+          -0.1578151285648346,
+          -0.009624256752431393,
+          -0.10664708912372589,
+          -0.07941985130310059,
+          0.3291360139846802,
+          -0.0689423680305481,
+          0.021220283582806587,
+          0.1994878202676773,
+          0.15814250707626343,
+          0.2375965267419815
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.length"
+        ],
+        "digest": "6d842ac45be0bf51e817f3af38ab2e88ab09ff5c8a1f017579a6ae57cae3e7a9"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:e2a1f899182cc2b8d3b9604100626637d316d6344ffc417e0569c95689be30f6"
+    },
+    {
+      "version": 1,
+      "name": "buffer.get",
+      "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+      "input_types": [
+        "buffer",
+        "value"
+      ],
+      "argument_roles": [
+        "hexadecimal buffer bytes",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "buffer",
+          "role": "hexadecimal buffer bytes",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.21165160834789276,
+          -0.10036919265985489,
+          -0.19283168017864227,
+          0.13551673293113708,
+          0.1462397575378418,
+          0.11186254024505615,
+          0.46736592054367065,
+          -0.25471213459968567,
+          -0.018526794388890266,
+          0.027888428419828415,
+          -0.14231668412685394,
+          -0.2980378568172455,
+          -0.024460790678858757,
+          -0.24763208627700806,
+          -0.07490641623735428,
+          0.0588887482881546,
+          -0.06220858171582222,
+          0.028352858498692513,
+          0.05845119431614876,
+          0.2790314257144928,
+          0.06914114207029343,
+          0.09262653440237045,
+          -0.048173725605010986,
+          -0.028254609555006027,
+          0.04604975879192352,
+          -0.18500423431396484,
+          -0.45531150698661804,
+          0.031309545040130615,
+          -0.16874466836452484,
+          0.07540528476238251,
+          0.03771040588617325,
+          0.09233062714338303
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.get"
+        ],
+        "digest": "798ca36e243718e179e3ae320aaa7ecbb029c40936edf5a97a92634bf2db9374"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:5cb80507a6e81a612afdf0a820949e98acd3594d36b7211f4edcf5f51014d6ca"
+    },
+    {
+      "version": 1,
+      "name": "buffer.set",
+      "description": "Write, replace, update one byte in a memory buffer at a position or offset.",
+      "input_types": [
+        "buffer",
+        "value",
+        "value"
+      ],
+      "argument_roles": [
+        "hexadecimal buffer bytes",
+        "numeric parameter",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "buffer",
+          "role": "hexadecimal buffer bytes",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "x2",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.2018575519323349,
+          -0.20685355365276337,
+          0.06294949352741241,
+          -0.02239862270653248,
+          0.20839259028434753,
+          -0.10408911854028702,
+          0.15885505080223083,
+          0.12904849648475647,
+          0.06554655730724335,
+          0.044525738805532455,
+          -0.025056377053260803,
+          0.07523325085639954,
+          -0.06554372608661652,
+          -0.22514225542545319,
+          0.05026070028543472,
+          -0.29141318798065186,
+          -0.013805236667394638,
+          -0.0747939795255661,
+          -0.3259209096431732,
+          -0.07401927560567856,
+          0.22563576698303223,
+          0.02744140662252903,
+          0.32842060923576355,
+          0.16309593617916107,
+          -0.2251318097114563,
+          -0.1504645049571991,
+          0.3069760799407959,
+          0.057529084384441376,
+          0.13916702568531036,
+          -0.2075437605381012,
+          -0.24823777377605438,
+          -0.2496122568845749
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.set"
+        ],
+        "digest": "0019b1fef32c3aa542422a4a2673c07ca3edc91d67a972385425cf857ff81c11"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:171dab942cbcef70245f8d8877f80f920275bc7b9813213e3b2a7840841cef9b"
+    },
+    {
+      "version": 1,
+      "name": "file.read",
+      "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+      "input_types": [
+        "path"
+      ],
+      "argument_roles": [
+        "relative file path"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "output": {
+        "type": "buffer",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.12802205979824066,
+          0.12203803658485413,
+          0.09308016300201416,
+          0.09026636928319931,
+          0.039235178381204605,
+          0.20040567219257355,
+          -0.06567467004060745,
+          0.2337123453617096,
+          -0.017018724232912064,
+          -0.24985916912555695,
+          0.08968071639537811,
+          0.13600493967533112,
+          0.1515030860900879,
+          -0.27595606446266174,
+          0.13895906507968903,
+          -0.12516863644123077,
+          0.2679005563259125,
+          0.022303402423858643,
+          0.2203834056854248,
+          0.19223394989967346,
+          -0.2867884635925293,
+          0.22575050592422485,
+          -0.11315823346376419,
+          -0.29351139068603516,
+          0.21851837635040283,
+          0.29363369941711426,
+          -0.1523236632347107,
+          0.12928107380867004,
+          0.06581558287143707,
+          -0.0076348790898919106,
+          -0.24291963875293732,
+          -0.026176350191235542
+        ],
+        "requires_host": true,
+        "operations": [
+          "file.read"
+        ],
+        "digest": "7f27977dbd2683c70ad65d86a997fa64ef13466b1ff6e2e4821c7b8a47bc42c7"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:c33337d09194d34a80251f6aad0ba2c9146c0174d52e1108e9c7517a55e985d0"
+    },
+    {
+      "version": 1,
+      "name": "file.write",
+      "description": "Write, save buffer contents from memory to a disk file; return bytes written.",
+      "input_types": [
+        "path",
+        "buffer"
+      ],
+      "argument_roles": [
+        "relative file path",
+        "hexadecimal buffer bytes"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "buffer",
+          "role": "hexadecimal buffer bytes",
+          "schema": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-fA-F]{2})*$"
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.0650561973452568,
+          0.2977275252342224,
+          0.03630770742893219,
+          0.0719924122095108,
+          -0.02742895483970642,
+          0.12081755697727203,
+          -0.05329963564872742,
+          -0.25198835134506226,
+          -0.026908589527010918,
+          -0.10121139138936996,
+          -0.09917127341032028,
+          0.16324016451835632,
+          -0.1680641919374466,
+          0.15893329679965973,
+          0.21845369040966034,
+          -0.333697646856308,
+          -0.2800067067146301,
+          -0.33266931772232056,
+          0.014432157389819622,
+          -0.2043766975402832,
+          0.2729199528694153,
+          -0.020955687388777733,
+          0.10930504649877548,
+          -0.03205556422472,
+          -0.012131606228649616,
+          0.19676369428634644,
+          0.17182737588882446,
+          -0.09010165184736252,
+          -0.1649908572435379,
+          0.027426274493336678,
+          0.3605583906173706,
+          0.07397325336933136
+        ],
+        "requires_host": true,
+        "operations": [
+          "file.write"
+        ],
+        "digest": "3567bd4d19881dc5c82ba71e138adab83a36f3048e8f05acd2e40206ae624d5c"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [],
+        "audit": null
+      },
+      "id": "vp1:21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504b397"
+    },
+    {
+      "version": 1,
+      "name": "fill",
+      "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+      "input_types": [
+        "path",
+        "value"
+      ],
+      "argument_roles": [
+        "relative file path",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.0077123199589550495,
+          -0.15699291229248047,
+          -0.09706755727529526,
+          -0.0708136186003685,
+          0.11461237818002701,
+          -0.22643935680389404,
+          -0.028082409873604774,
+          -0.038145918399095535,
+          -0.016760217025876045,
+          0.2731595039367676,
+          0.11692118644714355,
+          -0.09458065778017044,
+          -0.07171164453029633,
+          -0.2599439322948456,
+          0.33207252621650696,
+          0.40459144115448,
+          -0.04582778736948967,
+          0.13854998350143433,
+          0.11362021416425705,
+          0.05255519226193428,
+          -0.4033063054084778,
+          0.1046043261885643,
+          -0.10487351566553116,
+          -0.16917528212070465,
+          -0.004602100234478712,
+          0.2295074760913849,
+          0.07809511572122574,
+          -0.038924530148506165,
+          -0.22642646729946136,
+          -0.06202943995594978,
+          0.18418622016906738,
+          -0.22466623783111572
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.length",
+          "buffer.set",
+          "file.read",
+          "file.write"
+        ],
+        "digest": "ba3465128f13b0cc8797e832e6c9dfca5cc4de5bdb41a1ba1b719144acd813eb"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "strategy": "state search",
+            "steps": 5,
+            "tensor_steps": 6,
+            "candidates": 1,
+            "control": "buffer-fill",
+            "training_cases": 2,
+            "validation_cases": 2,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:4915d758bf123e730354761eb2abcabd253ca9aacbc7376ef5c71ae9e85b8b38"
+    },
+    {
+      "version": 1,
+      "name": "map",
+      "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+      "input_types": [
+        "path",
+        "value"
+      ],
+      "argument_roles": [
+        "relative file path",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.12195082753896713,
+          0.17278996109962463,
+          -0.04030284285545349,
+          -0.15969887375831604,
+          -0.017601126804947853,
+          -0.21388423442840576,
+          0.01320139691233635,
+          -0.10670734196901321,
+          -0.1775851994752884,
+          0.17895212769508362,
+          -0.13818103075027466,
+          0.28256168961524963,
+          0.31924155354499817,
+          -0.13540075719356537,
+          0.21570180356502533,
+          -0.09431669116020203,
+          -0.1360086053609848,
+          -0.04719245061278343,
+          -0.10664642602205276,
+          0.17174187302589417,
+          0.023480135947465897,
+          -0.2338346689939499,
+          -0.025456706061959267,
+          -0.2219393104314804,
+          -0.2614416480064392,
+          0.10441219061613083,
+          -0.2683261036872864,
+          -0.29899081587791443,
+          0.3368559181690216,
+          -0.0072469525039196014,
+          -0.0913592129945755,
+          -0.055780328810214996
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.get",
+          "buffer.length",
+          "buffer.set",
+          "file.read",
+          "file.write"
+        ],
+        "digest": "fb63a74fa338099f59349c92f544b2c88697ae0acffbb4b5c2ed859391693dd6"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "strategy": "state search",
+            "steps": 7,
+            "tensor_steps": 8,
+            "candidates": 12,
+            "control": "buffer-map",
+            "training_cases": 2,
+            "validation_cases": 2,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2"
+    },
+    {
+      "version": 1,
+      "name": "guarded_map",
+      "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+      "input_types": [
+        "path",
+        "value",
+        "value"
+      ],
+      "argument_roles": [
+        "relative file path",
+        "numeric parameter",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "x2",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          -0.016626814380288124,
+          -0.007024173159152269,
+          0.052537981420755386,
+          0.14491848647594452,
+          0.24896490573883057,
+          0.12964898347854614,
+          0.1292574107646942,
+          -0.055776748806238174,
+          -0.1598728895187378,
+          0.16527049243450165,
+          0.031363796442747116,
+          0.06823734194040298,
+          -0.0018695268081501126,
+          -0.2876479923725128,
+          0.18861974775791168,
+          -0.15684428811073303,
+          0.08288677781820297,
+          0.505635142326355,
+          -0.01600845716893673,
+          0.03799872845411301,
+          0.049232371151447296,
+          -0.07072726637125015,
+          -0.1278928518295288,
+          0.17316852509975433,
+          0.2503300905227661,
+          -0.1660185009241104,
+          -0.3022840917110443,
+          -0.26618021726608276,
+          0.117006316781044,
+          -0.08936996757984161,
+          0.2521041929721832,
+          -0.14201872050762177
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.get",
+          "buffer.length",
+          "buffer.set",
+          "file.read",
+          "file.write"
+        ],
+        "digest": "4dfa24f9fb5a34126b4e8d997ee5af9ebb3b9c527eda69b993437ce6864b9469"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "strategy": "state search",
+            "steps": 1,
+            "candidates": 240,
+            "control": "branch",
+            "tensor_steps": 2,
+            "training_cases": 2,
+            "validation_cases": 2,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:d8f8f3d8484925d919d2e085c65757c32d9b555de07cba31c02244d17897a5c2"
+    },
+    {
+      "version": 1,
+      "name": "pair_map",
+      "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+      "input_types": [
+        "path",
+        "path",
+        "value"
+      ],
+      "argument_roles": [
+        "relative file path",
+        "relative file path",
+        "numeric parameter"
+      ],
+      "output_width": "W",
+      "has_effects": true,
+      "parameters": [
+        {
+          "name": "x0",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x1",
+          "type": "path",
+          "role": "relative file path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "x2",
+          "type": "value",
+          "role": "numeric parameter",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.1198163777589798,
+          0.3407469391822815,
+          0.24046647548675537,
+          0.27597153186798096,
+          0.025479229167103767,
+          0.35853737592697144,
+          0.10266824066638947,
+          0.28800106048583984,
+          0.19334547221660614,
+          0.014419964514672756,
+          0.17120641469955444,
+          -0.21480223536491394,
+          -0.1965440958738327,
+          -0.07047968357801437,
+          -0.07404166460037231,
+          0.10058476775884628,
+          0.11047518998384476,
+          0.19440093636512756,
+          0.08622843772172928,
+          0.32382187247276306,
+          0.10616936534643173,
+          -0.11810223013162613,
+          -0.0076722935773432255,
+          0.14553475379943848,
+          -0.0689094215631485,
+          -0.12443546205759048,
+          -0.1070520430803299,
+          -0.28166353702545166,
+          -0.03853007033467293,
+          0.12268920242786407,
+          -0.040221016854047775,
+          -0.051915694028139114
+        ],
+        "requires_host": true,
+        "operations": [
+          "buffer.get",
+          "buffer.length",
+          "buffer.set",
+          "file.read",
+          "file.write"
+        ],
+        "digest": "9fe38fed643352c6841d71f5bc94b2ebbfa8d4e49dc69e8f96e4a3e04d0940fb"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "strategy": "state search",
+            "steps": 2,
+            "candidates": 2508,
+            "control": "sequence",
+            "tensor_steps": 2,
+            "training_cases": 2,
+            "validation_cases": 2,
+            "accepted": true
+          }
+        ],
+        "audit": null
+      },
+      "id": "vp1:493f419f9f2fc641312b964bb690c529529727fd7421f74cfdaabd661928cec0"
+    }
+  ],
+  "tool_schema": {
+    "type": "function",
+    "function": {
+      "name": "vp_21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504",
+      "description": "Write, save buffer contents from memory to a disk file; return bytes written. Contract ID: vp1:21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504b397",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 64
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "x0": {
+                "type": "string",
+                "description": "relative file path"
+              },
+              "x1": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-fA-F]{2})*$",
+                "description": "hexadecimal buffer bytes"
+              }
+            },
+            "required": [
+              "x0",
+              "x1"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "width",
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "cases": [
+    {
+      "root": "results/contracts_model/native-0",
+      "numeric": {
+        "status": "executed",
+        "contract_id": "vp1:f6c0c3e5074c4a96e95076201d10ee0c518ea91af300d6e1445eb2f1cee1a0c0",
+        "contract_version": 1,
+        "capability": "xor",
+        "outputs": [
+          64
+        ],
+        "effects": []
+      },
+      "map": {
+        "status": "executed",
+        "contract_id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+        "contract_version": 1,
+        "capability": "map",
+        "outputs": [
+          4
+        ],
+        "effects": [
+          {
+            "operation": "file.read",
+            "arguments": [
+              1
+            ],
+            "result": 2
+          },
+          {
+            "operation": "buffer.length",
+            "arguments": [
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              3
+            ],
+            "result": 98
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              3,
+              111
+            ],
+            "result": 111
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              2
+            ],
+            "result": 255
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              2,
+              242
+            ],
+            "result": 242
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              1
+            ],
+            "result": 23
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              1,
+              26
+            ],
+            "result": 26
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              0
+            ],
+            "result": 0
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              0,
+              13
+            ],
+            "result": 13
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          }
+        ]
+      },
+      "write": {
+        "status": "executed",
+        "contract_id": "vp1:21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504b397",
+        "contract_version": 1,
+        "capability": "file.write",
+        "outputs": [
+          3
+        ],
+        "effects": [
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              4
+            ],
+            "result": 3
+          }
+        ]
+      },
+      "rejected": [
+        "virtual paths must be portable relative paths",
+        "numeric arguments must be unsigned integers fitting the register width"
+      ],
+      "files": {
+        "keep.bin": "6b656570",
+        "메시지.bin": "616263",
+        "새 파일.bin": "0d1af26f"
+      }
+    },
+    {
+      "root": "results/contracts_model/native-1",
+      "numeric": {
+        "status": "executed",
+        "contract_id": "vp1:f6c0c3e5074c4a96e95076201d10ee0c518ea91af300d6e1445eb2f1cee1a0c0",
+        "contract_version": 1,
+        "capability": "xor",
+        "outputs": [
+          64
+        ],
+        "effects": []
+      },
+      "map": {
+        "status": "executed",
+        "contract_id": "vp1:69489b421b6f59ec6e37b266cc3598cafd1058343abe4e4315a584b272a7b5e2",
+        "contract_version": 1,
+        "capability": "map",
+        "outputs": [
+          4
+        ],
+        "effects": [
+          {
+            "operation": "file.read",
+            "arguments": [
+              1
+            ],
+            "result": 2
+          },
+          {
+            "operation": "buffer.length",
+            "arguments": [
+              2
+            ],
+            "result": 4
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              3
+            ],
+            "result": 98
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              3,
+              111
+            ],
+            "result": 111
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              2
+            ],
+            "result": 255
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              2,
+              242
+            ],
+            "result": 242
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              1
+            ],
+            "result": 23
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              1,
+              26
+            ],
+            "result": 26
+          },
+          {
+            "operation": "buffer.get",
+            "arguments": [
+              2,
+              0
+            ],
+            "result": 0
+          },
+          {
+            "operation": "buffer.set",
+            "arguments": [
+              2,
+              0,
+              13
+            ],
+            "result": 13
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 4
+          }
+        ]
+      },
+      "write": {
+        "status": "executed",
+        "contract_id": "vp1:21b6880547038cf511ab44be59866ab29c1fdb2a3280e7d7cc2ea2a91504b397",
+        "contract_version": 1,
+        "capability": "file.write",
+        "outputs": [
+          3
+        ],
+        "effects": [
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              4
+            ],
+            "result": 3
+          }
+        ]
+      },
+      "rejected": [
+        "virtual paths must be portable relative paths",
+        "numeric arguments must be unsigned integers fitting the register width"
+      ],
+      "files": {
+        "keep.bin": "6b656570",
+        "메시지.bin": "616263",
+        "새 파일.bin": "0d1af26f"
+      }
+    }
+  ],
+  "llm_imported": false,
+  "encoder_imported": false,
+  "scope": "execution of previously learned functions; not new learning or natural-language accuracy"
+}
