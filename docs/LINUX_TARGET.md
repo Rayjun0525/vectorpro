@@ -93,7 +93,8 @@ stdout/stderr/종료/cwd/env/시간 제한과 학습한 stdout 저장을 검증�
 [PROCESS_RESULTS.md](PROCESS_RESULTS.md)에 명세와 미사용 검증을 기록했다.
 동시 파이프/권한/시스템
 정보/네트워크와 임의의 중첩 조건·문자열 처리·자료구조는 아직 구현하지 않았다.
-다음 단계는 다른 프로세스 stdin으로 결과를 전달하는 학습과 파이프 검증이다.
+두 프로세스의 순차 stdin/stdout 연결과 종료 코드에 따른 쓰기 분기를 학습·검증했다.
+범위는 [PROCESS_CHAIN.md](PROCESS_CHAIN.md)에 있다. 동시 스트리밍 파이프가 다음 과제다.
 버퍼+숫자 이진 레코드의 반환·분리와 다음 계약 전달은 구현·검증했다.
 현재의 제한과 재현은 [RECORD_RESULTS.md](RECORD_RESULTS.md)에 있다.
 

@@ -65,3 +65,5 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m 
 현재 단계는 리눅스 프로세스 입출력의 초기 연결이다. 남은 것은 결과를 다른
 프로세스 stdin으로 이어가는 학습·검증, 동시 OS 파이프, 프로세스 실패 분기,
 파일 변경 관찰·네트워크·시스템 정보다. 전체 프로그램의 범용 정확성 증명은 아니다.
+이후 순차 연결과 종료 코드 저장 분기까지 검증했다. 최신 범위는
+[PROCESS_CHAIN.md](PROCESS_CHAIN.md)를 참고한다. 동시 OS 파이프는 남아 있다.

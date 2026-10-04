@@ -40,7 +40,13 @@ The runtime provides generic buffer/file primitives and their input/output
 types, analogous to a machine's instruction semantics. It does not provide task
 recipes. The stateful learner enumerates typed call sequences and argument
 routing, simulates them in a fresh memory filesystem, and compiles the successful
-sequence to the existing vector instruction format. Its search library includes
+sequence to the existing vector instruction format.
+Acquired stdout-returning functions can themselves be composed to learn sequential
+process input/output routing. `branches_only: true` with `control_flow: true`
+restricts the general grammar to guards while preserving the old default branch/while
+search. It supplies no condition or task recipe. See [PROCESS_CHAIN.md](PROCESS_CHAIN.md).
+
+Its search library includes
 learned numeric capabilities and previously learned state procedures with stored
 type contracts. Numeric calls receive values, not path/buffer handles; their
 results use the vector machine's W-bit register fitting semantics. Real execution uses fresh

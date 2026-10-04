@@ -7,6 +7,37 @@
 
 ## 현재 구현
 
+### 프로세스 순차 연결과 종료 코드 분기 (2026-10-05)
+
+기존 프로세스 파일에 run_stdout/chain_stdout/save_stdout/save_success를 축적했다.
+호출 순서/인자 경로/조건 구간/극성은 예제에서 탐색하며 Python 작업 레시피는 없다.
+각 기능은 학습 2건·검증 2건을 사용했다. 후보는 각각 30/553/387/1293개다.
+chain_stdout은 습득 기능 2호출(내부 실제 호스트 4호출), save_success는
+process.code와 조건부 save_stdout의 2호출/제어 포함 3단계다.
+
+반복을 포함한 제어 탐색은 직접/조합 모두 시간 한도 실패(1223/1257후보)했다.
+범용 branches_only 옵션을 추가해 control_flow일 때 일반 while 후보만 제외한다.
+기본값 false와 기존 제어 후보는 유지하며 guard의 조건/극성/구간은 계속 검색한다.
+목록/버퍼 문법과 이미 습득한 기능 내부 반복에는 적용하지 않는다. 새 옵션 기능은
+조건을 nonzero로 단정하지 않는 설명 버전2를 저장하며 기존 계약 설명/ID는 유지한다.
+저장/계약/커널 버전은 유지했다. 후보 20000개/시간 60초 한도도 유지했다.
+
+Popen 금지 상태에서 네 기능의 학습·저장을 검사했고 기존 capture_to_file 계약 ID
+유지와 새 프로그램 재로딩을 확인했다. 미사용 native cat/cat·cat/tr·tr/cat,
+빈/바이너리/한글/6144바이트, 전체 상태와 결과 **4/4** 통과했다.
+실제 프로세스 결과에 성공 빈 출력·한글·종료19·신호-15 저장 분기를 적용해
+**4/4** 통과했다. 성공 빈 파일 생성, 실패 시 기존 파일 보존/쓰기 호출 없음도 확인했다.
+첫/둘째 프로세스의 실행 파일 없음은 해당 단계에서 중단하며 이후 호출하지 않는다.
+관련 제어/기한/연결 테스트 **19 passed, 25.08초**.
+최종 전체 회귀 **286 passed, 251.19초**. 안내 변경 후 어댑터 **6 passed, 6.04초**.
+
+최종 근거: results/process_chain_final_verified; 명세와 재현은 PROCESS_CHAIN.md.
+process_chain_verified와 process_chain_branched_verified는 중간 통과 기록이며,
+guarded/composed 시도의 EXCLUDED.json은 실패 한도를 기록한다. 자료를 덮어쓰지 않았다.
+chain 자체는 비정상 종료에도 stdout을 전달하고, save_success는 별도 기능이다.
+이 둘을 하나의 작업으로 묶는 학습과 동시 스트리밍 OS 파이프, 프로세스 파일 변경
+관찰, 네트워크·시스템 정보가 남아 있다. 기존 컨테이너/이미지 하나만 사용했다.
+
 ### 프로세스 실행 결과와 학습된 stdout 전달 (2026-10-05)
 
 opt-in process.run/stdout/stderr/code를 추가했다. argv 직접 실행, stdin,

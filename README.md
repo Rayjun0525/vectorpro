@@ -7,6 +7,8 @@
 [RECORD_RESULTS.md](docs/RECORD_RESULTS.md)에 있다.
 프로세스 입력·출력·종료 코드와 학습된 출력 저장 절차는
 [PROCESS_RESULTS.md](docs/PROCESS_RESULTS.md)를 참고한다.
+두 프로세스의 순차 연결과 종료 코드에 따른 저장 분기까지 학습·검증했다.
+현재 범위와 남은 파이프 과제는 [PROCESS_CHAIN.md](docs/PROCESS_CHAIN.md)에 있다.
 
 실제 Gemma로 반복 작업의 비용을 비교했다. 정확한 구조화 입력의 텐서 직접 호출은
 LLM 사용 0회였지만, 자연어 인자 준비는 오류가 많았고 Python 직접 함수가 더 빨랐다.

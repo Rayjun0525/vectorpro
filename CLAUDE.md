@@ -10,6 +10,7 @@
 - [목록·문자열·JSON과 학습된 순회](docs/STRUCTURED_DATA.md)
 - [여러 결과 전달의 초기 기반](docs/RECORD_RESULTS.md)
 - [프로세스 실행과 학습된 출력 전달](docs/PROCESS_RESULTS.md)
+- [순차 프로세스 연결과 실패 분기](docs/PROCESS_CHAIN.md)
 - [작업 인수인계](docs/HANDOFF.md)
 - [구현·실험 안내](README.md)
 - [LLM 어댑터와 근거의 한계](docs/LLM_ADAPTER.md)

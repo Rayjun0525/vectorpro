@@ -58,6 +58,9 @@ It returns stdout/stderr/code in a portable result buffer. State cases may inclu
 processes:[{request:hex,stdin:hex,stdout:hex,stderr:hex,code:int}] as exact recorded
 observations. Learning never launches a process and must consume every observation.
 Do not invent observed responses or claim external program algorithms were learned.
+With control_flow:true, branches_only:true limits general control search to guards
+and excludes while candidates. Guard condition, polarity and region remain searched;
+it does not disable loops inside previously acquired capabilities or list grammars.
 execute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.
 Only supplied host-root files are accessible. ask_user takes {question:string}.
 Trust tool statuses; learned means checked examples, learning_failed means no solution.

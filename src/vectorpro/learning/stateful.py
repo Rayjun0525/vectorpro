@@ -46,6 +46,7 @@ class StateLesson:
     allowed_operations: tuple[str, ...] | None = None
     list_reduction: bool = False
     output_type: str = "value"
+    branches_only: bool = False
 
     def validate(self):
         if self.output_type not in ("value", "buffer"):
@@ -56,6 +57,8 @@ class StateLesson:
             raise ValueError("state widths and search budgets must be positive")
         if type(self.control_flow) is not bool:
             raise ValueError("control_flow must be boolean")
+        if type(self.branches_only) is not bool or (self.branches_only and not self.control_flow):
+            raise ValueError("branches_only requires control_flow and a boolean flag")
         if type(self.buffer_loops) is not bool:
             raise ValueError("buffer_loops must be boolean")
         if type(self.list_loops) is not bool:
@@ -129,7 +132,7 @@ class StateLesson:
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
                    data.get("control_flow", False), data.get("time_budget_seconds", 60.0),
                    data.get("buffer_loops", False), data.get("execution_budget"), data.get("list_loops", False),
-                   None, data.get("list_reduction", False), data.get("output_type", "value"))
+                   None, data.get("list_reduction", False), data.get("output_type", "value"), data.get("branches_only", False))
 
 
 @dataclass
@@ -197,7 +200,7 @@ def prefilter_instructions(registry, instructions, registers, output, case, less
     return False
 
 
-def control_candidates(instructions, input_types, result_types, enabled):
+def control_candidates(instructions, input_types, result_types, enabled, allow_loops=True):
     """One structured guard or while region; no operation/task-specific recipes.
 
     A while region feeds a numeric call's result back into one of its numeric
@@ -221,6 +224,8 @@ def control_candidates(instructions, input_types, result_types, enabled):
                                   otherwise=exit_label if nonzero else f"s{start}")
                     labeled.insert(start, guard)
                     yield tuple(labeled), instructions[-1].dest, "branch"
+            if not allow_loops:
+                continue
             for update in range(start, size):
                 if result_types[update] != "value" or test not in instructions[update].args:
                     continue
@@ -334,7 +339,8 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
                     registers = initial | {f"t{i}": "zero" for i in range(1, depth + 1)}
                     result_types = prefix_types + (result_type,)
                     for candidate, output, control in control_candidates(
-                            instructions, lesson.input_types, result_types, lesson.control_flow):
+                            instructions, lesson.input_types, result_types, lesson.control_flow,
+                            allow_loops=not lesson.branches_only):
                         if (available | {destination: result_type})[output] != lesson.output_type:
                             continue
                         if timed_out():
@@ -352,7 +358,8 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
                                                         input_types=list(lesson.input_types),
                                                         output_type=(available | {destination: result_type})[output],
                                                         teaching_width=lesson.width, control=control,
-                                                        execution_budget=lesson.execution_budget)
+                                                        execution_budget=lesson.execution_budget,
+                                                        **({"branch_description_version": 2} if lesson.branches_only else {}))
                         executable = registry.build(plan, provenance)
                         if matches(executable, lesson.training):
                             if matches(executable, lesson.validation):

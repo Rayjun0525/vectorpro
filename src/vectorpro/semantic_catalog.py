@@ -107,7 +107,9 @@ def document(registry, name, visited=()):
     elif program.has_loop:
         prefix.append("Repeat indexed operations over the bytes in a file buffer.")
     elif has_guard:
-        prefix.append("Conditionally execute when a flag is nonzero; otherwise skip.")
+        prefix.append("Execute acquired calls according to stored conditional routing."
+                      if prov.get("branch_description_version") == 2
+                      else "Conditionally execute when a flag is nonzero; otherwise skip.")
     if prov.get("input_types", []).count("path") > 1:
         prefix.append("Apply operations to two separate files.")
     return " ".join(prefix + list(dict.fromkeys(mutations or details)))

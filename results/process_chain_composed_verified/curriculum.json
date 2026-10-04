@@ -1,0 +1,487 @@
+[
+  {
+    "draft": {
+      "version": 1,
+      "name": "run_stdout",
+      "description": "run_stdout",
+      "parameters": [
+        {
+          "name": "request",
+          "type": "buffer",
+          "role": "request"
+        },
+        {
+          "name": "stdin",
+          "type": "buffer",
+          "role": "stdin"
+        }
+      ],
+      "output": {
+        "type": "buffer",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "process.run",
+        "process.stdout"
+      ]
+    },
+    "state_lesson": {
+      "output_type": "buffer",
+      "max_steps": 2,
+      "candidate_budget": 20000,
+      "input_types": [
+        "buffer",
+        "buffer"
+      ],
+      "training": [
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "616263"
+          ],
+          "before": {
+            "one": "aa"
+          },
+          "after": {
+            "one": "aa"
+          },
+          "output": "414243",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "616263",
+              "stdout": "414243",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        },
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "646966666572656e74"
+          ],
+          "before": {
+            "two": "aa"
+          },
+          "after": {
+            "two": "aa"
+          },
+          "output": "444946464552454e54",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "646966666572656e74",
+              "stdout": "444946464552454e54",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            ""
+          ],
+          "before": {
+            "empty": "aa"
+          },
+          "after": {
+            "empty": "aa"
+          },
+          "output": "",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "",
+              "stdout": "",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        },
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "6d6f726500ff"
+          ],
+          "before": {
+            "binary": "aa"
+          },
+          "after": {
+            "binary": "aa"
+          },
+          "output": "4d4f524500ff",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "6d6f726500ff",
+              "stdout": "4d4f524500ff",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "chain_stdout",
+      "description": "chain_stdout",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "buffer",
+          "role": "first"
+        },
+        {
+          "name": "second",
+          "type": "buffer",
+          "role": "second"
+        },
+        {
+          "name": "stdin",
+          "type": "buffer",
+          "role": "stdin"
+        }
+      ],
+      "output": {
+        "type": "buffer",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "process.run",
+        "process.stdout"
+      ]
+    },
+    "state_lesson": {
+      "output_type": "buffer",
+      "max_steps": 2,
+      "candidate_budget": 20000,
+      "input_types": [
+        "buffer",
+        "buffer",
+        "buffer"
+      ],
+      "training": [
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+            "616263"
+          ],
+          "before": {
+            "one": "aa"
+          },
+          "after": {
+            "one": "aa"
+          },
+          "output": "585943",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "616263",
+              "stdout": "414243",
+              "stderr": "",
+              "code": 0
+            },
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+              "stdin": "414243",
+              "stdout": "585943",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        },
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+            "62616261"
+          ],
+          "before": {
+            "two": "aa"
+          },
+          "after": {
+            "two": "aa"
+          },
+          "output": "59585958",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "62616261",
+              "stdout": "42414241",
+              "stderr": "",
+              "code": 0
+            },
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+              "stdin": "42414241",
+              "stdout": "59585958",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+            ""
+          ],
+          "before": {
+            "empty": "aa"
+          },
+          "after": {
+            "empty": "aa"
+          },
+          "output": "",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "",
+              "stdout": "",
+              "stderr": "",
+              "code": 0
+            },
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+              "stdin": "",
+              "stdout": "",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        },
+        {
+          "inputs": [
+            "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+            "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+            "616200ff"
+          ],
+          "before": {
+            "binary": "aa"
+          },
+          "after": {
+            "binary": "aa"
+          },
+          "output": "585900ff",
+          "processes": [
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c22612d7a222c22412d5a225d7d",
+              "stdin": "616200ff",
+              "stdout": "414200ff",
+              "stderr": "",
+              "code": 0
+            },
+            {
+              "request": "7b2261726776223a5b222f7573722f62696e2f7472222c224142222c225859225d7d",
+              "stdin": "414200ff",
+              "stdout": "585900ff",
+              "stderr": "",
+              "code": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "save_stdout",
+      "description": "Save stdout from a supplied process result",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "buffer",
+          "role": "process result"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "process.stdout",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "buffer",
+        "path"
+      ],
+      "max_steps": 2,
+      "control_flow": false,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "7b22636f6465223a302c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22363136323633227d",
+            "ok"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "ok": "616263"
+          },
+          "output": 3
+        },
+        {
+          "inputs": [
+            "7b22636f6465223a372c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22373336383666373536633634326436653666373432643733363137363635227d",
+            "fail"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "fail": "73686f756c642d6e6f742d73617665"
+          },
+          "output": 15
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "7b22636f6465223a302c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22227d",
+            "empty"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "empty": ""
+          },
+          "output": 0
+        },
+        {
+          "inputs": [
+            "7b22636f6465223a2d31352c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a2236653666227d",
+            "signal"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "signal": "6e6f"
+          },
+          "output": 2
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "save_success",
+      "description": "Save stdout only when process exit code is zero",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "buffer",
+          "role": "process result"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "process.code",
+        "process.stdout",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "buffer",
+        "path"
+      ],
+      "max_steps": 2,
+      "control_flow": true,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "7b22636f6465223a302c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22363136323633227d",
+            "ok"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "ok": "616263"
+          },
+          "output": 3
+        },
+        {
+          "inputs": [
+            "7b22636f6465223a372c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22373336383666373536633634326436653666373432643733363137363635227d",
+            "fail"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa"
+          },
+          "output": 0
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "7b22636f6465223a302c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a22227d",
+            "empty"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "empty": ""
+          },
+          "output": 0
+        },
+        {
+          "inputs": [
+            "7b22636f6465223a2d31352c22737464657272223a223634363936313637366536663733373436393633222c227374646f7574223a2236653666227d",
+            "signal"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa"
+          },
+          "output": 0
+        }
+      ]
+    }
+  }
+]
