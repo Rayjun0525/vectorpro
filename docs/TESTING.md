@@ -29,6 +29,14 @@ Qwen GGUF가 누락된 경우에는 [LLM 검증 기록](LLM_ADAPTER.md)의 모�
 
 ## 변경별 검증
 
+최종 근거 선검사/작은 예제 문맥/파일 실행 경계 변경은 전체
+**179 passed, 247.57초**, 관련 범위 27 passed, 8.85초다.
+실행 경계 수정 전에는 전체 178건(241.22초), 관련 26건(8.94초)이었다.
+새 요청 첫 평가 9/12와 같은 실패 사례의 수정 후 Qwen 재검증 1/1을 구분한다.
+후자는 질문 반환·실제 파일 불변·학습 없음 확인이며 독립 정확도 평가가 아니다.
+자세한 기록은 `results/catalog_agent/v2-verification.json`에 보존한다.
+아래 173건 기록은 이전 구현 시점이다.
+
 2026-10-04 최신 텐서 저장/카탈로그 연결 변경을 포함한 전체 회귀는
 **173 passed, 232.15초**다. 기존 `vectorpro-test`만 사용했다. 관련 범위를 먼저
 실행한 결과는 21 passed, 15.61초이며 이를 전체 결과에 더하지 않는다.
@@ -84,6 +92,18 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python exp
   이미 확인한 요청으로 수정한 뒤에는 새 독립 평가 세트를 추가해야 한다.
 
 ## 실제 소형 LLM 재현
+
+후속 평가 명령은 아래와 같다. 기존 결과 경로가 있으면 거절하므로 새 경로를
+사용한다. 고정된 요청의 재실행은 재현이며 새 독립 평가로 취급하지 않는다.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/local_small_llm.py --catalog results/catalog_retrieval/final/program.pt --root results/catalog_agent/v2-reproduction --constrain-tools --evaluation experiments/requests/catalog_agent_holdout_v2.json --max-calls 12
+```
+
+`checks`의 파일 전체 비교, 실제 출력, 미지원 근거 검사, 네이티브 효과/학습 없음,
+등록·재로딩·별도 평가를 확인한다. evaluation_sha256과 protocol을 기록한다.
+caller 예제 요청과 자체 예제/학습 요청을 분리해서 해석한다. 사례 생성 스크립트의
+Python 정답 계산은 평가용이며 자체 예제/학습 요청에는 전달하지 않는다.
 
 ```powershell
 nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/local_small_llm.py --root results/local_small_llm/recheck --constrain-tools

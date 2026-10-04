@@ -1,0 +1,136 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true
+  },
+  "response": {
+    "status": "answered",
+    "text": "The XOR operation has been applied to every byte in the payload.dat file, resulting in the new value. The payload.dat file has been updated to reflect this change.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.5793435573577881
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.5793435573577881
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.5178825855255127
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "verify_state",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.5793435573577881
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.5178825855255127
+            }
+          ],
+          "status": "matched",
+          "name": "map",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            4
+          ],
+          "capability": "map",
+          "history": []
+        }
+      }
+    ]
+  }
+}

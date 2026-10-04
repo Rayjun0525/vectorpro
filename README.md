@@ -561,7 +561,23 @@ isolated evidence verification and a single execution of the bound request. The
 runtime supports `.pt` alongside JSON; known named functions still run without an
 LLM or encoder. See [catalog adapter](docs/CATALOG_AGENT.md) for its evidence
 requirements and remaining intent/example-generation limitations.
-The final regression suite passed 173 tests. Real Qwen diagnostics passed 5/8;
+The evidence precheck and compact-example adapter initially passed 178 regression tests.
+First-use Qwen evaluation passed 9/12: four numeric, two file, and three unsupported
+requests with caller evidence. Self-generated XOR/NAND evidence failed. An ambiguous
+file request incorrectly authorized a no-op using invented empty snapshots; files
+were unchanged. The catalog LLM path now requires caller `state_validation` for
+state execution. Rechecking that same failure passed 1/1; this is a regression,
+not a new independent accuracy measurement. See docs/CATALOG_AGENT.md.
+Final regression: 179 passed in 247.57 seconds; focused checks: 27 passed in 8.85 seconds.
+Structured caller evidence can reject unsupported goals in isolated memory before
+binding native inputs. Self-generated 4-bit examples use a separate model context
+with actual bindings replaced by symbols; no candidate computes the answers.
+`check_small` and `teach_small` retain backend limits and disjoint example checks.
+Real Qwen development tests passed self-evidence XOR and unsupported deletion;
+new NAND example generation still failed. Fixed first-use evaluation cases are
+in `experiments/requests/catalog_agent_holdout_v2.json`.
+
+Earlier real Qwen diagnostics passed 5/8;
 after further phase/schema constraints, the native file request passed while
 self-generated validation examples still failed. Those reused diagnostic sets
 are reported separately, not as independent accuracy.

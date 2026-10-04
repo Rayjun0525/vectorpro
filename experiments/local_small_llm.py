@@ -20,6 +20,40 @@ from vectorpro.host import HostContext
 from vectorpro.runtime import VectorRuntime
 
 
+def snapshot(root):
+    return {p.relative_to(root).as_posix(): p.read_bytes().hex()
+            for p in root.rglob("*") if p.is_file()}
+
+
+def evaluate_case(case, response, runtime, native_root, initial_registry):
+    expected = case["expect"]
+    events = response.get("tools", [])
+    executed = [e["result"] for e in events if e["result"].get("status") == "executed"]
+    checks = {"files": snapshot(native_root) == expected["files"]}
+    if expected["status"] == "executed":
+        checks["output"] = any(e.get("outputs") == expected["outputs"] for e in executed)
+    else:
+        checks["question"] = response["status"] == "needs_input"
+        checks["no_native_effects"] = not executed and runtime.host.events == []
+        checks["no_teaching"] = runtime.registry.to_data() == initial_registry and not any(e["name"].startswith("teach") for e in events)
+        if expected["status"] == "unsupported":
+            checks["verified_unsupported"] = any(e["result"].get("status") == "needs_learning_examples"
+                and (e["result"].get("verification") or e["name"] in ("verify_numeric", "verify_state", "check_small"))
+                for e in events)
+    if "learned" in expected:
+        name = expected["learned"]
+        checks["learned"] = name in runtime.registry and any(e["name"].startswith("teach") and e["result"].get("status") == "learned" for e in events)
+        proof = expected["heldout"]
+        if checks["learned"]:
+            result = runtime.request(name, [tuple(r) for r in proof["operands"]], proof["width"])
+            checks["heldout"] = result.outputs == proof["targets"]
+            restored = VectorRuntime.load(case["program"])
+            checks["reload"] = restored.request(name, [tuple(r) for r in proof["operands"]], proof["width"]).outputs == proof["targets"]
+        else:
+            checks["heldout"] = checks["reload"] = False
+    return {"passed": all(checks.values()), "checks": checks, "response": response}
+
+
 def native_message(text):
     cleaned = re.sub(r"<think>.*?</think>", "", text, flags=re.S).strip()
     matches = re.findall(r"<tool_call>\s*(.*?)\s*</tool_call>", cleaned, flags=re.S)
@@ -42,9 +76,18 @@ def main():
     parser.add_argument("--encoder", default="/opt/vectorpro-models/multilingual-minilm")
     parser.add_argument("--constrain-tools", action="store_true", help="Use JSON-schema constrained decoding for tool turns; model still chooses tool and arguments")
     parser.add_argument("--max-tokens", type=int, default=512, help="bound generated output per model turn")
+    parser.add_argument("--evaluation", type=Path, help="data-only cases; expected outputs are never passed to the model")
+    parser.add_argument("--max-calls", type=int, default=8)
     args = parser.parse_args()
+    evaluation = json.loads(args.evaluation.read_text(encoding="utf-8")) if args.evaluation else None
+    cases = {c["name"]: c for c in evaluation["cases"]} if evaluation else {}
+    if evaluation:
+        if not args.catalog or len(cases) != len(evaluation["cases"]):
+            parser.error("evaluation needs a catalog and unique case names")
+        if args.root.exists():
+            parser.error("evaluation output root already exists; preserve it and choose a new root")
     if args.scenarios is None:
-        args.scenarios = (["catalog_xor", "catalog_sub", "catalog_file", "catalog_unknown",
+        args.scenarios = list(cases) if evaluation else (["catalog_xor", "catalog_sub", "catalog_file", "catalog_unknown",
                            "catalog_delete", "catalog_clarify", "catalog_xor_self", "catalog_korean"]
                           if args.catalog else ["known", "clarify", "file", "learn"])
     encoder, identity = None, None
@@ -134,16 +177,33 @@ def main():
             root.mkdir(parents=True, exist_ok=True)
             program = root / ("program.pt" if args.catalog else "program.json")
             shutil.copyfile(args.catalog or "results/initial_model/program.json", program)
-            (root / "input.bin").write_bytes(b"\x00\x07\xff\x80")
+            case = cases.get(name)
+            native_root = root / "native" if case else root
+            native_root.mkdir(exist_ok=True)
+            files = case["before"] if case else {"input.bin": "0007ff80"}
+            from vectorpro.host import MemoryHostContext
+            for path, hex_bytes in files.items():
+                target = native_root / MemoryHostContext.normalize(path)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(bytes.fromhex(hex_bytes))
             model = HTTPChatModel(f"http://127.0.0.1:{server.server_port}/v1/chat/completions", "Qwen3-0.6B-Q8_0", timeout=180)
-            runtime = VectorRuntime.load(program, host=HostContext(root))
+            runtime = VectorRuntime.load(program, host=HostContext(native_root))
             catalog = TensorCatalog(runtime, encoder, identity) if args.catalog else None
-            session = AgentSession(runtime, model, program, max_calls=8, catalog=catalog, allow_learning=not bool(args.catalog))
+            session = AgentSession(runtime, model, program, max_calls=args.max_calls, catalog=catalog,
+                                   allow_learning=case.get("allow_learning", False) if case else not bool(args.catalog))
+            initial_registry = runtime.registry.to_data()
             start = len(raw_calls)
             print(f"running {name}", flush=True)
             try:
-                response = session.run(catalog_intents.get(name, prompts[name]) if args.catalog else prompts[name],
-                    evidence=json.dumps(supplied_evidence[name]) if args.catalog and name in supplied_evidence else None)
+                intent = case["intent"] if case else catalog_intents.get(name, prompts[name]) if args.catalog else prompts[name]
+                evidence = case.get("evidence") if case else supplied_evidence.get(name) if args.catalog else None
+                response = session.run(intent, evidence=json.dumps(evidence) if evidence is not None else None)
+                if case:
+                    results[name] = evaluate_case({**case, "program": program}, response, runtime, native_root, initial_registry)
+                    (root / "transcript.json").write_text(json.dumps(raw_calls[start:], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                    (root / "result.json").write_text(json.dumps(results[name], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                    print(json.dumps({"scenario": name, "passed": results[name]["passed"]}), flush=True)
+                    continue
                 tools = response.get("tools", [])
                 outputs = [e["result"].get("outputs") for e in tools if isinstance(e["result"], dict)]
                 if name in ("known", "catalog_xor", "catalog_xor_self", "catalog_korean"):
@@ -155,7 +215,7 @@ def main():
                 elif name == "catalog_sub":
                     passed = [12345 - 4567] in outputs
                 elif name in ("catalog_unknown", "catalog_delete"):
-                    resolutions = [e["result"] for e in tools if e["name"] in ("resolve_request", "resolve_numeric", "resolve_state", "verify_numeric", "verify_state")]
+                    resolutions = [e["result"] for e in tools if e["name"] in ("search_goal", "resolve_request", "resolve_numeric", "resolve_state", "verify_numeric", "verify_state", "check_small")]
                     passed = (response["status"] == "needs_input" and any(r.get("status") == "needs_learning_examples" for r in resolutions)
                               and not any(e["name"] in ("execute", "execute_resolved", "teach", "teach_numeric") for e in tools)
                               and (root / "input.bin").read_bytes() == b"\x00\x07\xff\x80")
@@ -190,6 +250,11 @@ def main():
     summary["caller_evidence_delivered_after_input_extraction"] = bool(args.catalog)
     summary["max_tokens_per_turn"] = args.max_tokens
     summary["evaluation_protocol"] = "development scenarios reused during adapter improvements; not independent held-out accuracy"
+    if evaluation:
+        summary["evaluation_protocol"] = evaluation["protocol"]
+        summary["evaluation_file"] = str(args.evaluation)
+        summary["evaluation_sha256"] = hashlib.sha256(args.evaluation.read_bytes()).hexdigest()
+    summary["max_calls"] = args.max_calls
     (args.root / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"passed": sum(r["passed"] for r in results.values()), "total": len(results)}), flush=True)
 

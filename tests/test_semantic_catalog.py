@@ -155,18 +155,18 @@ def test_llm_loop_extracts_operands_then_exposes_only_verified_execution(tmp_pat
                 index = next(i for i, c in enumerate(candidates) if c["name"] == "xor")
                 return message(f"prepare_{index}", {"width": 16, "x0": 12345, "x1": 4567})
             if self.turn == 3:
-                assert json.loads(messages[-1]["content"])["input_types"] == ["value", "value"]
-                assert "verify_numeric" in names and "execute_resolved" not in names
-                schema = next(t for t in tools if t["function"]["name"] == "verify_numeric")["function"]["parameters"]
-                assert schema["properties"]["operands"]["items"]["minItems"] == 2
-                assert schema["properties"]["operands"]["items"]["maxItems"] == 2
-                return message("verify_numeric", {"width": 4, "operands": [[1, 3], [5, 3]], "targets": [2, 6]})
+                assert "12345" not in json.dumps(messages) and "4567" not in json.dumps(messages)
+                assert "actual_input_0" in messages[-1]["content"]
+                assert "check_small" in names and "execute_resolved" not in names
+                schema = next(t for t in tools if t["function"]["name"] == "check_small")["function"]["parameters"]
+                assert schema["properties"]["cases"]["items"]["properties"]["x0"]["maximum"] == 15
+                return message("check_small", {"cases": [{"x0": 1, "x1": 3, "y": 2}, {"x0": 5, "x1": 3, "y": 6}]})
             if self.turn == 4:
                 assert "execute_resolved" in names
                 return message("execute_resolved", {})
             return {"role": "assistant", "content": "Done"}
     session.model = Model()
-    result = session.run("Compute the XOR")
+    result = session.run("Compute the XOR of 12345 and 4567 at width 16")
     assert result["status"] == "answered"
     assert result["tools"][-1]["result"]["outputs"] == [8686]
 
@@ -194,7 +194,7 @@ def test_evidence_arrives_after_request_and_cannot_replace_requested_mask(tmp_pa
             self.turn += 1
             if self.turn == 1:
                 assert "probe.bin" not in json.dumps(messages)
-                return message("search_goal", {"query": "mask file"})
+                return message("search_goal", {"query": "mask file", "width": 16})
             if self.turn == 2:
                 assert "probe.bin" not in json.dumps(messages)
                 return message("prepare_0", {"width": 16, "x0": "native.bin", "x1": 53})
@@ -241,3 +241,107 @@ def test_argument_roles_come_from_cell_semantics_and_required_inputs(tmp_path):
     with pytest.raises(ValueError, match="every candidate input"):
         session.call(f"prepare_{index}", {"width": 16, "x0": 12345})
     assert session._resolved is None and session._proposed is None
+
+
+@pytest.mark.parametrize("state", [False, True])
+def test_supplied_evidence_rejects_unsupported_goal_before_request_binding(tmp_path, state):
+    runtime, catalog, session = setup(tmp_path)
+    session.allow_learning = False
+    (tmp_path / "native.bin").write_bytes(b"unchanged")
+    evidence = {"cases": [{"inputs": [{"utf8": "probe.bin"}],
+                           "before": {"probe.bin": "00"}, "after": {}}]} if state else {
+                               "width": 4, "operands": [[2, 3], [4, 2]], "targets": [6, 8]}
+    class Model:
+        def complete(self, messages, tools):
+            if len(messages) == 2:
+                assert [t["function"]["name"] for t in tools] == ["search_goal"]
+                args = {"query": "unsupported operation", **({"width": 16} if state else {})}
+                name = "search_goal"
+            else:
+                result = json.loads(messages[-1]["content"])
+                assert result["status"] == "needs_learning_examples"
+                assert "verification" in result
+                assert not any(t["function"]["name"].startswith("prepare_") for t in tools)
+                name, args = "ask_user", {"question": "Please supply learning evidence"}
+            return {"role": "assistant", "tool_calls": [{"id": "test", "function": {
+                "name": name, "arguments": json.dumps(args)}}]}
+    session.model = Model()
+    response = session.run("Perform the unsupported operation", evidence=json.dumps(evidence))
+    assert response["status"] == "needs_input"
+    assert session._resolved is None and session._proposed is None
+    assert runtime.host.events == [] and (tmp_path / "native.bin").read_bytes() == b"unchanged"
+
+
+def test_precheck_does_not_bind_caller_demonstration_as_native_request(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    session._caller_evidence = {"numeric_validation": numeric()["numeric_validation"]}
+    session._caller_types = ["value", "value"]
+    result = session.call("search_goal", {"query": "xor"})
+    assert [c["name"] for c in result["candidates"]] == ["xor"]
+    assert session._resolved is None
+    with pytest.raises(ValueError, match="uniquely matched"):
+        session.call("execute_resolved", {})
+
+
+def test_compact_examples_reject_large_or_duplicate_inputs(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    session.call("propose_numeric_request", {"query": "xor", "width": 16, "inputs": [12345, 4567]})
+    with pytest.raises(ValueError, match="0..15"):
+        session.call("check_small", {"cases": [{"x0": 12345, "x1": 4567, "y": 2}, {"x0": 5, "x1": 3, "y": 6}]})
+    with pytest.raises(ValueError, match="distinct"):
+        session.call("check_small", {"cases": [{"x0": 1, "x1": 3, "y": 2}] * 2})
+    assert session._resolved is None
+
+
+def small_nand():
+    return {"name": "compact_nand", "output": "W", "training": [
+        {"x0": 0, "x1": 0, "y": 15}, {"x0": 1, "x1": 1, "y": 14},
+        {"x0": 1, "x1": 0, "y": 15}, {"x0": 0, "x1": 1, "y": 15}], "validation": [
+        {"x0": 2, "x1": 1, "y": 15}, {"x0": 3, "x1": 1, "y": 14}]}
+
+
+def test_compact_teaching_uses_disjoint_data_and_executes_original_inputs(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    session.call("propose_numeric_request", {"query": "NAND", "width": 8, "inputs": [6, 3]})
+    assert session.call("check_small", {"cases": small_nand()["training"][:2]})["status"] == "needs_learning_examples"
+    bad = small_nand(); bad["validation"][0] = bad["training"][0]
+    with pytest.raises(ValueError, match="disjoint"):
+        session.call("teach_small", bad)
+    assert "compact_nand" not in runtime.registry
+    result = session.call("teach_small", small_nand())
+    assert result["status"] == "learned" and result["request_verification"]["status"] == "matched"
+    assert session.call("execute_resolved", {})["outputs"] == [253]
+    restored = VectorRuntime.load(tmp_path / "program.pt")
+    import random
+    rng = random.Random(81)
+    inputs = [(rng.randrange(65536), rng.randrange(65536)) for _ in range(100)]
+    assert restored.request("compact_nand", inputs, 16).outputs == [(~(a & b)) & 65535 for a, b in inputs]
+    session.allow_learning = False
+    with pytest.raises(ValueError, match="disabled"):
+        session.call("teach_small", small_nand())
+
+
+def test_model_invented_noop_snapshots_cannot_authorize_ambiguous_file_execution(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    path = tmp_path / "native.bin"; path.write_bytes(b"unchanged")
+    candidate = next(c for c in catalog.contracts if c["name"] == "guarded_map")
+    catalog.search_goal = lambda query, limit=5, types=None: [{**candidate, "description": "Guarded file map", "score": 1.0}]
+    class Model:
+        def __init__(self): self.turn = 0
+        def complete(self, messages, tools):
+            self.turn += 1
+            if self.turn == 1:
+                name, args = "search_goal", {"query": "process the file"}
+            elif self.turn == 2:
+                name, args = "prepare_0", {"width": 16, "x0": "native.bin", "x1": 0, "x2": 0}
+            elif self.turn == 3:
+                assert [t["function"]["name"] for t in tools] == ["ask_user"]
+                name, args = "verify_state", {"cases": [{"inputs": [{"utf8": "native.bin"}, 0, 0], "before": {}, "after": {}}]}
+            else:
+                assert json.loads(messages[-1]["content"])["status"] == "error"
+                name, args = "ask_user", {"question": "What transformation and expected file state do you want?"}
+            return {"role": "assistant", "tool_calls": [{"id": "test", "function": {"name": name, "arguments": json.dumps(args)}}]}
+    session.model = Model()
+    response = session.run("Process native.bin; I have not decided what I want")
+    assert response["status"] == "needs_input"
+    assert session._resolved is None and runtime.host.events == [] and path.read_bytes() == b"unchanged"

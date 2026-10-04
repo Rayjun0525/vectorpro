@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "response": {
+    "status": "needs_input",
+    "question": "What is the correct way to delete input.bin at width 16?",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "needs_learning_examples",
+          "reason": "no candidate matches evidence",
+          "verification": "caller evidence checked in isolated memory",
+          "matching_candidates": []
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "What is the correct way to delete input.bin at width 16?"
+        }
+      }
+    ]
+  }
+}

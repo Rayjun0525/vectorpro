@@ -1,0 +1,136 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true
+  },
+  "response": {
+    "status": "answered",
+    "text": "The operation has been successfully executed. The result is: 3.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.5974161624908447
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.6240754723548889
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.5974161624908447
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "verify_state",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.6240754723548889
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.5974161624908447
+            }
+          ],
+          "status": "matched",
+          "name": "fill",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            3
+          ],
+          "capability": "fill",
+          "history": []
+        }
+      }
+    ]
+  }
+}

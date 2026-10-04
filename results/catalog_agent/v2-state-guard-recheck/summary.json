@@ -1,0 +1,157 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "ambiguous_new_file": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "question": true,
+        "no_native_effects": true,
+        "no_teaching": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "What do you need to process the note.dat file?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "guarded_map",
+                  "input_types": [
+                    "path",
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2935483753681183
+                },
+                {
+                  "name": "buffer.get",
+                  "input_types": [
+                    "buffer",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "hexadecimal buffer bytes",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+                  "score": 0.2705960273742676
+                },
+                {
+                  "name": "file.write",
+                  "input_types": [
+                    "path",
+                    "buffer"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "hexadecimal buffer bytes"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Write, save buffer contents from memory to a disk file; return bytes written.",
+                  "score": 0.25454550981521606
+                },
+                {
+                  "name": "file.read",
+                  "input_types": [
+                    "path"
+                  ],
+                  "argument_roles": [
+                    "relative file path"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, load file contents from disk into memory, returning a byte buffer.",
+                  "score": 0.249612957239151
+                },
+                {
+                  "name": "buffer.length",
+                  "input_types": [
+                    "buffer"
+                  ],
+                  "argument_roles": [
+                    "hexadecimal buffer bytes"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Measure buffer size, count how many bytes a memory buffer contains.",
+                  "score": 0.2397310584783554
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "guarded_map",
+                  "input_types": [
+                    "path",
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2935483753681183
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What do you need to process the note.dat file?"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true,
+  "max_tokens_per_turn": 512,
+  "evaluation_protocol": "first-use fixed requests, operands and caller examples; frozen before inference after development; do not retune on these results",
+  "evaluation_file": "experiments/requests/catalog_agent_holdout_v2.json",
+  "evaluation_sha256": "9bc1c6729a9085c35ad3c3f69c5aeaf8be7ce77a90a87448074c03d4cbc20e0e",
+  "max_calls": 12
+}

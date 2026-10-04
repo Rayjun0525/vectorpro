@@ -5,6 +5,7 @@ import argparse
 from dataclasses import asdict
 import json
 import os
+import re
 from pathlib import Path
 from typing import Protocol
 from urllib.request import Request, urlopen
@@ -137,6 +138,31 @@ VERIFY_STATE = tool("verify_state", "Step 2: provide complete before/after file 
 SEARCH_GOAL = tool("search_goal", "Find candidate functions and their argument roles for the requested operation; no execution",
                    {"query": {"type": "string"}}, ("query",))
 
+
+def small_case_schema(arity, minimum=2, maximum=4):
+    properties = {f"x{i}": {"type": "integer", "minimum": 0, "maximum": 15} for i in range(arity)}
+    properties["y"] = {"type": "integer", "minimum": 0, "maximum": 255,
+                       "description": "Correct unsigned answer for this 4-bit example"}
+    return {"type": "array", "minItems": minimum, "maxItems": maximum, "items": {
+        "type": "object", "properties": properties, "required": list(properties), "additionalProperties": False}}
+
+
+def small_cases(rows, arity, minimum=2, maximum=4):
+    if not isinstance(rows, list) or not minimum <= len(rows) <= maximum:
+        raise ValueError(f"provide {minimum}..{maximum} distinct small cases")
+    operands, targets = [], []
+    keys = {*(f"x{i}" for i in range(arity)), "y"}
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != keys:
+            raise ValueError("each case needs every x input and its y answer")
+        inputs = [row[f"x{i}"] for i in range(arity)]
+        if any(type(x) is not int or not 0 <= x < 16 for x in inputs) or type(row["y"]) is not int or not 0 <= row["y"] < 256:
+            raise ValueError("small cases use inputs 0..15 and unsigned answers 0..255")
+        operands.append(inputs); targets.append(row["y"])
+    if len({tuple(row) for row in operands}) != len(operands):
+        raise ValueError("small case inputs must be distinct")
+    return {"width": 4, "operands": operands, "targets": targets}
+
 CATALOG_GUIDE = """Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.
 Ask the user only if the goal is missing, or verification says more evidence/learning is needed.
 Follow the steps:
@@ -150,10 +176,27 @@ two distinct correct examples, or verify_state(cases) for full before/after file
 State example inputs use integers, {"utf8":"file"} paths or {"hex":"00ff"} buffers.
 Snapshots map actual filenames directly to HEX bytes, including unchanged files.
 Copy caller evidence accurately; model-generated answers are fallible proposals.
+Without caller evidence use check_small with distinct SMALL inputs 0..15 and correct
+4-bit answers. Never copy large actual request inputs into small examples.
 4. On matched, execute_resolved({}) once. Report the actual returned output.
 On needs_evidence or needs_learning_examples, ask_user; never substitute another operation.
 If learning is enabled and authorized, teaching needs separate training and validation.
+teach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct
+and disjoint. Supply your own answers, then trust the returned learning/verification status.
 On error, correct the failed arguments. No code, binaries, recipes or invented tool names.
+"""
+
+SMALL_GUIDE = """Prepare evidence for the requested numeric operation, using actual tools.
+Actual execution inputs are deliberately replaced with symbolic names below.
+Every example uses FOUR-BIT inputs x0,x1,... in 0..15. Compute correct unsigned
+answers at this example width, not the omitted execution width. Choose DISTINCT
+small input rows yourself. Do not return the symbols as values.
+check_small: propose two correct examples, each an object with x inputs and y answer.
+If no stored function matches and learning is authorized, use teach_small with
+at least four training cases and two DISJOINT validation cases. Do not copy
+another stored function's answers or pretend that the nearest function is the goal.
+No code, recipes, execution or answers for the omitted actual request inputs.
+If you cannot provide correct evidence, ask_user. Never claim success on error.
 """
 
 
@@ -196,6 +239,8 @@ class AgentSession:
         if self.catalog is None:
             return [t for t in TOOLS if self.allow_learning or t["function"]["name"] not in ("teach", "teach_numeric")]
         permitted = {"ask_user"}
+        if getattr(self, "_caller_evidence", None) and self._goal is None:
+            permitted.clear()  # inspect supplied evidence before asking whether support exists
         if self._resolved or (self._proposed and getattr(self, "_caller_evidence", None)
                               and not getattr(self, "_verification_attempted", False)):
             permitted.clear()  # already supplied evidence/verified inputs need no extra confirmation
@@ -216,6 +261,9 @@ class AgentSession:
                     for field in ("operands", "targets"):
                         properties[field].update(minItems=count, maxItems=count)
                 verification = [numeric_tool]
+                if not supplied:
+                    verification = [tool("check_small", "Verify YOUR small 4-bit input/output cases. Inputs 0..15, distinct rows, true answers; not the actual requested large inputs",
+                                         {"cases": small_case_schema(len(shape))}, ("cases",))]
             if verification == [VERIFY_STATE]:
                 state_tool = json.loads(json.dumps(VERIFY_STATE))
                 schemas = []
@@ -227,10 +275,21 @@ class AgentSession:
                     "type": "array", "prefixItems": schemas, "items": False,
                     "minItems": len(shape), "maxItems": len(shape)}
                 verification = [state_tool]
+                supplied = getattr(self, "_caller_evidence", None)
+                if not supplied or "state_validation" not in supplied:
+                    # Model-invented snapshots do not establish the user's intended native effects.
+                    verification = []
         proposal_tools = []
-        if not self._proposed:
+        if not self._proposed and self._resolution_status != "needs_learning_examples":
             if not self._candidates:
-                proposal_tools = [SEARCH_GOAL]
+                search_tool = json.loads(json.dumps(SEARCH_GOAL))
+                caller_types = getattr(self, "_caller_types", None)
+                if caller_types and any(t != "value" for t in caller_types):
+                    parameters = search_tool["function"]["parameters"]
+                    parameters["properties"]["width"] = {"type": "integer", "minimum": 1, "maximum": 32,
+                        "description": "Requested register width; use 16 when the request leaves it unspecified"}
+                    parameters["required"].append("width")
+                proposal_tools = [search_tool]
             else:
                 for index, candidate in enumerate(self._candidates):
                     properties = {"width": {"type": "integer", "minimum": 1, "maximum": 32}}
@@ -239,11 +298,20 @@ class AgentSession:
                             "description": role + "; actual request input, not validation example"}
                     proposal_tools.append(tool(f"prepare_{index}", "Prepare " + candidate["name"] + ": " + candidate["description"],
                                                properties, tuple(properties)))
-        return [*proposal_tools, *verification, *([EXECUTE_RESOLVED] if self._resolved else []),
+        teaching = []
+        from vectorpro.semantic_catalog import operand_types
+        numeric_shape = operand_types(self._proposed["operands"]) if self._proposed else getattr(self, "_caller_types", None)
+        if self._resolution_status == "needs_learning_examples" and self.allow_learning and numeric_shape and all(t == "value" for t in numeric_shape):
+            permitted.difference_update(("teach", "teach_numeric"))
+            teaching = [tool("teach_small", "Acquire a new numeric function from YOUR disjoint 4-bit training/validation cases; no code or answer generator",
+                {"name": {"type": "string"}, "output": {"type": "string", "enum": ["W", "W+1", "2W", "1"]},
+                 "training": small_case_schema(len(numeric_shape), 4, 8),
+                 "validation": small_case_schema(len(numeric_shape), 2, 4)}, ("name", "output", "training", "validation"))]
+        return [*proposal_tools, *verification, *teaching, *([EXECUTE_RESOLVED] if self._resolved else []),
                 *[t for t in TOOLS if t["function"]["name"] in permitted]]
 
     def call(self, name, args):
-        if name in ("teach", "teach_numeric") and not self.allow_learning:
+        if name in ("teach", "teach_numeric", "teach_small") and not self.allow_learning:
             raise ValueError("learning is disabled for this session")
         if name == "search_goal":
             if self.catalog is None:
@@ -252,6 +320,20 @@ class AgentSession:
             self._goal = args["query"]
             self._candidates = self.catalog.search_goal(self._goal, types=getattr(self, "_caller_types", None))
             self._resolution_status = None if self._candidates else "needs_learning_examples"
+            evidence = getattr(self, "_caller_evidence", None)
+            if evidence:
+                numeric = evidence.get("numeric_validation")
+                states = evidence.get("state_validation")
+                rows = numeric["operands"][:1] if numeric is not None else [states[0]["inputs"]]
+                width = numeric["width"] if numeric is not None else args["width"]
+                checked = self.catalog.resolve(self._goal, rows, width, numeric, states)
+                if checked["status"] == "matched":
+                    self._candidates = [c for c in checked["candidates"] if c["name"] == checked["name"]]
+                elif checked["status"] == "needs_learning_examples":
+                    self._resolution_status = checked["status"]
+                    return {"status": checked["status"], "reason": checked["reason"],
+                            "verification": "caller evidence checked in isolated memory", "matching_candidates": []}
+                # A precheck never binds demonstration inputs for native execution.
             return {"status": "candidates" if self._candidates else "needs_learning_examples", "candidates": self._candidates,
                     "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"}
         if name.startswith("prepare_"):
@@ -284,6 +366,24 @@ class AgentSession:
             self._proposed = json.loads(json.dumps(proposal))
             if result["status"] == "needs_evidence":
                 result = {**result, "status": "proposed", "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"}
+            return result
+        if name in ("check_small", "teach_small"):
+            from vectorpro.semantic_catalog import operand_types
+            shape = operand_types(self._proposed["operands"]) if self._proposed else getattr(self, "_caller_types", None)
+            if not shape or any(t != "value" for t in shape):
+                raise ValueError("small numeric cases require a numeric request shape")
+            if name == "check_small":
+                if set(args) != {"cases"}:
+                    raise ValueError("check_small takes only cases")
+                return self.call("verify_numeric", small_cases(args["cases"], len(shape)))
+            if set(args) != {"name", "output", "training", "validation"}:
+                raise ValueError("teach_small needs name/output/training/validation")
+            training = small_cases(args["training"], len(shape), 4, 8)
+            validation = small_cases(args["validation"], len(shape), 2, 4)
+            result = self.call("teach_numeric", {"name": args["name"], "description": self._goal or "model supplied examples",
+                          "output": args["output"], "training": training, "validation": validation})
+            if result["status"] == "learned" and self._proposed:
+                result["request_verification"] = self.call("resolve_request", {**self._proposed, "numeric_validation": validation})
             return result
         if name in ("verify_numeric", "verify_state"):
             if self._proposed is None:
@@ -413,6 +513,7 @@ class AgentSession:
         self._goal, self._candidates = None, []
         self._caller_evidence, self._caller_types = None, None
         self._verification_attempted = False
+        small_messages = None
         if self.catalog is not None and evidence is not None:
             from vectorpro.semantic_catalog import operand_types
             try:
@@ -434,10 +535,23 @@ class AgentSession:
         events = []
         for _ in range(self.max_calls):
             offered_tools = self.available_tools()
-            message = self.model.complete(self.messages, offered_tools)
+            compact = any(t["function"]["name"] in ("check_small", "teach_small") for t in offered_tools)
+            if compact and small_messages is None:
+                goal = intent
+                if self._proposed:
+                    # Remove only already-bound numeric values; never derive answers from a candidate.
+                    for i, value in enumerate(self._proposed["operands"][0]):
+                        goal = re.sub(r"(?<!\d)" + re.escape(str(value)) + r"(?!\d)", f"actual_input_{i}", goal)
+                    goal = re.sub(r"(?<!\d)" + str(self._proposed["width"]) + r"(?!\d)", "execution_width", goal)
+                small_messages = [{"role": "system", "content": SMALL_GUIDE},
+                                  {"role": "user", "content": "Operation intent (examples still use 4 bits):\n" + goal}]
+            model_messages = small_messages if compact else self.messages
+            message = self.model.complete(model_messages, offered_tools)
             if message.get("role") != "assistant":
                 raise ValueError("model must return an assistant message")
             self.messages.append(message)
+            if compact:
+                small_messages.append(message)
             calls = message.get("tool_calls") or []
             if not calls:
                 if self.catalog is not None and not any(e["result"].get("status") == "executed" for e in events):
@@ -455,7 +569,10 @@ class AgentSession:
             except (ValueError, KeyError, TypeError, OSError, RuntimeError) as error:
                 result = {"status": "error", "message": str(error)}
             events.append({"name": call["function"]["name"], "result": result})
-            self.messages.append({"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result, ensure_ascii=False)})
+            feedback = {"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result, ensure_ascii=False)}
+            self.messages.append(feedback)
+            if compact:
+                small_messages.append(feedback)
             if evidence is not None and (call["function"]["name"].startswith("prepare_") or call["function"]["name"] in ("propose_request", "propose_numeric_request", "propose_file_request")) and result.get("status") == "proposed":
                 self.messages.append({"role": "user", "content": "Separate validation evidence from the caller (virtual only; DO NOT change the already proposed request):\n" + evidence})
                 evidence = None

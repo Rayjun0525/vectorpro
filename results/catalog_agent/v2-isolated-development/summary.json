@@ -1,0 +1,207 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "catalog_xor_self": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The bitwise exclusive OR of 12345 and 4567 at width 16 is 8686.",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5762981176376343
+                },
+                {
+                  "name": "buffer.new",
+                  "input_types": [
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Allocate, create a new byte array in memory with the requested size.",
+                  "score": 0.47944024205207825
+                },
+                {
+                  "name": "buffer.length",
+                  "input_types": [
+                    "buffer"
+                  ],
+                  "argument_roles": [
+                    "hexadecimal buffer bytes"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Measure buffer size, count how many bytes a memory buffer contains.",
+                  "score": 0.4187438488006592
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.3805663287639618
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3746737539768219
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5762981176376343
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3746737539768219
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "check_small",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5762981176376343
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3746737539768219
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                8686
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true,
+  "max_tokens_per_turn": 512,
+  "evaluation_protocol": "development scenarios reused during adapter improvements; not independent held-out accuracy",
+  "max_calls": 8
+}

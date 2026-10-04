@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-04",
+  "container": "vectorpro-test",
+  "image": "python:3.12-slim",
+  "new_containers_or_images": false,
+  "full_regression": {"passed": 179, "seconds": 247.57, "command": "nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q"},
+  "focused_regression": {"passed": 27, "seconds": 8.85, "test_file": "tests/test_semantic_catalog.py"},
+  "first_use_evaluation": {
+    "root": "results/catalog_agent/v2-first-use",
+    "passed": 9,
+    "total": 12,
+    "agent_sha256_before_state_guard": "64f6d8cee8ac9c107fb212811f82c1a558fbab0a5e001c0434ded67f734a3d04",
+    "dataset_sha256": "9bc1c6729a9085c35ad3c3f69c5aeaf8be7ce77a90a87448074c03d4cbc20e0e",
+    "failures": ["ambiguous_new_file", "self_xor_new", "self_nand_new"],
+    "native_file_changed_in_ambiguous_failure": false,
+    "new_nand_registered": false,
+    "nand_heldout_run": false,
+    "used_to_fix_state_guard": true
+  },
+  "state_guard_recheck": {"root": "results/catalog_agent/v2-state-guard-recheck", "passed": 1, "total": 1, "independent_accuracy_evaluation": false},
+  "development_roots": ["v2-development", "v2-nand-development", "v2-isolated-development", "v2-isolated-nand-development"],
+  "limitations": ["Model-generated numeric answers are fallible", "Catalog LLM state execution requires caller state_validation", "External provider endpoint/model not supplied", "New independent evaluation after the guard fix remains", "macOS deferred"]
+}

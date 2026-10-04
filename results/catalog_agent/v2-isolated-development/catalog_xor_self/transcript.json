@@ -1,0 +1,249 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Compute bitwise exclusive OR of 12345 and 4567 at width 16. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"search_goal\", \"arguments\": {\"query\": \"compute bitwise exclusive OR of 12345 and 4567 at width 16\"}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 638,
+      "completion_tokens": 39,
+      "total_tokens": 677
+    },
+    "seconds": 10.68835062799917
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Compute bitwise exclusive OR of 12345 and 4567 at width 16. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "search_goal",
+              "arguments": "{\"query\": \"compute bitwise exclusive OR of 12345 and 4567 at width 16\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"candidates\", \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"buffer.new\", \"input_types\": [\"value\"], \"argument_roles\": [\"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Allocate, create a new byte array in memory with the requested size.\", \"score\": 0.47944024205207825}, {\"name\": \"buffer.length\", \"input_types\": [\"buffer\"], \"argument_roles\": [\"hexadecimal buffer bytes\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Measure buffer size, count how many bytes a memory buffer contains.\", \"score\": 0.4187438488006592}, {\"name\": \"map\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.\", \"score\": 0.3805663287639618}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"next_step\": \"choose a prepare_N tool and bind the actual request inputs using its argument roles\"}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"prepare_0\", \"arguments\": {\"width\": 16, \"x0\": 12345, \"x1\": 4567}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 1808,
+      "completion_tokens": 41,
+      "total_tokens": 1849
+    },
+    "seconds": 18.6511393710025
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Prepare evidence for the requested numeric operation, using actual tools.\nActual execution inputs are deliberately replaced with symbolic names below.\nEvery example uses FOUR-BIT inputs x0,x1,... in 0..15. Compute correct unsigned\nanswers at this example width, not the omitted execution width. Choose DISTINCT\nsmall input rows yourself. Do not return the symbols as values.\ncheck_small: propose two correct examples, each an object with x inputs and y answer.\nIf no stored function matches and learning is authorized, use teach_small with\nat least four training cases and two DISJOINT validation cases. Do not copy\nanother stored function's answers or pretend that the nearest function is the goal.\nNo code, recipes, execution or answers for the omitted actual request inputs.\nIf you cannot provide correct evidence, ask_user. Never claim success on error.\n"
+      },
+      {
+        "role": "user",
+        "content": "Operation intent (examples still use 4 bits):\nCompute bitwise exclusive OR of actual_input_0 and actual_input_1 at width execution_width. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"check_small\", \"arguments\": {\"cases\": [{\"x0\": 0, \"x1\": 1, \"y\": 1}, {\"x0\": 1, \"x1\": 2, \"y\": 3}]} }</tool_call>",
+    "usage": {
+      "prompt_tokens": 596,
+      "completion_tokens": 57,
+      "total_tokens": 653
+    },
+    "seconds": 12.292966408997017
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Compute bitwise exclusive OR of 12345 and 4567 at width 16. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "search_goal",
+              "arguments": "{\"query\": \"compute bitwise exclusive OR of 12345 and 4567 at width 16\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"candidates\", \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"buffer.new\", \"input_types\": [\"value\"], \"argument_roles\": [\"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Allocate, create a new byte array in memory with the requested size.\", \"score\": 0.47944024205207825}, {\"name\": \"buffer.length\", \"input_types\": [\"buffer\"], \"argument_roles\": [\"hexadecimal buffer bytes\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Measure buffer size, count how many bytes a memory buffer contains.\", \"score\": 0.4187438488006592}, {\"name\": \"map\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.\", \"score\": 0.3805663287639618}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"next_step\": \"choose a prepare_N tool and bind the actual request inputs using its argument roles\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "prepare_0",
+              "arguments": "{\"width\": 16, \"x0\": 12345, \"x1\": 4567}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"value\", \"value\"], \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"status\": \"proposed\", \"reason\": \"similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots\", \"next_step\": \"verify_numeric or verify_state with the user-provided examples; keep requested inputs separate\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "check_small",
+              "arguments": "{\"cases\": [{\"x0\": 0, \"x1\": 1, \"y\": 1}, {\"x0\": 1, \"x1\": 2, \"y\": 3}]}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"value\", \"value\"], \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"status\": \"matched\", \"name\": \"xor\", \"evidence_source\": \"caller/LLM supplied, not an independent proof of intent\"}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"execute_resolved\", \"arguments\": {} }</tool_call>",
+    "usage": {
+      "prompt_tokens": 1698,
+      "completion_tokens": 15,
+      "total_tokens": 1713
+    },
+    "seconds": 21.631056238999008
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Compute bitwise exclusive OR of 12345 and 4567 at width 16. Generate two correct small numeric validation examples yourself to resolve a stored function, then execute it. Do not teach."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "search_goal",
+              "arguments": "{\"query\": \"compute bitwise exclusive OR of 12345 and 4567 at width 16\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"candidates\", \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"buffer.new\", \"input_types\": [\"value\"], \"argument_roles\": [\"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Allocate, create a new byte array in memory with the requested size.\", \"score\": 0.47944024205207825}, {\"name\": \"buffer.length\", \"input_types\": [\"buffer\"], \"argument_roles\": [\"hexadecimal buffer bytes\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Measure buffer size, count how many bytes a memory buffer contains.\", \"score\": 0.4187438488006592}, {\"name\": \"map\", \"input_types\": [\"path\", \"value\"], \"argument_roles\": [\"relative file path\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": true, \"description\": \"Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.\", \"score\": 0.3805663287639618}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"next_step\": \"choose a prepare_N tool and bind the actual request inputs using its argument roles\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "prepare_0",
+              "arguments": "{\"width\": 16, \"x0\": 12345, \"x1\": 4567}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"value\", \"value\"], \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"status\": \"proposed\", \"reason\": \"similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots\", \"next_step\": \"verify_numeric or verify_state with the user-provided examples; keep requested inputs separate\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "check_small",
+              "arguments": "{\"cases\": [{\"x0\": 0, \"x1\": 1, \"y\": 1}, {\"x0\": 1, \"x1\": 2, \"y\": 3}]}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"input_types\": [\"value\", \"value\"], \"candidates\": [{\"name\": \"xor\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"numeric parameter\", \"numeric parameter\"], \"output_width\": \"W\", \"has_effects\": false, \"description\": \"Bitwise exclusive OR (XOR) of two integers; bits differ.\", \"score\": 0.5762981176376343}, {\"name\": \"sub\", \"input_types\": [\"value\", \"value\"], \"argument_roles\": [\"minuend: number to subtract FROM (left operand)\", \"subtrahend: number to subtract (right operand)\"], \"output_width\": \"W+1\", \"has_effects\": false, \"description\": \"Subtract the second number from the first number; integer difference with borrow.\", \"score\": 0.3746737539768219}], \"status\": \"matched\", \"name\": \"xor\", \"evidence_source\": \"caller/LLM supplied, not an independent proof of intent\"}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "execute_resolved",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"outputs\": [8686], \"capability\": \"xor\", \"history\": []}"
+      }
+    ],
+    "raw_output": "The bitwise exclusive OR of 12345 and 4567 at width 16 is 8686.",
+    "usage": {
+      "prompt_tokens": 1761,
+      "completion_tokens": 29,
+      "total_tokens": 1790
+    },
+    "seconds": 20.72708640700148
+  }
+]
