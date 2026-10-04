@@ -538,6 +538,19 @@ macOS remains unverified. The default one-container test rule is retained.
 
 ## Tensor catalog and retrieval experiments
 
+Path binding now copies quoted strings and bare filename tokens from the original
+request, using the catalog's path types. Unicode names, quoted spaces and nested
+paths are preserved. Filename digits are excluded from numeric operand choices;
+missing paths lead to clarification. The backend rejects invented paths before
+file access. Choosing the correct role among several mentioned paths is still a
+semantic problem. See docs/LLM_ADAPTER.md for syntax limits and evidence-source gaps.
+Full regression: 186 passed. New path evaluation: 4/6 overall, with exact target
+paths in all five execution cases and clarification for the missing-path case.
+Two Korean fills swapped width and byte value, incorrectly changing the test target
+files while preserving other files. Path copying is not proof of parameter roles.
+The reused NAND diagnostic still chose a buffer for numeric inputs and did not teach.
+Raw successes/failures and source/data hashes are preserved in results/gemma_paths.
+
 The follow-up catalog adapter isolates actual-input extraction, restricts numeric
 bindings to literals in the original request, and verifies supplied caller evidence
 without model transcription. A successful catalog request returns the executor's

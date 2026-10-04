@@ -1,0 +1,137 @@
+{
+  "passed": false,
+  "checks": {
+    "files": true,
+    "output": false,
+    "terminal_status": false,
+    "learned": false,
+    "heldout": false,
+    "reload": false
+  },
+  "response": {
+    "status": "needs_input",
+    "question": "What is the intended operation? Please specify the desired input type and the expected output.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.5079134702682495
+            },
+            {
+              "name": "buffer.set",
+              "input_types": [
+                "buffer",
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Write, replace, update one byte in a memory buffer at a position or offset.",
+              "score": 0.2509402930736542
+            },
+            {
+              "name": "buffer.new",
+              "input_types": [
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Allocate, create a new byte array in memory with the requested size.",
+              "score": 0.2068353146314621
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.20175069570541382
+            },
+            {
+              "name": "buffer.get",
+              "input_types": [
+                "buffer",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+              "score": 0.19931618869304657
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_4",
+        "result": {
+          "input_types": [
+            "buffer",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "buffer.get",
+              "input_types": [
+                "buffer",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+              "score": 0.19931618869304657
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "What is the intended operation? Please specify the desired input type and the expected output."
+        }
+      }
+    ]
+  }
+}

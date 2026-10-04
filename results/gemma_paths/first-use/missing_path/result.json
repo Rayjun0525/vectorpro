@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "question": true,
+    "no_native_effects": true,
+    "no_teaching": true
+  },
+  "response": {
+    "status": "needs_input",
+    "question": "Can you please tell me what the user is trying to achieve?",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.23255427181720734
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Can you please tell me what the user is trying to achieve?"
+        }
+      }
+    ]
+  }
+}

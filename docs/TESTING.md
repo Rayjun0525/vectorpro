@@ -31,6 +31,25 @@ Gemma GGUF가 누락됐으면 `nerdctl exec vectorpro-test python experiments/se
 
 ## 변경별 검증
 
+경로 검증은 원문 선택지, 한글/공백/여러 점, 파일명 숫자 제외, 경로 누락 질문,
+검증 예제 경로 제외, 요청에 없는 실제 존재 파일도 접근 전에 거절하는지 확인한다.
+새 평가 파일 `experiments/requests/gemma_paths_first_use.json`의 기대 경로/스냅샷은
+평가기에만 전달한다. 개발 재검증은 `results/gemma_paths/development`, 기존 자동
+학습 요청의 진단은 `teacher-diagnostic`, 새 경로 요청은 `first-use`로 구분한다.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/local_small_llm.py --catalog results/catalog_retrieval/final/program.pt --root results/gemma_paths/reproduction --constrain-tools --evaluation experiments/requests/gemma_paths_first_use.json --max-calls 6
+```
+
+기존 고정 요청의 재실행은 replay이며 최초 미사용 평가일 때만 `--evaluation-kind
+first-use`를 명시한다. 옵션 자체가 독립 평가임을 증명하지는 않는다.
+
+최신 전체 회귀 186 passed, 280.11초, 관련 32 passed, 9.90초.
+새 경로 요청의 전체 성공은 4/6이며 실행 경로만 일치한 것은 5/5다. 실패 2건은
+값/폭을 바꿔 실제 테스트 대상 바이트가 잘못 변경됐다. 보존 파일 유지도 확인했다.
+이 결과로 튜닝하지 않았다. NAND 진단에서는 학습/별도 평가가 진행되지 않았다.
+실험별 의미와 코드/데이터 SHA는 `results/gemma_paths/verification.json` 참고.
+
 최신 후속 입력/완료 변경 전체 회귀는 **183 passed, 338.79초**, 관련 테스트는
 29 passed, 17.28초다. 실제 모델 추론과 병행했으므로 이전 시간과 직접 비교하지 않는다.
 모호한 caller 근거의 자동 승인 방지, 마지막 허용 턴의 정상 종료, 실제 인자/근거

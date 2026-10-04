@@ -241,6 +241,35 @@ def test_automatic_caller_verification_cannot_authorize_ambiguous_evidence(tmp_p
     assert runtime.host.events == []
 
 
+def test_model_invented_path_is_rejected_before_any_native_effect(tmp_path):
+    runtime, catalog, session = setup(tmp_path)
+    path = tmp_path / '출력 폴더' / '한글 문서.bin'
+    path.parent.mkdir(); path.write_bytes(b'abc')
+    (tmp_path / 'IN').write_bytes(b'untouched')
+    proof = {"cases":[{"inputs":[{"utf8":"probe.bin"},4],"before":{"probe.bin":"0010"},"after":{"probe.bin":"0404"},"output":2}]}
+    class Model:
+        def __init__(self): self.turn = 0
+        def complete(self, messages, tools):
+            self.turn += 1
+            if self.turn == 1:
+                name,args = 'search_goal',{'query':'fill bytes','width':16}
+            elif self.turn in (2,3):
+                prepare = next(t for t in tools if t['function']['name'].startswith('prepare_'))
+                assert prepare['function']['parameters']['properties']['x0']['enum'] == ['출력 폴더/한글 문서.bin']
+                assert 'probe.bin' not in json.dumps(messages)
+                if self.turn == 3:
+                    assert runtime.host.events == [] and path.read_bytes() == b'abc'
+                    assert json.loads(messages[-1]['content'])['status'] == 'error'
+                name,args = prepare['function']['name'], {'width':16,'x0':'IN' if self.turn==2 else '출력 폴더/한글 문서.bin','x1':23}
+            else:
+                name,args = 'execute_resolved',{}
+            return {'role':'assistant','tool_calls':[{'id':'test','function':{'name':name,'arguments':json.dumps(args)}}]}
+    session.model = Model()
+    result = session.run('"출력 폴더/한글 문서.bin"을 23으로 채워줘. 폭은 16비트.',evidence=json.dumps(proof))
+    assert result['status'] == 'executed' and result['outputs'] == [3]
+    assert path.read_bytes() == bytes([23])*3 and (tmp_path/'IN').read_bytes() == b'untouched'
+
+
 def test_execution_only_sessions_reject_teaching_even_if_model_hallucinates_tool(tmp_path):
     runtime = VectorRuntime()
     session = AgentSession(runtime, None, allow_learning=False)

@@ -147,21 +147,46 @@ def small_case_schema(arity, minimum=2, maximum=4):
         "type": "object", "properties": properties, "required": list(properties), "additionalProperties": False}}
 
 
-def binding_tools(tools, intent):
+def path_literals(intent):
+    """Extract quoted strings and bare filename tokens, without filesystem access."""
+    found = []
+    quoted = r'''(["'`])([^\r\n]*?)\1|“([^\r\n]*?)”|‘([^\r\n]*?)’'''
+    for match in re.finditer(quoted, intent):
+        value = next((s for s in match.groups()[1:] if s is not None), "")
+        if value and not re.fullmatch(r"[+-]?\d+", value):
+            found.append((match.start(), match.end(), value))
+    bare = r'''[^\s"'`“”‘’<>{}\[\](),;:!?]+\.[A-Za-z0-9_-]+'''
+    for match in re.finditer(bare, intent):
+        if not any(start <= match.start() < end for start, end, _ in found):
+            found.append((match.start(), match.end(), match.group()))
+    return sorted(found)
+
+
+def binding_tools(tools, intent, candidates=None):
     """Restrict literal-copy binding, without interpreting an operation or computing answers."""
-    numbers = list(dict.fromkeys(int(s) for s in re.findall(r"(?<!\d)[+-]?\d+(?!\d)", intent)))
+    paths = path_literals(intent)
+    text = list(intent)
+    for start, end, _ in paths:
+        text[start:end] = " " * (end - start)
+    numbers = list(dict.fromkeys(int(s) for s in re.findall(r"(?<!\d)[+-]?\d+(?!\d)", "".join(text))))
     result = json.loads(json.dumps(tools))
-    if numbers:
-        for item in result:
-            if not item["function"]["name"].startswith("prepare_"):
-                continue
-            for name, field in item["function"]["parameters"]["properties"].items():
-                if field.get("type") == "integer":
+    allowed = []
+    for item in result:
+        function = item["function"]
+        if function["name"].startswith("prepare_"):
+            kinds = candidates[int(function["name"].split("_")[1])]["input_types"] if candidates is not None else []
+            if "path" in kinds and not paths:
+                continue  # no original path literal: only clarification is possible
+            for name, field in function["parameters"]["properties"].items():
+                if field.get("type") == "integer" and numbers:
                     options = [n for n in numbers if name != "width" or 1 <= n <= 32]
                     field["enum"] = options or [16]
                     if name == "width":
                         field["description"] = "The explicitly requested execution width, not an operand or validation width"
-    return result
+                elif name.startswith("x") and kinds and kinds[int(name[1:])] == "path":
+                    field["enum"] = list(dict.fromkeys(p for _, _, p in paths))
+        allowed.append(item)
+    return allowed
 
 
 def small_cases(rows, arity, minimum=2, maximum=4):
@@ -568,7 +593,7 @@ class AgentSession:
                 binding_messages = [{"role": "system", "content": BINDING_GUIDE},
                                     {"role": "user", "content": intent}]
             if binding:
-                offered_tools = binding_tools(offered_tools, intent)
+                offered_tools = binding_tools(offered_tools, intent, self._candidates)
             compact = any(t["function"]["name"] in ("check_small", "teach_small") for t in offered_tools)
             if compact and small_messages is None:
                 goal = intent
@@ -604,7 +629,7 @@ class AgentSession:
                 offered = next(t for t in offered_tools if t["function"]["name"] == call["function"]["name"])
                 for field, schema in offered["function"]["parameters"].get("properties", {}).items():
                     if "enum" in schema and args.get(field) not in schema["enum"]:
-                        raise ValueError(f"{field} must copy a number from the actual request: {schema['enum']}")
+                        raise ValueError(f"{field} must use an offered value: {schema['enum']}")
                 result = self.call(call["function"]["name"], args)
                 if (self.catalog is not None and result.get("status") == "proposed"
                         and getattr(self, "_caller_evidence", None)):

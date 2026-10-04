@@ -1,0 +1,283 @@
+{
+  "protocol": "new path requests frozen before first inference after development; no retuning on results",
+  "cases": [
+    {
+      "name": "quoted_korean_fill",
+      "intent": "‘출력 폴더/샘플 문서.bin’의 모든 바이트를 29로 채워서 저장해줘. 유지.bin은 그대로 두고, 폭은 16비트야. 학습하지 마.",
+      "before": {
+        "출력 폴더/샘플 문서.bin": "0012ff45",
+        "유지.bin": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "출력 폴더/샘플 문서.bin": "1d1d1d1d",
+          "유지.bin": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "출력 폴더/샘플 문서.bin"
+              },
+              29
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "bare_korean_fill",
+      "intent": "실험.bin의 바이트를 31로 채워서 같은 파일에 저장해줘. 고정.dat은 유지해. 16비트로 실행하고 학습하지 마.",
+      "before": {
+        "실험.bin": "00ee12",
+        "고정.dat": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "실험.bin": "1f1f1f",
+          "고정.dat": "aa55"
+        },
+        "outputs": [
+          3
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "실험.bin"
+              },
+              31
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested_korean_xor",
+      "intent": "XOR all bytes of raw.v1/블록.bin with 7 and write back. Leave safe.bin unchanged. Use width 16 and no learning.",
+      "before": {
+        "raw.v1/블록.bin": "01ff00",
+        "safe.bin": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "raw.v1/블록.bin": "06f807",
+          "safe.bin": "aa55"
+        },
+        "outputs": [
+          3
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "raw.v1/블록.bin"
+              },
+              7
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              3
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "0313fc"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "quoted_english_xor",
+      "intent": "XOR each byte of \"samples/mixed bytes.bin\" with 21. Save to that same file; preserve keep.bin. Execute at width 16 without teaching.",
+      "before": {
+        "samples/mixed bytes.bin": "00ff4212",
+        "keep.bin": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "samples/mixed bytes.bin": "15ea5707",
+          "keep.bin": "aa55"
+        },
+        "outputs": [
+          4
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "samples/mixed bytes.bin"
+              },
+              21
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              3
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "0313fc"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "filename_digits_zero",
+      "intent": "Fill data2024.bin with byte value 0 using width 16. Keep backup16.bin unchanged. Do not learn.",
+      "before": {
+        "data2024.bin": "ff01ee",
+        "backup16.bin": "aa55"
+      },
+      "expect": {
+        "status": "executed",
+        "files": {
+          "data2024.bin": "000000",
+          "backup16.bin": "aa55"
+        },
+        "outputs": [
+          3
+        ],
+        "request": {
+          "width": 16,
+          "operands": [
+            [
+              {
+                "utf8": "data2024.bin"
+              },
+              0
+            ]
+          ]
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing_path",
+      "intent": "모든 바이트를 17로 채워줘. 대상 파일 경로는 아직 정하지 않았어. 16비트로 실행하고 학습하지 마.",
+      "before": {
+        "keep.bin": "00ff"
+      },
+      "expect": {
+        "status": "clarify",
+        "files": {
+          "keep.bin": "00ff"
+        }
+      },
+      "allow_learning": false,
+      "evidence": {
+        "cases": [
+          {
+            "inputs": [
+              {
+                "utf8": "probe.bin"
+              },
+              5
+            ],
+            "before": {
+              "probe.bin": "0010ff"
+            },
+            "after": {
+              "probe.bin": "050505"
+            },
+            "output": 3
+          }
+        ]
+      }
+    }
+  ]
+}

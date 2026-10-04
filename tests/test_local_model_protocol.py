@@ -1,7 +1,7 @@
 import json
 
 from experiments.local_small_llm import gemma_messages, native_message
-from vectorpro.agent import binding_tools
+from vectorpro.agent import binding_tools, path_literals
 
 
 def test_gemma_framing_preserves_bound_inputs_and_separate_evidence():
@@ -39,3 +39,22 @@ def test_binding_schema_uses_request_literals_without_computing_answers():
     assert 276 not in fields["x0"]["enum"] and 0 not in fields["x1"]["enum"]
     assert fields["width"]["enum"] == [16]
     assert "enum" not in tools[0]["function"]["parameters"]["properties"]["x0"]
+
+
+def test_paths_preserve_unicode_spaces_and_do_not_leak_filename_numbers():
+    intent = '‘출력 폴더/한글2024.bin’의 바이트를 23으로 채워줘. keep.dat은 유지해. 폭은 16비트.'
+    assert [p for _, _, p in path_literals(intent)] == ['출력 폴더/한글2024.bin', 'keep.dat']
+    tools = [{"function":{"name":"prepare_0","parameters":{"properties":{
+        "width":{"type":"integer"},"x0":{"type":"string"},"x1":{"type":"integer"}}}}}]
+    revised = binding_tools(tools, intent, [{"input_types":["path","value"]}])
+    fields = revised[0]["function"]["parameters"]["properties"]
+    assert fields["x0"]["enum"] == ['출력 폴더/한글2024.bin','keep.dat']
+    assert fields["x1"]["enum"] == [23,16]
+    assert '한글2024.bin' not in fields["x0"]["enum"]
+
+
+def test_missing_path_cannot_offer_a_guessing_preparation_tool():
+    tools = [{"function":{"name":"prepare_0","parameters":{"properties":{}}}},
+             {"function":{"name":"ask_user","parameters":{"properties":{}}}}]
+    assert [t["function"]["name"] for t in binding_tools(tools, "파일을 23으로 채워줘", [{"input_types":["path","value"]}])] == ["ask_user"]
+    assert [p for _, _, p in path_literals('Read dir.v1/archive.tar.gz and "확장자 없음".')] == ['dir.v1/archive.tar.gz','확장자 없음']

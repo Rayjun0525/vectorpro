@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-04",
+  "container": "vectorpro-test",
+  "new_images_or_containers": false,
+  "model": "Gemma 3 1B Instruct Q8_0",
+  "full_regression": {"passed":186,"seconds":280.11,"command":"nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q"},
+  "focused_regression": {"passed":32,"seconds":9.90},
+  "development_recheck": {"root":"results/gemma_paths/development","passed":1,"total":1,"independent_accuracy":false},
+  "first_use": {
+    "root":"results/gemma_paths/first-use",
+    "passed":4,"total":6,
+    "exact_path_binding":{"passed":5,"total":5,"scope":"all five cases requiring execution; not overall request accuracy"},
+    "missing_path_clarification":{"passed":1,"total":1},
+    "agent_sha256":"bb50159e586d50c644873de3ea94fae0f35fe4a42f9aa79004482c44f85717e9",
+    "dataset_sha256":"72175e6793dad15cd70b57b5fd28aed0f1694c64655fd5a14292c8cad9f121f9",
+    "failures":["quoted_korean_fill","bare_korean_fill"],
+    "failure_reason":"Correct target paths, but operand 29/31 and register width 16 were swapped",
+    "failed_target_files_changed":true,
+    "failed_target_bytes":["10101010","101010"],
+    "preserved_files_unchanged":true,
+    "no_retuning_after_evaluation":true
+  },
+  "teacher_diagnostic":{"root":"results/gemma_paths/teacher-diagnostic","passed":0,"total":1,"issue":"Numeric NAND request prepared as buffer plus numeric input; no teaching occurred","new_capability_registered":false,"heldout_run":false},
+  "limits":["Lexical source checks do not prove parameter roles","Quoted ordinary strings can be path choices","Unquoted extensionless filenames may require clarification","Independent target sources and typed goal extraction remain","External provider needs endpoint/model; macOS deferred"]
+}
