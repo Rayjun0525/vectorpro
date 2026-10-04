@@ -4,3 +4,5 @@ __pycache__/
 build/
 dist/
 .venv/
+results/agent_cost/native/
+results/agent_cost_final/native/

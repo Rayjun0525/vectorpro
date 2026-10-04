@@ -1,0 +1,11 @@
+{
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "torch_version": "2.14.1+cpu",
+  "llama_cpp_version": "0.3.36",
+  "model_sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5",
+  "model_threads": 4,
+  "context_tokens": 8192,
+  "temperature": 0,
+  "native_storage": "/workspace mounted project filesystem; timings include this filesystem latency",
+  "stop_rule": "Stop after successful make_copy or write_file; verify exact state independently; retry tool errors at most 6 calls"
+}

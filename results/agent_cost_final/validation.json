@@ -1,0 +1,7 @@
+{
+  "attempts": true,
+  "successes": true,
+  "calls": true,
+  "tokens": true,
+  "direct_all_pass": true
+}

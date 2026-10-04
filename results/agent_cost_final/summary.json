@@ -1,0 +1,64 @@
+{
+  "model": "/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf",
+  "model_load_seconds": 1.0634328250016551,
+  "warmup_seconds": 1.315870131002157,
+  "learning_seconds": 0.2716127919993596,
+  "save_seconds": 0.03572539900051197,
+  "program_load_seconds": 0.014937198997358792,
+  "program_sha256": "b85cea547edcac7286bf0a4f8e173f8fb2abf03ae038c1fadfa199804237d9be",
+  "aggregates": {
+    "llm_primitives": {
+      "attempts": 6,
+      "passed": 1,
+      "seconds_total": 110.9306812499999,
+      "seconds_median": 16.168592525998974,
+      "llm_calls": 24,
+      "prompt_tokens": 11324,
+      "completion_tokens": 782
+    },
+    "llm_tensor": {
+      "attempts": 6,
+      "passed": 0,
+      "seconds_total": 42.92158945600386,
+      "seconds_median": 7.754614711000613,
+      "llm_calls": 6,
+      "prompt_tokens": 1416,
+      "completion_tokens": 279
+    },
+    "llm_python_macro": {
+      "attempts": 6,
+      "passed": 0,
+      "seconds_total": 41.44641902500007,
+      "seconds_median": 6.477294416999939,
+      "llm_calls": 6,
+      "prompt_tokens": 1416,
+      "completion_tokens": 279
+    },
+    "direct_tensor": {
+      "attempts": 120,
+      "passed": 120,
+      "seconds_total": 10.067592027051433,
+      "seconds_median": 0.08253855150178424,
+      "llm_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    "direct_python": {
+      "attempts": 120,
+      "passed": 120,
+      "seconds_total": 1.4866337810162804,
+      "seconds_median": 0.012529650000942638,
+      "llm_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    }
+  },
+  "limitations": [
+    "6 fixed simple structured workflows, not arbitrary agent tasks",
+    "No billed monetary or power cost",
+    "Evidence authorship excluded",
+    "Direct calls receive structured inputs; natural-language interpretation is bypassed",
+    "Python macro is hand-written control, not a learned program",
+    "Model prompt caching may benefit repeats; randomized mode order, warmup excluded"
+  ]
+}

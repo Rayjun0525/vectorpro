@@ -1,0 +1,2162 @@
+[
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07350449800287606,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.008041898996452801,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.008900900000298861,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.06945919700228842,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.06496109799627448,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.007910299995273817,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.00789249999797903,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08384469800512306,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07947909799986519,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.009652400003687944,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.008497899994836189,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.06627379699784797,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.06654889800120145,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.008755599999858532,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.009946600002876949,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08114839799964102,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07803639799385564,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.011005799002305139,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.010409399998025037,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.0742658980016131,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07852159799949732,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.010640998996677808,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.010283200004778337,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08571959699474974,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08021989700500853,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.010177900003327522,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.009906699997372925,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07572429800347891,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07857109699398279,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.010169799003051594,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.009873100003460422,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08602729799895314,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08030789800250204,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.01028789999691071,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.0108979999931762,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.07920029699744191,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08038039699749788,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.01069859899871517,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_python",
+    "seconds": 0.009618000003683846,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-0",
+    "mode": "direct_tensor",
+    "seconds": 0.08041669800149975,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08087649800290819,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.013203800001065247,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.012112700002035126,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.0811838980007451,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08105269799852977,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.010857699999178294,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.01193449900165433,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.0757449979937519,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08857149699906586,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.012044499999319669,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.014343798997288104,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08827479799947469,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08683919699979015,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.01453380000020843,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.012997599995287601,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.07996959800220793,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08172669800114818,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.015073700000357348,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.013727198995184153,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.09313659700274002,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08967279700300423,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.013462798997352365,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.012303499999688938,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08206449700082885,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.07714239800407086,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.011822899999970105,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.01278219999949215,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08181119799701264,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08187319799617399,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.011775999999372289,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.01208780000160914,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08228829700237839,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08096329800173407,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.010977499005093705,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.011082199998782016,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.07420199800253613,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.07838739800354233,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.011200499000551645,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_python",
+    "seconds": 0.011731200000212993,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-1",
+    "mode": "direct_tensor",
+    "seconds": 0.08029569799691672,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08193189799931133,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.0122888999976567,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012675999998464249,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.07727459799934877,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.07456409800215624,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.01155049999943003,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012122999003622681,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.09638399699906586,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.07951379800215364,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.015974100002495106,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.014339899003971368,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08801749700069195,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08646849700016901,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.013165600001229905,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.013037199998507276,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.09153169699857244,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.09354109699779656,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012432798997906502,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012567300000227988,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.0840574980029487,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08498709800187498,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.013835099998686928,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012393699005770031,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.084622597998532,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.10274249700159999,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.01397700000234181,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.013784299997496419,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.07930889799899887,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08225789699645247,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012408100003085565,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.012613899998541456,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08210439800313907,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.07639039800415048,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.013472800004819874,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.014587800003937446,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.09340029700251762,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.09045609700115165,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.01184849999845028,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_python",
+    "seconds": 0.01586179899459239,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-2",
+    "mode": "direct_tensor",
+    "seconds": 0.08366619799926411,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08955459800199606,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.011407300000428222,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.011476600004243664,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.07446439799969085,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0774959980044514,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.012407798996719066,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.012958098996023182,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0855815979957697,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08810439799708547,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.01316879899968626,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013090699001622852,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.09002779699949315,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0771594979960355,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.011469899000076111,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.011138100002426654,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08813369699782925,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08514639799977886,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.01393149999785237,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.01293170000280952,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08879609800351318,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08640549799747532,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.01613079999515321,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.014463898995018099,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08102169800258707,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.09386299800098641,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.014328999997815117,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.014186799002345651,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0964668980013812,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0920447980024619,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013782499001536053,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013794600003166124,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.09514769799716305,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.0866468989988789,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.01276040000084322,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013095899994368665,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08759109800303122,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08499619900248945,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013008200003241654,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_python",
+    "seconds": 0.013363999998546205,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-3",
+    "mode": "direct_tensor",
+    "seconds": 0.08464559800631832,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08386719899863238,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.013415300003543962,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012941000000864733,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.1007401979950373,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.09444099800020922,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.013325299994903617,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.013105700003507081,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.09052689799864311,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.07889679799700389,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.013038999997661449,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.01632180000160588,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.10019169800216332,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08707479900476756,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.011575000004086178,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.011262499996519182,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.07784309899579966,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08031319799920311,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012010799000563566,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.01209019999805605,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.07791189799900167,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08210439800313907,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012279299997317139,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012956799997482449,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.0803099979966646,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.07609109800250735,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.014636100000643637,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.015468498997506686,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08890279899787856,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.0864043980036513,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.013615199997730087,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.011965999998210464,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.0990592980015208,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.0846845980049693,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.014917200001946185,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012947199000336695,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.07638109799881931,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08097359800012782,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012590400001499802,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_python",
+    "seconds": 0.012492000001657289,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-4",
+    "mode": "direct_tensor",
+    "seconds": 0.08253120200242847,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08321900200098753,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.011286401000688784,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.013794700003927574,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08597890199598623,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08978200200363062,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.011605701001826674,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012191700996481813,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.07783830100379419,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08004210200306261,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012386399997922126,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.01246210000681458,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08309740199911175,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08113060200412292,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.013161100003344472,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.013614300005428959,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.10803290300100343,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.0951739029987948,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012326800002483651,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.01178990000335034,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.07797280200611567,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08630260199424811,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.013156000000890344,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012716600998828653,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08433750200492796,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08893220200116048,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012671399999817368,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.013158501002180856,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.09004520200687693,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.07763390200125286,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.011304201005259529,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.0110763999982737,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.0838237019997905,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.08254590100114001,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.012928901000123005,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.01313030000164872,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.07864670200069668,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.09282260199688608,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.01382520100014517,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_python",
+    "seconds": 0.01363359999959357,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  },
+  {
+    "case": "case-5",
+    "mode": "direct_tensor",
+    "seconds": 0.09578130300360499,
+    "passed": true,
+    "llm_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0
+  }
+]

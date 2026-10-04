@@ -1,5 +1,7 @@
 # 테스트와 결과 확인
 
+실제 Gemma의 호출·토큰·지연·성공률 비용 비교는 [AGENT_COST.md](AGENT_COST.md)를 참고한다.
+
 리눅스 파일시스템 기반의 상태 학습·native 검증은
 [LINUX_TARGET.md](LINUX_TARGET.md)의 재현 명령과 한계를 참고한다.
 

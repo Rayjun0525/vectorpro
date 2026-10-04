@@ -12,6 +12,7 @@
 - [LLM 어댑터와 근거의 한계](docs/LLM_ADAPTER.md)
 - [다른 OS의 동일 파일 검증 절차](docs/PORTABILITY.md)
 - [변경별 테스트와 재현 방법](docs/TESTING.md)
+- [에이전트 반복 실행 비용 실측](docs/AGENT_COST.md)
 - [텐서 카탈로그·검색 정확도 검증](docs/TENSOR_CATALOG.md)
 - [정식 텐서 저장·LLM 카탈로그 연결](docs/CATALOG_AGENT.md)
 - [공통 기능 계약과 직접 호출](docs/FUNCTION_CONTRACTS.md)
