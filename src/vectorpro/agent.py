@@ -64,7 +64,26 @@ EXAMPLE_SCHEMA = {"type": "object", "properties": {
     "required": ["width", "operands", "targets"], "additionalProperties": False}
 
 
-TOOLS = [tool("list_capabilities", "List acquired and provided capabilities with types", {}),
+DRAFT_SCHEMA = {"type": "object", "properties": {
+    "version": {"type": "integer", "enum": [1]},
+    "name": {"type": "string"}, "description": {"type": "string"},
+    "parameters": {"type": "array", "minItems": 1, "maxItems": 3, "items": {
+        "type": "object", "properties": {"name": {"type": "string"},
+        "type": {"type": "string", "enum": ["value", "path", "buffer"]},
+        "role": {"type": "string"}}, "required": ["name", "type", "role"], "additionalProperties": False}},
+    "output": {"type": "object", "properties": {"type": {"type": "string", "enum": ["value", "path", "buffer"]},
+        "width": {"type": "string", "enum": ["W", "W+1", "2W", "1"]}}, "required": ["type", "width"], "additionalProperties": False},
+    "allowed_operations": {"type": "array", "items": {"type": "string"}}},
+    "required": ["version", "name", "description", "parameters", "output", "allowed_operations"], "additionalProperties": False}
+
+CONTRACT_TEACH = tool("teach_contract", "Learn and register a NEW named contract from finite examples. Registration does not execute native work or independently prove intent.",
+    {"draft": DRAFT_SCHEMA, "lesson": {"type": "object", "properties": {
+        "training": EXAMPLE_SCHEMA, "validation": EXAMPLE_SCHEMA}, "required": ["training", "validation"], "additionalProperties": False},
+     "state_lesson": {"type": "object"}, "time_budget_seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 60}}, ("draft",))
+
+GUIDE += "\nFor named interfaces use teach_contract with a data-only draft and lesson OR state_lesson. No evidence means needs_learning_examples. registered means examples and interface bounds passed; native work has not been executed. Descriptive roles and model-generated examples are declarations, not independent correctness proof.\n"
+
+TOOLS = [CONTRACT_TEACH, tool("list_capabilities", "List acquired and provided capabilities with types", {}),
          tool("teach_numeric", "Acquire a NEW numeric function from YOUR examples. No code. Separate training and validation.",
               {"name": {"type": "string"}, "description": {"type": "string"},
                "output": {"type": "string", "enum": ["W", "W+1", "2W", "1"]},
@@ -300,7 +319,7 @@ class AgentSession:
 
     def available_tools(self):
         if self.catalog is None:
-            return [t for t in TOOLS if self.allow_learning or t["function"]["name"] not in ("teach", "teach_numeric")]
+            return [t for t in TOOLS if self.allow_learning or t["function"]["name"] not in ("teach", "teach_numeric", "teach_contract")]
         permitted = {"ask_user"}
         if getattr(self, "_caller_evidence", None) and self._goal is None:
             permitted.clear()  # inspect supplied evidence before asking whether support exists
@@ -308,7 +327,7 @@ class AgentSession:
                               and not getattr(self, "_verification_attempted", False)):
             permitted.clear()  # already supplied evidence/verified inputs need no extra confirmation
         if self._resolution_status == "needs_learning_examples" and self.allow_learning:
-            permitted.update(("teach", "teach_numeric"))
+            permitted.update(("teach", "teach_numeric", "teach_contract"))
         verification = []
         if self._proposed and self._resolution_status not in ("matched", "needs_learning_examples"):
             from vectorpro.semantic_catalog import operand_types
@@ -374,8 +393,17 @@ class AgentSession:
                 *[t for t in TOOLS if t["function"]["name"] in permitted]]
 
     def call(self, name, args):
-        if name in ("teach", "teach_numeric", "teach_small") and not self.allow_learning:
+        if name in ("teach", "teach_numeric", "teach_small", "teach_contract") and not self.allow_learning:
             raise ValueError("learning is disabled for this session")
+        if name == "teach_contract":
+            if set(args) - {"draft", "lesson", "state_lesson", "time_budget_seconds"}:
+                raise ValueError("contract tool accepts only draft/evidence/budget")
+            result = self.runtime.teach_contract(**args, evidence_source="llm_proposed_examples")
+            if result["status"] == "registered":
+                self._resolved, self._proposed, self._resolution_status = None, None, None
+                self._candidates = []
+                self.save()
+            return result
         if name == "search_goal":
             if self.catalog is None:
                 raise ValueError("no tensor catalog configured")
@@ -675,6 +703,8 @@ class AgentSession:
                 small_messages.append(feedback)
             if binding:
                 binding_messages.append(feedback)
+            if isinstance(result, dict) and result.get("status") == "registered":
+                return result | {"tools": events}
             if self.catalog is not None and result.get("status") == "executed":
                 # The single bound request is complete. A model cannot undo success,
                 # re-execute it, or replace the authoritative result with prose.
@@ -714,7 +744,7 @@ def main(argv=None):
     result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning).run(
         args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
-    return 0 if result["status"] in ("answered", "executed") else 2
+    return 0 if result["status"] in ("answered", "executed", "registered") else 2
 
 
 if __name__ == "__main__":

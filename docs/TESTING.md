@@ -1,5 +1,7 @@
 # 테스트와 결과 확인
 
+계약 초안의 학습·등록 검증은 [CONTRACT_LEARNING.md](CONTRACT_LEARNING.md)를 참고한다.
+
 공통 계약의 저장 호환/직접 호출/CLI/어댑터 연결 검증과 재현은
 [FUNCTION_CONTRACTS.md](FUNCTION_CONTRACTS.md)를 참고한다.
 

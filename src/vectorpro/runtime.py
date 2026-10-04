@@ -8,6 +8,8 @@ from __future__ import annotations
 import json
 import random
 import tempfile
+from time import monotonic
+from dataclasses import replace
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
@@ -52,6 +54,71 @@ class VectorRuntime:
 
     def contracts(self) -> list[dict]:
         return [self.contract(c.name) for c in self.registry]
+
+    def teach_contract(self, draft: dict, *, lesson: dict | None = None, state_lesson: dict | None = None,
+                       evidence_source: str = "caller_examples", time_budget_seconds: float = 60) -> dict:
+        """Acquire in a detached registry; register only after examples AND draft bounds pass."""
+        import math
+        from vectorpro.contract_learning import validate_draft, numeric_lesson, state_lesson as parse_state
+        from vectorpro.learning import OutputWidth
+        draft = validate_draft(draft)
+        if evidence_source not in ("caller_examples","llm_proposed_examples"):
+            raise ValueError("evidence source is a label, not an independent correctness certificate")
+        if (type(time_budget_seconds) not in (int,float) or not math.isfinite(time_budget_seconds)
+                or not 0<time_budget_seconds<=60):
+            raise ValueError("contract learning time budget must be finite and in (0,60]")
+        if draft["name"] in self.registry:
+            raise ValueError("draft name already exists; query and call its contract explicitly")
+        if lesson is not None and state_lesson is not None:
+            raise ValueError("provide numeric OR state evidence")
+        if lesson is None and state_lesson is None:
+            return {"status":"needs_learning_examples", "draft":draft, "registered":False}
+        deadline = monotonic() + time_budget_seconds
+        kinds = [p["type"] for p in draft["parameters"]]
+        if lesson is not None:
+            if any(k!="value" for k in kinds) or draft["output"]["type"]!="value" or draft["allowed_operations"]:
+                raise ValueError("numeric lessons require pure value input/output contracts")
+            examples=numeric_lesson(lesson)
+            plan=LearningPlan(draft["name"],draft["description"],len(kinds),OutputWidth(draft["output"]["width"]),
+                              rounds=(len(examples.training),),train_width=examples.training.width,
+                              validation_width=examples.validation.width,validation_examples=len(examples.validation))
+            examples.validate(plan)
+            state=None
+        else:
+            state=parse_state(state_lesson)
+            if list(state.input_types)!=kinds:
+                raise ValueError("state evidence input types must exactly match the draft")
+            state=replace(state,time_budget_seconds=min(state.time_budget_seconds,time_budget_seconds))
+            examples=plan=None
+        config=self.learner.config
+        bounded=replace(config, search_budget=min(config.search_budget,50000), search_size=min(config.search_size,3),
+                        restarts=min(config.restarts,2),train=replace(config.train,steps=min(config.train.steps,1500)))
+        staged=VectorRuntime(Registry.from_data(self.registry.to_data()),config=bounded)
+        staged._rng.setstate(self._rng.getstate())
+        outcome=staged.teach(draft["name"],plan=plan,lesson=examples,state_lesson=state)
+        if outcome.status!="learned":
+            return {"status":"learning_failed","registered":False,"reason":"no candidate passed supplied examples", "history":outcome.history}
+        actual=staged.contract(draft["name"])
+        reason=None
+        if monotonic()>deadline:
+            reason="contract learning time budget exhausted"
+        elif actual["input_types"]!=kinds or actual["output"]!=draft["output"]:
+            reason="candidate input/output type or width does not match draft"
+        elif set(actual["execution"]["operations"])-set(draft["allowed_operations"]):
+            reason="candidate uses operations outside the draft allowance"
+        if reason:
+            return {"status":"learning_failed","registered":False,"reason":reason,"history":outcome.history}
+        cap=staged.registry.get(draft["name"])
+        cap.provenance["contract_draft"]=draft
+        cap.provenance["evidence_source"]=evidence_source
+        contract=staged.contract(draft["name"])
+        # Whole staged registry is accepted atomically; failed staging never modifies live state.
+        self.registry=staged.registry
+        self.learner=Learner(self.registry,config)
+        self._rng.setstate(staged._rng.getstate())
+        self._tensor_extras={}
+        return {"status":"registered","registered":True,"contract":contract,"history":outcome.history,
+                "evidence_source":evidence_source,"intent_independently_verified":False}
 
     def call_contract(self, contract_id: str, arguments: dict, width: int, *, version: int = 1) -> dict:
         """Strict named/typed, single-lane execution of an exact stored function ID.

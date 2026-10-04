@@ -61,6 +61,15 @@ def build_contract(registry, name):
                               "operations": _operations(closure), "digest": hashlib.sha256(encoded).hexdigest()},
                 "verification": {"source": "stored training/validation records; not independent intent proof",
                                  "history": cap.history, "audit": cap.audit}}
+    if "contract_draft" in cap.provenance:
+        from vectorpro.contract_learning import validate_draft
+        draft = validate_draft(cap.provenance["contract_draft"])
+        if ([p["type"] for p in draft["parameters"]] != kinds or draft["output"] != contract["output"]
+                or draft["name"] != name or set(contract["execution"]["operations"])-set(draft["allowed_operations"])):
+            raise ValueError("stored draft does not match the acquired implementation")
+        for parameter, declared in zip(parameters,draft["parameters"]):
+            parameter.update(name=declared["name"],role=declared["role"],role_source="draft declaration, not independent proof")
+        contract["interface_origin"] = "validated draft shape/effect bounds; descriptive roles are supplied"
     identity = json.dumps(contract, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
     contract["id"] = "vp1:" + hashlib.sha256(identity).hexdigest()
     return json.loads(json.dumps(contract))  # detached data: callers cannot mutate capability metadata

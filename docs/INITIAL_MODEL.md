@@ -1,5 +1,9 @@
 # Initial model v0
 
+Contract drafts now use isolated acquisition and acceptance against supplied examples,
+input/output shape and permitted effects. See [CONTRACT_LEARNING.md](CONTRACT_LEARNING.md).
+Registration does not independently certify the user's intent or model-generated labels.
+
 The product is a learnable, portable vector program, with one request entry
 point. A runtime supplies execution semantics; learned task logic is stored as
 tables and program tensors, never Python source. The LLM is an optional intent

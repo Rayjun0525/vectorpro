@@ -24,16 +24,20 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     try:
         data = json.loads(args.request.read_text(encoding="utf-8"))
-        plan = LearningPlan.from_dict(data["plan"]) if "plan" in data else None
-        lesson = ExampleLesson.from_dict(data["lesson"]) if "lesson" in data else None
-        state_lesson = StateLesson.from_dict(data["state_lesson"]) if "state_lesson" in data else None
         host = HostContext(args.host_root) if args.host_root is not None else None
         torch.manual_seed(args.seed)
         runtime = (VectorRuntime.load(args.program, host=host) if args.program.exists()
                    else VectorRuntime(host=host, seed=args.seed))
-        if host is not None:
-            runtime.provide_host_operations()
         action = data.get("action")
+        if action == "teach_contract":
+            if set(data)-{"action","draft","lesson","state_lesson","evidence_source","time_budget_seconds"}:
+                raise ValueError("contract teaching accepts only a draft and finite evidence")
+            response=runtime.teach_contract(data["draft"],lesson=data.get("lesson"),state_lesson=data.get("state_lesson"),
+                evidence_source=data.get("evidence_source","caller_examples"),time_budget_seconds=data.get("time_budget_seconds",60))
+            if response["status"]=="registered":
+                runtime.save(args.program)
+            print(json.dumps(response,ensure_ascii=False))
+            return 0 if response["status"]=="registered" else 2
         if action in ("contracts", "call_contract"):
             if set(data) - ({"action", "name"} if action == "contracts" else
                             {"action", "contract_id", "arguments", "width", "version"}):
@@ -46,6 +50,11 @@ def main(argv=None) -> int:
                                                  version=data.get("version", 1))
             print(json.dumps(response, ensure_ascii=False))
             return 0
+        plan = LearningPlan.from_dict(data["plan"]) if "plan" in data else None
+        lesson = ExampleLesson.from_dict(data["lesson"]) if "lesson" in data else None
+        state_lesson = StateLesson.from_dict(data["state_lesson"]) if "state_lesson" in data else None
+        if host is not None:
+            runtime.provide_host_operations()
         # Byte inputs allocate fresh transient handles; raw handles are not portable.
         operands = []
         for row in data["operands"]:

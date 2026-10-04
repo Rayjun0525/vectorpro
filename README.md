@@ -1,5 +1,8 @@
 # vectorpro
 
+계약 초안의 격리 학습·검증·등록과 이름 기반 인자 호출은
+[CONTRACT_LEARNING.md](docs/CONTRACT_LEARNING.md)를 참고한다.
+
 현재 로컬 LLM 기준은 **Gemma 3 1B Instruct Q8_0**이다. Laya 적합성 시험 후
 사용자 요청으로 Laya 가중치를 제거하고 Gemma를 복원했다. 기존 컨테이너 하나를
 재사용한다. 명시된 레지스터 폭이 하나인 요청은 그 폭만 도구 선택지로 제공한다.
