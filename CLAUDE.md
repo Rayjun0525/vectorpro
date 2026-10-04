@@ -6,6 +6,7 @@
 추가로 읽을 문서:
 
 - [초기모델 명세](docs/INITIAL_MODEL.md)
+- [첫 완성 목표: 리눅스 사용](docs/LINUX_TARGET.md)
 - [작업 인수인계](docs/HANDOFF.md)
 - [구현·실험 안내](README.md)
 - [LLM 어댑터와 근거의 한계](docs/LLM_ADAPTER.md)

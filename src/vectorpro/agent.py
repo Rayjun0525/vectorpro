@@ -41,6 +41,8 @@ before:{relative_path:hex},after:{relative_path:hex},output?:int,operations?:[ho
 validation:[same shape],width:16,max_steps:7,candidate_budget:5000,
 control_flow:true,buffer_loops:true,time_budget_seconds:60,execution_budget:20000}}.
 before/after are complete file snapshots; unchanged files must remain in after.
+before_directories/after_directories list empty or explicit relative directory paths.
+File parents are inferred; unchanged empty directories must remain in after_directories.
 buffer_loops searches indexed fill/map grammar; acquired numeric stepping is needed.
 max_steps counts calls. Validation is separate; model-generated examples are evidence
 proposals, not independent proof of the human's intent or general correctness.
@@ -114,6 +116,8 @@ RESOLVE_TOOL = tool("resolve_request", "Find typed candidates and verify supplie
              "inputs": _EXECUTE_PROPERTIES["operands"]["items"],
              "before": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-fA-F]*$"}},
              "after": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-fA-F]*$"}},
+             "before_directories": {"type": "array", "maxItems": 32, "items": {"type": "string"}},
+             "after_directories": {"type": "array", "maxItems": 32, "items": {"type": "string"}},
              "output": {"type": "integer"}}, "required": ["inputs", "before", "after"], "additionalProperties": False}}},
     ("query", "width", "operands"))
 

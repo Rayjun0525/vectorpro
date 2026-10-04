@@ -1,0 +1,1854 @@
+{
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "program_sha256": "9963ccb7b0a4404b12dc7d8e0594aa713f114ae34db762664208a57df79d2b53",
+  "learned": [
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "make_copy",
+        "description": "Apply operations to two separate files. Create one directory with an existing parent; return 1. 디렉터리 생성. file bytes read from input path save file bytes read from input path to input path",
+        "input_types": [
+          "path",
+          "path",
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path",
+          "relative file path",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "folder",
+            "type": "path",
+            "role": "folder",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.0650561973452568,
+            0.2977275252342224,
+            0.03630770742893219,
+            0.0719924122095108,
+            -0.02742895483970642,
+            0.12081755697727203,
+            -0.05329963564872742,
+            -0.25198835134506226,
+            -0.026908589527010918,
+            -0.10121139138936996,
+            -0.09917127341032028,
+            0.16324016451835632,
+            -0.1680641919374466,
+            0.15893329679965973,
+            0.21845369040966034,
+            -0.333697646856308,
+            -0.2800067067146301,
+            -0.33266931772232056,
+            0.014432157389819622,
+            -0.2043766975402832,
+            0.2729199528694153,
+            -0.020955687388777733,
+            0.10930504649877548,
+            -0.03205556422472,
+            -0.012131606228649616,
+            0.19676369428634644,
+            0.17182737588882446,
+            -0.09010165184736252,
+            -0.1649908572435379,
+            0.027426274493336678,
+            0.3605583906173706,
+            0.07397325336933136
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.create",
+            "file.read",
+            "file.write"
+          ],
+          "digest": "098bab0069d2f2de26832122b8441aedf10eaa252ea1723c06e461172cd9c2b9"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 3,
+              "candidates": 189,
+              "control": "sequence",
+              "tensor_steps": 3,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:304f31b046513c89a73f9dbb57bd58439265b4a31d9cd203fcd07cc8f6e7de27"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 3,
+          "candidates": 189,
+          "control": "sequence",
+          "tensor_steps": 3,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "save_listing",
+        "description": "Apply operations to two separate files. Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회. save Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회. to input path",
+        "input_types": [
+          "path",
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "folder",
+            "type": "path",
+            "role": "folder",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.12195082753896713,
+            0.17278996109962463,
+            -0.04030284285545349,
+            -0.15969887375831604,
+            -0.017601126804947853,
+            -0.21388423442840576,
+            0.01320139691233635,
+            -0.10670734196901321,
+            -0.1775851994752884,
+            0.17895212769508362,
+            -0.13818103075027466,
+            0.28256168961524963,
+            0.31924155354499817,
+            -0.13540075719356537,
+            0.21570180356502533,
+            -0.09431669116020203,
+            -0.1360086053609848,
+            -0.04719245061278343,
+            -0.10664642602205276,
+            0.17174187302589417,
+            0.023480135947465897,
+            -0.2338346689939499,
+            -0.025456706061959267,
+            -0.2219393104314804,
+            -0.2614416480064392,
+            0.10441219061613083,
+            -0.2683261036872864,
+            -0.29899081587791443,
+            0.3368559181690216,
+            -0.0072469525039196014,
+            -0.0913592129945755,
+            -0.055780328810214996
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.list",
+            "file.write"
+          ],
+          "digest": "abdad5e5c2551b92e5dcd9974a4f7022249639ceb92229ec16271337c0c34bf2"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 292,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:f993560c5573526457483254872e9f1cd66002cdcbbfe8924ebbfd90de0c76be"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 292,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "remove_file",
+        "description": "Remove one file; return 1. 파일 하나 삭제.",
+        "input_types": [
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "target",
+            "type": "path",
+            "role": "target",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.1198163777589798,
+            0.3407469391822815,
+            0.24046647548675537,
+            0.27597153186798096,
+            0.025479229167103767,
+            0.35853737592697144,
+            0.10266824066638947,
+            0.28800106048583984,
+            0.19334547221660614,
+            0.014419964514672756,
+            0.17120641469955444,
+            -0.21480223536491394,
+            -0.1965440958738327,
+            -0.07047968357801437,
+            -0.07404166460037231,
+            0.10058476775884628,
+            0.11047518998384476,
+            0.19440093636512756,
+            0.08622843772172928,
+            0.32382187247276306,
+            0.10616936534643173,
+            -0.11810223013162613,
+            -0.0076722935773432255,
+            0.14553475379943848,
+            -0.0689094215631485,
+            -0.12443546205759048,
+            -0.1070520430803299,
+            -0.28166353702545166,
+            -0.03853007033467293,
+            0.12268920242786407,
+            -0.040221016854047775,
+            -0.051915694028139114
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.remove"
+          ],
+          "digest": "5b49250d64c0c0e557ec629e20d0c4a2b72ec650c373db0ca7012e28f0c025d1"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 1,
+              "candidates": 8,
+              "control": "sequence",
+              "tensor_steps": 1,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:ad0f68b01de5af23cd310d74f54ff6befd4a33adecc4f3740d844416a2159b87"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 8,
+          "control": "sequence",
+          "tensor_steps": 1,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "move_file",
+        "description": "Apply operations to two separate files. Move a file to a destination path, replacing a destination file; return 1. 파일 이동 이름 변경.",
+        "input_types": [
+          "path",
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.0021984807681292295,
+            0.18190355598926544,
+            -0.197943314909935,
+            0.3290163278579712,
+            -0.05185273662209511,
+            -0.051414765417575836,
+            0.13905969262123108,
+            -0.1194760724902153,
+            -0.17672167718410492,
+            0.05041578412055969,
+            0.12469805777072906,
+            0.3435027599334717,
+            0.22113434970378876,
+            -0.10952393710613251,
+            0.17912332713603973,
+            -0.2802547514438629,
+            0.418841689825058,
+            0.22816148400306702,
+            -0.09013985097408295,
+            0.08421864360570908,
+            0.2509348392486572,
+            0.08057110011577606,
+            -0.09530009329319,
+            -0.03454126790165901,
+            0.05118391662836075,
+            0.020367244258522987,
+            0.06673749536275864,
+            -0.1399533748626709,
+            0.04259467497467995,
+            -0.04724488779902458,
+            0.29337525367736816,
+            -0.04537331685423851
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.move"
+          ],
+          "digest": "ac260931d6c7d9908d1070c3f830633cee8db299839edabd785db57180dfc0d2"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 1,
+              "candidates": 26,
+              "control": "sequence",
+              "tensor_steps": 1,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:3677e137c74a509043cbe58127e0288f2311b7d474af183df4e98f7f1c463021"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 26,
+          "control": "sequence",
+          "tensor_steps": 1,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "create_folder",
+        "description": "Create one directory with an existing parent; return 1. 디렉터리 생성.",
+        "input_types": [
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "folder",
+            "type": "path",
+            "role": "folder",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.16967985033988953,
+            -0.003634718945249915,
+            0.25504493713378906,
+            -0.14994613826274872,
+            0.48151665925979614,
+            -0.08046960085630417,
+            -0.06728404015302658,
+            0.24666614830493927,
+            -0.02892466075718403,
+            -0.044774193316698074,
+            0.183071106672287,
+            0.19036123156547546,
+            0.02744399756193161,
+            0.22239971160888672,
+            -0.05415889993309975,
+            0.1974111646413803,
+            0.0485001802444458,
+            -0.22704358398914337,
+            -0.08310659229755402,
+            0.08495792001485825,
+            0.061951350420713425,
+            -0.013648811727762222,
+            0.04673466458916664,
+            -0.026534846052527428,
+            -0.20193666219711304,
+            0.08384932577610016,
+            -0.16388976573944092,
+            0.00506034679710865,
+            0.03056684322655201,
+            -0.12962982058525085,
+            0.2207266241312027,
+            -0.4462675154209137
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.create"
+          ],
+          "digest": "2b8a47801b63558688e94439122c0969d45c55b6a0fc629ac10c5b440b741e78"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 1,
+              "candidates": 1,
+              "control": "sequence",
+              "tensor_steps": 1,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:3987a98b20862dc677252b1c211275abfddee6c7bfff78094b9e8685e64d0dfd"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 1,
+          "control": "sequence",
+          "tensor_steps": 1,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "remove_folder",
+        "description": "Remove one empty directory; return 1. 빈 디렉터리 삭제.",
+        "input_types": [
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "folder",
+            "type": "path",
+            "role": "folder",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.08693093061447144,
+            -0.10031989216804504,
+            -0.10103180259466171,
+            0.15515969693660736,
+            0.03340544551610947,
+            0.004758254159241915,
+            0.2720981538295746,
+            -0.11553563177585602,
+            -0.12314163893461227,
+            0.09491308033466339,
+            -0.19905783236026764,
+            0.1823703497648239,
+            0.11769799143075943,
+            0.19950026273727417,
+            -0.0707649290561676,
+            0.13029175996780396,
+            -0.1302223801612854,
+            0.05735976621508598,
+            -0.2570347189903259,
+            -0.393741637468338,
+            0.005755745340138674,
+            -0.05447867512702942,
+            -0.06076272204518318,
+            -0.009054656140506268,
+            0.1342979371547699,
+            0.10870867967605591,
+            0.5403637290000916,
+            -0.2656576335430145,
+            0.08132506906986237,
+            -0.04552680253982544,
+            0.05333787202835083,
+            0.1865641176700592
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.remove"
+          ],
+          "digest": "9ac61fb2d9050de8dfd100e0fd50dfde778fb197656cb509e890d6fba727048a"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 1,
+              "candidates": 13,
+              "control": "sequence",
+              "tensor_steps": 1,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 13,
+          "control": "sequence",
+          "tensor_steps": 1,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "exists",
+        "description": "Check whether a file or directory exists; return 1 or 0. 파일 디렉터리 존재 확인.",
+        "input_types": [
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "target",
+            "type": "path",
+            "role": "target",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.127188041806221,
+            0.0006206315010786057,
+            -0.18319813907146454,
+            -0.15794126689434052,
+            0.10966363549232483,
+            0.04713593050837517,
+            -0.040052350610494614,
+            0.19014880061149597,
+            0.030839452520012856,
+            0.039608485996723175,
+            -0.1349850744009018,
+            -0.39803311228752136,
+            -0.08216603845357895,
+            -0.03990520164370537,
+            0.020357590168714523,
+            0.07406677305698395,
+            0.04035669565200806,
+            -0.14290881156921387,
+            0.12945125997066498,
+            0.228507861495018,
+            -0.011920983903110027,
+            -0.050886496901512146,
+            0.029481319710612297,
+            -0.04200005158782005,
+            0.021598005667328835,
+            0.35226306319236755,
+            0.1933903694152832,
+            -0.038428500294685364,
+            0.05308067426085472,
+            0.3705095648765564,
+            -0.39169296622276306,
+            0.35574063658714294
+          ],
+          "requires_host": true,
+          "operations": [
+            "path.exists"
+          ],
+          "digest": "cee94e7a8a84caa5590f4d12d0c9acdba344718cad4fb8a8c84904cdcf258870"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 1,
+              "candidates": 15,
+              "control": "sequence",
+              "tensor_steps": 1,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 1,
+          "candidates": 15,
+          "control": "sequence",
+          "tensor_steps": 1,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    }
+  ],
+  "held_out": [
+    {
+      "root": "results/linux_filesystem/native-0",
+      "calls": [
+        {
+          "name": "make_copy",
+          "arguments": {
+            "folder": "새 폴더",
+            "source": "source.bin",
+            "destination": "새 폴더/copied.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:304f31b046513c89a73f9dbb57bd58439265b4a31d9cd203fcd07cc8f6e7de27",
+            "contract_version": 1,
+            "capability": "make_copy",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  1
+                ],
+                "result": 1
+              },
+              {
+                "operation": "file.read",
+                "arguments": [
+                  2
+                ],
+                "result": 4
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  3,
+                  4
+                ],
+                "result": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "save_listing",
+          "arguments": {
+            "folder": "새 폴더",
+            "destination": "listing.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:f993560c5573526457483254872e9f1cd66002cdcbbfe8924ebbfd90de0c76be",
+            "contract_version": 1,
+            "capability": "save_listing",
+            "outputs": [
+              11
+            ],
+            "effects": [
+              {
+                "operation": "directory.list",
+                "arguments": [
+                  5
+                ],
+                "result": 7
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  6,
+                  7
+                ],
+                "result": 11
+              }
+            ]
+          }
+        },
+        {
+          "name": "move_file",
+          "arguments": {
+            "source": "새 폴더/copied.bin",
+            "destination": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3677e137c74a509043cbe58127e0288f2311b7d474af183df4e98f7f1c463021",
+            "contract_version": 1,
+            "capability": "move_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  8,
+                  9
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  10
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_file",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ad0f68b01de5af23cd310d74f54ff6befd4a33adecc4f3740d844416a2159b87",
+            "contract_version": 1,
+            "capability": "remove_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.remove",
+                "arguments": [
+                  11
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  12
+                ],
+                "result": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "새 폴더"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  13
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "create_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3987a98b20862dc677252b1c211275abfddee6c7bfff78094b9e8685e64d0dfd",
+            "contract_version": 1,
+            "capability": "create_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  14
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  15
+                ],
+                "result": 1
+              }
+            ]
+          }
+        }
+      ],
+      "final_snapshot": {
+        "files": {
+          "keep": "707265736572766564",
+          "listing.bin": "636f706965642e62696e00",
+          "source.bin": ""
+        },
+        "directories": []
+      },
+      "passed": true
+    },
+    {
+      "root": "results/linux_filesystem/native-1",
+      "calls": [
+        {
+          "name": "make_copy",
+          "arguments": {
+            "folder": "새 폴더",
+            "source": "source.bin",
+            "destination": "새 폴더/copied.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:304f31b046513c89a73f9dbb57bd58439265b4a31d9cd203fcd07cc8f6e7de27",
+            "contract_version": 1,
+            "capability": "make_copy",
+            "outputs": [
+              16
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  1
+                ],
+                "result": 1
+              },
+              {
+                "operation": "file.read",
+                "arguments": [
+                  2
+                ],
+                "result": 4
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  3,
+                  4
+                ],
+                "result": 16
+              }
+            ]
+          }
+        },
+        {
+          "name": "save_listing",
+          "arguments": {
+            "folder": "새 폴더",
+            "destination": "listing.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:f993560c5573526457483254872e9f1cd66002cdcbbfe8924ebbfd90de0c76be",
+            "contract_version": 1,
+            "capability": "save_listing",
+            "outputs": [
+              11
+            ],
+            "effects": [
+              {
+                "operation": "directory.list",
+                "arguments": [
+                  5
+                ],
+                "result": 7
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  6,
+                  7
+                ],
+                "result": 11
+              }
+            ]
+          }
+        },
+        {
+          "name": "move_file",
+          "arguments": {
+            "source": "새 폴더/copied.bin",
+            "destination": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3677e137c74a509043cbe58127e0288f2311b7d474af183df4e98f7f1c463021",
+            "contract_version": 1,
+            "capability": "move_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  8,
+                  9
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  10
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_file",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ad0f68b01de5af23cd310d74f54ff6befd4a33adecc4f3740d844416a2159b87",
+            "contract_version": 1,
+            "capability": "remove_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.remove",
+                "arguments": [
+                  11
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  12
+                ],
+                "result": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "새 폴더"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  13
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "create_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3987a98b20862dc677252b1c211275abfddee6c7bfff78094b9e8685e64d0dfd",
+            "contract_version": 1,
+            "capability": "create_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  14
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  15
+                ],
+                "result": 1
+              }
+            ]
+          }
+        }
+      ],
+      "final_snapshot": {
+        "files": {
+          "keep": "707265736572766564",
+          "listing.bin": "636f706965642e62696e00",
+          "source.bin": "756e7365656e20636f6e74656e7400ff"
+        },
+        "directories": []
+      },
+      "passed": true
+    },
+    {
+      "root": "results/linux_filesystem/native-2",
+      "calls": [
+        {
+          "name": "make_copy",
+          "arguments": {
+            "folder": "새 폴더",
+            "source": "source.bin",
+            "destination": "새 폴더/copied.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:304f31b046513c89a73f9dbb57bd58439265b4a31d9cd203fcd07cc8f6e7de27",
+            "contract_version": 1,
+            "capability": "make_copy",
+            "outputs": [
+              256
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  1
+                ],
+                "result": 1
+              },
+              {
+                "operation": "file.read",
+                "arguments": [
+                  2
+                ],
+                "result": 4
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  3,
+                  4
+                ],
+                "result": 256
+              }
+            ]
+          }
+        },
+        {
+          "name": "save_listing",
+          "arguments": {
+            "folder": "새 폴더",
+            "destination": "listing.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:f993560c5573526457483254872e9f1cd66002cdcbbfe8924ebbfd90de0c76be",
+            "contract_version": 1,
+            "capability": "save_listing",
+            "outputs": [
+              11
+            ],
+            "effects": [
+              {
+                "operation": "directory.list",
+                "arguments": [
+                  5
+                ],
+                "result": 7
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  6,
+                  7
+                ],
+                "result": 11
+              }
+            ]
+          }
+        },
+        {
+          "name": "move_file",
+          "arguments": {
+            "source": "새 폴더/copied.bin",
+            "destination": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3677e137c74a509043cbe58127e0288f2311b7d474af183df4e98f7f1c463021",
+            "contract_version": 1,
+            "capability": "move_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  8,
+                  9
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  10
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_file",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ad0f68b01de5af23cd310d74f54ff6befd4a33adecc4f3740d844416a2159b87",
+            "contract_version": 1,
+            "capability": "remove_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.remove",
+                "arguments": [
+                  11
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  12
+                ],
+                "result": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "새 폴더"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  13
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "create_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3987a98b20862dc677252b1c211275abfddee6c7bfff78094b9e8685e64d0dfd",
+            "contract_version": 1,
+            "capability": "create_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  14
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  15
+                ],
+                "result": 1
+              }
+            ]
+          }
+        }
+      ],
+      "final_snapshot": {
+        "files": {
+          "keep": "707265736572766564",
+          "listing.bin": "636f706965642e62696e00",
+          "source.bin": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"
+        },
+        "directories": []
+      },
+      "passed": true
+    },
+    {
+      "root": "results/linux_filesystem/native-3",
+      "calls": [
+        {
+          "name": "make_copy",
+          "arguments": {
+            "folder": "새 폴더",
+            "source": "source.bin",
+            "destination": "새 폴더/copied.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:304f31b046513c89a73f9dbb57bd58439265b4a31d9cd203fcd07cc8f6e7de27",
+            "contract_version": 1,
+            "capability": "make_copy",
+            "outputs": [
+              4096
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  1
+                ],
+                "result": 1
+              },
+              {
+                "operation": "file.read",
+                "arguments": [
+                  2
+                ],
+                "result": 4
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  3,
+                  4
+                ],
+                "result": 4096
+              }
+            ]
+          }
+        },
+        {
+          "name": "save_listing",
+          "arguments": {
+            "folder": "새 폴더",
+            "destination": "listing.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:f993560c5573526457483254872e9f1cd66002cdcbbfe8924ebbfd90de0c76be",
+            "contract_version": 1,
+            "capability": "save_listing",
+            "outputs": [
+              11
+            ],
+            "effects": [
+              {
+                "operation": "directory.list",
+                "arguments": [
+                  5
+                ],
+                "result": 7
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  6,
+                  7
+                ],
+                "result": 11
+              }
+            ]
+          }
+        },
+        {
+          "name": "move_file",
+          "arguments": {
+            "source": "새 폴더/copied.bin",
+            "destination": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3677e137c74a509043cbe58127e0288f2311b7d474af183df4e98f7f1c463021",
+            "contract_version": 1,
+            "capability": "move_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  8,
+                  9
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  10
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_file",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ad0f68b01de5af23cd310d74f54ff6befd4a33adecc4f3740d844416a2159b87",
+            "contract_version": 1,
+            "capability": "remove_file",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.remove",
+                "arguments": [
+                  11
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "exists",
+          "arguments": {
+            "target": "새 폴더/moved.bin"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:65c3f391c304f4acdff93733a7467126bf494ae461ce15a2f9547075fb991924",
+            "contract_version": 1,
+            "capability": "exists",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "path.exists",
+                "arguments": [
+                  12
+                ],
+                "result": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "새 폴더"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  13
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "create_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:3987a98b20862dc677252b1c211275abfddee6c7bfff78094b9e8685e64d0dfd",
+            "contract_version": 1,
+            "capability": "create_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.create",
+                "arguments": [
+                  14
+                ],
+                "result": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "remove_folder",
+          "arguments": {
+            "folder": "empty-new"
+          },
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ef3377e713fdf6c1d94a937f2540085eef8b0f35e797fedf9bf72cbc6684dab6",
+            "contract_version": 1,
+            "capability": "remove_folder",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "directory.remove",
+                "arguments": [
+                  15
+                ],
+                "result": 1
+              }
+            ]
+          }
+        }
+      ],
+      "final_snapshot": {
+        "files": {
+          "keep": "707265736572766564",
+          "listing.bin": "636f706965642e62696e00",
+          "source.bin": "61616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161"
+        },
+        "directories": []
+      },
+      "passed": true
+    }
+  ],
+  "passed": 4,
+  "llm_imported": false,
+  "encoder_imported": false,
+  "scope": "filesystem examples only; not general Linux or natural-language correctness"
+}

@@ -1,5 +1,8 @@
 # 테스트와 결과 확인
 
+리눅스 파일시스템 기반의 상태 학습·native 검증은
+[LINUX_TARGET.md](LINUX_TARGET.md)의 재현 명령과 한계를 참고한다.
+
 계약 초안의 학습·등록 검증은 [CONTRACT_LEARNING.md](CONTRACT_LEARNING.md)를 참고한다.
 
 공통 계약의 저장 호환/직접 호출/CLI/어댑터 연결 검증과 재현은

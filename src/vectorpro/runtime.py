@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
 
-from vectorpro.host import ARITIES, HostContext
+from vectorpro.host import ARITIES, BASE_OPERATIONS, HostContext
 from vectorpro.learning import Capability, Learner, LearnerConfig, LearningPlan, OutputWidth, Registry
 from vectorpro.learning.examples import ExampleLesson, Operands, TargetSource
 
@@ -36,9 +36,13 @@ class VectorRuntime:
         self._rng = random.Random(seed)
         self._tensor_extras = {}
 
-    def provide_host_operations(self) -> None:
+    def provide_host_operations(self, operations: Sequence[str] | None = None) -> None:
         """Install primitive descriptions; these are execution machinery, not learned rules."""
-        for name, arity in ARITIES.items():
+        names = list(BASE_OPERATIONS if operations is None else operations)
+        if any(name not in ARITIES for name in names):
+            raise ValueError("unknown host operation")
+        for name in names:
+            arity = ARITIES[name]
             provenance = {"kind": "host", "operation": name}
             if name in self.registry:
                 if self.registry.get(name).provenance != provenance:
@@ -95,6 +99,8 @@ class VectorRuntime:
                         restarts=min(config.restarts,2),train=replace(config.train,steps=min(config.train.steps,1500)))
         staged=VectorRuntime(Registry.from_data(self.registry.to_data()),config=bounded)
         staged._rng.setstate(self._rng.getstate())
+        if state is not None:
+            staged.provide_host_operations(draft["allowed_operations"])
         outcome=staged.teach(draft["name"],plan=plan,lesson=examples,state_lesson=state)
         if outcome.status!="learned":
             return {"status":"learning_failed","registered":False,"reason":"no candidate passed supplied examples", "history":outcome.history}

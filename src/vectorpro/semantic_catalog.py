@@ -19,6 +19,12 @@ HOST_TEXT = {
     "buffer.set": "Write, replace, update one byte in a memory buffer at a position or offset. 메모리 버퍼의 특정 위치에 바이트 하나 쓰기 변경.",
     "file.read": "Read, load file contents from disk into memory, returning a byte buffer. 디스크 파일 내용을 읽어 메모리 버퍼로 불러오기.",
     "file.write": "Write, save buffer contents from memory to a disk file; return bytes written. 메모리 버퍼 내용을 디스크 파일에 저장 쓰기.",
+    "path.exists": "Check whether a file or directory exists; return 1 or 0. 파일 디렉터리 존재 확인.",
+    "file.remove": "Remove one file; return 1. 파일 하나 삭제.",
+    "file.move": "Move a file to a destination path, replacing a destination file; return 1. 파일 이동 이름 변경.",
+    "directory.create": "Create one directory with an existing parent; return 1. 디렉터리 생성.",
+    "directory.remove": "Remove one empty directory; return 1. 빈 디렉터리 삭제.",
+    "directory.list": "Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회.",
 }
 
 
@@ -275,12 +281,19 @@ class TensorCatalog:
             if len(rows) != 1:
                 raise ValueError("state requests require one execution lane")
             for case in state_validation:
-                if set(case) - {"inputs", "before", "after", "output"} or not {"inputs", "before", "after"} <= set(case):
+                if set(case) - {"inputs", "before", "after", "output", "before_directories", "after_directories"} or not {"inputs", "before", "after"} <= set(case):
                     raise ValueError("state evidence accepts only inputs/before/after/output")
                 if operand_types([case["inputs"]]) != shape:
                     raise ValueError("state validation types do not match requested operands")
                 if any(type(v) is int and v >= 1 << width for v in case["inputs"]):
                     raise ValueError("state validation integers must fit the requested width")
+                for field, files in (("before_directories", case["before"]), ("after_directories", case["after"])):
+                    directories = case.get(field, [])
+                    if (not isinstance(directories, list) or len(directories) > 32
+                            or any(not isinstance(p, str) or MemoryHostContext.normalize(p) != p for p in directories)
+                            or len(set(directories)) != len(directories)):
+                        raise ValueError("directory snapshots need at most 32 distinct normalized paths")
+                    MemoryHostContext.directory_state(files, directories)
                 for snapshot in (case["before"], case["after"]):
                     if not isinstance(snapshot, dict) or len(snapshot) > 32:
                         raise ValueError("snapshot needs at most 32 files")
@@ -313,11 +326,14 @@ class TensorCatalog:
                 else:
                     passed = True
                     for case in state_validation:
-                        context = MemoryHostContext({n: bytes.fromhex(v) for n, v in case["before"].items()}, max_buffer_bytes=65536)
+                        context = MemoryHostContext({n: bytes.fromhex(v) for n, v in case["before"].items()}, max_buffer_bytes=65536,
+                                                    directories=case.get("before_directories", []))
                         with context.activate():
                             output = isolated.run(cap.name, convert([case["inputs"]], context), width)[0]
                         desired = {n: bytes.fromhex(v) for n, v in case["after"].items()}
-                        if context.files != desired or ("output" in case and case["output"] != output):
+                        if (context.files != desired
+                                or context.directories != MemoryHostContext.directory_state(desired, case.get("after_directories", []))
+                                or ("output" in case and case["output"] != output)):
                             passed = False
                             break
                 if passed:

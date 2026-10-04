@@ -21,9 +21,12 @@ class StateExample:
     after: dict[str, bytes]
     output: int | None = None
     operations: tuple[str, ...] | None = None
+    before_directories: tuple[str, ...] = ()
+    after_directories: tuple[str, ...] = ()
 
     def signature(self):
-        return (self.inputs, tuple(sorted(self.before.items())))
+        return (self.inputs, tuple(sorted(self.before.items())),
+                tuple(sorted(MemoryHostContext.directory_state(self.before, self.before_directories))))
 
 @dataclass
 class StateLesson:
@@ -68,6 +71,11 @@ class StateLesson:
                 for name, data in files.items():
                     if MemoryHostContext.normalize(name) != name or not isinstance(data, bytes):
                         raise ValueError("state files require normalized paths and bytes")
+            for files, directories in ((case.before, case.before_directories), (case.after, case.after_directories)):
+                if (not isinstance(directories, (list, tuple)) or len(set(directories)) != len(directories)
+                        or any(not isinstance(p, str) or MemoryHostContext.normalize(p) != p for p in directories)):
+                    raise ValueError("state directories require distinct normalized paths")
+                MemoryHostContext.directory_state(files, directories)
             if case.output is not None and (type(case.output) is not int or not 0 <= case.output < 1 << self.width):
                 raise ValueError("state output must fit register width")
             if case.operations is not None and any(op not in HOST_TYPES for op in case.operations):
@@ -83,7 +91,8 @@ class StateLesson:
             return [StateExample(tuple(c["inputs"]),
                                  {p: bytes.fromhex(v) for p, v in c["before"].items()},
                                  {p: bytes.fromhex(v) for p, v in c["after"].items()}, c.get("output"),
-                                 tuple(c["operations"]) if "operations" in c else None)
+                                 tuple(c["operations"]) if "operations" in c else None,
+                                 c.get("before_directories", ()), c.get("after_directories", ()))
                     for c in data[name]]
         return cls(tuple(data["input_types"]), cases("training"), cases("validation"),
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
@@ -98,13 +107,15 @@ class StateOutcome:
 
 
 def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
-    context = MemoryHostContext(case.before)
+    context = MemoryHostContext(case.before, directories=case.before_directories)
     inputs = tuple(context.put(value.encode("utf-8")) if kind == "path" else value
                    for value, kind in zip(case.inputs, lesson.input_types))
     try:
         with context.activate():
             output = executable([inputs], lesson.width)[0]
-        return (context.files == case.after and (case.output is None or output == case.output)
+        return (context.files == case.after
+                and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
+                and (case.output is None or output == case.output)
                 and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
     except (OSError, ValueError, KeyError, IndexError, RuntimeError):
         return False

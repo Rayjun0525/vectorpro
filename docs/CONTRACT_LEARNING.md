@@ -21,6 +21,8 @@
 초안은 위 여섯 필드만 받는다. 매개변수는 1~3개, 타입은 `value/path/buffer`,
 출력 폭은 `W/W+1/2W/1`이다. 코드를 받지 않으며 기존 이름은 덮어쓰지 않는다.
 상태 예제는 `experiments/requests/learn_transfer.json`의 `state_lesson` 형식이다.
+디렉터리 상태는 `before_directories/after_directories` 상대 경로 목록으로 표현한다.
+전체 파일 및 디렉터리 집합을 비교한다. [LINUX_TARGET.md](LINUX_TARGET.md)를 참고한다.
 숫자 예제는 `training/validation` 각각에 `width/operands/targets`를 제공한다.
 
 학습은 복제 레지스트리와 메모리 호스트에서 진행한다. 예제를 통과해도 타입·폭이나

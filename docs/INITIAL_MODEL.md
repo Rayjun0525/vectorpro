@@ -64,6 +64,14 @@ grammar are explicit; individual task procedures must be discovered.
 
 ## Initial proof of the concept
 
+The user's first completion target is a tensor program that can use Linux:
+filesystem, structured values and iteration, processes/stdio/pipes, networking,
+and evidence-backed acquisition. See [LINUX_TARGET.md](LINUX_TARGET.md) for
+acceptance criteria and measured progress. Filesystem host primitives now include
+opt-in existence, move/delete, and directory creation/listing/removal. Stateful
+evidence compares both exact files and directory state in isolated memory.
+These semantics are supplied; task procedures are acquired as tensors.
+
 Given example initial/final files, discover a file-transfer procedure without
 providing calls, order, or argument routing. Run the learned tensor program on
 unseen paths, empty/binary/longer content, and native files. Save and reload the

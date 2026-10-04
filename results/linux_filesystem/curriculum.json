@@ -1,0 +1,745 @@
+[
+  {
+    "draft": {
+      "version": 1,
+      "name": "make_copy",
+      "description": "make_copy",
+      "parameters": [
+        {
+          "name": "folder",
+          "type": "path",
+          "role": "folder"
+        },
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.create",
+        "file.read",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path",
+        "path",
+        "path"
+      ],
+      "max_steps": 3,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "box",
+            "src",
+            "box/out"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "src": "616263"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "src": "616263",
+            "box/out": "616263"
+          },
+          "output": 3,
+          "before_directories": [],
+          "after_directories": [
+            "box"
+          ]
+        },
+        {
+          "inputs": [
+            "other",
+            "input",
+            "other/result"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "input": "00ff"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "input": "00ff",
+            "other/result": "00ff"
+          },
+          "output": 2,
+          "before_directories": [],
+          "after_directories": [
+            "other"
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "empty",
+            "blank",
+            "empty/copy"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "blank": ""
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "blank": "",
+            "empty/copy": ""
+          },
+          "output": 0,
+          "before_directories": [],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "long",
+            "data",
+            "long/copied"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "data": "6c6f6e676572206279746573"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "data": "6c6f6e676572206279746573",
+            "long/copied": "6c6f6e676572206279746573"
+          },
+          "output": 12,
+          "before_directories": [],
+          "after_directories": [
+            "long"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "save_listing",
+      "description": "save_listing",
+      "parameters": [
+        {
+          "name": "folder",
+          "type": "path",
+          "role": "folder"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.list",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path",
+        "path"
+      ],
+      "max_steps": 2,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "one",
+            "a.txt"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "one/x": "64617461"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "one/x": "64617461",
+            "a.txt": "7800"
+          },
+          "output": 2,
+          "before_directories": [
+            "one"
+          ],
+          "after_directories": [
+            "one"
+          ]
+        },
+        {
+          "inputs": [
+            "two",
+            "b.txt"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "two/two names": "64617461"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "two/two names": "64617461",
+            "b.txt": "74776f206e616d657300"
+          },
+          "output": 10,
+          "before_directories": [
+            "two"
+          ],
+          "after_directories": [
+            "two"
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "three",
+            "c.txt"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "three/새 파일": "64617461"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "three/새 파일": "64617461",
+            "c.txt": "ec838820ed8c8cec9dbc00"
+          },
+          "output": 11,
+          "before_directories": [
+            "three"
+          ],
+          "after_directories": [
+            "three"
+          ]
+        },
+        {
+          "inputs": [
+            "four",
+            "d.txt"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "four/line\nbreak": "64617461"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "four/line\nbreak": "64617461",
+            "d.txt": "6c696e650a627265616b00"
+          },
+          "output": 11,
+          "before_directories": [
+            "four"
+          ],
+          "after_directories": [
+            "four"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "remove_file",
+      "description": "remove_file",
+      "parameters": [
+        {
+          "name": "target",
+          "type": "path",
+          "role": "target"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.remove"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "max_steps": 1,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "a": "64656c657465"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "b": "64656c657465"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "c"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "c": "64656c657465"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "d"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "d": "64656c657465"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "move_file",
+      "description": "move_file",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.move"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path",
+        "path"
+      ],
+      "max_steps": 1,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a",
+            "b"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "a": "6d6f7665",
+            "b": "6f6c64"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "b": "6d6f7665"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "c",
+            "d"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "c": "6d6f7665",
+            "d": "6f6c64"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "d": "6d6f7665"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "e",
+            "f"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "e": "6d6f7665",
+            "f": "6f6c64"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "f": "6d6f7665"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "g",
+            "h"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "g": "6d6f7665",
+            "h": "6f6c64"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "h": "6d6f7665"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "create_folder",
+      "description": "create_folder",
+      "parameters": [
+        {
+          "name": "folder",
+          "type": "path",
+          "role": "folder"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.create"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "max_steps": 1,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": [
+            "a"
+          ]
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": [
+            "b"
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "c"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": [
+            "c"
+          ]
+        },
+        {
+          "inputs": [
+            "d"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": [
+            "d"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "remove_folder",
+      "description": "remove_folder",
+      "parameters": [
+        {
+          "name": "folder",
+          "type": "path",
+          "role": "folder"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.remove"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "max_steps": 1,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [
+            "a"
+          ],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [
+            "b"
+          ],
+          "after_directories": []
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "c"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [
+            "c"
+          ],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "d"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 1,
+          "before_directories": [
+            "d"
+          ],
+          "after_directories": []
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "exists",
+      "description": "exists",
+      "parameters": [
+        {
+          "name": "target",
+          "type": "path",
+          "role": "target"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "path.exists"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "max_steps": 1,
+      "candidate_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "a": "657869737473"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "a": "657869737473"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 0,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "c"
+          ],
+          "before": {
+            "keep": "707265736572766564"
+          },
+          "after": {
+            "keep": "707265736572766564"
+          },
+          "output": 0,
+          "before_directories": [],
+          "after_directories": []
+        },
+        {
+          "inputs": [
+            "d"
+          ],
+          "before": {
+            "keep": "707265736572766564",
+            "d": "657869737473"
+          },
+          "after": {
+            "keep": "707265736572766564",
+            "d": "657869737473"
+          },
+          "output": 1,
+          "before_directories": [],
+          "after_directories": []
+        }
+      ]
+    }
+  }
+]

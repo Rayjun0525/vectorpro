@@ -81,9 +81,13 @@ def state_lesson(data):
         if not isinstance(data[split],list) or not 1<=len(data[split])<=8:
             raise ValueError("state evidence needs 1..8 cases per split")
         for case in data[split]:
-            if (not isinstance(case,dict) or set(case)-{"inputs","before","after","output","operations"}
+            if (not isinstance(case,dict) or set(case)-{"inputs","before","after","output","operations","before_directories","after_directories"}
                     or not {"inputs","before","after"}<=set(case)):
                 raise ValueError("state cases accept only inputs/snapshots/output/operation observations")
+            for field in ("before_directories", "after_directories"):
+                if field in case and (not isinstance(case[field], list) or len(case[field]) > 32
+                                     or any(not isinstance(p, str) for p in case[field])):
+                    raise ValueError("state directory snapshots need at most 32 paths")
             for field in ("before","after"):
                 files=case[field]
                 if not isinstance(files,dict) or len(files)>32:
