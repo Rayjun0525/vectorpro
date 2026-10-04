@@ -1,0 +1,56 @@
+{
+  "verdict": "not suitable for automatic contract selection, literal binding or chat/lesson generation in current checkpoint; basic decision inference works; advisory candidates require independent verification",
+  "new_requests": 24,
+  "known_requests": 16,
+  "unsupported_requests": 8,
+  "orders_per_request": 3,
+  "controls_correct": 4,
+  "counts": {
+    "selection": {
+      "correct": 30,
+      "total": 72
+    },
+    "selection_en": {
+      "correct": 16,
+      "total": 36
+    },
+    "known_selection": {
+      "correct": 17,
+      "total": 48
+    },
+    "binding_width": {
+      "correct": 11,
+      "total": 24
+    },
+    "binding_number": {
+      "correct": 27,
+      "total": 64
+    },
+    "selection_ko": {
+      "correct": 14,
+      "total": 36
+    },
+    "binding_path": {
+      "correct": 6,
+      "total": 16
+    },
+    "rejection": {
+      "correct": 13,
+      "total": 24
+    }
+  },
+  "stable_correct_known_cases": 3,
+  "all_binding_fields_correct_cases": 0,
+  "ambiguous_width_correct": 3,
+  "ambiguous_width_total": 16,
+  "order_dependent_cases": 6,
+  "decisions": 180,
+  "truncated": 0,
+  "native_effects": false,
+  "learning": false,
+  "tests": "32 passed in 13.60s",
+  "source_sha256": "610a6470931d795ce96e6930fc113fc5063da21793ae19f088c1339753f93c6c",
+  "dataset_sha256": "5fae38d3eb02be21443b0ede2da7b88ef0c221c7116658216e97d9d64cf460a2",
+  "summary_sha256": "5863bb8fdc6804519fdb1eb8205793af802a429a81884b09958a0dabfa6f2aa1",
+  "limits": "one checkpoint, one frozen dataset; repeated orders are not independent samples; caller-supplied input types and known correct contracts make these easier diagnostics; no tuning or finetuning, not universal incapability proof"
+}

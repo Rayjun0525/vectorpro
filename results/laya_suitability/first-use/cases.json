@@ -1,0 +1,338 @@
+[
+  {
+    "name": "xor_en1",
+    "intent": "XOR the integers 83 and 46 using a 16-bit register.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "xor",
+    "width": 16,
+    "operands": [
+      83,
+      46
+    ],
+    "language": "en"
+  },
+  {
+    "name": "xor_en2",
+    "intent": "With register width 8, calculate bitwise exclusive OR of 197 and 58.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "xor",
+    "width": 8,
+    "operands": [
+      197,
+      58
+    ],
+    "language": "en"
+  },
+  {
+    "name": "xor_ko1",
+    "intent": "폭 16비트로 정수 71과 38의 비트별 XOR를 구해줘.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "xor",
+    "width": 16,
+    "operands": [
+      71,
+      38
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "xor_ko2",
+    "intent": "정수 203과 91을 비트별 배타적 논리합으로 계산해줘. 레지스터 폭은 8비트.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "xor",
+    "width": 8,
+    "operands": [
+      203,
+      91
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "sub_en1",
+    "intent": "Subtract 47 from 182. Register width is 16 bits.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "sub",
+    "width": 16,
+    "operands": [
+      182,
+      47
+    ],
+    "language": "en"
+  },
+  {
+    "name": "sub_en2",
+    "intent": "Use 8 bits: the difference of 214 minus 63.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "sub",
+    "width": 8,
+    "operands": [
+      214,
+      63
+    ],
+    "language": "en"
+  },
+  {
+    "name": "sub_ko1",
+    "intent": "폭은 16비트로 하고 176에서 59를 빼줘.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "sub",
+    "width": 16,
+    "operands": [
+      176,
+      59
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "sub_ko2",
+    "intent": "레지스터 폭 8비트. 225에서 74를 뺀 값을 계산해줘.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "sub",
+    "width": 8,
+    "operands": [
+      225,
+      74
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "fill_en1",
+    "intent": "Fill every byte of target.bin with 27. Leave keep.bin alone. Register width: 16 bits.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "fill",
+    "width": 16,
+    "operands": [
+      "target.bin",
+      27
+    ],
+    "language": "en"
+  },
+  {
+    "name": "fill_en2",
+    "intent": "Using a 16-bit register, replace all bytes in 'input records.bin' with 13; retain spare.dat.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "fill",
+    "width": 16,
+    "operands": [
+      "input records.bin",
+      13
+    ],
+    "language": "en"
+  },
+  {
+    "name": "fill_ko1",
+    "intent": "대상.bin의 모든 바이트를 25로 채워줘. 보존.bin은 그대로 두고 레지스터 폭은 16비트.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "fill",
+    "width": 16,
+    "operands": [
+      "대상.bin",
+      25
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "fill_ko2",
+    "intent": "폭 16비트로 ‘문서 폴더/자료.bin’ 전체 바이트를 11로 바꿔줘. 남김.dat은 건드리지 마.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "fill",
+    "width": 16,
+    "operands": [
+      "문서 폴더/자료.bin",
+      11
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "map_en1",
+    "intent": "XOR each byte in payload.bin with mask 9, and save back. Keep hold.bin unchanged. Register width 16.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "map",
+    "width": 16,
+    "operands": [
+      "payload.bin",
+      9
+    ],
+    "language": "en"
+  },
+  {
+    "name": "map_en2",
+    "intent": "Use 16-bit registers to transform 'archive bytes.bin' by bitwise exclusive OR of every byte with 22. Retain backup.bin.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "map",
+    "width": 16,
+    "operands": [
+      "archive bytes.bin",
+      22
+    ],
+    "language": "en"
+  },
+  {
+    "name": "map_ko1",
+    "intent": "변환.bin의 각 바이트를 마스크 5와 XOR해서 같은 파일에 저장해줘. 보호.bin은 유지해. 폭은 16비트.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "map",
+    "width": 16,
+    "operands": [
+      "변환.bin",
+      5
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "map_ko2",
+    "intent": "레지스터 폭 16비트로 ‘임시 폴더/내용.bin’의 바이트마다 18과 배타적 논리합을 수행해줘. 원본.dat은 그대로 둬.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "map",
+    "width": 16,
+    "operands": [
+      "임시 폴더/내용.bin",
+      18
+    ],
+    "language": "ko"
+  },
+  {
+    "name": "and_en",
+    "intent": "Calculate bitwise AND of integers 85 and 39 with width 16.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "en"
+  },
+  {
+    "name": "add_ko",
+    "intent": "16비트 정수 143과 52를 더해줘.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "ko"
+  },
+  {
+    "name": "mul_en",
+    "intent": "Multiply 26 by 7 using 16-bit integers.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "en"
+  },
+  {
+    "name": "or_ko",
+    "intent": "16비트 정수 101과 42를 비트별 OR로 계산해줘.",
+    "types": [
+      "value",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "ko"
+  },
+  {
+    "name": "append_en",
+    "intent": "Append 14 bytes to report.bin; do not overwrite existing data. Register width 16.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "en"
+  },
+  {
+    "name": "truncate_ko",
+    "intent": "폭 16비트로 문서.bin의 길이를 6바이트로 줄여줘.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "ko"
+  },
+  {
+    "name": "rotate_en",
+    "intent": "Rotate every byte of source.bin left by 3 bits; width 16.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "en"
+  },
+  {
+    "name": "increment_ko",
+    "intent": "폭 16비트로 자료.bin의 각 바이트에 4를 더해서 저장해줘.",
+    "types": [
+      "path",
+      "value"
+    ],
+    "expected": "none",
+    "width": null,
+    "operands": null,
+    "language": "ko"
+  }
+]

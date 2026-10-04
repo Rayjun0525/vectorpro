@@ -2,8 +2,10 @@
 
 현재 로컬 결정 모델은 **Laya multilingual**이다. 사용자 요청으로 Gemma 가중치를
 제거했다. Laya는 계약/예제를 생성하는 대화 모델이 아니며, 기능·인자 후보 선택을
-메모리 환경에서 검증했다. 실행 요청 11건은 0건 성공해 운영 실행 경로로 채택하지
-않았다. 설치·결과·재현은 [LAYA.md](docs/LAYA.md)를 참고한다.
+메모리 환경에서 검증했다. 실행 요청 11건은 0건 성공했고, 후속 새 요청 진단에서도
+타입을 제공한 기능 선택은 17/48회, 정답 계약을 제공한 숫자 인자 선택은 27/64회였다.
+현재 체크포인트를 자동 실행 어댑터로 채택하지 않았다. 설치·결과·재현은
+[LAYA.md](docs/LAYA.md)를 참고한다.
 
 Vector programs executed by learned, verifiable state-transition cells.
 
