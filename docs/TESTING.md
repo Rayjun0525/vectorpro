@@ -1,6 +1,9 @@
 # 테스트와 결과 확인
 
 목록/문자열/JSON 연산과 학습된 순회 검증은 [STRUCTURED_DATA.md](STRUCTURED_DATA.md)를 참고한다.
+조건부 선택·학습 산술 집계는 `tests/test_list_selection.py`와
+`experiments/list_selection.py`로 재현한다. 시뮬레이션과 텐서의 분기·결과를 버리는
+쓰기·전체 상태 거부·시간 중단 일치도 검사한다. native 미사용 목록 4개를 검증한다.
 
 실제 Gemma의 호출·토큰·지연·성공률 비용 비교는 [AGENT_COST.md](AGENT_COST.md)를 참고한다.
 

@@ -1,0 +1,1395 @@
+{
+  "arithmetic": {
+    "status": "registered",
+    "registered": true,
+    "contract": {
+      "version": 1,
+      "name": "plus",
+      "description": "Add two unsigned integers",
+      "input_types": [
+        "value",
+        "value"
+      ],
+      "argument_roles": [
+        "numeric parameter",
+        "numeric parameter"
+      ],
+      "output_width": "W+1",
+      "has_effects": false,
+      "parameters": [
+        {
+          "name": "left",
+          "type": "value",
+          "role": "left",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "role_source": "draft declaration, not independent proof"
+        },
+        {
+          "name": "right",
+          "type": "value",
+          "role": "right",
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "role_source": "draft declaration, not independent proof"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W+1"
+      },
+      "width": {
+        "minimum": 1,
+        "maximum": 64
+      },
+      "execution": {
+        "address": [
+          0.03846437856554985,
+          0.10424327850341797,
+          0.1652856469154358,
+          0.12230785191059113,
+          0.07131482660770416,
+          -0.20100080966949463,
+          0.0408487543463707,
+          0.09675665199756622,
+          0.18960432708263397,
+          0.5362361669540405,
+          0.14619873464107513,
+          -0.20485226809978485,
+          -0.09138519316911697,
+          0.0750962421298027,
+          0.1618664711713791,
+          -0.08374530076980591,
+          -0.0999484732747078,
+          0.031487904489040375,
+          0.021758781746029854,
+          -0.2917912006378174,
+          0.18162782490253448,
+          -0.06567580997943878,
+          0.21960586309432983,
+          -0.1338733434677124,
+          0.22042058408260345,
+          -0.15920311212539673,
+          0.10001260042190552,
+          0.1565132439136505,
+          -0.09319086372852325,
+          -0.008573455736041069,
+          0.28828155994415283,
+          0.2333962619304657
+        ],
+        "requires_host": false,
+        "operations": [],
+        "digest": "964a9e55daf9663d2219c5e60c31b8e167f1470b28ccf9febd017384c4522bd7"
+      },
+      "verification": {
+        "source": "stored training/validation records; not independent intent proof",
+        "history": [
+          {
+            "round": 1,
+            "train_examples": 64,
+            "validation_examples": 64,
+            "strategy": "learn",
+            "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+            "train_accuracy": 1.0,
+            "validation_accuracy": 1.0,
+            "provided_train_accuracy": 1.0,
+            "accepted": true,
+            "source": "example data"
+          }
+        ],
+        "audit": null
+      },
+      "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+      "id": "vp1:2061fc95b1c6ef579638ce462ba75229a786da29774aed8e4e4d3e1b74eeda59"
+    },
+    "history": [
+      {
+        "round": 1,
+        "train_examples": 64,
+        "validation_examples": 64,
+        "strategy": "learn",
+        "structure": "walks bits lowest to highest bit carrying 1 state bit(s) (starting at [0]), then emits its final state",
+        "train_accuracy": 1.0,
+        "validation_accuracy": 1.0,
+        "provided_train_accuracy": 1.0,
+        "accepted": true,
+        "source": "example data"
+      }
+    ],
+    "evidence_source": "caller_examples",
+    "intent_independently_verified": false
+  },
+  "learning": [
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "selected_copy",
+        "description": "Conditionally execute acquired calls for selected list items. Apply operations to two separate files. Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회. Count items of a NUL-terminated byte list. 목록 항목 개수. Subtract the second number from the first number; integer difference with borrow. Applied to Count items of a NUL-terminated byte list. 목록 항목 개수. and constant 1 Extract one byte-list item by zero-based index. 목록 항목 추출. Check whether UTF-8 text ends with a supplied suffix; return 1 or 0. 문자열 접미사 조건 확인. Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. file bytes read from Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. save file bytes read from Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. to Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합.",
+        "input_types": [
+          "path",
+          "path",
+          "buffer"
+        ],
+        "argument_roles": [
+          "relative file path",
+          "relative file path",
+          "hexadecimal buffer bytes"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "suffix",
+            "type": "buffer",
+            "role": "UTF-8 suffix",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.127188041806221,
+            0.0006206315010786057,
+            -0.18319813907146454,
+            -0.15794126689434052,
+            0.10966363549232483,
+            0.04713593050837517,
+            -0.040052350610494614,
+            0.19014880061149597,
+            0.030839452520012856,
+            0.039608485996723175,
+            -0.1349850744009018,
+            -0.39803311228752136,
+            -0.08216603845357895,
+            -0.03990520164370537,
+            0.020357590168714523,
+            0.07406677305698395,
+            0.04035669565200806,
+            -0.14290881156921387,
+            0.12945125997066498,
+            0.228507861495018,
+            -0.011920983903110027,
+            -0.050886496901512146,
+            0.029481319710612297,
+            -0.04200005158782005,
+            0.021598005667328835,
+            0.35226306319236755,
+            0.1933903694152832,
+            -0.038428500294685364,
+            0.05308067426085472,
+            0.3705095648765564,
+            -0.39169296622276306,
+            0.35574063658714294
+          ],
+          "requires_host": true,
+          "operations": [
+            "directory.list",
+            "file.read",
+            "file.write",
+            "list.get",
+            "list.length",
+            "path.join",
+            "text.ends_with"
+          ],
+          "digest": "f3c205ecc64490fe1cedc5de29bbafb2f28ff8453da55fe1d4e905409ebf2cf1"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 9,
+              "tensor_steps": 13,
+              "candidates": 1404,
+              "control": "list-selection",
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:e39dfa8a3942a0fc73780ed606b8688be9597f49e769e5569881f97b10fdf99e"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 9,
+          "tensor_steps": 13,
+          "candidates": 1404,
+          "control": "list-selection",
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "total_bytes",
+        "description": "Accumulate list results using acquired arithmetic and routing. Read sorted immediate directory entry names as UTF-8 bytes, each terminated by NUL. 디렉터리 항목 목록 조회. Count items of a NUL-terminated byte list. 목록 항목 개수. Subtract the second number from the first number; integer difference with borrow. Applied to Count items of a NUL-terminated byte list. 목록 항목 개수. and constant 1 Extract one byte-list item by zero-based index. 목록 항목 추출. Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. file bytes read from Join a relative parent path and a relative UTF-8 child buffer. 상대 경로 결합. Measure buffer size, count how many bytes a memory buffer contains. 메모리 버퍼 길이 크기 바이트 개수 확인. Add two unsigned integers Applied to constant 0 and Measure buffer size, count how many bytes a memory buffer contains. 메모리 버퍼 길이 크기 바이트 개수 확인.",
+        "input_types": [
+          "path"
+        ],
+        "argument_roles": [
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.0018577126320451498,
+            -0.17843006551265717,
+            0.17520909011363983,
+            -0.07904363423585892,
+            -0.04674210399389267,
+            0.1428847759962082,
+            -0.19824396073818207,
+            0.41731002926826477,
+            -0.13698312640190125,
+            -0.08504708856344223,
+            -0.08868003636598587,
+            -0.03551819175481796,
+            0.3965936601161957,
+            -0.024475298821926117,
+            -0.18231065571308136,
+            0.03194505721330643,
+            -0.0919620469212532,
+            -0.10106594860553741,
+            -0.16444188356399536,
+            -0.13421596586704254,
+            -0.01699857972562313,
+            0.19711977243423462,
+            0.23464950919151306,
+            -0.052436526864767075,
+            -0.14115996658802032,
+            -0.030354272574186325,
+            -0.38942810893058777,
+            0.12896662950515747,
+            0.05111164599657059,
+            0.04100985452532768,
+            0.22978061437606812,
+            -0.24695880711078644
+          ],
+          "requires_host": true,
+          "operations": [
+            "buffer.length",
+            "directory.list",
+            "file.read",
+            "list.get",
+            "list.length",
+            "path.join"
+          ],
+          "digest": "61a3e6f2f42cb3862e66e0747fa369735938f53bfab1f3d4bb9e290b0b399557"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 8,
+              "tensor_steps": 11,
+              "candidates": 17,
+              "control": "list-reduction",
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:ab4b46e038bbd4633d939650e77a60ec2da48a8ded64ed72a6d70d47107eed91"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 8,
+          "tensor_steps": 11,
+          "candidates": 17,
+          "control": "list-reduction",
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    }
+  ],
+  "native_checks": [
+    {
+      "count": 0,
+      "passed": true,
+      "sum": [
+        0
+      ],
+      "selection": {
+        "status": "executed",
+        "contract_id": "vp1:e39dfa8a3942a0fc73780ed606b8688be9597f49e769e5569881f97b10fdf99e",
+        "contract_version": 1,
+        "capability": "selected_copy",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              4
+            ],
+            "result": 0
+          }
+        ]
+      },
+      "snapshot": {
+        "keep": "6b656570"
+      }
+    },
+    {
+      "count": 1,
+      "passed": true,
+      "sum": [
+        0
+      ],
+      "selection": {
+        "status": "executed",
+        "contract_id": "vp1:e39dfa8a3942a0fc73780ed606b8688be9597f49e769e5569881f97b10fdf99e",
+        "contract_version": 1,
+        "capability": "selected_copy",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              4
+            ],
+            "result": 1
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              0
+            ],
+            "result": 5
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              5,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              6
+            ],
+            "result": 8
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              7,
+              8
+            ],
+            "result": 0
+          }
+        ]
+      },
+      "snapshot": {
+        "keep": "6b656570",
+        "source/0.new": "",
+        "target/0.new": ""
+      }
+    },
+    {
+      "count": 7,
+      "passed": true,
+      "sum": [
+        21
+      ],
+      "selection": {
+        "status": "executed",
+        "contract_id": "vp1:e39dfa8a3942a0fc73780ed606b8688be9597f49e769e5569881f97b10fdf99e",
+        "contract_version": 1,
+        "capability": "selected_copy",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              4
+            ],
+            "result": 7
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              6
+            ],
+            "result": 5
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              5,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              6
+            ],
+            "result": 8
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              7,
+              8
+            ],
+            "result": 6
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              5
+            ],
+            "result": 9
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              9,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              4
+            ],
+            "result": 10
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              10,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              10
+            ],
+            "result": 11
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              10
+            ],
+            "result": 12
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              11
+            ],
+            "result": 13
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              12,
+              13
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              3
+            ],
+            "result": 14
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              14,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              2
+            ],
+            "result": 15
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              15,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              15
+            ],
+            "result": 16
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              15
+            ],
+            "result": 17
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              16
+            ],
+            "result": 18
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              17,
+              18
+            ],
+            "result": 2
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              1
+            ],
+            "result": 19
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              19,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              0
+            ],
+            "result": 20
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              20,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              20
+            ],
+            "result": 21
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              20
+            ],
+            "result": 22
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              21
+            ],
+            "result": 23
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              22,
+              23
+            ],
+            "result": 0
+          }
+        ]
+      },
+      "snapshot": {
+        "keep": "6b656570",
+        "source/0.new": "",
+        "source/1.old": "42",
+        "source/2.new": "4343",
+        "source/3.old": "444444",
+        "source/4.new": "45454545",
+        "source/5.old": "4646464646",
+        "source/6.new": "474747474747",
+        "target/0.new": "",
+        "target/2.new": "4343",
+        "target/4.new": "45454545",
+        "target/6.new": "474747474747"
+      }
+    },
+    {
+      "count": 17,
+      "passed": true,
+      "sum": [
+        136
+      ],
+      "selection": {
+        "status": "executed",
+        "contract_id": "vp1:e39dfa8a3942a0fc73780ed606b8688be9597f49e769e5569881f97b10fdf99e",
+        "contract_version": 1,
+        "capability": "selected_copy",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "directory.list",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.length",
+            "arguments": [
+              4
+            ],
+            "result": 17
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              16
+            ],
+            "result": 5
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              5,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              15
+            ],
+            "result": 6
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              6,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              6
+            ],
+            "result": 7
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              6
+            ],
+            "result": 8
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              7
+            ],
+            "result": 9
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              8,
+              9
+            ],
+            "result": 8
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              14
+            ],
+            "result": 10
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              10,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              13
+            ],
+            "result": 11
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              11,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              11
+            ],
+            "result": 12
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              11
+            ],
+            "result": 13
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              12
+            ],
+            "result": 14
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              13,
+              14
+            ],
+            "result": 6
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              12
+            ],
+            "result": 15
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              15,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              11
+            ],
+            "result": 16
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              16,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              16
+            ],
+            "result": 17
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              16
+            ],
+            "result": 18
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              17
+            ],
+            "result": 19
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              18,
+              19
+            ],
+            "result": 4
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              10
+            ],
+            "result": 20
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              20,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              9
+            ],
+            "result": 21
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              21,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              21
+            ],
+            "result": 22
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              21
+            ],
+            "result": 23
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              22
+            ],
+            "result": 24
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              23,
+              24
+            ],
+            "result": 2
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              8
+            ],
+            "result": 25
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              25,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              25
+            ],
+            "result": 26
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              25
+            ],
+            "result": 27
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              26
+            ],
+            "result": 28
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              27,
+              28
+            ],
+            "result": 16
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              7
+            ],
+            "result": 29
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              29,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              6
+            ],
+            "result": 30
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              30,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              30
+            ],
+            "result": 31
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              30
+            ],
+            "result": 32
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              31
+            ],
+            "result": 33
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              32,
+              33
+            ],
+            "result": 14
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              5
+            ],
+            "result": 34
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              34,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              4
+            ],
+            "result": 35
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              35,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              35
+            ],
+            "result": 36
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              35
+            ],
+            "result": 37
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              36
+            ],
+            "result": 38
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              37,
+              38
+            ],
+            "result": 12
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              3
+            ],
+            "result": 39
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              39,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              2
+            ],
+            "result": 40
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              40,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              40
+            ],
+            "result": 41
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              40
+            ],
+            "result": 42
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              41
+            ],
+            "result": 43
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              42,
+              43
+            ],
+            "result": 10
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              1
+            ],
+            "result": 44
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              44,
+              3
+            ],
+            "result": 0
+          },
+          {
+            "operation": "list.get",
+            "arguments": [
+              4,
+              0
+            ],
+            "result": 45
+          },
+          {
+            "operation": "text.ends_with",
+            "arguments": [
+              45,
+              3
+            ],
+            "result": 1
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              1,
+              45
+            ],
+            "result": 46
+          },
+          {
+            "operation": "path.join",
+            "arguments": [
+              2,
+              45
+            ],
+            "result": 47
+          },
+          {
+            "operation": "file.read",
+            "arguments": [
+              46
+            ],
+            "result": 48
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              47,
+              48
+            ],
+            "result": 0
+          }
+        ]
+      },
+      "snapshot": {
+        "keep": "6b656570",
+        "source/0.new": "",
+        "source/1.old": "42",
+        "source/10.new": "4b4b4b4b4b4b4b4b4b4b",
+        "source/11.old": "4c4c4c4c4c4c4c4c4c4c4c",
+        "source/12.new": "4d4d4d4d4d4d4d4d4d4d4d4d",
+        "source/13.old": "4e4e4e4e4e4e4e4e4e4e4e4e4e",
+        "source/14.new": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "source/15.old": "505050505050505050505050505050",
+        "source/16.new": "51515151515151515151515151515151",
+        "source/2.new": "4343",
+        "source/3.old": "444444",
+        "source/4.new": "45454545",
+        "source/5.old": "4646464646",
+        "source/6.new": "474747474747",
+        "source/7.old": "48484848484848",
+        "source/8.new": "4949494949494949",
+        "source/9.old": "4a4a4a4a4a4a4a4a4a",
+        "target/0.new": "",
+        "target/10.new": "4b4b4b4b4b4b4b4b4b4b",
+        "target/12.new": "4d4d4d4d4d4d4d4d4d4d4d4d",
+        "target/14.new": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "target/16.new": "51515151515151515151515151515151",
+        "target/2.new": "4343",
+        "target/4.new": "45454545",
+        "target/6.new": "474747474747",
+        "target/8.new": "4949494949494949"
+      }
+    }
+  ]
+}

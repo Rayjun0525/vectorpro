@@ -46,6 +46,8 @@ File parents are inferred; unchanged empty directories must remain in after_dire
 buffer_loops searches indexed fill/map grammar; acquired numeric stepping is needed.
 list_loops searches a reverse list iterator with a typed argument-expression body;
 it requires an acquired decrement operation. Buffer example inputs are hexadecimal.
+With list_loops, control_flow enables item predicates and list_reduction enables
+an accumulator using an acquired binary arithmetic operation. max_steps is at most 12.
 max_steps counts calls. Validation is separate; model-generated examples are evidence
 proposals, not independent proof of the human's intent or general correctness.
 execute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.
@@ -555,7 +557,7 @@ class AgentSession:
                     raise ValueError("numeric lesson exceeds agent learning limits")
             state = StateLesson.from_dict(data["state_lesson"]) if "state_lesson" in data else None
             if state and (state.candidate_budget > 20000 or state.time_budget_seconds > 60
-                          or (state.execution_budget or 1) > 20000 or state.max_steps > 8):
+                          or (state.execution_budget or 1) > 20000 or state.max_steps > 12):
                 raise ValueError("state lesson exceeds agent learning limits")
             result = self.runtime.teach(data["name"],
                         plan=LearningPlan.from_dict(data["plan"]) if "plan" in data else None,

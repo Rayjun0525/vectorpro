@@ -11,7 +11,7 @@ from vectorpro.learning.plan import LearningPlan, OutputWidth
 from vectorpro.learning.buffer_loops import buffer_loop_candidates
 from vectorpro.learning.list_loops import list_loop_candidates
 from vectorpro.learning.registry import Capability, Registry, program_provenance
-from vectorpro.machine import HALT, Instr, assemble
+from vectorpro.machine import HALT, NEXT, Instr, assemble
 from vectorpro.machine.program import MAX_ARGS
 
 
@@ -43,6 +43,7 @@ class StateLesson:
     execution_budget: int | None = None
     list_loops: bool = False
     allowed_operations: tuple[str, ...] | None = None
+    list_reduction: bool = False
 
     def validate(self):
         if not self.input_types or any(t not in ("path", "value", "buffer") for t in self.input_types):
@@ -55,6 +56,8 @@ class StateLesson:
             raise ValueError("buffer_loops must be boolean")
         if type(self.list_loops) is not bool:
             raise ValueError("list_loops must be boolean")
+        if type(self.list_reduction) is not bool or (self.list_reduction and not self.list_loops):
+            raise ValueError("list_reduction requires list_loops and a boolean flag")
         if self.allowed_operations is not None and any(op not in HOST_TYPES for op in self.allowed_operations):
             raise ValueError("unknown allowed host operation")
         if self.execution_budget is not None and (type(self.execution_budget) is not int or self.execution_budget < 1):
@@ -107,7 +110,8 @@ class StateLesson:
         return cls(tuple(data["input_types"]), cases("training"), cases("validation"),
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
                    data.get("control_flow", False), data.get("time_budget_seconds", 60.0),
-                   data.get("buffer_loops", False), data.get("execution_budget"), data.get("list_loops", False))
+                   data.get("buffer_loops", False), data.get("execution_budget"), data.get("list_loops", False),
+                   None, data.get("list_reduction", False))
 
 
 @dataclass
@@ -129,6 +133,44 @@ def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
                 and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
     except (OSError, ValueError, KeyError, IndexError, RuntimeError):
         return False
+
+
+def prefilter_instructions(registry, instructions, registers, output, case, lesson, cancelled):
+    """Generic scalar simulation rejects bad search candidates; tensors recheck survivors.
+
+    No task-name dispatch. Calls, writes and branch routing follow the candidate.
+    Native host APIs are never used. This is not the adopted execution backend.
+    """
+    context = MemoryHostContext(case.before, directories=case.before_directories)
+    values = {name: int(value == "one") for name, value in registers.items()}
+    for i, (value, kind) in enumerate(zip(case.inputs, lesson.input_types)):
+        values[f"x{i}"] = context.put(value.encode()) if kind == "path" else context.put(bytes.fromhex(value)) if kind == "buffer" else value
+    labels = {ins.label: i for i, ins in enumerate(instructions) if ins.label}
+    pc = 0
+    mask = (1 << lesson.width) - 1
+    try:
+        with context.activate():
+            for _ in range(lesson.execution_budget or 20000):
+                if cancelled():
+                    return False
+                if pc == len(instructions):
+                    return (context.files == case.after
+                            and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
+                            and (case.output is None or values[output] == case.output)
+                            and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
+                ins = instructions[pc]
+                if ins.op:
+                    cap = registry.get(ins.op)
+                    args = tuple(values[a] for a in ins.args)
+                    result = (context.invoke(cap.provenance["operation"], args, lesson.width)
+                              if cap.provenance["kind"] == "host" else cap.run([args], lesson.width)[0])
+                    if ins.dest is not None:
+                        values[ins.dest] = result & mask
+                target = ins.then if ins.test is None or values[ins.test] else ins.otherwise
+                pc = pc + 1 if target == NEXT else len(instructions) if target == HALT else labels[target]
+    except (OSError, ValueError, KeyError, IndexError, RuntimeError):
+        return False
+    return False
 
 
 def control_candidates(instructions, input_types, result_types, enabled):
@@ -230,12 +272,16 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
 
         from itertools import chain
         candidates = chain(buffer_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid) if lesson.buffer_loops else (),
-                           list_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid, timed_out) if lesson.list_loops else ())
+                           list_loop_candidates(operations, lesson.input_types, lesson.max_steps, step_valid, timed_out,
+                                                lesson.control_flow, lesson.list_reduction) if lesson.list_loops else ())
         for instructions, registers, output, control in candidates:
             if timed_out() or tried >= lesson.candidate_budget:
                 reason = "time budget" if timed_out() else "candidate budget"
                 return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": reason}])
             tried += 1
+            if control.startswith("list-") and not all(prefilter_instructions(registry, instructions, registers, output,
+                    case, lesson, timed_out) for case in lesson.training):
+                continue
             program = assemble(instructions, [f"x{i}" for i in range(plan.arity)], registers, output, registry.key_of)
             provenance = program_provenance(program, "state example search", input_types=list(lesson.input_types),
                                             output_type="value", teaching_width=lesson.width, control=control,

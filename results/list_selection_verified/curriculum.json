@@ -1,0 +1,296 @@
+[
+  {
+    "draft": {
+      "version": 1,
+      "name": "selected_copy",
+      "description": "Copy filenames matching supplied suffix",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        },
+        {
+          "name": "suffix",
+          "type": "buffer",
+          "role": "UTF-8 suffix"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.list",
+        "list.length",
+        "list.get",
+        "path.join",
+        "file.read",
+        "file.write",
+        "text.ends_with"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path",
+        "path",
+        "buffer"
+      ],
+      "list_loops": true,
+      "control_flow": true,
+      "max_steps": 9,
+      "candidate_budget": 20000,
+      "execution_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "src",
+            "out",
+            "2e747874"
+          ],
+          "before": {
+            "src/a.txt": "796573",
+            "src/b.bin": "6e6f",
+            "keep": "aa",
+            "out/preserved": "bb"
+          },
+          "after": {
+            "src/a.txt": "796573",
+            "src/b.bin": "6e6f",
+            "keep": "aa",
+            "out/preserved": "bb",
+            "out/a.txt": "796573"
+          },
+          "before_directories": [
+            "src",
+            "out"
+          ],
+          "after_directories": [
+            "src",
+            "out"
+          ]
+        },
+        {
+          "inputs": [
+            "in",
+            "to",
+            "2e646174"
+          ],
+          "before": {
+            "in/a.log": "69676e6f7265",
+            "in/b.dat": "",
+            "in/c.dat": "64617461",
+            "keep": "aa",
+            "to/preserved": "bb"
+          },
+          "after": {
+            "in/a.log": "69676e6f7265",
+            "in/b.dat": "",
+            "in/c.dat": "64617461",
+            "keep": "aa",
+            "to/preserved": "bb",
+            "to/b.dat": "",
+            "to/c.dat": "64617461"
+          },
+          "before_directories": [
+            "in",
+            "to"
+          ],
+          "after_directories": [
+            "in",
+            "to"
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "empty",
+            "result",
+            "2e747874"
+          ],
+          "before": {
+            "keep": "aa",
+            "result/preserved": "bb"
+          },
+          "after": {
+            "keep": "aa",
+            "result/preserved": "bb"
+          },
+          "before_directories": [
+            "empty",
+            "result"
+          ],
+          "after_directories": [
+            "empty",
+            "result"
+          ]
+        },
+        {
+          "inputs": [
+            "other",
+            "copied",
+            "2e6c6f67"
+          ],
+          "before": {
+            "other/one.txt": "736b6970",
+            "other/two.log": "796573",
+            "other/three.log": "6d6f7265",
+            "keep": "aa",
+            "copied/preserved": "bb"
+          },
+          "after": {
+            "other/one.txt": "736b6970",
+            "other/two.log": "796573",
+            "other/three.log": "6d6f7265",
+            "keep": "aa",
+            "copied/preserved": "bb",
+            "copied/two.log": "796573",
+            "copied/three.log": "6d6f7265"
+          },
+          "before_directories": [
+            "other",
+            "copied"
+          ],
+          "after_directories": [
+            "other",
+            "copied"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "total_bytes",
+      "description": "Sum byte lengths in a flat directory",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "directory.list",
+        "list.length",
+        "list.get",
+        "path.join",
+        "file.read",
+        "buffer.length"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "list_loops": true,
+      "list_reduction": true,
+      "max_steps": 8,
+      "candidate_budget": 20000,
+      "execution_budget": 20000,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "a/first": "616263",
+            "a/second": "6162",
+            "keep": "aa"
+          },
+          "after": {
+            "a/first": "616263",
+            "a/second": "6162",
+            "keep": "aa"
+          },
+          "before_directories": [
+            "a"
+          ],
+          "after_directories": [
+            "a"
+          ],
+          "output": 5
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "b/x": "61626364",
+            "b/y": "",
+            "b/z": "61",
+            "keep": "aa"
+          },
+          "after": {
+            "b/x": "61626364",
+            "b/y": "",
+            "b/z": "61",
+            "keep": "aa"
+          },
+          "before_directories": [
+            "b"
+          ],
+          "after_directories": [
+            "b"
+          ],
+          "output": 5
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "empty"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ],
+          "output": 0
+        },
+        {
+          "inputs": [
+            "other"
+          ],
+          "before": {
+            "other/one": "30313233343536",
+            "other/two": "3132",
+            "other/three": "787878",
+            "keep": "aa"
+          },
+          "after": {
+            "other/one": "30313233343536",
+            "other/two": "3132",
+            "other/three": "787878",
+            "keep": "aa"
+          },
+          "before_directories": [
+            "other"
+          ],
+          "after_directories": [
+            "other"
+          ],
+          "output": 12
+        }
+      ]
+    }
+  }
+]

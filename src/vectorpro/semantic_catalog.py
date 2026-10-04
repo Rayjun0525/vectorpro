@@ -13,6 +13,7 @@ from vectorpro.machine import VectorProgram
 from vectorpro.tensor_codec import encode_tree, decode_tree
 
 HOST_TEXT = {
+    "text.ends_with": "Check whether UTF-8 text ends with a supplied suffix; return 1 or 0. 문자열 접미사 조건 확인.",
     "list.length": "Count items of a NUL-terminated byte list. 목록 항목 개수.",
     "list.get": "Extract one byte-list item by zero-based index. 목록 항목 추출.",
     "list.append": "Return a new byte list with an appended item. 목록 항목 추가.",
@@ -92,6 +93,10 @@ def document(registry, name, visited=()):
     prefix = []
     if prov.get("control") == "list-iteration":
         prefix.append("Iterate over list items using acquired argument routing and calls.")
+    elif prov.get("control") == "list-selection":
+        prefix.append("Conditionally execute acquired calls for selected list items.")
+    elif prov.get("control") == "list-reduction":
+        prefix.append("Accumulate list results using acquired arithmetic and routing.")
     elif program.has_loop:
         prefix.append("Repeat indexed operations over the bytes in a file buffer.")
     elif has_guard:

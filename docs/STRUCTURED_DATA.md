@@ -71,6 +71,37 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m 
 예제는 탐색 중 수정하지 않았다. 후보 탐색의 확장 비용은 여전히 남은 과제다.
 
 현재 위치는 파일시스템 기반에서 목록 순회와 구조화 데이터 추출을 연결한 단계다.
-다음은 항목 조건 선택·집계와 다중 결과 처리, 이어서 프로세스·표준 입출력·파이프다.
+제한된 항목 조건 선택·산술 집계는 아래 검증까지 진행했다. 다음은 다중 결과 처리,
+이어서 프로세스·표준 입출력·파이프다.
 네트워크, 독립 목표 검증 및 정확성을 유지한 경로 최적화도 남아 있다.
 native 실행 중 실패가 발생하면 앞서 실행한 파일 변경을 되돌리지 않는다.
+
+## 조건 선택과 학습 산술 집계
+
+`list_loops`와 `control_flow`를 함께 켜면 항목 및 입력 버퍼로 만드는 값 판정과
+참/거짓 분기를 탐색한다. `text.ends_with(buffer, buffer)`는 제공된 UTF-8 호스트
+의미이며, 작업에 사용할 판정·극성·본문·인자 경로는 전체 상태 예제에서 선택한다.
+`list_reduction: true`는 학습된 이항 산술로 누산기를 갱신한다. 감소와 덧셈은
+학습 기능이며 파일 크기 합산 순서를 Python 실행기에 내장하지 않았다.
+0개 목록의 출력은 0이며, 조건에 맞는 빈 파일 쓰기도 실행한다.
+
+목록 생산자를 먼저 탐색하고, 일반 명령 시뮬레이션으로 학습 사례의 불일치 후보를
+새 MemoryHostContext에서 제거한다. 살아남은 후보는 실제 제어 텐서로 컴파일해
+학습·검증 사례를 다시 실행한다. 검증 사례는 사전 제거에 사용하지 않는다.
+최대 호출 12개, 후보 20000개, 시간 60초 제한은 유지한다.
+
+`experiments/list_selection.py`의 사전 커리큘럼과 산술 예제를 사용했다.
+선택 복사: 1404후보/9호출/13텐서 단계. 합산: 17후보/8호출/11텐서 단계.
+별도 native 루트의 목록 0·1·7·17개에서 저장·재로딩 후 **4/4** 통과했다.
+관련 10개 테스트와 전체 회귀 261개 통과(각 12.20초, 214.27초).
+전체 파일·디렉터리 상태와 합산 결과를 확인했고 LLM 없이 직접 계약을 호출했다.
+자료는 `results/list_selection_verified/{curriculum.json,program.pt,summary.json}`이다.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q tests/test_list_selection.py
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/list_selection.py --output results/list_selection_replay
+```
+
+이 문법은 단일 판정, 타입에 맞는 표현식 본문과 단일 값 누산기에 한정된다.
+누산 결과는 W비트이며 넘침은 모듈러 연산이다. 중첩 조건, 여러 결과를 반환하는
+레코드, 재귀 디렉터리, 일반 자료구조의 학습을 증명하지 않는다.

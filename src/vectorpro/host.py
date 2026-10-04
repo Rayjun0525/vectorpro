@@ -35,6 +35,7 @@ HOST_TYPES = {"buffer.new": (("value",), "buffer"),
               "directory.remove": (("path",), "value"),
               "directory.list": (("path",), "buffer")}
 HOST_TYPES.update({"list.length": (("buffer",), "value"),
+                   "text.ends_with": (("buffer", "buffer"), "value"),
                    "list.get": (("buffer", "value"), "buffer"),
                    "list.append": (("buffer", "buffer"), "buffer"),
                    "path.join": (("path", "buffer"), "path"),
@@ -136,6 +137,9 @@ class HostContext:
         elif operation == "text.concat":
             left, right = (bytes(self.buffers[h]).decode("utf-8") for h in args)
             result = self.put((left + right).encode("utf-8"))
+        elif operation == "text.ends_with":
+            text, suffix = (bytes(self.buffers[h]).decode("utf-8") for h in args)
+            result = int(text.endswith(suffix))
         elif operation in ("json.get", "json.text"):
             def reject_constant(value):
                 raise ValueError("JSON must be finite")

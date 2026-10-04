@@ -67,10 +67,10 @@ def numeric_lesson(data):
 def state_lesson(data):
     from vectorpro.learning.stateful import StateLesson
     allowed={"input_types","training","validation","width","max_steps","candidate_budget",
-             "control_flow","time_budget_seconds","buffer_loops","execution_budget","list_loops"}
+             "control_flow","time_budget_seconds","buffer_loops","execution_budget","list_loops","list_reduction"}
     if not isinstance(data,dict) or set(data)-allowed or not {"input_types","training","validation"}<=set(data):
         raise ValueError("state evidence accepts only types/examples and bounded search settings")
-    for field,minimum,maximum in (("width",1,32),("max_steps",1,8),("candidate_budget",1,20000),
+    for field,minimum,maximum in (("width",1,32),("max_steps",1,12),("candidate_budget",1,20000),
                                    ("execution_budget",1,20000)):
         if field in data and (type(data[field]) is not int or not minimum<=data[field]<=maximum):
             raise ValueError(f"state {field} exceeds learning limits")

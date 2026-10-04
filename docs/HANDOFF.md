@@ -7,6 +7,30 @@
 
 ## 현재 구현
 
+### 목록 조건 선택과 학습 산술 집계 (2026-10-04)
+
+`list_loops + control_flow`에서 단일 항목 판정·극성·타입 본문을 탐색하고,
+`list_reduction`에서 학습된 이항 산술 누산기를 조합한다. 제공된 의미는
+`text.ends_with`이며 선택 복사 순서나 합산 작업을 커널에 내장하지 않았다.
+max_steps의 외부 한도는 8→12; 후보 20000/시간 60초 한도는 유지한다.
+목록 생산자 우선 탐색과 일반 명령의 메모리 시뮬레이션으로 학습 불일치 후보를
+거른다. 채택 후보는 컴파일된 텐서로 학습/독립 검증 사례를 다시 확인한다.
+기존 저장 형식과 기존 list-iteration 설명은 유지했다.
+
+선택 복사 1404후보/9호출/13텐서 단계, 합산 17후보/8호출/11텐서 단계.
+학습/검증 사례 각 2개와 별도 native 목록 0·1·7·17개를 구분했다.
+같은 저장 파일을 재로딩해 전체 파일/디렉터리 및 합산 결과 **4/4** 통과했다.
+작업 전용 Python은 목표 예제·검증 정답 생성에만 쓰이며 native 실행은 계약을 호출한다.
+새 파일명·접미사, 한글 이름, 빈 파일, 조건 불일치도 테스트했다.
+실패한 초안은 후보/시간 한도로 거절됐으며 최종 탐색 순서를 개선했다.
+
+재현: `nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/list_selection.py --output results/list_selection_replay`.
+자료: `results/list_selection_verified`; 상세 문법은 STRUCTURED_DATA.md.
+최종 관련 테스트 **10 passed, 12.20초**, 전체 회귀 **261 passed, 214.27초**.
+기존 vectorpro-test 하나만 사용했다. 프로그램/호스트/학습기 변경을 검증했다.
+경계: 단일 판정과 단일 W비트 값 누산, 제한된 표현식 본문; 임의 프로그램의
+정확성 증명이 아니다. 다음은 다중 결과 전달, 프로세스/stdio/파이프, 네트워크.
+
 ### 목록·문자열·JSON과 학습된 반복 (2026-10-04)
 
 로드맵 본선인 데이터 처리 기반을 진행했다. `list.length/get/append`, `path.join`,
