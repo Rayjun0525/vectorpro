@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "question": true,
+    "no_native_effects": true,
+    "no_teaching": true
+  },
+  "response": {
+    "status": "needs_input",
+    "question": "What is the expected input for the 'map' tool? Please provide the path and value for the input file.",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "pair_map",
+              "input_types": [
+                "path",
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2735379934310913
+            },
+            {
+              "name": "guarded_map",
+              "input_types": [
+                "path",
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2486882507801056
+            },
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2339058667421341
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.23296400904655457
+            },
+            {
+              "name": "buffer.get",
+              "input_types": [
+                "buffer",
+                "value"
+              ],
+              "argument_roles": [
+                "hexadecimal buffer bytes",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+              "score": 0.17544025182724
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_2",
+        "result": {
+          "input_types": [
+            "path",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "map",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+              "score": 0.2339058667421341
+            },
+            {
+              "name": "fill",
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "argument_roles": [
+                "relative file path",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": true,
+              "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+              "score": 0.23296400904655457
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "What is the expected input for the 'map' tool? Please provide the path and value for the input file."
+        }
+      }
+    ]
+  }
+}

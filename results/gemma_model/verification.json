@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-04",
+  "container": "vectorpro-test",
+  "new_images_or_containers": false,
+  "qwen_weights_removed": true,
+  "model": "Gemma 3 1B Instruct Q8_0",
+  "replacement_manifest": "results/gemma_model/replacement.json",
+  "full_regression": {"passed": 181, "seconds": 374.36, "command": "nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q"},
+  "focused_tests": {"passed": 27, "seconds": 10.14, "files": ["tests/test_local_model_protocol.py", "tests/test_agent.py", "tests/test_semantic_catalog.py"]},
+  "smoke": {"passed": 1, "total": 1, "root": "results/gemma_model/smoke", "duplicate_bos_before_fix": true},
+  "evaluation_root": "results/gemma_model/catalog-v2",
+  "evaluation": {
+    "passed": 7,
+    "total": 12,
+    "numeric_output_cases": {"passed": 3, "total": 4},
+    "file_transform_cases": {"passed": 0, "total": 2},
+    "unsupported_cases": {"passed": 3, "total": 3},
+    "clarification_cases": {"passed": 1, "total": 1},
+    "self_evidence_or_learning_cases": {"passed": 0, "total": 2},
+    "failed_file_cases_unchanged": true,
+    "new_nand_registered": false,
+    "nand_heldout_run": false
+  },
+  "run_semantics": "model-replacement replay of existing fixed requests, not independent held-out accuracy",
+  "raw_evaluation_protocol_is_dataset_label": true,
+  "limitations": [
+    "Existing output/file scoring does not prove final conversation quality or all requested bindings",
+    "English XOR had correct output 99 but used width 32 instead of requested width 8",
+    "Repeated tool calls were rejected after execution; model may finish by asking a question",
+    "Known vector programs remain usable without the model",
+    "External-provider verification requires an endpoint/model; macOS remains deferred"
+  ]
+}

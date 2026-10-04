@@ -1,5 +1,52 @@
 # LLM 학습 어댑터
 
+## 현재 모델: Gemma 3 1B
+
+사용자 요청으로 컨테이너의 Qwen3-0.6B 가중치를 삭제하고 Gemma 3 1B Instruct
+Q8_0으로 교체했다. 모델은 `/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf`에 있다.
+배포 저장소 `ggml-org/gemma-3-1b-it-GGUF`, revision
+`f9c28bcd85737ffc5aef028638d3341d49869c27`, 1,069,306,368바이트,
+SHA-256 `b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5`.
+기존 `vectorpro-test`와 llama-cpp-python 0.3.36을 재사용했다.
+
+Gemma의 원래 대화 템플릿을 사용하며 도구 JSON 스키마와 호출 형식을 메시지에
+명시한다. system/tool 역할을 user 메시지로 표현하고 assistant 도구 호출은
+`<tool_call>` JSON으로 전달한다. 연속 메시지만 합치고 실제 입력·caller 근거·
+도구 결과 값은 유지한다. 모델이 도구/인자를 직접 선택하며 스크립트 답변은 없다.
+BOS를 한 번만 넣고 Gemma 종료 토큰을 사용한다. 알려진 벡터 기능은 계속 LLM 없이
+실행되고 MiniLM 색인과 벡터 저장 형식은 유지한다. 아래 Qwen 기록은 교체 전 결과다.
+
+```powershell
+nerdctl exec vectorpro-test python experiments/setup_gemma_model.py
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/local_small_llm.py --catalog results/catalog_retrieval/final/program.pt --root results/gemma_model/reproduction --constrain-tools --evaluation experiments/requests/catalog_agent_holdout_v2.json --max-calls 12
+```
+
+고정된 기존 요청의 모델 교체 후 재현이며 새 독립 평가로 표현하지 않는다.
+Qwen 제거/설치 기록은 `results/gemma_model/replacement.json`에 있다.
+
+교체 후 전체 회귀는 181건 통과(374.36초), 관련 프로토콜/어댑터 테스트는
+27건 통과(10.14초)다. Gemma 실제 모델 결과의 `passed`는 기존 평가기의
+실행 출력/파일/실패 격리 기준이다. 실행 후 추가 질문이나 잘못된 폭 해석까지
+모두 검증한 완전한 대화 정확도가 아니다. 실제 영어 XOR는 출력 99가 맞아도
+8비트 요청을 32비트로 준비했고, 실행 뒤 불필요한 호출/질문으로 종료했다.
+이런 한계를 성공 숫자와 함께 기록한다. 자체 예제 생성 문제도 모델 교체만으로
+해결됐다고 표현하지 않는다.
+
+실제 Gemma 재현 결과는 **7/12**(`results/gemma_model/catalog-v2`). 숫자 출력
+3/4, 파일 변환 0/2, 미지원 3/3, 모호한 요청 질문 1/1, 자체 예제/학습 0/2다.
+영어 뺄셈은 실제 인자를 잘못 준비했다. 파일 작업은 잘못된 경로/값과 중복
+스냅샷을 제출하고 호출 예산으로 종료했으며 두 파일 모두 원본을 유지했다.
+자체 XOR는 잘못된 정답으로 거절됐다. NAND는 숫자 요청을 파일 요청으로
+해석해 질문으로 종료했고 기능 등록/별도 100건 평가는 수행되지 않았다.
+결과·원문과 설치 기록은 `results/gemma_model/`에 보존한다.
+
+현재 재현의 원시 summary `evaluation_protocol`은 실행 시작 당시 코드가 읽은
+기존 데이터셋의 첫 평가 라벨이다. 이번 실행은 재현이다. 해석은
+`verification.json`의 `run_semantics`를 따른다. 이후 스크립트는 데이터셋 라벨을
+`dataset_protocol`로 분리하고 모델 교체 재현임을 별도로 표시한다.
+모델 교체는 완료됐으며 남은 과제는 정확한 요청 인자 해석, 실행 후 답변 종료,
+정확한 자체 예제와 새 기능 학습, 새 독립 요청 평가 및 외부 서버 실제 검증이다.
+
 선택적인 텐서 카탈로그 경로는 [CATALOG_AGENT.md](CATALOG_AGENT.md) 참고.
 `--encoder`, `--no-learning`, `--evidence-file`을 추가했고, 실제 입력을 먼저
 고정한 뒤 검증 예제를 전달한다. 아래의 기존 기본 도구 경로도 유지한다.

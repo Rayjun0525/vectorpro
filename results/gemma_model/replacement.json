@@ -1,0 +1,16 @@
+{
+  "removed_file": "/opt/vectorpro-models/Qwen3-0.6B-Q8_0.gguf",
+  "removed_bytes": 639446688,
+  "qwen_present": false,
+  "gemma": {
+    "repo": "ggml-org/gemma-3-1b-it-GGUF",
+    "revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+    "quantization": "Q8_0",
+    "filename": "gemma-3-1b-it-Q8_0.gguf",
+    "bytes": 1069306368,
+    "sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5"
+  },
+  "container": "vectorpro-test",
+  "container_id": "98610c2e6eae",
+  "new_images_or_containers": false
+}

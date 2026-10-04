@@ -1,7 +1,8 @@
 """Prototype: lossless typed tensor tree + real model search vectors in ONE file.
 
 Strings remain losslessly encoded UTF-8, not magically language-free semantics.
-Qwen hidden-state mean pooling is experimental, not a trained retrieval model.
+Causal hidden-state mean pooling is experimental, not a trained retrieval model.
+Historical experiment: supply an explicit compatible GGUF; the active catalog uses MiniLM.
 Existing runtime storage is unchanged; this tests a prospective storage boundary.
 """
 import argparse
@@ -24,7 +25,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, default=Path("results/initial_model/program.json"))
     parser.add_argument("--root", type=Path, default=Path("results/tensor_catalog"))
-    parser.add_argument("--model", default="/opt/vectorpro-models/Qwen3-0.6B-Q8_0.gguf")
+    parser.add_argument("--model", required=True, help="explicit compatible embedding GGUF for this historical experiment")
     args = parser.parse_args()
     args.root.mkdir(parents=True, exist_ok=True)
     original = json.loads(args.source.read_text(encoding="utf-8"))
@@ -47,7 +48,7 @@ def main():
     vectors = torch.stack([embed(text) for text in texts])
     archive = {"version": torch.tensor([1]), **exact, "semantic_vectors": vectors,
                **{"embedding_" + k: v for k, v in encode_tree({
-                   "model": "Qwen3-0.6B-Q8_0", "pooling": "mean", "trained_retrieval": False}).items()}}
+                   "model": Path(args.model).name, "pooling": "mean", "trained_retrieval": False}).items()}}
     path = args.root / "program.pt"
     assert all(isinstance(v, torch.Tensor) for v in archive.values())
     torch.save(archive, path)
@@ -104,7 +105,7 @@ def main():
         "semantic_top3": sum(r["top3_passed"] for r in retrieval),
         "semantic_cases": len(retrieval), "retrieval": retrieval,
         "archive_bytes": path.stat().st_size, "source_json_bytes": args.source.stat().st_size,
-        "embedding": "Qwen causal hidden-state mean pooling, NOT a trained sentence encoder",
+        "embedding": Path(args.model).name + " causal hidden-state mean pooling, NOT a trained sentence encoder",
         "storage": "typed numeric tree + UTF-8 byte tensor + float64 values; language remains encoded",
         "prototype_only": True}
     (args.root / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")

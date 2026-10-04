@@ -1,7 +1,7 @@
-"""Real local Qwen inference through HTTP and the unmodified agent tool loop.
+"""Real local Gemma inference through HTTP and the unmodified agent tool loop.
 
 Requires an explicitly installed llama-cpp-python and GGUF inside the ONE test
-container. Native model template/tool-call parsing only: no scripted replies,
+container. Native dialogue template with an explicit tool JSON protocol: no scripted replies,
 no oracle-generated tool arguments and no replacement of the model's decisions.
 """
 import argparse
@@ -67,9 +67,37 @@ def native_message(text):
     return {"role": "assistant", "content": None, "tool_calls": calls}
 
 
+def gemma_messages(messages, tools):
+    """Adapt role/tool framing only; preserve instructions, evidence and arguments."""
+    guide = ('Available tools (JSON schemas):\n' + json.dumps(tools, ensure_ascii=False)
+             + '\nTo call ONE tool output <tool_call>{"name":"tool_name","arguments":{...}}</tool_call>.'
+             + '\nChoose the tool and all argument values yourself. Tool results are user messages labeled TOOL_RESULT.'
+             + '\nAfter an executed result, report the actual result in plain language.')
+    result = []
+    for message in messages:
+        role = message["role"]
+        content = message.get("content") or ""
+        if role == "system":
+            role, content = "user", "INSTRUCTIONS:\n" + content
+        elif role == "tool":
+            role, content = "user", "TOOL_RESULT " + message["tool_call_id"] + ":\n" + content
+        elif message.get("tool_calls"):
+            content += "".join('<tool_call>' + json.dumps({"name": call["function"]["name"],
+                "arguments": json.loads(call["function"]["arguments"])}, ensure_ascii=False) + '</tool_call>'
+                for call in message["tool_calls"])
+        if result and result[-1]["role"] == role:
+            result[-1]["content"] += "\n\n" + content
+        else:
+            result.append({"role": role, "content": content})
+    if not result or result[0]["role"] != "user":
+        raise ValueError("Gemma dialogue must start with user instructions")
+    result[0]["content"] = guide + "\n\n" + result[0]["content"]
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default="/opt/vectorpro-models/Qwen3-0.6B-Q8_0.gguf")
+    parser.add_argument("--model", default="/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf")
     parser.add_argument("--root", type=Path, default=Path("results/local_small_llm"))
     parser.add_argument("--scenarios", nargs="+")
     parser.add_argument("--catalog", type=Path, help="use a tensor program and the evidence-gated catalog tool loop")
@@ -98,17 +126,18 @@ def main():
     import llama_cpp
     from llama_cpp.llama_chat_format import Jinja2ChatFormatter
     llm = llama_cpp.Llama(model_path=args.model, n_ctx=8192, n_threads=4, n_batch=256, verbose=False, seed=0)
+    if not llm.metadata.get("general.architecture", "").startswith("gemma"):
+        raise ValueError("this local adapter expects a Gemma GGUF")
     formatter = Jinja2ChatFormatter(llm.metadata["tokenizer.chat_template"],
-                                   eos_token="<|im_end|>", bos_token="<|endoftext|>")
+                                   eos_token="<eos>", bos_token="<bos>")
     raw_calls = []
 
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             try:
                 data = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
-                # The native Qwen template expects string content even for tool calls.
-                template_messages = [dict(m, content=m.get("content") or "") for m in data["messages"]]
-                formatted = formatter(messages=template_messages, tools=data["tools"], enable_thinking=False)
+                template_messages = gemma_messages(data["messages"], data["tools"])
+                formatted = formatter(messages=template_messages)
                 started = monotonic()
                 grammar = None
                 last = data["messages"][-1]
@@ -121,8 +150,10 @@ def main():
                     json_grammar = llama_cpp.LlamaGrammar.from_json_schema(json.dumps(schema), verbose=False)._grammar
                     json_grammar = re.sub(r"(?m)^root ::=", "tool-json ::=", json_grammar)
                     grammar = llama_cpp.LlamaGrammar.from_string('root ::= "<tool_call>" tool-json "</tool_call>"\n' + json_grammar, verbose=False)
-                generated = llm.create_completion(formatted.prompt, max_tokens=args.max_tokens, temperature=0,
-                                                  stop=["<|im_end|>"], seed=0, grammar=grammar)
+                # The native template already includes <bos>; avoid adding a second BOS.
+                prompt_tokens = llm.tokenize(formatted.prompt.encode("utf-8"), add_bos=False, special=True)
+                generated = llm.create_completion(prompt_tokens, max_tokens=args.max_tokens, temperature=0,
+                                                  stop=["<end_of_turn>", "<eos>"], seed=0, grammar=grammar)
                 text = generated["choices"][0]["text"]
                 raw_calls.append({"messages": data["messages"], "raw_output": text,
                                   "usage": generated.get("usage"), "seconds": monotonic() - started})
@@ -186,7 +217,7 @@ def main():
                 target = native_root / MemoryHostContext.normalize(path)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(bytes.fromhex(hex_bytes))
-            model = HTTPChatModel(f"http://127.0.0.1:{server.server_port}/v1/chat/completions", "Qwen3-0.6B-Q8_0", timeout=180)
+            model = HTTPChatModel(f"http://127.0.0.1:{server.server_port}/v1/chat/completions", Path(args.model).stem, timeout=180)
             runtime = VectorRuntime.load(program, host=HostContext(native_root))
             catalog = TensorCatalog(runtime, encoder, identity) if args.catalog else None
             session = AgentSession(runtime, model, program, max_calls=args.max_calls, catalog=catalog,
@@ -240,9 +271,15 @@ def main():
         server.shutdown()
         thread.join()
         server.server_close()
-    summary = {"model": "Qwen/Qwen3-0.6B-GGUF", "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
-               "quantization": "Q8_0", "model_bytes": Path(args.model).stat().st_size,
-               "model_sha256": hashlib.sha256(Path(args.model).read_bytes()).hexdigest(),
+    with Path(args.model).open("rb") as stream:
+        model_digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    manifest_path = Path(args.model).parent / "gemma-download.json"
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    if manifest.get("sha256") != model_digest:
+        manifest = {}  # never label an arbitrary --model file as the pinned download
+    summary = {"model": manifest.get("repo", Path(args.model).name), "revision": manifest.get("revision"),
+               "quantization": manifest.get("quantization"), "model_bytes": Path(args.model).stat().st_size,
+               "model_sha256": model_digest, "chat_protocol": "Gemma native template with explicit JSON tool schemas",
                "llama_cpp_python": llama_cpp.__version__, "real_model_inference": True,
                "scripted_replies": False, "container": "vectorpro-test", "results": results}
     summary["constrained_tool_decoding"] = args.constrain_tools
@@ -251,7 +288,8 @@ def main():
     summary["max_tokens_per_turn"] = args.max_tokens
     summary["evaluation_protocol"] = "development scenarios reused during adapter improvements; not independent held-out accuracy"
     if evaluation:
-        summary["evaluation_protocol"] = evaluation["protocol"]
+        summary["dataset_protocol"] = evaluation["protocol"]
+        summary["evaluation_protocol"] = "Gemma model replacement replay of existing fixed requests; not new independent held-out accuracy"
         summary["evaluation_file"] = str(args.evaluation)
         summary["evaluation_sha256"] = hashlib.sha256(args.evaluation.read_bytes()).hexdigest()
     summary["max_calls"] = args.max_calls

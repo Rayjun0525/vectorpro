@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "question": true,
+    "no_native_effects": true,
+    "no_teaching": true,
+    "verified_unsupported": true
+  },
+  "response": {
+    "status": "needs_input",
+    "question": "Do you need any additional evidence or learning examples to complete this calculation?",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "needs_learning_examples",
+          "reason": "no candidate matches evidence",
+          "verification": "caller evidence checked in isolated memory",
+          "matching_candidates": []
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Do you need any additional evidence or learning examples to complete this calculation?"
+        }
+      }
+    ]
+  }
+}

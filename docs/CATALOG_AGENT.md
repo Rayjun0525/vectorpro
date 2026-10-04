@@ -3,6 +3,10 @@
 2026-10-04, 기존 검색 프로토타입을 선택적인 런타임/LLM 어댑터로 연결했다.
 기존 JSON 파일은 호환되고, `VectorRuntime.save/load`는 `.pt`도 지원한다.
 
+현재 실제 모델은 Gemma 3 1B Instruct Q8_0이며 Qwen 가중치는 제거했다.
+아래 Qwen 결과는 교체 전 기록이다. Gemma 교체/재현 결과는
+[LLM_ADAPTER.md](LLM_ADAPTER.md)에 별도로 기록한다.
+
 ## 후속: 근거 선검사와 작은 예제 문맥
 
 구조화된 caller 근거가 있으면 첫 `search_goal`에서 저장된 후보를 격리된
@@ -108,7 +112,7 @@ int64 범위를 넘는 정수는 별도 타입 태그와 부호 있는 바이트
 
 ## 실행 방법
 
-기존 컨테이너의 Qwen과 MiniLM을 그대로 재사용한다. 검색용 선택 의존성은
+기존 컨테이너의 Gemma와 MiniLM을 사용한다. Qwen 가중치는 제거했다. 검색용 선택 의존성은
 `vectorpro[catalog]`이며 이미 설치된 환경에서는 추가 설치할 필요 없다.
 
 ```powershell

@@ -1,0 +1,59 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Square the number 123 at width 16. Do not teach; ask for learning examples if there is no matching function."
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"search_goal\", \"arguments\": {\"query\": \"square number\"}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 577,
+      "completion_tokens": 27,
+      "total_tokens": 604
+    },
+    "seconds": 9.796369192001293
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use actual tools, one call per turn. For an explicit operation, ALWAYS search_goal first.\nAsk the user only if the goal is missing, or verification says more evidence/learning is needed.\nFollow the steps:\n1. search_goal(query=operation in words).\n2. Choose prepare_N using the returned descriptions. Fill every x0,x1,... from the ACTUAL\nrequest, following argument roles, not order of mention. Read the required fields carefully.\nNever drop a requested operand to fit a candidate with fewer inputs.\n3. Caller validation examples may arrive AFTER prepare_N. They are DIFFERENT inputs;\nnever change the already fixed request. Use verify_numeric(width,operands,targets) for\ntwo distinct correct examples, or verify_state(cases) for full before/after file snapshots.\nState example inputs use integers, {\"utf8\":\"file\"} paths or {\"hex\":\"00ff\"} buffers.\nSnapshots map actual filenames directly to HEX bytes, including unchanged files.\nCopy caller evidence accurately; model-generated answers are fallible proposals.\nWithout caller evidence use check_small with distinct SMALL inputs 0..15 and correct\n4-bit answers. Never copy large actual request inputs into small examples.\n4. On matched, execute_resolved({}) once. Report the actual returned output.\nOn needs_evidence or needs_learning_examples, ask_user; never substitute another operation.\nIf learning is enabled and authorized, teaching needs separate training and validation.\nteach_small accepts 4-bit cases: training at least 4, validation at least 2, all distinct\nand disjoint. Supply your own answers, then trust the returned learning/verification status.\nOn error, correct the failed arguments. No code, binaries, recipes or invented tool names.\n\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "user",
+        "content": "Square the number 123 at width 16. Do not teach; ask for learning examples if there is no matching function."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "search_goal",
+              "arguments": "{\"query\": \"square number\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"needs_learning_examples\", \"reason\": \"no candidate matches evidence\", \"verification\": \"caller evidence checked in isolated memory\", \"matching_candidates\": []}"
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": {\"question\": \"Do you have any examples of squaring numbers?\"}}</tool_call>",
+    "usage": {
+      "prompt_tokens": 658,
+      "completion_tokens": 35,
+      "total_tokens": 693
+    },
+    "seconds": 10.131957977002457
+  }
+]

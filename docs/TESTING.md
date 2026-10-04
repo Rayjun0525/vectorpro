@@ -17,17 +17,29 @@ transformers 4.57.6 및 두 모델이 이미 설치돼 있다.
 
 | 자원 | 컨테이너 내부 위치 |
 |---|---|
-| 실제 소형 LLM | `/opt/vectorpro-models/Qwen3-0.6B-Q8_0.gguf` |
+| 실제 소형 LLM | `/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf` |
 | 다국어 검색 인코더 | `/opt/vectorpro-models/multilingual-minilm/` |
 | 실험의 원본 프로그램 | `/workspace/results/initial_model/program.json` |
 
 모델은 저장소에 포함하지 않는다. MiniLM 파일만 누락됐으면
 `nerdctl exec vectorpro-test python experiments/setup_retrieval_model.py`로 같은
 컨테이너에 내려받는다. 기존 download.json이 있으면 기록된 revision을 재사용한다.
-Qwen GGUF가 누락된 경우에는 [LLM 검증 기록](LLM_ADAPTER.md)의 모델/revision을
-확인하고 복구한다. 원본 프로그램 재생성 방법은 README의 initial-model 절에 있다.
+Gemma GGUF가 누락됐으면 `nerdctl exec vectorpro-test python experiments/setup_gemma_model.py`로
+고정 revision을 내려받고 SHA-256을 확인한다. Qwen 가중치는 사용자 요청으로 제거했다.
+이전 Qwen 결과는 역사적 기록이며 다시 다운로드하지 않는다.
+원본 프로그램 재생성 방법은 README의 initial-model 절에 있다.
 
 ## 변경별 검증
+
+Gemma 교체 후 전체 회귀는 **181 passed, 374.36초**다. 관련 어댑터/프로토콜
+범위는 27 passed, 10.14초다. 실제 모델 테스트와 병행한 실행 시간이므로
+이전 시간과 직접 성능 비교하지 않는다. 테스트는 모두 같은 컨테이너에서 실행했다.
+새 테스트는 Gemma 역할 변환에서 실제 입력/검증 근거/도구 인자가 유지되고
+평문을 가짜 도구 호출로 바꾸지 않는지 확인한다.
+실제 Gemma 재현은 7/12이며 기존 출력/파일 기준이다. 잘못된 폭 해석과 실행 후
+추가 질문은 별도 한계로 기록했다. 실패한 파일 변환 2건의 원본 불변, NAND 등록
+없음도 확인했다. 기록은 `results/gemma_model/verification.json`, 원문은
+`results/gemma_model/catalog-v2/`다. 기존 고정 요청의 재현이며 독립 정확도가 아니다.
 
 최종 근거 선검사/작은 예제 문맥/파일 실행 경계 변경은 전체
 **179 passed, 247.57초**, 관련 범위 27 passed, 8.85초다.
@@ -72,12 +84,15 @@ main 반영 전 최종 확인에서 위 두 테스트 파일을 함께 실행해
 프로그램 실행으로 이 디렉터리에 input.bin 및 program.pt가 생성/변경된다.
 
 ```powershell
-nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/tensor_catalog.py --root results/tensor_catalog/recheck
 nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/catalog_retrieval.py --root results/catalog_retrieval/recheck
 ```
 
 각 디렉터리의 summary.json을 확인한다. 예외 없이 프로세스가 끝났다는 것만으로
 의미 검색이 정확하다고 판단하지 않는다. 검색 오류도 정상적으로 결과에 기록된다.
+
+`tensor_catalog.py`의 원래 Qwen 풀링 실험은 보존된 기록이다. 현재 기본 검증에는
+포함하지 않으며 별도 호환 GGUF를 `--model`로 명시해야 실행한다. 실제 검색은
+MiniLM을 사용하고 Gemma 교체로 검색 색인/벡터 프로그램을 다시 학습하지 않는다.
 
 - 텐서 복원 기준: exact_roundtrip, unicode_types_roundtrip, native_file_passed,
   metadata_edit_roundtrip이 true, numeric_heldout이 100.

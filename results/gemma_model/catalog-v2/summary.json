@@ -1,0 +1,1511 @@
+{
+  "model": "ggml-org/gemma-3-1b-it-GGUF",
+  "revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+  "quantization": "Q8_0",
+  "model_bytes": 1069306368,
+  "model_sha256": "b205840c5dcef55078e37d344677869a714ffd42a4ae448c48dcfb52e4bb10d5",
+  "chat_protocol": "Gemma native template with explicit JSON tool schemas",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "xor_new_english": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Are you asking about the bitwise exclusive OR of 73 and 42?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5989994406700134
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5989994406700134
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.33058881759643555
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.5989994406700134
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.33058881759643555
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                99
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "error",
+              "message": "tool is not available in the current request phase"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Are you asking about the bitwise exclusive OR of 73 and 42?"
+            }
+          }
+        ]
+      }
+    },
+    "xor_new_korean": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you want to continue with the calculation?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.30895936489105225
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.30895936489105225
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.24717244505882263
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.30895936489105225
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.24717244505882263
+                }
+              ],
+              "status": "matched",
+              "name": "xor",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                1837
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "status": "error",
+              "message": "tool is not available in the current request phase"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you want to continue with the calculation?"
+            }
+          }
+        ]
+      }
+    },
+    "sub_new_english": {
+      "passed": false,
+      "checks": {
+        "files": true,
+        "output": false
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Are you asking about register width 16?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1738719642162323
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.19978897273540497
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1738719642162323
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.19978897273540497
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1738719642162323
+                }
+              ],
+              "status": "matched",
+              "name": "sub",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                10490
+              ],
+              "capability": "sub",
+              "history": []
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "status": "error",
+              "message": "tool is not available in the current request phase"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Are you asking about register width 16?"
+            }
+          }
+        ]
+      }
+    },
+    "sub_new_korean": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "output": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Can you please specify which tool you want to use?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.4060712158679962
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.4060712158679962
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.3425433039665222
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_numeric",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.4060712158679962
+                },
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.3425433039665222
+                }
+              ],
+              "status": "matched",
+              "name": "sub",
+              "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+            }
+          },
+          {
+            "name": "execute_resolved",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                827
+              ],
+              "capability": "sub",
+              "history": []
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "status": "error",
+              "message": "tool is not available in the current request phase"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Can you please specify which tool you want to use?"
+            }
+          }
+        ]
+      }
+    },
+    "map_new_file": {
+      "passed": false,
+      "checks": {
+        "files": false,
+        "output": false
+      },
+      "response": {
+        "status": "call_budget",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.1721540242433548
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.1721540242433548
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.17175337672233582
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          }
+        ]
+      }
+    },
+    "fill_new_file": {
+      "passed": false,
+      "checks": {
+        "files": false,
+        "output": false
+      },
+      "response": {
+        "status": "call_budget",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.24430078268051147
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_0",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.24430078268051147
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2356807142496109
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          },
+          {
+            "name": "verify_state",
+            "result": {
+              "status": "error",
+              "message": "copy caller validation evidence exactly; do not change its inputs, answers or snapshots"
+            }
+          }
+        ]
+      }
+    },
+    "unsupported_product": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "question": true,
+        "no_native_effects": true,
+        "no_teaching": true,
+        "verified_unsupported": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you need any additional evidence or learning examples to complete this calculation?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "verification": "caller evidence checked in isolated memory",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you need any additional evidence or learning examples to complete this calculation?"
+            }
+          }
+        ]
+      }
+    },
+    "unsupported_delete": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "question": true,
+        "no_native_effects": true,
+        "no_teaching": true,
+        "verified_unsupported": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you want to delete the local_call_0 file?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "verification": "caller evidence checked in isolated memory",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you want to delete the local_call_0 file?"
+            }
+          }
+        ]
+      }
+    },
+    "unsupported_square": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "question": true,
+        "no_native_effects": true,
+        "no_teaching": true,
+        "verified_unsupported": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you have any examples of squaring numbers?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "verification": "caller evidence checked in isolated memory",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you have any examples of squaring numbers?"
+            }
+          }
+        ]
+      }
+    },
+    "ambiguous_new_file": {
+      "passed": true,
+      "checks": {
+        "files": true,
+        "question": true,
+        "no_native_effects": true,
+        "no_teaching": true
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "What is the expected input for the 'map' tool? Please provide the path and value for the input file.",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "pair_map",
+                  "input_types": [
+                    "path",
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2735379934310913
+                },
+                {
+                  "name": "guarded_map",
+                  "input_types": [
+                    "path",
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2486882507801056
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2339058667421341
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.23296400904655457
+                },
+                {
+                  "name": "buffer.get",
+                  "input_types": [
+                    "buffer",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "hexadecimal buffer bytes",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Read, retrieve, fetch one byte from a memory buffer at a position or offset.",
+                  "score": 0.17544025182724
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_2",
+            "result": {
+              "input_types": [
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.2339058667421341
+                },
+                {
+                  "name": "fill",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Fill all bytes of a file with the same supplied value.",
+                  "score": 0.23296400904655457
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What is the expected input for the 'map' tool? Please provide the path and value for the input file."
+            }
+          }
+        ]
+      }
+    },
+    "self_xor_new": {
+      "passed": false,
+      "checks": {
+        "files": true,
+        "output": false
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you need to verify the intent of the user's request?",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.6920416355133057
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3680371642112732
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.36028701066970825
+                },
+                {
+                  "name": "pair_map",
+                  "input_types": [
+                    "path",
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.3302385210990906
+                },
+                {
+                  "name": "guarded_map",
+                  "input_types": [
+                    "path",
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.27728819847106934
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_1",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.6920416355133057
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3680371642112732
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "check_small",
+            "result": {
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.6920416355133057
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.3680371642112732
+                }
+              ],
+              "status": "needs_learning_examples",
+              "reason": "no candidate matches evidence",
+              "matching_candidates": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you need to verify the intent of the user's request?"
+            }
+          }
+        ]
+      }
+    },
+    "self_nand_new": {
+      "passed": false,
+      "checks": {
+        "files": true,
+        "output": false,
+        "learned": false,
+        "heldout": false,
+        "reload": false
+      },
+      "response": {
+        "status": "needs_input",
+        "question": "Do you want to perform a bitwise NAND operation on two files? Please specify the paths to the files you want to operate on.",
+        "tools": [
+          {
+            "name": "search_goal",
+            "result": {
+              "status": "candidates",
+              "candidates": [
+                {
+                  "name": "xor",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": false,
+                  "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+                  "score": 0.38560497760772705
+                },
+                {
+                  "name": "pair_map",
+                  "input_types": [
+                    "path",
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.25215670466423035
+                },
+                {
+                  "name": "map",
+                  "input_types": [
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.21558257937431335
+                },
+                {
+                  "name": "guarded_map",
+                  "input_types": [
+                    "path",
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "numeric parameter",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Conditionally execute when a flag is nonzero; otherwise skip. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.20164096355438232
+                },
+                {
+                  "name": "sub",
+                  "input_types": [
+                    "value",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "minuend: number to subtract FROM (left operand)",
+                    "subtrahend: number to subtract (right operand)"
+                  ],
+                  "output_width": "W+1",
+                  "has_effects": false,
+                  "description": "Subtract the second number from the first number; integer difference with borrow.",
+                  "score": 0.1888085901737213
+                }
+              ],
+              "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+            }
+          },
+          {
+            "name": "prepare_1",
+            "result": {
+              "input_types": [
+                "path",
+                "path",
+                "value"
+              ],
+              "candidates": [
+                {
+                  "name": "pair_map",
+                  "input_types": [
+                    "path",
+                    "path",
+                    "value"
+                  ],
+                  "argument_roles": [
+                    "relative file path",
+                    "relative file path",
+                    "numeric parameter"
+                  ],
+                  "output_width": "W",
+                  "has_effects": true,
+                  "description": "Apply operations to two separate files. Repeat indexed operations over the bytes in a file buffer. Transform every byte of a file using bitwise exclusive OR (XOR) of byte from file bytes read from input path and input value.",
+                  "score": 0.25215670466423035
+                }
+              ],
+              "status": "proposed",
+              "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+              "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "Do you want to perform a bitwise NAND operation on two files? Please specify the paths to the files you want to operate on."
+            }
+          }
+        ]
+      }
+    }
+  },
+  "constrained_tool_decoding": true,
+  "tensor_catalog": "results/catalog_retrieval/final/program.pt",
+  "caller_evidence_delivered_after_input_extraction": true,
+  "max_tokens_per_turn": 512,
+  "evaluation_protocol": "first-use fixed requests, operands and caller examples; frozen before inference after development; do not retune on these results",
+  "evaluation_file": "experiments/requests/catalog_agent_holdout_v2.json",
+  "evaluation_sha256": "9bc1c6729a9085c35ad3c3f69c5aeaf8be7ce77a90a87448074c03d4cbc20e0e",
+  "max_calls": 12
+}

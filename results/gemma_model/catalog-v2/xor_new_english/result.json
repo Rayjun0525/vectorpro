@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "checks": {
+    "files": true,
+    "output": true
+  },
+  "response": {
+    "status": "needs_input",
+    "question": "Are you asking about the bitwise exclusive OR of 73 and 42?",
+    "tools": [
+      {
+        "name": "search_goal",
+        "result": {
+          "status": "candidates",
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.5989994406700134
+            }
+          ],
+          "next_step": "choose a prepare_N tool and bind the actual request inputs using its argument roles"
+        }
+      },
+      {
+        "name": "prepare_0",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.5989994406700134
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.33058881759643555
+            }
+          ],
+          "status": "proposed",
+          "reason": "similarity alone cannot verify intent; provide numeric examples or complete before/after snapshots",
+          "next_step": "verify_numeric or verify_state with the user-provided examples; keep requested inputs separate"
+        }
+      },
+      {
+        "name": "verify_numeric",
+        "result": {
+          "input_types": [
+            "value",
+            "value"
+          ],
+          "candidates": [
+            {
+              "name": "xor",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "numeric parameter",
+                "numeric parameter"
+              ],
+              "output_width": "W",
+              "has_effects": false,
+              "description": "Bitwise exclusive OR (XOR) of two integers; bits differ.",
+              "score": 0.5989994406700134
+            },
+            {
+              "name": "sub",
+              "input_types": [
+                "value",
+                "value"
+              ],
+              "argument_roles": [
+                "minuend: number to subtract FROM (left operand)",
+                "subtrahend: number to subtract (right operand)"
+              ],
+              "output_width": "W+1",
+              "has_effects": false,
+              "description": "Subtract the second number from the first number; integer difference with borrow.",
+              "score": 0.33058881759643555
+            }
+          ],
+          "status": "matched",
+          "name": "xor",
+          "evidence_source": "caller/LLM supplied, not an independent proof of intent"
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            99
+          ],
+          "capability": "xor",
+          "history": []
+        }
+      },
+      {
+        "name": "execute_resolved",
+        "result": {
+          "status": "error",
+          "message": "tool is not available in the current request phase"
+        }
+      },
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "Are you asking about the bitwise exclusive OR of 73 and 42?"
+        }
+      }
+    ]
+  }
+}

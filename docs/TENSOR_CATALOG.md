@@ -6,6 +6,9 @@
 
 ## 저장 구조
 
+아래 Qwen 풀링 결과는 교체 전 기록이다. Qwen 가중치는 제거했고 현재 실제 LLM은
+Gemma, 검색 인코더는 MiniLM이다. 원래 번외 스크립트는 `--model`을 명시해야 한다.
+
 `experiments/tensor_catalog.py`는 기존 런타임 파일의 전체 데이터를 정수 타입
 태그/트리 구조를 담은 int64 텐서, UTF-8 문자열의 uint8 텐서, float64 값 텐서로
 변환한다. 메타정보와 실행 데이터 모두 이 트리에 들어간다. 단순히 JSON 문자열
@@ -37,7 +40,7 @@ LLM 교환 형식으로 복원한 목록: `exported-catalog.json`.
 검증 근거를 대체하지 않는다.
 
 ```powershell
-nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/tensor_catalog.py
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/tensor_catalog.py --model /path/to/explicit-compatible-embedding.gguf
 ```
 
 기존 vectorpro-test 및 이미 설치된 모델만 재사용했다. 모델/의존성 추가 없음.
