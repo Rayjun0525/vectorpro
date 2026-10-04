@@ -4,3 +4,4 @@ results/**/*.dat binary
 results/**/*.pt binary
 results/structured_data_verified/native-*/** -text
 results/list_selection_verified/native-*/** -text
+results/record_results_verified/native-*/** -text

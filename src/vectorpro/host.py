@@ -35,6 +35,9 @@ HOST_TYPES = {"buffer.new": (("value",), "buffer"),
               "directory.remove": (("path",), "value"),
               "directory.list": (("path",), "buffer")}
 HOST_TYPES.update({"list.length": (("buffer",), "value"),
+                   "record.pack": (("buffer", "value"), "buffer"),
+                   "record.buffer": (("buffer",), "buffer"),
+                   "record.value": (("buffer",), "value"),
                    "text.ends_with": (("buffer", "buffer"), "value"),
                    "list.get": (("buffer", "value"), "buffer"),
                    "list.append": (("buffer", "buffer"), "buffer"),
@@ -134,6 +137,20 @@ class HostContext:
             parent = MemoryHostContext.normalize(bytes(self.buffers[args[0]]).decode("utf-8"))
             child = MemoryHostContext.normalize(bytes(self.buffers[args[1]]).decode("utf-8"))
             result = self.put(MemoryHostContext.normalize(parent + "/" + child).encode("utf-8"))
+        elif operation in ("record.pack", "record.buffer", "record.value"):
+            if operation == "record.pack":
+                if not 0 <= args[1] < 1 << 64:
+                    raise ValueError("record value must fit uint64")
+                data = bytes(self.buffers[args[0]])
+                result = self.put(b"VPR1" + len(data).to_bytes(8, "little") + args[1].to_bytes(8, "little") + data)
+            else:
+                data = bytes(self.buffers[args[0]])
+                if len(data) < 20 or data[:4] != b"VPR1" or int.from_bytes(data[4:12], "little") != len(data) - 20:
+                    raise ValueError("invalid record encoding")
+                value = int.from_bytes(data[12:20], "little")
+                if operation == "record.value" and value >= 1 << width:
+                    raise ValueError("record value does not fit register width")
+                result = self.put(data[20:]) if operation == "record.buffer" else value
         elif operation == "text.concat":
             left, right = (bytes(self.buffers[h]).decode("utf-8") for h in args)
             result = self.put((left + right).encode("utf-8"))

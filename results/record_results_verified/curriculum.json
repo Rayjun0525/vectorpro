@@ -1,0 +1,186 @@
+[
+  {
+    "draft": {
+      "version": 1,
+      "name": "read_result",
+      "description": "read_result",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source"
+        }
+      ],
+      "output": {
+        "type": "buffer",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.read",
+        "buffer.length",
+        "record.pack"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "path"
+      ],
+      "output_type": "buffer",
+      "max_steps": 3,
+      "training": [
+        {
+          "inputs": [
+            "a"
+          ],
+          "before": {
+            "a": "6162",
+            "keep": "aa"
+          },
+          "after": {
+            "a": "6162",
+            "keep": "aa"
+          },
+          "output": "56505231020000000000000002000000000000006162"
+        },
+        {
+          "inputs": [
+            "b"
+          ],
+          "before": {
+            "b": "78797a",
+            "keep": "aa"
+          },
+          "after": {
+            "b": "78797a",
+            "keep": "aa"
+          },
+          "output": "565052310300000000000000030000000000000078797a"
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "empty"
+          ],
+          "before": {
+            "empty": "",
+            "keep": "aa"
+          },
+          "after": {
+            "empty": "",
+            "keep": "aa"
+          },
+          "output": "5650523100000000000000000000000000000000"
+        },
+        {
+          "inputs": [
+            "binary"
+          ],
+          "before": {
+            "binary": "ff006d6f7265",
+            "keep": "aa"
+          },
+          "after": {
+            "binary": "ff006d6f7265",
+            "keep": "aa"
+          },
+          "output": "5650523106000000000000000600000000000000ff006d6f7265"
+        }
+      ]
+    }
+  },
+  {
+    "draft": {
+      "version": 1,
+      "name": "write_result",
+      "description": "write_result",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "buffer",
+          "role": "result"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "record.buffer",
+        "file.write"
+      ]
+    },
+    "state_lesson": {
+      "input_types": [
+        "buffer",
+        "path"
+      ],
+      "max_steps": 2,
+      "training": [
+        {
+          "inputs": [
+            "56505231020000000000000002000000000000006162",
+            "a"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "a": "6162"
+          },
+          "output": 2
+        },
+        {
+          "inputs": [
+            "565052310300000000000000030000000000000078797a",
+            "b"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "b": "78797a"
+          },
+          "output": 3
+        }
+      ],
+      "validation": [
+        {
+          "inputs": [
+            "5650523100000000000000000000000000000000",
+            "empty"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "empty": ""
+          },
+          "output": 0
+        },
+        {
+          "inputs": [
+            "5650523106000000000000000600000000000000ff006d6f7265",
+            "binary"
+          ],
+          "before": {
+            "keep": "aa"
+          },
+          "after": {
+            "keep": "aa",
+            "binary": "ff006d6f7265"
+          },
+          "output": 6
+        }
+      ]
+    }
+  }
+]

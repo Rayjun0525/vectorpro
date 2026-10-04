@@ -13,6 +13,9 @@ from vectorpro.machine import VectorProgram
 from vectorpro.tensor_codec import encode_tree, decode_tree
 
 HOST_TEXT = {
+    "record.pack": "Pack a byte buffer and unsigned value into a portable binary record.",
+    "record.buffer": "Extract the byte buffer from a portable binary record.",
+    "record.value": "Extract the unsigned value from a portable binary record.",
     "text.ends_with": "Check whether UTF-8 text ends with a supplied suffix; return 1 or 0. 문자열 접미사 조건 확인.",
     "list.length": "Count items of a NUL-terminated byte list. 목록 항목 개수.",
     "list.get": "Extract one byte-list item by zero-based index. 목록 항목 추출.",

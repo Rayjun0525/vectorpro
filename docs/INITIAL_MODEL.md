@@ -26,8 +26,13 @@ Independent held-out cases measure generalization and do not guide search.
 
 ## Execution and learning boundary
 
-Structured input buffers use hexadecimal evidence. Optional `list_loops` supplies
-a reverse list iterator with a searched typed argument-expression body and one
+Structured input buffers use hexadecimal evidence.
+State lessons may explicitly request `output_type: "buffer"` with hexadecimal
+output targets, compared as actual bytes rather than transient handles. Portable
+binary records currently combine one buffer and one unsigned value. Generic
+packing/extraction is supplied; task routes are acquired. See [RECORD_RESULTS.md](RECORD_RESULTS.md).
+
+Optional `list_loops` supplies a reverse list iterator with a searched typed argument-expression body and one
 terminal value/effect call. This is a bounded grammar, not unrestricted list
 program discovery. See [STRUCTURED_DATA.md](STRUCTURED_DATA.md).
 

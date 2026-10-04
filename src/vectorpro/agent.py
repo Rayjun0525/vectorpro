@@ -50,6 +50,9 @@ With list_loops, control_flow enables item predicates and list_reduction enables
 an accumulator using an acquired binary arithmetic operation. max_steps is at most 12.
 max_steps counts calls. Validation is separate; model-generated examples are evidence
 proposals, not independent proof of the human's intent or general correctness.
+For buffer results set state_lesson.output_type='buffer' and example output to hex bytes;
+the draft output type must agree. record.pack combines bytes and a value, and
+record.buffer/record.value extract them without passing transient handles between calls.
 execute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.
 Only supplied host-root files are accessible. ask_user takes {question:string}.
 Trust tool statuses; learned means checked examples, learning_failed means no solution.

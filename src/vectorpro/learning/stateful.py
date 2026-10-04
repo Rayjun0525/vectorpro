@@ -20,7 +20,7 @@ class StateExample:
     inputs: tuple[str | int, ...]
     before: dict[str, bytes]
     after: dict[str, bytes]
-    output: int | None = None
+    output: int | str | None = None
     operations: tuple[str, ...] | None = None
     before_directories: tuple[str, ...] = ()
     after_directories: tuple[str, ...] = ()
@@ -44,8 +44,11 @@ class StateLesson:
     list_loops: bool = False
     allowed_operations: tuple[str, ...] | None = None
     list_reduction: bool = False
+    output_type: str = "value"
 
     def validate(self):
+        if self.output_type not in ("value", "buffer"):
+            raise ValueError("state output type must be value or buffer")
         if not self.input_types or any(t not in ("path", "value", "buffer") for t in self.input_types):
             raise ValueError("state inputs must declare path/value types")
         if self.width < 1 or self.max_steps < 1 or self.candidate_budget < 1:
@@ -89,8 +92,12 @@ class StateLesson:
                         or any(not isinstance(p, str) or MemoryHostContext.normalize(p) != p for p in directories)):
                     raise ValueError("state directories require distinct normalized paths")
                 MemoryHostContext.directory_state(files, directories)
-            if case.output is not None and (type(case.output) is not int or not 0 <= case.output < 1 << self.width):
-                raise ValueError("state output must fit register width")
+            if case.output is not None:
+                if self.output_type == "buffer":
+                    if not isinstance(case.output, str) or len(case.output) % 2 or any(c not in "0123456789abcdefABCDEF" for c in case.output):
+                        raise ValueError("buffer output requires hexadecimal byte pairs")
+                elif type(case.output) is not int or not 0 <= case.output < 1 << self.width:
+                    raise ValueError("state output must fit register width")
             if case.operations is not None and any(op not in HOST_TYPES for op in case.operations):
                 raise ValueError("operation traces must contain host operation names")
         train = [c.signature() for c in self.training]
@@ -111,7 +118,7 @@ class StateLesson:
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
                    data.get("control_flow", False), data.get("time_budget_seconds", 60.0),
                    data.get("buffer_loops", False), data.get("execution_budget"), data.get("list_loops", False),
-                   None, data.get("list_reduction", False))
+                   None, data.get("list_reduction", False), data.get("output_type", "value"))
 
 
 @dataclass
@@ -129,7 +136,8 @@ def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
             output = executable([inputs], lesson.width)[0]
         return (context.files == case.after
                 and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
-                and (case.output is None or output == case.output)
+                and (case.output is None or (bytes(context.buffers[output]) == bytes.fromhex(case.output)
+                     if lesson.output_type == "buffer" else output == case.output))
                 and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
     except (OSError, ValueError, KeyError, IndexError, RuntimeError):
         return False
@@ -156,7 +164,8 @@ def prefilter_instructions(registry, instructions, registers, output, case, less
                 if pc == len(instructions):
                     return (context.files == case.after
                             and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
-                            and (case.output is None or values[output] == case.output)
+                            and (case.output is None or (bytes(context.buffers[values[output]]) == bytes.fromhex(case.output)
+                                 if lesson.output_type == "buffer" else values[output] == case.output))
                             and (case.operations is None or tuple(e["operation"] for e in context.events) == case.operations))
                 ins = instructions[pc]
                 if ins.op:
@@ -259,6 +268,8 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
     frontier = [((), types, ())]
     tried = 0
     if lesson.buffer_loops or lesson.list_loops:
+        if lesson.output_type != "value":
+            raise ValueError("loop search currently requires value outputs")
         def step_valid(op, args):
             if timed_out() or registry.get(op).executable.effects:
                 return False
@@ -306,6 +317,8 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
                     result_types = prefix_types + (result_type,)
                     for candidate, output, control in control_candidates(
                             instructions, lesson.input_types, result_types, lesson.control_flow):
+                        if (available | {destination: result_type})[output] != lesson.output_type:
+                            continue
                         if timed_out():
                             return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "time budget"}])
                         if tried >= lesson.candidate_budget:

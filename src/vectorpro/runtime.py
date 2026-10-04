@@ -90,6 +90,8 @@ class VectorRuntime:
             state=None
         else:
             state=parse_state(state_lesson)
+            if state.output_type != draft["output"]["type"]:
+                raise ValueError("state output type must exactly match the draft")
             if list(state.input_types)!=kinds:
                 raise ValueError("state evidence input types must exactly match the draft")
             state=replace(state,time_budget_seconds=min(state.time_budget_seconds,time_budget_seconds),
