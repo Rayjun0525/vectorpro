@@ -83,6 +83,6 @@ HTTP fixture: this verifies the integration protocol, not live-model quality.
 
 `scripts/check_portability.py` executes the same saved initial-model file without
 learning, checking Unicode paths, numeric functions, mutation and composed loops.
-Its Linux result is recorded. Windows/macOS runtime results require those hosts
-and authorization compatible with the project's one-container test rule; they
-must not be reported as passed from platform-independent source alone.
+Linux and Windows results are recorded with identical program SHA-256. The
+user explicitly authorized the Windows desktop test directory on 2026-10-04.
+macOS remains unverified. Native OS results must not be inferred from source alone.

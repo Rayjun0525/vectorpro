@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "execute(name='xor', width=16, operands=[[12345, 4567]])",
+    "tools": []
+  }
+}

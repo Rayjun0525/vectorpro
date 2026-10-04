@@ -1,0 +1,805 @@
+{
+  "encoder": {
+    "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+  },
+  "model_parameters": 117653760,
+  "exact_roundtrip": true,
+  "search_then_execution": [
+    {
+      "expected": "xor",
+      "passed": true
+    },
+    {
+      "expected": "sub",
+      "passed": true
+    },
+    {
+      "expected": "map",
+      "passed": false,
+      "reason": "wrong candidate"
+    },
+    {
+      "expected": "fill",
+      "passed": true
+    }
+  ],
+  "results": {
+    "description_only": {
+      "development": {
+        "top1": 1,
+        "top3": 2,
+        "cases": 4,
+        "rows": [
+          {
+            "expected": "xor",
+            "query": "Compute the bitwise exclusive OR of two numbers",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "buffer.length"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "Subtract one integer from another",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "pair_map"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "map",
+            "query": "Apply a byte XOR mask to every byte in a file",
+            "language": "en",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "buffer.set",
+              "buffer.get"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "fill",
+            "query": "Fill a file with a repeated byte value",
+            "language": "en",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "file.read",
+              "file.write"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          }
+        ]
+      },
+      "heldout": {
+        "top1": 6,
+        "top3": 11,
+        "cases": 24,
+        "rows": [
+          {
+            "expected": "xor",
+            "query": "Compare two integers bit by bit and return one where their bits differ",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "buffer.length"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "xor",
+            "query": "두 정수의 비트별 배타적 논리합을 계산해줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "buffer.length",
+              "fill"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "Return the difference between the first number and the second number",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "pair_map"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "첫 번째 정수에서 두 번째 정수를 빼줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "fill",
+              "map"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "buffer.new",
+            "query": "Create an empty byte array of the requested size",
+            "language": "en",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "buffer.set",
+              "buffer.get"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "buffer.new",
+            "query": "지정한 길이의 새 바이트 버퍼를 할당해줘",
+            "language": "ko",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "xor",
+              "buffer.new"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.length",
+            "query": "How many bytes does this memory buffer contain?",
+            "language": "en",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "buffer.get",
+              "buffer.new"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.length",
+            "query": "이 버퍼의 바이트 개수를 알려줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "buffer.get",
+              "buffer.length"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.get",
+            "query": "Retrieve the byte at position 2 in a buffer",
+            "language": "en",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "buffer.length",
+              "buffer.set"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.get",
+            "query": "버퍼의 특정 인덱스에 있는 바이트 값을 읽어줘",
+            "language": "ko",
+            "top1": "file.read",
+            "top3": [
+              "file.read",
+              "xor",
+              "buffer.get"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.set",
+            "query": "Replace just one byte at a chosen offset in memory",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "buffer.length"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "buffer.set",
+            "query": "메모리 버퍼의 특정 위치에 바이트 하나를 써줘",
+            "language": "ko",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "buffer.length",
+              "buffer.set"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.read",
+            "query": "Load the contents of a relative file path into memory",
+            "language": "en",
+            "top1": "file.read",
+            "top3": [
+              "file.read",
+              "file.write",
+              "buffer.get"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.read",
+            "query": "상대 경로의 파일 내용을 버퍼로 읽어줘",
+            "language": "ko",
+            "top1": "file.read",
+            "top3": [
+              "file.read",
+              "buffer.get",
+              "file.write"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.write",
+            "query": "Save this existing buffer to a file on disk",
+            "language": "en",
+            "top1": "buffer.set",
+            "top3": [
+              "buffer.set",
+              "buffer.get",
+              "buffer.new"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "file.write",
+            "query": "버퍼에 담긴 내용을 파일에 저장해줘",
+            "language": "ko",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "file.read",
+              "buffer.new"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "fill",
+            "query": "Overwrite all the bytes of a file with the same supplied value",
+            "language": "en",
+            "top1": "file.write",
+            "top3": [
+              "file.write",
+              "file.read",
+              "buffer.length"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "fill",
+            "query": "파일의 모든 바이트를 지정한 동일한 값으로 채워줘",
+            "language": "ko",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "buffer.length",
+              "file.read"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "map",
+            "query": "Transform every byte in one file by exclusive OR with the supplied number",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "buffer.length",
+              "file.write"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "map",
+            "query": "파일 전체의 각 바이트에 같은 값으로 XOR을 적용해줘",
+            "language": "ko",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "buffer.length",
+              "buffer.set"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "guarded_map",
+            "query": "Run the file XOR transformation only when the flag is nonzero",
+            "language": "en",
+            "top1": "file.write",
+            "top3": [
+              "file.write",
+              "file.read",
+              "sub"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "guarded_map",
+            "query": "조건 값이 0이 아닐 때만 파일 바이트 XOR 변환을 실행해줘",
+            "language": "ko",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "file.read",
+              "file.write"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "pair_map",
+            "query": "Perform the same XOR transformation on two separate files",
+            "language": "en",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "xor",
+              "buffer.new"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "pair_map",
+            "query": "두 파일 각각의 모든 바이트에 동일한 XOR 변환을 적용해줘",
+            "language": "ko",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "buffer.new",
+              "buffer.set"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          }
+        ]
+      }
+    },
+    "tensor_derived": {
+      "development": {
+        "top1": 3,
+        "top3": 4,
+        "cases": 4,
+        "rows": [
+          {
+            "expected": "xor",
+            "query": "Compute the bitwise exclusive OR of two numbers",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "pair_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "Subtract one integer from another",
+            "language": "en",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "xor",
+              "guarded_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "map",
+            "query": "Apply a byte XOR mask to every byte in a file",
+            "language": "en",
+            "top1": "pair_map",
+            "top3": [
+              "pair_map",
+              "map",
+              "fill"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "fill",
+            "query": "Fill a file with a repeated byte value",
+            "language": "en",
+            "top1": "fill",
+            "top3": [
+              "fill",
+              "map",
+              "file.read"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          }
+        ]
+      },
+      "heldout": {
+        "top1": 19,
+        "top3": 23,
+        "cases": 24,
+        "rows": [
+          {
+            "expected": "xor",
+            "query": "Compare two integers bit by bit and return one where their bits differ",
+            "language": "en",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "pair_map",
+              "map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "xor",
+            "query": "두 정수의 비트별 배타적 논리합을 계산해줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "sub",
+              "map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "Return the difference between the first number and the second number",
+            "language": "en",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "xor",
+              "guarded_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "sub",
+            "query": "첫 번째 정수에서 두 번째 정수를 빼줘",
+            "language": "ko",
+            "top1": "sub",
+            "top3": [
+              "sub",
+              "xor",
+              "buffer.get"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.new",
+            "query": "Create an empty byte array of the requested size",
+            "language": "en",
+            "top1": "buffer.new",
+            "top3": [
+              "buffer.new",
+              "fill",
+              "buffer.length"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.new",
+            "query": "지정한 길이의 새 바이트 버퍼를 할당해줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "buffer.get",
+              "buffer.set"
+            ],
+            "top1_passed": false,
+            "top3_passed": false
+          },
+          {
+            "expected": "buffer.length",
+            "query": "How many bytes does this memory buffer contain?",
+            "language": "en",
+            "top1": "buffer.length",
+            "top3": [
+              "buffer.length",
+              "file.write",
+              "buffer.set"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.length",
+            "query": "이 버퍼의 바이트 개수를 알려줘",
+            "language": "ko",
+            "top1": "xor",
+            "top3": [
+              "xor",
+              "buffer.get",
+              "buffer.length"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.get",
+            "query": "Retrieve the byte at position 2 in a buffer",
+            "language": "en",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "buffer.set",
+              "fill"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.get",
+            "query": "버퍼의 특정 인덱스에 있는 바이트 값을 읽어줘",
+            "language": "ko",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "map",
+              "file.read"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.set",
+            "query": "Replace just one byte at a chosen offset in memory",
+            "language": "en",
+            "top1": "buffer.set",
+            "top3": [
+              "buffer.set",
+              "buffer.get",
+              "buffer.new"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "buffer.set",
+            "query": "메모리 버퍼의 특정 위치에 바이트 하나를 써줘",
+            "language": "ko",
+            "top1": "buffer.set",
+            "top3": [
+              "buffer.set",
+              "buffer.get",
+              "file.write"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.read",
+            "query": "Load the contents of a relative file path into memory",
+            "language": "en",
+            "top1": "file.read",
+            "top3": [
+              "file.read",
+              "file.write",
+              "buffer.get"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.read",
+            "query": "상대 경로의 파일 내용을 버퍼로 읽어줘",
+            "language": "ko",
+            "top1": "buffer.get",
+            "top3": [
+              "buffer.get",
+              "file.read",
+              "file.write"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.write",
+            "query": "Save this existing buffer to a file on disk",
+            "language": "en",
+            "top1": "file.write",
+            "top3": [
+              "file.write",
+              "file.read",
+              "buffer.set"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "file.write",
+            "query": "버퍼에 담긴 내용을 파일에 저장해줘",
+            "language": "ko",
+            "top1": "file.write",
+            "top3": [
+              "file.write",
+              "file.read",
+              "buffer.get"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "fill",
+            "query": "Overwrite all the bytes of a file with the same supplied value",
+            "language": "en",
+            "top1": "fill",
+            "top3": [
+              "fill",
+              "map",
+              "pair_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "fill",
+            "query": "파일의 모든 바이트를 지정한 동일한 값으로 채워줘",
+            "language": "ko",
+            "top1": "fill",
+            "top3": [
+              "fill",
+              "file.read",
+              "buffer.get"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "map",
+            "query": "Transform every byte in one file by exclusive OR with the supplied number",
+            "language": "en",
+            "top1": "fill",
+            "top3": [
+              "fill",
+              "map",
+              "pair_map"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          },
+          {
+            "expected": "map",
+            "query": "파일 전체의 각 바이트에 같은 값으로 XOR을 적용해줘",
+            "language": "ko",
+            "top1": "map",
+            "top3": [
+              "map",
+              "pair_map",
+              "guarded_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "guarded_map",
+            "query": "Run the file XOR transformation only when the flag is nonzero",
+            "language": "en",
+            "top1": "guarded_map",
+            "top3": [
+              "guarded_map",
+              "map",
+              "pair_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "guarded_map",
+            "query": "조건 값이 0이 아닐 때만 파일 바이트 XOR 변환을 실행해줘",
+            "language": "ko",
+            "top1": "guarded_map",
+            "top3": [
+              "guarded_map",
+              "map",
+              "pair_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "pair_map",
+            "query": "Perform the same XOR transformation on two separate files",
+            "language": "en",
+            "top1": "pair_map",
+            "top3": [
+              "pair_map",
+              "map",
+              "guarded_map"
+            ],
+            "top1_passed": true,
+            "top3_passed": true
+          },
+          {
+            "expected": "pair_map",
+            "query": "두 파일 각각의 모든 바이트에 동일한 XOR 변환을 적용해줘",
+            "language": "ko",
+            "top1": "map",
+            "top3": [
+              "map",
+              "pair_map",
+              "guarded_map"
+            ],
+            "top1_passed": false,
+            "top3_passed": true
+          }
+        ]
+      }
+    }
+  },
+  "documents": {
+    "sub": "Subtract the second number from the first number; integer difference with borrow. 첫 번째 정수에서 두 번째 정수를 빼기 뺄셈 차이.",
+    "xor": "Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합.",
+    "buffer.new": "Allocate, create a new byte array in memory with the requested size. 지정한 길이의 새 메모리 바이트 버퍼 생성 할당.",
+    "buffer.length": "Measure buffer size, count how many bytes a memory buffer contains. 메모리 버퍼 길이 크기 바이트 개수 확인.",
+    "buffer.get": "Read, retrieve, fetch one byte from a memory buffer at a position or offset. 버퍼의 특정 인덱스 위치에서 바이트 하나 읽기.",
+    "buffer.set": "Write, replace, update one byte in a memory buffer at a position or offset. 메모리 버퍼의 특정 위치에 바이트 하나 쓰기 변경.",
+    "file.read": "Read, load file contents from disk into memory, returning a byte buffer. 디스크 파일 내용을 읽어 메모리 버퍼로 불러오기.",
+    "file.write": "Write, save buffer contents from memory to a disk file; return bytes written. 메모리 버퍼 내용을 디스크 파일에 저장 쓰기.",
+    "fill": "Repeat indexed operations over the bytes in a file buffer. Fill file bytes with the same supplied byte value. 파일 바이트를 지정한 동일한 값으로 채우기.",
+    "map": "Repeat indexed operations over the bytes in a file buffer. Transform file bytes using Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value. 파일 바이트 변환 Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value",
+    "guarded_map": "Conditionally execute when a flag is nonzero; otherwise skip. 조건 값이 0이 아닐 때만 실행. Repeat indexed operations over the bytes in a file buffer. Transform file bytes using Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value. 파일 바이트 변환 Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value",
+    "pair_map": "Apply operations to two separate files. 서로 다른 두 파일 각각에 작업 적용. Repeat indexed operations over the bytes in a file buffer. Transform file bytes using Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value. 파일 바이트 변환 Bitwise exclusive OR (XOR) of two integers; bits differ. 두 정수의 비트별 배타적 논리합. Applied to byte from file bytes read from input path and input value"
+  },
+  "queries_used_to_train_encoder": false,
+  "core_runtime_changed": false
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "response": {
+    "status": "answered",
+    "text": "The result of using the map function on input.bin with mask 53 at width 16 is 4.",
+    "tools": [
+      {
+        "name": "execute",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            4
+          ],
+          "capability": "map",
+          "history": []
+        }
+      }
+    ]
+  }
+}

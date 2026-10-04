@@ -1,0 +1,43 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "The function `tiny_nand` has been successfully executed with the inputs 5 and 3, producing an output of 1.",
+    "tools": [
+      {
+        "name": "teach_numeric",
+        "result": {
+          "status": "learned",
+          "outputs": null,
+          "capability": "tiny_nand",
+          "history": [
+            {
+              "round": 1,
+              "train_examples": 1,
+              "validation_examples": 1,
+              "strategy": "reuse",
+              "structure": "one",
+              "train_accuracy": 1.0,
+              "validation_accuracy": 1.0,
+              "provided_train_accuracy": 1.0,
+              "accepted": true,
+              "source": "example data"
+            }
+          ]
+        }
+      },
+      {
+        "name": "execute",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            1
+          ],
+          "capability": "tiny_nand",
+          "history": []
+        }
+      }
+    ],
+    "held_out": 0
+  }
+}

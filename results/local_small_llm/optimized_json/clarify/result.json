@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "<ask_user>What is missing? Please specify what transformation or output you would like to perform with input.bin.</ask_user>",
+    "tools": []
+  }
+}

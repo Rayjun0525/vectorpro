@@ -1,0 +1,25 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You prepare evidence and use a learnable vector runtime, not a code interpreter.\nCall ONE tool at a time. Tools are separate functions: list_capabilities is NOT a\ncapability name for execute. After an error, correct the arguments and retry.\nFor an ambiguous request ALWAYS call ask_user, rather than asking in plain text.\nFor numeric learning prefer teach_numeric: supply your own training and validation\nexamples; the adapter derives the learning schedule, never the answers or algorithm.\nNever write Python-like calls in text. Use the actual function-calling protocol.\nThe execute operands JSON is [[12,3]] for numbers and [[{\"utf8\":\"input.bin\"},53]]\nfor a path and a number. Both examples show argument format only.\nLook up the actual capability name and its arity before executing.\nRead list_capabilities and describe_capability before teaching. Known functions execute\ndirectly. Unknown functions need independent training/validation example sets. Use teach\nto acquire a function in memory, then execute only the user's requested native operation.\nMissing/ambiguous goals: ask_user; do not invent the user's desired output or claim success.\nNo source code, binaries, instruction recipes or tensor programs may be supplied.\nNumeric teaching: {name, plan: {name,description,arity,output: 'W'|'W+1'|'2W'|'1',\nrounds:[count], train_width,validation_width,validation_examples}, lesson:\n{training:{width,operands:[[int]],targets:[int]},validation:{width,operands,targets}}}.\nState teaching: {name,state_lesson:{input_types:['path'|'value'], training:[{inputs,\nbefore:{relative_path:hex},after:{relative_path:hex},output?:int,operations?:[host_name]}],\nvalidation:[same shape],width:16,max_steps:7,candidate_budget:5000,\ncontrol_flow:true,buffer_loops:true,time_budget_seconds:60,execution_budget:20000}}.\nbefore/after are complete file snapshots; unchanged files must remain in after.\nbuffer_loops searches indexed fill/map grammar; acquired numeric stepping is needed.\nmax_steps counts calls. Validation is separate; model-generated examples are evidence\nproposals, not independent proof of the human's intent or general correctness.\nexecute: {name, width, operands:[[integer|{utf8:relative_path}|{hex:bytes_hex}]]}.\nOnly supplied host-root files are accessible. ask_user takes {question:string}.\nTrust tool statuses; learned means checked examples, learning_failed means no solution.\n"
+      },
+      {
+        "role": "system",
+        "content": "Available capabilities (names, arity and input types): [{\"name\": \"sub\", \"arity\": 2, \"provided\": false, \"input_types\": null, \"output_type\": null}, {\"name\": \"xor\", \"arity\": 2, \"provided\": false, \"input_types\": null, \"output_type\": null}, {\"name\": \"buffer.new\", \"arity\": 1, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"buffer.length\", \"arity\": 1, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"buffer.get\", \"arity\": 2, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"buffer.set\", \"arity\": 3, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"file.read\", \"arity\": 1, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"file.write\", \"arity\": 2, \"provided\": true, \"input_types\": null, \"output_type\": null}, {\"name\": \"fill\", \"arity\": 2, \"provided\": false, \"input_types\": [\"path\", \"value\"], \"output_type\": \"value\"}, {\"name\": \"map\", \"arity\": 2, \"provided\": false, \"input_types\": [\"path\", \"value\"], \"output_type\": \"value\"}, {\"name\": \"guarded_map\", \"arity\": 3, \"provided\": false, \"input_types\": [\"path\", \"value\", \"value\"], \"output_type\": \"value\"}, {\"name\": \"pair_map\", \"arity\": 3, \"provided\": false, \"input_types\": [\"path\", \"path\", \"value\"], \"output_type\": \"value\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Do something with input.bin. I have not decided what transformation or output I want. Ask me what is missing instead of modifying the file."
+      }
+    ],
+    "raw_output": "<ask_user>What is missing? Please specify what transformation or output you would like to perform with input.bin.</ask_user>",
+    "usage": {
+      "prompt_tokens": 1877,
+      "completion_tokens": 26,
+      "total_tokens": 1903
+    },
+    "seconds": 4.267114782000135
+  }
+]

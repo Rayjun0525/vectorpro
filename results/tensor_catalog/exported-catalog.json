@@ -1,0 +1,100 @@
+[
+  {
+    "name": "sub",
+    "arity": 2,
+    "provided": false,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "xor",
+    "arity": 2,
+    "provided": false,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "buffer.new",
+    "arity": 1,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "buffer.length",
+    "arity": 1,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "buffer.get",
+    "arity": 2,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "buffer.set",
+    "arity": 3,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "file.read",
+    "arity": 1,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "file.write",
+    "arity": 2,
+    "provided": true,
+    "input_types": null,
+    "output_type": null
+  },
+  {
+    "name": "fill",
+    "arity": 2,
+    "provided": false,
+    "input_types": [
+      "path",
+      "value"
+    ],
+    "output_type": "value"
+  },
+  {
+    "name": "map",
+    "arity": 2,
+    "provided": false,
+    "input_types": [
+      "path",
+      "value"
+    ],
+    "output_type": "value"
+  },
+  {
+    "name": "guarded_map",
+    "arity": 3,
+    "provided": false,
+    "input_types": [
+      "path",
+      "value",
+      "value"
+    ],
+    "output_type": "value"
+  },
+  {
+    "name": "pair_map",
+    "arity": 3,
+    "provided": false,
+    "input_types": [
+      "path",
+      "path",
+      "value"
+    ],
+    "output_type": "value"
+  }
+]

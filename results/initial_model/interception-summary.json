@@ -1,0 +1,15 @@
+{
+  "platform": "Windows",
+  "mode": "assistant_tool_interception",
+  "scenario_chosen_by": "assistant",
+  "external_model_api": false,
+  "unknown_then_learned_then_executed": true,
+  "held_out_numeric": 100,
+  "widths": [
+    16,
+    32
+  ],
+  "native_file_hex": "3532cab5",
+  "reload_without_llm": true,
+  "original_program_sha256": "5bc028a30497f24b082b06a9288e49d9a10d1f311d6f9f41dd217f762cf243cc"
+}

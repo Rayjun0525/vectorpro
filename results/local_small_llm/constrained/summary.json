@@ -1,0 +1,113 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "known": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The result of computing the bitwise XOR of 12345 and 4567 at width 16 is 8686.",
+        "tools": [
+          {
+            "name": "execute",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                8686
+              ],
+              "capability": "xor",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "clarify": {
+      "passed": true,
+      "response": {
+        "status": "needs_input",
+        "question": "What transformation or output would you like to perform with input.bin?",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What transformation or output would you like to perform with input.bin?"
+            }
+          }
+        ]
+      }
+    },
+    "file": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The result of using the map function on input.bin with mask 53 at width 16 is 4.",
+        "tools": [
+          {
+            "name": "execute",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "map",
+              "history": []
+            }
+          }
+        ]
+      }
+    },
+    "learn": {
+      "passed": false,
+      "response": {
+        "status": "answered",
+        "text": "The function `tiny_nand` has been successfully executed with the inputs 5 and 3, producing the output 1.",
+        "tools": [
+          {
+            "name": "teach_numeric",
+            "result": {
+              "status": "learned",
+              "outputs": null,
+              "capability": "tiny_nand",
+              "history": [
+                {
+                  "round": 1,
+                  "train_examples": 1,
+                  "validation_examples": 1,
+                  "strategy": "reuse",
+                  "structure": "one",
+                  "train_accuracy": 1.0,
+                  "validation_accuracy": 1.0,
+                  "provided_train_accuracy": 1.0,
+                  "accepted": true,
+                  "source": "example data"
+                }
+              ]
+            }
+          },
+          {
+            "name": "execute",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                1
+              ],
+              "capability": "tiny_nand",
+              "history": []
+            }
+          }
+        ],
+        "held_out": 0
+      }
+    }
+  },
+  "constrained_tool_decoding": true
+}

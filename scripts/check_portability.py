@@ -14,8 +14,8 @@ from vectorpro.host import HostContext
 from vectorpro.runtime import VectorRuntime
 
 
-def check(program):
-    with tempfile.TemporaryDirectory(prefix="vectorpro-portable-") as directory:
+def check(program, work_dir=None):
+    with tempfile.TemporaryDirectory(prefix="vectorpro-portable-", dir=work_dir) as directory:
         root = Path(directory)
         (root / "입력.bin").write_bytes(bytes(range(256)))
         (root / "other.bin").write_bytes(b"\x00\xff\x80")
@@ -42,8 +42,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--program", type=Path, default=Path("results/initial_model/program.json"))
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--work-dir", type=Path, help="parent directory for temporary native file tests")
     args = parser.parse_args()
-    result = check(args.program)
+    result = check(args.program, args.work_dir)
     encoded = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

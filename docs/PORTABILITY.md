@@ -6,8 +6,9 @@
 한글 경로를 확인한다. SHA-256이 같아야 동일한 프로그램 파일을 검증한 것이다.
 
 현재 프로젝트 규칙은 모든 테스트를 기존 `vectorpro-test` 컨테이너에서만
-실행하는 것이다. 이 규칙 아래에서 확인된 플랫폼은 Linux다. Windows/macOS에서
-실제로 실행했다고 주장하지 않는다. 해당 호스트와 호스트 테스트 허용이 확보된
+실행하는 것이다. 2026-10-04 사용자가 Windows의 바탕화면 전용 폴더에서
+테스트하도록 명시적으로 허용했고, Windows 실측도 통과했다. macOS는 미검증이다.
+추가 대상 호스트와 호스트 테스트 허용이 확보된
 경우 아래 절차를 적용한다. 새 컨테이너나 이미지는 필요하지 않다.
 
 1. 프로젝트 소스와 같은 `program.json` 파일을 대상 컴퓨터로 가져간다.
@@ -18,8 +19,13 @@
 python scripts/check_portability.py --program results/initial_model/program.json --output portability-HOST.json
 ```
 
-Linux 검증 결과는 `results/initial_model/portability-linux.json`에 있다. 대상 OS의
+Linux/Windows 검증 결과는 `results/initial_model/portability-linux.json` 및
+`portability-windows.json`에 있다. 두 프로그램 SHA-256이 같으며 재학습 없이
+성공했다. Windows 테스트 폴더는 `C:\Users\audwn\Desktop\vectorpro-windows-test-20261004`다.
+`--work-dir`로 임시 파일 테스트도 이 폴더 안에서 수행했다. 대상 OS의
 결과와 프로그램 SHA-256을 비교한다. 플랫폼별 파일 시스템 특성이 다르므로
 이 검사 성공은 모든 경로·모든 OS 동작의 동일성을 증명하는 것은 아니다.
 호스트 경로 입력은 이식 가능한 UTF-8 상대 경로로 통일하며, 역슬래시·드라이브
 접두사·상위 디렉터리 접근을 거절한다.
+
+2026-10-04 사용자 결정으로 macOS 검증은 후속 과제로 보류한다.

@@ -1,0 +1,41 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "quantization": "Q8_0",
+  "model_bytes": 639446688,
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "llama_cpp_python": "0.3.36",
+  "real_model_inference": true,
+  "scripted_replies": false,
+  "container": "vectorpro-test",
+  "results": {
+    "clarify": {
+      "passed": false,
+      "response": {
+        "status": "answered",
+        "text": "<ask_user>What is the missing intent or evidence for the operation? Please provide a question or description so I can assist further.</ask_user>",
+        "tools": []
+      }
+    },
+    "file": {
+      "passed": true,
+      "response": {
+        "status": "answered",
+        "text": "The result of using the map function on input.bin with mask 53 at width 16 is 4.",
+        "tools": [
+          {
+            "name": "execute",
+            "result": {
+              "status": "executed",
+              "outputs": [
+                4
+              ],
+              "capability": "map",
+              "history": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

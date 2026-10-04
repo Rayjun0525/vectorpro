@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "response": {
+    "status": "needs_input",
+    "question": "What transformation or output would you like to perform with input.bin?",
+    "tools": [
+      {
+        "name": "ask_user",
+        "result": {
+          "status": "needs_input",
+          "question": "What transformation or output would you like to perform with input.bin?"
+        }
+      }
+    ]
+  }
+}

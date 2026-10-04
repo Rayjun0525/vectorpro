@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "I need more information to proceed. Could you please describe what transformation or output you would like to perform with the input.bin file?",
+    "tools": []
+  }
+}

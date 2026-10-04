@@ -1,0 +1,14 @@
+{
+  "platform": "Windows",
+  "python": "3.12.14",
+  "status": "passed",
+  "same_program": "C:\\Users\\audwn\\Desktop\\vectorpro-windows-test-20261004\\program.json",
+  "sha256": "5bc028a30497f24b082b06a9288e49d9a10d1f311d6f9f41dd217f762cf243cc",
+  "checks": [
+    "numeric",
+    "mutable_loop",
+    "conditional_loop",
+    "multiple_loops",
+    "unicode_paths"
+  ]
+}

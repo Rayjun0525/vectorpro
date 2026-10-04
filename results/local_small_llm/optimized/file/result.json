@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "execute(name='map', width=16, operands=[[{'utf8':'input.bin'},53]])",
+    "tools": []
+  }
+}

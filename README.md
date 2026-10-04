@@ -479,8 +479,8 @@ path/buffer handles are not passed as numeric arguments. Results fit the machine
 W-bit registers, including truncation of a numeric capability's wider output.
 Older effectful programs without full type contracts remain executable but are
 not inferred as search operators. Arithmetic learning
-continues to use the existing unit/composition/bit-fold strategies. LLM intent
-interpretation is a future adapter, not a dependency for acquired functions.
+continues to use the existing unit/composition/bit-fold strategies. The optional
+LLM adapter prepares intent/evidence; acquired functions do not depend on it.
 
 `experiments/stateful_numeric_learning.py` learns XOR from JSON examples, learns
 a first-byte observation procedure, then discovers a procedure combining both
@@ -527,6 +527,41 @@ dependency is required. Acquired functions remain usable with the ordinary JSON
 CLI after the model is disconnected. See [LLM adapter guide](docs/LLM_ADAPTER.md).
 Protocol tests use scripted replies and a local HTTP fixture; live model quality
 and Windows/macOS execution are not inferred from those tests.
+
+On 2026-10-04 the user explicitly authorized native Windows tests in a desktop
+directory. The same program SHA-256 passed the portability checker on Linux and
+Windows without retraining; see `results/initial_model/portability-windows.json`.
+An assistant also intercepted real tool calls to teach a new NAND function,
+execute it after reload on 100 held-out 16/32-bit cases, and mutate a native file.
+This exercised the assistant-to-learner bridge without an external model API.
+macOS remains unverified. The default one-container test rule is retained.
+
+## Tensor catalog and retrieval experiments
+
+The new prototypes store an exact typed tensor tree and semantic search vectors
+in one `program.pt` file. Metadata can be reconstructed as JSON, edited and saved
+back into the same file. The ordinary runtime JSON format remains unchanged.
+
+`experiments/catalog_retrieval.py` replaces Qwen hidden-state pooling with a
+trained multilingual MiniLM sentence encoder. Search documents come from tensor
+calls, routing and control plus supplied machine semantics. An explicit input-type
+filter removes incompatible candidates. It does not infer types from test labels.
+
+Original requests improved from top1 1/4 to 4/4, with all four selected functions
+executed correctly. On a separate final set of 24 English/Korean requests, semantic
+search alone scored top1 12/24 and top3 21/24; supplied input types raised top1 to
+24/24. Sixteen cases had one compatible candidate and eight required semantic
+disambiguation. These are finite prototype results, not universal accuracy.
+
+The actual Qwen tool-loop test passed known arithmetic, clarification and native
+file execution under constrained decoding. New-function example generation still
+failed; the later evidence-size guard rejected duplicate examples and asked for
+input. Search integration into that LLM loop remains future work.
+
+For prerequisites, commands, expected results and preserved output paths, see
+[testing instructions](docs/TESTING.md), [tensor catalog details](docs/TENSOR_CATALOG.md)
+and [LLM adapter results](docs/LLM_ADAPTER.md). Models live in the existing container,
+outside the repository. macOS verification is deferred at the user's request.
 
 ## Roadmap
 

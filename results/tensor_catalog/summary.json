@@ -1,0 +1,67 @@
+{
+  "exact_roundtrip": true,
+  "unicode_types_roundtrip": true,
+  "tensor_only_archive": true,
+  "capabilities": 12,
+  "numeric_heldout": 100,
+  "native_file_passed": true,
+  "metadata_edit_roundtrip": true,
+  "semantic_top1": 1,
+  "semantic_top3": 3,
+  "semantic_cases": 4,
+  "retrieval": [
+    {
+      "query": "Compute the bitwise exclusive OR of two numbers",
+      "expected": "xor",
+      "top1": "xor",
+      "top3": [
+        "xor",
+        "pair_map",
+        "sub"
+      ],
+      "top1_passed": true,
+      "top3_passed": true
+    },
+    {
+      "query": "Subtract one integer from another",
+      "expected": "sub",
+      "top1": "xor",
+      "top3": [
+        "xor",
+        "fill",
+        "sub"
+      ],
+      "top1_passed": false,
+      "top3_passed": true
+    },
+    {
+      "query": "Apply a byte XOR mask to every byte in a file",
+      "expected": "map",
+      "top1": "xor",
+      "top3": [
+        "xor",
+        "pair_map",
+        "fill"
+      ],
+      "top1_passed": false,
+      "top3_passed": false
+    },
+    {
+      "query": "Fill a file with a repeated byte value",
+      "expected": "fill",
+      "top1": "xor",
+      "top3": [
+        "xor",
+        "fill",
+        "sub"
+      ],
+      "top1_passed": false,
+      "top3_passed": true
+    }
+  ],
+  "archive_bytes": 290957,
+  "source_json_bytes": 59087,
+  "embedding": "Qwen causal hidden-state mean pooling, NOT a trained sentence encoder",
+  "storage": "typed numeric tree + UTF-8 byte tensor + float64 values; language remains encoded",
+  "prototype_only": true
+}

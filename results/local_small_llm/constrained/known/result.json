@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "response": {
+    "status": "answered",
+    "text": "The result of computing the bitwise XOR of 12345 and 4567 at width 16 is 8686.",
+    "tools": [
+      {
+        "name": "execute",
+        "result": {
+          "status": "executed",
+          "outputs": [
+            8686
+          ],
+          "capability": "xor",
+          "history": []
+        }
+      }
+    ]
+  }
+}

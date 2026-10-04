@@ -16,6 +16,17 @@ from vectorpro.runtime import VectorRuntime
 
 
 GUIDE = """You prepare evidence and use a learnable vector runtime, not a code interpreter.
+Call ONE tool at a time. Tools are separate functions: list_capabilities is NOT a
+capability name for execute. After an error, correct the arguments and retry.
+For an ambiguous request ALWAYS call ask_user, rather than asking in plain text.
+Do not invent XML tags such as <ask_user>. Call ask_user through the tool protocol.
+For numeric learning prefer teach_numeric: supply your own training and validation
+examples; the adapter derives the learning schedule, never the answers or algorithm.
+Provide at least 4 training examples and 2 validation examples for teach_numeric.
+Never write Python-like calls in text. Use the actual function-calling protocol.
+The execute operands JSON is [[12,3]] for numbers and [[{"utf8":"input.bin"},53]]
+for a path and a number. Both examples show argument format only.
+Look up the actual capability name and its arity before executing.
 Read list_capabilities and describe_capability before teaching. Known functions execute
 directly. Unknown functions need independent training/validation example sets. Use teach
 to acquire a function in memory, then execute only the user's requested native operation.
@@ -44,7 +55,25 @@ def tool(name, description, properties, required=()):
                            "additionalProperties": False}}}
 
 
+EXAMPLE_SCHEMA = {"type": "object", "properties": {
+    "width": {"type": "integer", "minimum": 1, "maximum": 32},
+    "operands": {"type": "array", "minItems": 1, "maxItems": 256,
+                 "items": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"type": "integer"}}},
+    "targets": {"type": "array", "minItems": 1, "maxItems": 256, "items": {"type": "integer"}}},
+    "required": ["width", "operands", "targets"], "additionalProperties": False}
+
+
 TOOLS = [tool("list_capabilities", "List acquired and provided capabilities with types", {}),
+         tool("teach_numeric", "Acquire a NEW numeric function from YOUR examples. No code. Separate training and validation.",
+              {"name": {"type": "string"}, "description": {"type": "string"},
+               "output": {"type": "string", "enum": ["W", "W+1", "2W", "1"]},
+               "training": {**EXAMPLE_SCHEMA, "properties": {**EXAMPLE_SCHEMA["properties"],
+                   "operands": {**EXAMPLE_SCHEMA["properties"]["operands"], "minItems": 4},
+                   "targets": {**EXAMPLE_SCHEMA["properties"]["targets"], "minItems": 4}}},
+               "validation": {**EXAMPLE_SCHEMA, "properties": {**EXAMPLE_SCHEMA["properties"],
+                   "operands": {**EXAMPLE_SCHEMA["properties"]["operands"], "minItems": 2},
+                   "targets": {**EXAMPLE_SCHEMA["properties"]["targets"], "minItems": 2}}}},
+              ("name", "description", "output", "training", "validation")),
          tool("describe_capability", "Read a capability's actual learned behaviour", {"name": {"type": "string"}}, ("name",)),
          tool("teach", "Learn from a data-only numeric/state lesson; never executes on native files",
               {"request": {"type": "object"}}, ("request",)),
@@ -85,6 +114,24 @@ class AgentSession:
         self.messages = [{"role": "system", "content": GUIDE}]
 
     def call(self, name, args):
+        if name == "teach_numeric":
+            if set(args) != {"name", "description", "output", "training", "validation"}:
+                raise ValueError("teach_numeric requires name, description, output, training, validation")
+            for split in ("training", "validation"):
+                examples = args[split]
+                if (type(examples["width"]) is not int or not 1 <= examples["width"] <= 32
+                        or not (4 if split == "training" else 2) <= len(examples["operands"]) <= 256
+                        or len(examples["operands"]) != len(examples["targets"])):
+                    raise ValueError("need width 1..32, at least 4 training and 2 validation examples, with matching operands/targets (max 256)")
+            arity = len(args["training"]["operands"][0])
+            if not 1 <= arity <= 3 or any(len(row) != arity for split in ("training", "validation") for row in args[split]["operands"]):
+                raise ValueError("all operand rows must have the same arity, 1..3")
+            return self.call("teach", {"request": {"name": args["name"], "plan": {
+                "name": args["name"], "description": args["description"], "arity": arity,
+                "output": args["output"], "rounds": [len(args["training"]["operands"])],
+                "train_width": args["training"]["width"], "validation_width": args["validation"]["width"],
+                "validation_examples": len(args["validation"]["operands"])},
+                "lesson": {split: args[split] for split in ("training", "validation")}}})
         if name == "list_capabilities":
             return [{"name": c.name, "arity": c.plan.arity, "provided": c.provenance["kind"] == "host",
                      "input_types": c.provenance.get("input_types"), "output_type": c.provenance.get("output_type")}
@@ -118,6 +165,13 @@ class AgentSession:
                 self.save()
             return asdict(result)
         if name == "execute":
+            capability = self.runtime.registry.get(args["name"]) if args["name"] in self.runtime.registry else None
+            if not args["operands"]:
+                raise ValueError("execute requires non-empty operands, e.g. [[12,3]]; list_capabilities is a separate tool")
+            if any(isinstance(value, str) for row in args["operands"] for value in row):
+                raise ValueError("execute operands cannot be strings. Encode a file path as {\"utf8\":\"input.bin\"}; numbers must be JSON integers, e.g. 53, not \"53\". Retry execute with corrected types.")
+            if capability and any(len(row) != capability.plan.arity for row in args["operands"]):
+                raise ValueError(f"{args['name']} requires {capability.plan.arity} operands per row; input types: {capability.provenance.get('input_types')}")
             operands = []
             for row in args["operands"]:
                 converted = []
@@ -144,6 +198,8 @@ class AgentSession:
             self.runtime.save(self.program_path)
 
     def run(self, intent: str):
+        self.messages.append({"role": "system", "content": "Available capabilities (names, arity and input types): " +
+                              json.dumps(self.call("list_capabilities", {}), ensure_ascii=False)})
         self.messages.append({"role": "user", "content": intent})
         events = []
         for _ in range(self.max_calls):

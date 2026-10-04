@@ -27,6 +27,30 @@ class ScriptedModel:
         return next(self.replies)
 
 
+def test_simplified_numeric_tool_preserves_examples_and_reloads(tmp_path):
+    torch.manual_seed(0)
+    data = json.loads((Path(__file__).resolve().parents[1] / "experiments/requests/learn_xor.json").read_text())
+    session = AgentSession(VectorRuntime(), ScriptedModel([]), tmp_path / "program.json")
+    args = {"name": "small_xor", "description": data["plan"]["description"],
+            "output": "W", **data["lesson"]}
+    result = session.call("teach_numeric", args)
+    assert result["status"] == "learned"
+    assert VectorRuntime.load(tmp_path / "program.json").request("small_xor", [(123, 45)], 16).outputs == [86]
+    args["training"] = {"width": 4, "operands": [[1, 2]], "targets": []}
+    with pytest.raises(ValueError, match="matching operands/targets"):
+        session.call("teach_numeric", args)
+
+
+def test_execute_type_error_gives_recovery_hint_without_mutating_files(tmp_path):
+    runtime = VectorRuntime(host=HostContext(tmp_path))
+    runtime.provide_host_operations()
+    session = AgentSession(runtime, ScriptedModel([]))
+    (tmp_path / "input.bin").write_bytes(b"original")
+    with pytest.raises(ValueError, match="Retry execute with corrected types"):
+        session.call("execute", {"name": "file.read", "width": 16, "operands": [["input.bin"]]})
+    assert (tmp_path / "input.bin").read_bytes() == b"original"
+
+
 def test_model_adapter_teaches_executes_saves_then_runs_without_model(tmp_path):
     torch.manual_seed(0)
     data = json.loads((Path(__file__).resolve().parents[1] / "experiments/requests/learn_xor.json").read_text())

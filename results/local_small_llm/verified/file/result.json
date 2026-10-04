@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "response": {
+    "status": "answered",
+    "text": "The request must contain at least one operand tuple. Please provide the operands for the function.",
+    "tools": [
+      {
+        "name": "execute",
+        "result": {
+          "status": "error",
+          "message": "request must contain at least one operand tuple"
+        }
+      }
+    ]
+  }
+}
