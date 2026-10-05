@@ -1,0 +1,282 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "states",
+  "suite": "heldout",
+  "cases": [
+    {
+      "name": "copy_en",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Create a byte-for-byte duplicate of source.bin at target.bin. Leave the original untouched.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "0959ac2ca35373c38cf675724cacb18bdfb3385830ace4eb4eabdd44ab9f10fd",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "move_en",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "3d3a5a2d23ff7e6832f786855659e93a0d329e1723126ee6ac57d2e228f2e1df",
+        "review": [
+          "source \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "copy_ko",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "source.bin \ub0b4\uc6a9\uc744 target.bin\uc5d0 \uadf8\ub300\ub85c \ubcf5\uc81c\ud558\uace0 \uc6d0\ubcf8 source.bin\uc740 \uadf8\ub300\ub85c \ub0a8\uaca8\uc918.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "42dd2544af7f6e549a47e17414086036eaa8e71bca6cf192777a3abe9079206a",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "move_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "source.bin\uc744 target.bin\uc73c\ub85c \uc62e\uaca8\uc918. target.bin \ub0b4\uc6a9\uc740 \uae30\uc874 source.bin\uacfc \uac19\uace0 source.bin\uc740 \uc5c6\uc5b4\uc57c \ud574.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "b71a6933cfdc013f2cb28dbb98cb04c17796baf4c5eeb525bf4675904ba60bc5",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "preserve_both",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Keep source.bin and target.bin exactly as they are. Do not change either file.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "ef6ac65818f9d1e03675214101cf759a2898ccde455983d9a3ac355af2fd1127",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "delete_target",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Remove target.bin while leaving source.bin unchanged.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "19aee311a3f9cc196cd52208285e6bd7b1ed3694b805efcabcfefa51e81bafb3",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "unsupported_reverse",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Reverse the order of bytes in source.bin and save the reversed data to target.bin.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "f8c0e6b4281d157cd647a520d844577347ac58db4bc10a53a4205957abdd8fd3",
+        "review": [
+          "source: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "ambiguous",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Do something useful with source.bin and target.bin.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "e77443e885ab7d1c82c49e66a58d249f0b8390bc79754bbf8d585dbb0c942c32",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    }
+  ]
+}

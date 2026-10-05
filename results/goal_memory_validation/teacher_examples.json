@@ -1,0 +1,176 @@
+[
+  {
+    "intent": "Copy the source file to the destination file without changing the source.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc744 \ubcf4\uc874\ud558\uace0 \ub300\uc0c1 \ud30c\uc77c\uc5d0 \uac19\uc740 \ub0b4\uc6a9\uc744 \ubcf5\uc0ac\ud55c\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Move the source file to the destination and remove the old source file.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc758 \uc774\ub984\uc744 \ub300\uc0c1 \uc774\ub984\uc73c\ub85c \ubcc0\uacbd\ud558\uace0 \uc774\uc804 \uc774\ub984\uc740 \uc5c6\uc564\ub2e4.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Preserve both files without any changes.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "\ub450 \ud30c\uc77c\uc744 \ubaa8\ub450 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uace0 \uc544\ubb34\uac83\ub3c4 \uc218\uc815\ud558\uc9c0 \uc54a\ub294\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Delete the destination file and retain the source file untouched.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc740 \uadf8\ub300\ub85c \ub450\uace0 \ub300\uc0c1 \ud30c\uc77c\ub9cc \uc0ad\uc81c\ud55c\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Encrypt the file with a password.",
+    "rules": null
+  },
+  {
+    "intent": "Change the byte values or reorder the contents of the file.",
+    "rules": null
+  },
+  {
+    "intent": "\ud30c\uc77c \ub0b4\uc6a9\uc744 \uc554\ud638\ud654\ud558\uac70\ub098 \ubc14\uc774\ud2b8 \uc21c\uc11c\ub97c \ubc14\uafbc\ub2e4.",
+    "rules": null
+  },
+  {
+    "intent": "Process the files somehow, with no specified result.",
+    "rules": null
+  },
+  {
+    "intent": "\ud30c\uc77c\ub85c \ubb54\uac00 \uc791\uc5c5\uc744 \ud55c\ub2e4. \uc6d0\ud558\ub294 \uacb0\uacfc\ub294 \uc815\ud558\uc9c0 \uc54a\uc558\ub2e4.",
+    "rules": null
+  }
+]

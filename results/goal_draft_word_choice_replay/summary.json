@@ -1,0 +1,114 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "per_parameter",
+  "suite": "replay",
+  "choice_adapter": true,
+  "compact_choice": true,
+  "cases": [
+    {
+      "name": "copy",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Duplicate source.bin into target.bin, preserving source.bin.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "81265df77b172928d8e6ea73fd41c74ea36ed1d5807694c79c526b3298306b4a",
+        "review": [
+          "source \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "move",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Rename source.bin to target.bin. Afterward source.bin must not exist.",
+          "rules": [
+            {
+              "kind": "present",
+              "parameter": "source"
+            },
+            {
+              "kind": "present",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "3ca260001d1f6a73dd4c15fec0fd725533ae6cb8a60b4316756192382b4826d8",
+        "review": [
+          "source: \ud30c\uc77c \ub610\ub294 \ud3f4\ub354\uac00 \uc874\uc7ac\ud574\uc57c \ud568",
+          "destination: \ud30c\uc77c \ub610\ub294 \ud3f4\ub354\uac00 \uc874\uc7ac\ud574\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "unsupported",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Encrypt source.bin into target.bin using a secret key.",
+          "rules": [
+            {
+              "kind": "present",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "c2a2f3d99af13c3263119c769e11de74092d9e637ad87b36799e2b6f3dde394b",
+        "review": [
+          "source: \ud30c\uc77c \ub610\ub294 \ud3f4\ub354\uac00 \uc874\uc7ac\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    }
+  ]
+}

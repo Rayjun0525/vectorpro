@@ -1,0 +1,56 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "states",
+  "suite": "replay",
+  "cases": [
+    {
+      "name": "copy",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Duplicate source.bin into target.bin, preserving source.bin.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "27577ee7c973247f18ccd9d08d74feb67de6fe73053132b709edad4394083ff3",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "name": "move",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the name of the file you want to rename?"
+      }
+    },
+    {
+      "name": "unsupported",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the name of the file you want to encrypt? Be specific (e.g., 'source.bin')"
+      }
+    }
+  ]
+}

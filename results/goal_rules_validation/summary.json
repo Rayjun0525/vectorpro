@@ -1,0 +1,75 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "rules",
+  "suite": "replay",
+  "choice_adapter": false,
+  "compact_choice": false,
+  "word_choice": false,
+  "goal_memory": false,
+  "cases": [
+    {
+      "name": "copy_en",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Please specify if the file exists or is absent."
+      }
+    },
+    {
+      "name": "move_en",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the goal? Please specify the source and destination files or directories."
+      }
+    },
+    {
+      "name": "copy_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Please specify whether it should be absent or present."
+      }
+    },
+    {
+      "name": "move_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Is it absent, present, or unchanged?"
+      }
+    },
+    {
+      "name": "preserve_both",
+      "passed": false,
+      "result": {
+        "status": "goal_draft_failed",
+        "reason": "draft needs state conditions and one frame condition"
+      }
+    },
+    {
+      "name": "delete_target",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the destination file? Is it a file or a directory? Please specify if it\u2019s a file or a directory."
+      }
+    },
+    {
+      "name": "unsupported_reverse",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the goal? Please specify the source and destination file paths."
+      }
+    },
+    {
+      "name": "ambiguous",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the goal? Please specify the desired outcome, including any necessary source or destination files or directories.  Are there any files or directories that need to be removed or preserved?  For example, 'present' means the file or directory exists, 'absent' means it doesn't exist.  'unchanged' means the file or directory remains unchanged. 'equals_initial' means the final state is identical to the initial state.  'unchanged_except' means every other file or directory remains unchanged.  Please provide a detailed description of the desired state."
+      }
+    }
+  ]
+}

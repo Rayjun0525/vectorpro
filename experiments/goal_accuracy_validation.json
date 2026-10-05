@@ -1,0 +1,136 @@
+[
+  {
+    "name": "copy_en",
+    "intent": "Make a copy of the source file into the destination file and do not modify the source.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_en",
+    "intent": "Transfer the source file to the destination, leaving no source file behind.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "copy_ko",
+    "intent": "원본 파일의 내용은 손대지 말고 대상 파일로 복사해줘.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_ko",
+    "intent": "원본 파일을 대상 위치로 이동하고 원래 파일은 지워줘.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "preserve_both",
+    "intent": "Neither the source file nor the destination file should be modified.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "unchanged"
+      },
+      {
+        "parameters": [],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "delete_target",
+    "intent": "Erase the destination file only; the source file must remain intact.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "absent"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "unsupported_reverse",
+    "intent": "Compute a SHA256 hash of the source file and store it in the destination.",
+    "expected_rules": null
+  },
+  {
+    "name": "ambiguous",
+    "intent": "Please process these files.",
+    "expected_rules": null
+  }
+]

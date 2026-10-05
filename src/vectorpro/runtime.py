@@ -36,6 +36,7 @@ class VectorRuntime:
         self._rng = random.Random(seed)
         self._tensor_extras = {}
         self._intent_bindings = []
+        self._goal_memory = None
 
     def provide_host_operations(self, operations: Sequence[str] | None = None) -> None:
         """Install primitive descriptions; these are execution machinery, not learned rules."""
@@ -279,6 +280,9 @@ class VectorRuntime:
         if self._intent_bindings:
             from vectorpro.acquisition import validate_bindings
             data["intent_bindings"] = validate_bindings(self._intent_bindings, data["contracts"])
+        if self._goal_memory is not None:
+            from vectorpro.goal_memory import GoalMemory
+            data["goal_memory"] = GoalMemory.validate_data(self._goal_memory)
         temporary = None
         try:
             if path.suffix == ".pt":
@@ -330,4 +334,7 @@ class VectorRuntime:
         if "intent_bindings" in data:
             from vectorpro.acquisition import validate_bindings
             runtime._intent_bindings = validate_bindings(data["intent_bindings"], runtime.contracts())
+        if "goal_memory" in data:
+            from vectorpro.goal_memory import GoalMemory
+            runtime._goal_memory = GoalMemory.validate_data(data["goal_memory"])
         return runtime

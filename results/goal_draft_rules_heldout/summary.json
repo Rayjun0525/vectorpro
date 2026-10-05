@@ -1,0 +1,71 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "rules",
+  "suite": "heldout",
+  "cases": [
+    {
+      "name": "copy_en",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Is it a source file or a destination file?"
+      }
+    },
+    {
+      "name": "move_en",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Please specify if the file exists or is absent. Is the file source or destination?"
+      }
+    },
+    {
+      "name": "copy_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the desired final state of the file 'source.bin'?"
+      }
+    },
+    {
+      "name": "move_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the desired final state of the source file? Is the source file present, or do you want to remove it?"
+      }
+    },
+    {
+      "name": "preserve_both",
+      "passed": false,
+      "result": {
+        "status": "goal_draft_failed",
+        "reason": "draft needs state conditions and one frame condition"
+      }
+    },
+    {
+      "name": "delete_target",
+      "passed": false,
+      "result": {
+        "status": "goal_draft_failed",
+        "reason": "draft needs state conditions and one frame condition"
+      }
+    },
+    {
+      "name": "unsupported_reverse",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of the source file? Please specify if the file is absent or present."
+      }
+    },
+    {
+      "name": "ambiguous",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of source.bin and target.bin? Please specify if you want to preserve the original content or remove it."
+      }
+    }
+  ]
+}

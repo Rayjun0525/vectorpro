@@ -1,0 +1,719 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"absent\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unclear\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source.bin into target.bin, preserving source.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_parameter",
+          "description": "Choose the requested parameter's final state; no execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "unchanged",
+                  "absent",
+                  "present",
+                  "initial:source",
+                  "initial:destination",
+                  "unsupported",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "adapted_messages": [
+      {
+        "role": "user",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}\nAnswer with ONE letter only.\nChoices:\nA: unchanged\nB: absent\nC: present\nD: initial:source\nE: initial:destination\nF: unsupported\nG: unclear\n\nDuplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "content": "B"
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "content": "G"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source.bin into target.bin, preserving source.bin."
+      }
+    ],
+    "choice_map": {
+      "A": "unchanged",
+      "B": "absent",
+      "C": "present",
+      "D": "initial:source",
+      "E": "initial:destination",
+      "F": "unsupported",
+      "G": "unclear"
+    },
+    "raw_output": "G",
+    "seconds": 6.510721754995757,
+    "usage": {
+      "prompt_tokens": 370,
+      "completion_tokens": 1,
+      "total_tokens": 371
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"absent\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unclear\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin. Afterward source.bin must not exist."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_parameter",
+          "description": "Choose the requested parameter's final state; no execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "unchanged",
+                  "absent",
+                  "present",
+                  "initial:source",
+                  "initial:destination",
+                  "unsupported",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "adapted_messages": [
+      {
+        "role": "user",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}\nAnswer with ONE letter only.\nChoices:\nA: unchanged\nB: absent\nC: present\nD: initial:source\nE: initial:destination\nF: unsupported\nG: unclear\n\nDuplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "content": "B"
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "content": "G"
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin. Afterward source.bin must not exist."
+      }
+    ],
+    "choice_map": {
+      "A": "unchanged",
+      "B": "absent",
+      "C": "present",
+      "D": "initial:source",
+      "E": "initial:destination",
+      "F": "unsupported",
+      "G": "unclear"
+    },
+    "raw_output": "G",
+    "seconds": 0.3657437620131532,
+    "usage": {
+      "prompt_tokens": 373,
+      "completion_tokens": 1,
+      "total_tokens": 374
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"absent\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unchanged\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "notation",
+            "type": "function",
+            "function": {
+              "name": "describe_parameter",
+              "arguments": "{\"state\": \"unclear\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source.bin into target.bin using a secret key."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_parameter",
+          "description": "Choose the requested parameter's final state; no execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "unchanged",
+                  "absent",
+                  "present",
+                  "initial:source",
+                  "initial:destination",
+                  "unsupported",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "adapted_messages": [
+      {
+        "role": "user",
+        "content": "Read the actual request and choose ONE final state for the specified parameter. unchanged: keep this file exactly. absent: this file must be gone. present: require existence only. initial:NAME: exact original bytes from NAME. unsupported: ANY requested encryption, byte transformation, computation, process or network effect. unclear: the intended final effect is unspecified. Reject the WHOLE request if any effect is unsupported, even if this parameter is only preserved. Use unchanged for preservation, not initial:self. This is a draft requiring caller review.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]\nParameter to describe: {\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}\nAnswer with ONE letter only.\nChoices:\nA: unchanged\nB: absent\nC: present\nD: initial:source\nE: initial:destination\nF: unsupported\nG: unclear\n\nDuplicate source into destination, keeping source unchanged."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Move source into destination; source must no longer exist."
+      },
+      {
+        "role": "assistant",
+        "content": "B"
+      },
+      {
+        "role": "user",
+        "content": "Keep source and remove destination."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Keep all files exactly as they are."
+      },
+      {
+        "role": "assistant",
+        "content": "A"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file using a key."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes."
+      },
+      {
+        "role": "assistant",
+        "content": "F"
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with the files."
+      },
+      {
+        "role": "assistant",
+        "content": "G"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source.bin into target.bin using a secret key."
+      }
+    ],
+    "choice_map": {
+      "A": "unchanged",
+      "B": "absent",
+      "C": "present",
+      "D": "initial:source",
+      "E": "initial:destination",
+      "F": "unsupported",
+      "G": "unclear"
+    },
+    "raw_output": "G",
+    "seconds": 0.2887773690017639,
+    "usage": {
+      "prompt_tokens": 369,
+      "completion_tokens": 1,
+      "total_tokens": 370
+    }
+  }
+]

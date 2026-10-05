@@ -1,0 +1,136 @@
+[
+  {
+    "name": "copy_en",
+    "intent": "Create a byte-for-byte duplicate of source.bin at target.bin. Leave the original untouched.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_en",
+    "intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "copy_ko",
+    "intent": "source.bin \ub0b4\uc6a9\uc744 target.bin\uc5d0 \uadf8\ub300\ub85c \ubcf5\uc81c\ud558\uace0 \uc6d0\ubcf8 source.bin\uc740 \uadf8\ub300\ub85c \ub0a8\uaca8\uc918.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_ko",
+    "intent": "source.bin\uc744 target.bin\uc73c\ub85c \uc62e\uaca8\uc918. target.bin \ub0b4\uc6a9\uc740 \uae30\uc874 source.bin\uacfc \uac19\uace0 source.bin\uc740 \uc5c6\uc5b4\uc57c \ud574.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "preserve_both",
+    "intent": "Keep source.bin and target.bin exactly as they are. Do not change either file.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "unchanged"
+      },
+      {
+        "parameters": [],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "delete_target",
+    "intent": "Remove target.bin while leaving source.bin unchanged.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "absent"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "unsupported_reverse",
+    "intent": "Reverse the order of bytes in source.bin and save the reversed data to target.bin.",
+    "expected_rules": null
+  },
+  {
+    "name": "ambiguous",
+    "intent": "Do something useful with source.bin and target.bin.",
+    "expected_rules": null
+  }
+]

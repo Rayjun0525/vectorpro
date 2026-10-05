@@ -1,0 +1,1 @@
+{"intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.", "expected": "source absent; target initial source bytes; keep and empty unchanged"}

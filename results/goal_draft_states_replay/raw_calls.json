@@ -1,0 +1,260 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nA trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source.bin into target.bin, preserving source.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}}</tool_call>",
+    "seconds": 10.966640213999199,
+    "usage": {
+      "prompt_tokens": 509,
+      "completion_tokens": 40,
+      "total_tokens": 549
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nA trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin. Afterward source.bin must not exist."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"ask_user\",\"arguments\":{ \"question\": \"What is the name of the file you want to rename?\"}}</tool_call>",
+    "seconds": 4.201201132003916,
+    "usage": {
+      "prompt_tokens": 512,
+      "completion_tokens": 37,
+      "total_tokens": 549
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nA trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source.bin into target.bin using a secret key."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": {\"question\": \"What is the name of the file you want to encrypt? Be specific (e.g., 'source.bin')\"}}</tool_call>",
+    "seconds": 5.794124085994554,
+    "usage": {
+      "prompt_tokens": 508,
+      "completion_tokens": 50,
+      "total_tokens": 558
+    }
+  }
+]

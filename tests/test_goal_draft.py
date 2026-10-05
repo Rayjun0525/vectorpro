@@ -27,7 +27,7 @@ class Model:
 def test_draft_is_detached_and_never_collects(monkeypatch):
     providers = ReferenceProviders(manifests())
     monkeypatch.setattr(providers, "collect", lambda *a: pytest.fail("drafting collected evidence"))
-    draft = propose_goal(Model(), providers, INTENT)
+    draft = propose_goal(Model(), providers, INTENT, encoding="rules")
     assert draft["status"] == "needs_goal_review"
     assert any("없어야" in line for line in draft["review"])
     with pytest.raises(ValueError):
@@ -39,7 +39,7 @@ def test_draft_is_detached_and_never_collects(monkeypatch):
 
 @pytest.mark.parametrize("change", ["rules", "intent", "review", "digest", "approval"])
 def test_changed_proposal_or_approval_rejected(change):
-    draft = propose_goal(Model(), ReferenceProviders(manifests()), INTENT)
+    draft = propose_goal(Model(), ReferenceProviders(manifests()), INTENT, encoding="rules")
     approval = draft["proposal_sha256"]
     if change == "rules":
         draft["goal"]["rules"][1]["kind"] = "unchanged"
@@ -60,17 +60,17 @@ def test_changed_proposal_or_approval_rejected(change):
     ("propose_goal", {"rules": RULES[:2]}),
     ("propose_goal", {"rules": RULES, "intent": "substituted"})])
 def test_invalid_or_self_approval_tool_fails(name, args):
-    assert propose_goal(Model(name, args), ReferenceProviders(manifests()), INTENT)["status"] == "goal_draft_failed"
+    assert propose_goal(Model(name, args), ReferenceProviders(manifests()), INTENT, encoding="rules")["status"] == "goal_draft_failed"
 
 
 def test_missing_semantics_returns_question():
-    result = propose_goal(Model("ask_user", {"question": "Specify intended effects"}), ReferenceProviders(manifests()), INTENT)
+    result = propose_goal(Model("ask_user", {"question": "Specify intended effects"}), ReferenceProviders(manifests()), INTENT, encoding="rules")
     assert result["status"] == "needs_input" and "goal" not in result
 
 
 def test_accepted_draft_executes_and_reloads_without_collecting(tmp_path, monkeypatch):
     providers = ReferenceProviders(manifests())
-    draft = propose_goal(Model(), providers, INTENT)
+    draft = propose_goal(Model(), providers, INTENT, encoding="rules")
     goal = accept_goal(draft, draft["proposal_sha256"])
     runtime = VectorRuntime.load("results/reference_acquisition_gemma/program.pt", host=HostContext(tmp_path))
     (tmp_path / "source.bin").write_bytes(b"unseen")

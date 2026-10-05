@@ -1,0 +1,136 @@
+[
+  {
+    "name": "copy_en",
+    "intent": "Create a byte-for-byte duplicate of source.bin at target.bin. Leave the original untouched.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_en",
+    "intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "copy_ko",
+    "intent": "source.bin 내용을 target.bin에 그대로 복제하고 원본 source.bin은 그대로 남겨줘.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_ko",
+    "intent": "source.bin을 target.bin으로 옮겨줘. target.bin 내용은 기존 source.bin과 같고 source.bin은 없어야 해.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "preserve_both",
+    "intent": "Keep source.bin and target.bin exactly as they are. Do not change either file.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "unchanged"
+      },
+      {
+        "parameters": [],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "delete_target",
+    "intent": "Remove target.bin while leaving source.bin unchanged.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "absent"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "unsupported_reverse",
+    "intent": "Reverse the order of bytes in source.bin and save the reversed data to target.bin.",
+    "expected_rules": null
+  },
+  {
+    "name": "ambiguous",
+    "intent": "Do something useful with source.bin and target.bin.",
+    "expected_rules": null
+  }
+]

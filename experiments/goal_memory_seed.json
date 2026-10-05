@@ -1,0 +1,176 @@
+[
+  {
+    "intent": "Copy the source file to the destination file without changing the source.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "원본 파일을 보존하고 대상 파일에 같은 내용을 복사한다.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Move the source file to the destination and remove the old source file.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "원본 파일의 이름을 대상 이름으로 변경하고 이전 이름은 없앤다.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Preserve both files without any changes.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "두 파일을 모두 그대로 유지하고 아무것도 수정하지 않는다.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Delete the destination file and retain the source file untouched.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "원본 파일은 그대로 두고 대상 파일만 삭제한다.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Encrypt the file with a password.",
+    "rules": null
+  },
+  {
+    "intent": "Change the byte values or reorder the contents of the file.",
+    "rules": null
+  },
+  {
+    "intent": "파일 내용을 암호화하거나 바이트 순서를 바꾼다.",
+    "rules": null
+  },
+  {
+    "intent": "Process the files somehow, with no specified result.",
+    "rules": null
+  },
+  {
+    "intent": "파일로 뭔가 작업을 한다. 원하는 결과는 정하지 않았다.",
+    "rules": null
+  }
+]

@@ -1,0 +1,190 @@
+[
+  {
+    "name": "copy_en",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "b7dd1669581aab551f2ba5c02d985921ae14adc633660725b4d956af11e119f1",
+        "similarity": 0.5122430920600891,
+        "margin": 0.012787342071533203,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "move_en",
+    "result": {
+      "status": "needs_goal_review",
+      "goal": {
+        "intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.",
+        "rules": [
+          {
+            "kind": "absent",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "proposal_sha256": "a17e87e726c88bc91e462bb1aa53f161c406fb04be58629ea1b1a372ece62639",
+      "review": [
+        "source: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+        "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+        "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+      ],
+      "intent_independently_verified": false,
+      "retrieval": {
+        "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+        "similarity": 0.5973078608512878,
+        "margin": 0.04178673028945923,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "copy_ko",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+        "similarity": 0.4056762158870697,
+        "margin": 0.015554040670394897,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "move_ko",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+        "similarity": 0.4719703793525696,
+        "margin": 0.058418214321136475,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "preserve_both",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+        "similarity": 0.5241982936859131,
+        "margin": 0.008982360363006592,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "delete_target",
+    "result": {
+      "status": "needs_goal_review",
+      "goal": {
+        "intent": "Remove target.bin while leaving source.bin unchanged.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      },
+      "proposal_sha256": "d54f8550aab94238360c1e0af64473282d993c673748f942d9b7c764bd069198",
+      "review": [
+        "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+        "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+        "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+      ],
+      "intent_independently_verified": false,
+      "retrieval": {
+        "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+        "similarity": 0.6028236150741577,
+        "margin": 0.033376455307006836,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "unsupported_reverse",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "11073fe60be03fb9a3cb02841d42813125f3f58c6bf38ad051f6904bab1c8e1e",
+        "similarity": 0.704890251159668,
+        "margin": 0.2310415506362915,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  },
+  {
+    "name": "ambiguous",
+    "result": {
+      "status": "needs_input",
+      "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      "retrieval": {
+        "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+        "similarity": 0.4005310535430908,
+        "margin": 0.00211334228515625,
+        "encoder_identity": {
+          "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+        },
+        "source": "caller-labelled goal examples; not independent intent proof"
+      }
+    }
+  }
+]

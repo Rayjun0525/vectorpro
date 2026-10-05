@@ -1,0 +1,136 @@
+[
+  {
+    "name": "copy_en",
+    "intent": "Make a copy of the source file into the destination file and do not modify the source.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_en",
+    "intent": "Transfer the source file to the destination, leaving no source file behind.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "copy_ko",
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc758 \ub0b4\uc6a9\uc740 \uc190\ub300\uc9c0 \ub9d0\uace0 \ub300\uc0c1 \ud30c\uc77c\ub85c \ubcf5\uc0ac\ud574\uc918.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "move_ko",
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc744 \ub300\uc0c1 \uc704\uce58\ub85c \uc774\ub3d9\ud558\uace0 \uc6d0\ub798 \ud30c\uc77c\uc740 \uc9c0\uc6cc\uc918.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "absent"
+      },
+      {
+        "source": "source",
+        "parameter": "destination",
+        "kind": "equals_initial"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "preserve_both",
+    "intent": "Neither the source file nor the destination file should be modified.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "unchanged"
+      },
+      {
+        "parameters": [],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "delete_target",
+    "intent": "Erase the destination file only; the source file must remain intact.",
+    "expected_rules": [
+      {
+        "parameter": "source",
+        "kind": "unchanged"
+      },
+      {
+        "parameter": "destination",
+        "kind": "absent"
+      },
+      {
+        "parameters": [
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "name": "unsupported_reverse",
+    "intent": "Compute a SHA256 hash of the source file and store it in the destination.",
+    "expected_rules": null
+  },
+  {
+    "name": "ambiguous",
+    "intent": "Please process these files.",
+    "expected_rules": null
+  }
+]

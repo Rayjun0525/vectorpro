@@ -18,7 +18,7 @@ def validate_goal(goal):
         if kind not in ("absent", "present", "unchanged", "equals_initial", "unchanged_except") or set(rule) != fields:
             raise ValueError("unsupported goal rule")
         names = rule["parameters"] if kind == "unchanged_except" else [rule["parameter"]] + ([rule["source"]] if kind == "equals_initial" else [])
-        if not isinstance(names, list) or not names or len(names) > 16 or any(not isinstance(n, str) or not 1 <= len(n) <= 100 for n in names):
+        if not isinstance(names, list) or (not names and kind != "unchanged_except") or len(names) > 16 or any(not isinstance(n, str) or not 1 <= len(n) <= 100 for n in names):
             raise ValueError("goal references bounded parameter names")
     return copy.deepcopy(goal)
 

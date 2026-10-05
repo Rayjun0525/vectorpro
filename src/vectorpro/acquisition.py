@@ -173,6 +173,7 @@ class EvidenceBank:
         staged = VectorRuntime(Registry.from_data(runtime.registry.to_data()), config=runtime.learner.config)
         staged._rng.setstate(runtime._rng.getstate())
         staged._intent_bindings = bindings
+        staged._goal_memory = copy.deepcopy(runtime._goal_memory)
         staged._tensor_extras = runtime._tensor_extras.copy()
         if program_path is not None:
             staged.save(program_path)
@@ -198,6 +199,7 @@ class EvidenceBank:
         # The candidate is disposable until hidden acceptance AND persistence pass.
         staged = VectorRuntime(Registry.from_data(runtime.registry.to_data()), config=runtime.learner.config)
         staged._intent_bindings = copy.deepcopy(runtime._intent_bindings)
+        staged._goal_memory = copy.deepcopy(runtime._goal_memory)
         staged._rng.setstate(runtime._rng.getstate())
         key = "state_lesson" if "state_lesson" in source else "lesson"
         start = monotonic()

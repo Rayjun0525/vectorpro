@@ -1,0 +1,2274 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Create a byte-for-byte duplicate of source.bin at target.bin. Leave the original untouched."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 17.90439607000735,
+    "usage": {
+      "prompt_tokens": 491,
+      "completion_tokens": 27,
+      "total_tokens": 518
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Create a byte-for-byte duplicate of source.bin at target.bin. Leave the original untouched."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 31.99238632900233,
+    "usage": {
+      "prompt_tokens": 771,
+      "completion_tokens": 40,
+      "total_tokens": 811
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Put the original bytes of source.bin in target.bin and delete source.bin afterward."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 21.41341148300853,
+    "usage": {
+      "prompt_tokens": 488,
+      "completion_tokens": 27,
+      "total_tokens": 515
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Put the original bytes of source.bin in target.bin and delete source.bin afterward."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"initial:source\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 28.858911169998464,
+    "usage": {
+      "prompt_tokens": 768,
+      "completion_tokens": 41,
+      "total_tokens": 809
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source.bin \ub0b4\uc6a9\uc744 target.bin\uc5d0 \uadf8\ub300\ub85c \ubcf5\uc81c\ud558\uace0 \uc6d0\ubcf8 source.bin\uc740 \uadf8\ub300\ub85c \ub0a8\uaca8\uc918."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 17.914851281006122,
+    "usage": {
+      "prompt_tokens": 492,
+      "completion_tokens": 27,
+      "total_tokens": 519
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source.bin \ub0b4\uc6a9\uc744 target.bin\uc5d0 \uadf8\ub300\ub85c \ubcf5\uc81c\ud558\uace0 \uc6d0\ubcf8 source.bin\uc740 \uadf8\ub300\ub85c \ub0a8\uaca8\uc918."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 23.507725919000222,
+    "usage": {
+      "prompt_tokens": 772,
+      "completion_tokens": 40,
+      "total_tokens": 812
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source.bin\uc744 target.bin\uc73c\ub85c \uc62e\uaca8\uc918. target.bin \ub0b4\uc6a9\uc740 \uae30\uc874 source.bin\uacfc \uac19\uace0 source.bin\uc740 \uc5c6\uc5b4\uc57c \ud574."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 14.309050471987575,
+    "usage": {
+      "prompt_tokens": 500,
+      "completion_tokens": 27,
+      "total_tokens": 527
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source.bin\uc744 target.bin\uc73c\ub85c \uc62e\uaca8\uc918. target.bin \ub0b4\uc6a9\uc740 \uae30\uc874 source.bin\uacfc \uac19\uace0 source.bin\uc740 \uc5c6\uc5b4\uc57c \ud574."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 21.58291462699708,
+    "usage": {
+      "prompt_tokens": 780,
+      "completion_tokens": 40,
+      "total_tokens": 820
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source.bin and target.bin exactly as they are. Do not change either file."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 15.282859886006918,
+    "usage": {
+      "prompt_tokens": 488,
+      "completion_tokens": 27,
+      "total_tokens": 515
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source.bin and target.bin exactly as they are. Do not change either file."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 21.161324669999885,
+    "usage": {
+      "prompt_tokens": 768,
+      "completion_tokens": 40,
+      "total_tokens": 808
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Remove target.bin while leaving source.bin unchanged."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 14.481143829005305,
+    "usage": {
+      "prompt_tokens": 480,
+      "completion_tokens": 27,
+      "total_tokens": 507
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Remove target.bin while leaving source.bin unchanged."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 24.71802537300391,
+    "usage": {
+      "prompt_tokens": 760,
+      "completion_tokens": 40,
+      "total_tokens": 800
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes in source.bin and save the reversed data to target.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 15.012884014009614,
+    "usage": {
+      "prompt_tokens": 488,
+      "completion_tokens": 27,
+      "total_tokens": 515
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse the order of bytes in source.bin and save the reversed data to target.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 23.999843894009246,
+    "usage": {
+      "prompt_tokens": 768,
+      "completion_tokens": 40,
+      "total_tokens": 808
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Classify the request only. supported: exact copying, moving, deletion, existence, or preserving file bytes. unsupported: encrypting, changing byte values/order, calculating, processes or networking. ambiguous: intended final effect is not stated. Classify the ENTIRE request; any unsupported effect makes it unsupported. This is model triage, not independent verification."
+      },
+      {
+        "role": "user",
+        "content": "Duplicate a file while keeping its original."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Rename a file and remove its old name."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"supported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Reverse all the bytes in a file."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"unsupported\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something with these files."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "support-example",
+            "type": "function",
+            "function": {
+              "name": "assess_goal",
+              "arguments": "{\"decision\": \"ambiguous\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with source.bin and target.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "assess_goal",
+          "description": "Classify whether the entire requested effect can be expressed by file-state predicates",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"assess_goal\", \"arguments\": {\"decision\": \"supported\"}}</tool_call>",
+    "seconds": 15.998213938000845,
+    "usage": {
+      "prompt_tokens": 481,
+      "completion_tokens": 27,
+      "total_tokens": 508
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the FINAL STATE of EACH file parameter. Make one tool call.\nunchanged = keep this existing file and its bytes.\nabsent = this file must NOT exist afterward.\npresent = require existence only, with no byte condition.\ninitial:NAME = final bytes must equal the ORIGINAL bytes of parameter NAME.\nUse initial:NAME for exact byte duplication, not for encryption or transformation.\nRead explicit keep/remove conditions carefully. A request saying a file must not exist means absent.\nReturn states for ALL parameters. Other files and folders will be preserved by the backend.\nUse ask_user only for ambiguous or unsupported effects: encryption, content transformations, processes, network, numeric results.\nUse unchanged rather than initial:NAME when retaining that same NAME unchanged. A trusted caller reviews this draft before any execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source as it is; destination should contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "source must be gone; destination must contain the original bytes of source."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"absent\", \"destination\": \"initial:source\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Keep source; remove destination."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "propose_goal",
+              "arguments": "{\"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Encrypt a file with a secret key."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "example",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"Encryption is outside these state predicates; provide a supported goal.\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Do something useful with source.bin and target.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Describe each parameter's final state without executing",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "states"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"propose_goal\", \"arguments\": {\"states\": {\"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 23.384928019004292,
+    "usage": {
+      "prompt_tokens": 761,
+      "completion_tokens": 40,
+      "total_tokens": 801
+    }
+  }
+]

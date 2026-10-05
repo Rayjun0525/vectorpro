@@ -885,8 +885,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--program", type=Path, required=True)
     parser.add_argument("--host-root", type=Path)
-    parser.add_argument("--endpoint", required=True, help="full chat/completions endpoint URL")
-    parser.add_argument("--model", required=True)
+    parser.add_argument("--endpoint", help="full chat/completions endpoint URL")
+    parser.add_argument("--model")
     parser.add_argument("--api-key-env", default="VECTORPRO_LLM_API_KEY")
     parser.add_argument("--intent", required=True)
     parser.add_argument("--encoder", type=Path, help="enable tensor-catalog resolution with a local multilingual MiniLM directory")
@@ -896,18 +896,29 @@ def main(argv=None):
     parser.add_argument("--reference-providers", type=Path, help="caller-installed external reference manifests for automatic observation")
     parser.add_argument("--request-goal", type=Path, help="caller-owned exact intent and state predicates; independent of model reference selection")
     parser.add_argument("--draft-goal", action="store_true", help="return a reviewable goal draft and stop before acquisition or execution")
+    parser.add_argument("--goal-memory-encoder", type=Path, help="draft from stored goal examples with a matching local encoder; no LLM request")
     args = parser.parse_args(argv)
+    if args.goal_memory_encoder and not args.draft_goal:
+        parser.error("--goal-memory-encoder requires --draft-goal")
+    if not args.goal_memory_encoder and (not args.endpoint or not args.model):
+        parser.error("--endpoint and --model are required for LLM mode")
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
     if host:
         runtime.provide_host_operations()
-    model = HTTPChatModel(args.endpoint, args.model, os.environ.get(args.api_key_env))
+    model = HTTPChatModel(args.endpoint, args.model, os.environ.get(args.api_key_env)) if not args.goal_memory_encoder else None
     if args.draft_goal:
         if not args.reference_providers or args.request_goal or args.acquisition_evidence or args.encoder:
             parser.error("--draft-goal requires --reference-providers and cannot combine with supplied goals/evidence/catalog")
         from vectorpro.reference_evidence import ReferenceProviders
         from vectorpro.goal_draft import propose_goal
-        draft = propose_goal(model, ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8"))), args.intent)
+        memory = None
+        if args.goal_memory_encoder:
+            from vectorpro.goal_memory import GoalMemory
+            from vectorpro.semantic_catalog import Encoder
+            identity = json.loads((args.goal_memory_encoder / "download.json").read_text())
+            memory = GoalMemory.from_runtime(runtime, Encoder(args.goal_memory_encoder), identity)
+        draft = propose_goal(model, ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8"))), args.intent, goal_memory=memory)
         print(json.dumps(draft, ensure_ascii=False))
         return 2  # Drafting never reports a completed task.
     catalog = None

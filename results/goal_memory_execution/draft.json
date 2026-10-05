@@ -1,0 +1,41 @@
+{
+  "status": "needs_goal_review",
+  "goal": {
+    "intent": "Put the original bytes of source.bin in target.bin and delete source.bin afterward.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  "proposal_sha256": "a17e87e726c88bc91e462bb1aa53f161c406fb04be58629ea1b1a372ece62639",
+  "review": [
+    "source: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+    "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+    "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+  ],
+  "intent_independently_verified": false,
+  "retrieval": {
+    "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+    "similarity": 0.5973078608512878,
+    "margin": 0.04178673028945923,
+    "encoder_identity": {
+      "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+    },
+    "source": "caller-labelled goal examples; not independent intent proof"
+  }
+}

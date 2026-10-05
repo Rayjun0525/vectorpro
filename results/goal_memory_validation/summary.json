@@ -1,0 +1,285 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "rules",
+  "suite": "replay",
+  "choice_adapter": false,
+  "compact_choice": false,
+  "word_choice": false,
+  "goal_memory": true,
+  "cases": [
+    {
+      "name": "copy_en",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Make a copy of the source file into the destination file and do not modify the source.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "4a55f1385e3e171042ae363934006dad812548ae0da9f16dd8e1d0991ea37421",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "similarity": 0.9492827653884888,
+          "margin": 0.23352324962615967,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "move_en",
+      "passed": false,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Transfer the source file to the destination, leaving no source file behind.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "b00dd7e28509c6d2a0bfb21bd6d0174706cade432f7130ba95901cd091cbde67",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "similarity": 0.8508400321006775,
+          "margin": 0.038315415382385254,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "copy_ko",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc758 \ub0b4\uc6a9\uc740 \uc190\ub300\uc9c0 \ub9d0\uace0 \ub300\uc0c1 \ud30c\uc77c\ub85c \ubcf5\uc0ac\ud574\uc918.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "d2251a8dba20f79db976f23207d191e3c70f43b62a368ec5b26800785c9ca5b3",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "b7dd1669581aab551f2ba5c02d985921ae14adc633660725b4d956af11e119f1",
+          "similarity": 0.8641029596328735,
+          "margin": 0.21883612871170044,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "move_ko",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc744 \ub300\uc0c1 \uc704\uce58\ub85c \uc774\ub3d9\ud558\uace0 \uc6d0\ub798 \ud30c\uc77c\uc740 \uc9c0\uc6cc\uc918.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "24764e03b54ecb9d44a10fe7c43e184b71355fd26faa47f2fe9845d3ba005f38",
+        "review": [
+          "source: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+          "similarity": 0.7823795080184937,
+          "margin": 0.06547415256500244,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "preserve_both",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "similarity": 0.5086210370063782,
+          "margin": 0.00483626127243042,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "delete_target",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Erase the destination file only; the source file must remain intact.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "5701393d8d56554d1130cc60a967c212f9d1cf9f8546857a7e9525fa29a773e1",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "similarity": 0.8788226842880249,
+          "margin": 0.24361324310302734,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "unsupported_reverse",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "similarity": 0.5073484182357788,
+          "margin": 0.08782753348350525,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    },
+    {
+      "name": "ambiguous",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "89de94c0cb7b8726f511b0a84a9e920a5e35e7aef7b38e2f7f467c13665bfbcc",
+          "similarity": 0.4789417088031769,
+          "margin": 0.13531437516212463,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof"
+        }
+      }
+    }
+  ]
+}
