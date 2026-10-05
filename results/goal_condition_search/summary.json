@@ -1,0 +1,1139 @@
+{
+  "protocol": "16 new fixed minimal-pair requests; no LLM/caller answers; condition weights fit existing persisted examples only; preview never proves intent",
+  "metrics": {
+    "baseline": {
+      "correct": 7,
+      "supported_correct": 3,
+      "supported_total": 12,
+      "total": 16,
+      "wrong_proposals": 0
+    },
+    "conditions": {
+      "correct": 5,
+      "supported_correct": 1,
+      "supported_total": 12,
+      "total": 16,
+      "wrong_proposals": 1
+    },
+    "agreement": {
+      "correct": 5,
+      "supported_correct": 1,
+      "supported_total": 12,
+      "total": 16,
+      "wrong_proposals": 0
+    }
+  },
+  "cases": [
+    {
+      "index": 0,
+      "intent": "Transfer the source bytes into destination, retaining the source file.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.03226548433303833,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.3042849898338318,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8780196309089661,
+              "nearest_margin": 0.07003539800643921,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.3886878788471222,
+                "margin": 0.08485168218612671
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 1,
+      "intent": "Transfer the source bytes into destination, deleting the source file.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.36923642456531525,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5520429611206055,
+              "score_is_probability": false,
+              "nearest_similarity": 0.810210108757019,
+              "nearest_margin": 0.0367661714553833,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": true,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Transfer the source bytes into destination, deleting the source file.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "c73fb645f4fab70d04791b63d7f8b79dbd8b3d537e7d3f98f617f6705c01139b",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.7014485597610474,
+                "margin": 0.518642008304596
+              },
+              "state:destination": {
+                "value": "absent",
+                "score": 0.7069892287254333,
+                "margin": 0.5241826772689819
+              },
+              "state:source": {
+                "value": "equals_initial:destination",
+                "score": 0.7041155695915222,
+                "margin": 0.5213090181350708
+              }
+            },
+            "score_is_probability": false
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": [
+        {
+          "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          },
+          "checked_cases": 3
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "intent": "source를 destination에 전달하고 source는 남겨둬.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.05088278651237488,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.2708173394203186,
+              "score_is_probability": false,
+              "nearest_similarity": 0.7423691153526306,
+              "nearest_margin": 0.07885551452636719,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "source"
+                ],
+                "score": 0.2708173096179962,
+                "margin": 0.009031355381011963
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 3,
+      "intent": "source를 destination에 전달하고 source는 없애줘.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.05703943967819214,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.3208294212818146,
+              "score_is_probability": false,
+              "nearest_similarity": 0.768745481967926,
+              "nearest_margin": 0.11836642026901245,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.3326915204524994,
+                "margin": 0.06890156865119934
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 4,
+      "intent": "Transfer the destination bytes into source, retaining the destination file.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.1430557668209076,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5381010174751282,
+              "score_is_probability": false,
+              "nearest_similarity": 0.9146756529808044,
+              "nearest_margin": 0.07201522588729858,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.5271218419075012,
+                "margin": 0.13207665085792542
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 5,
+      "intent": "Transfer the destination bytes into source, deleting the destination file.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Transfer the destination bytes into source, deleting the destination file.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "a87eb621bd64dc8bbb76c58f852b91c73fd58ef387a0d5007f04bd0bcb7352f3",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.4008403420448303,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.7506479620933533,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8473620414733887,
+              "nearest_margin": 0.12696588039398193,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Transfer the destination bytes into source, deleting the destination file.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "a87eb621bd64dc8bbb76c58f852b91c73fd58ef387a0d5007f04bd0bcb7352f3",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.8108632564544678,
+                "margin": 0.46105557680130005
+              },
+              "state:destination": {
+                "value": "absent",
+                "score": 0.8665563464164734,
+                "margin": 0.5734357237815857
+              },
+              "state:source": {
+                "value": "equals_initial:destination",
+                "score": 1.1004557609558105,
+                "margin": 0.9612175226211548
+              }
+            },
+            "score_is_probability": false
+          }
+        },
+        "agreement": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Transfer the destination bytes into source, deleting the destination file.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "a87eb621bd64dc8bbb76c58f852b91c73fd58ef387a0d5007f04bd0bcb7352f3",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.8108632564544678,
+                "margin": 0.46105557680130005
+              },
+              "state:destination": {
+                "value": "absent",
+                "score": 0.8665563464164734,
+                "margin": 0.5734357237815857
+              },
+              "state:source": {
+                "value": "equals_initial:destination",
+                "score": 1.1004557609558105,
+                "margin": 0.9612175226211548
+              }
+            },
+            "score_is_probability": false
+          }
+        }
+      },
+      "matching_tensor_routes": [
+        {
+          "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          },
+          "checked_cases": 3
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "intent": "destination을 source에 전달하고 destination은 남겨둬.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.047171056270599365,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.49907609820365906,
+              "score_is_probability": false,
+              "nearest_similarity": 0.7780564427375793,
+              "nearest_margin": 0.13495928049087524,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "source"
+                ],
+                "score": 0.4519050419330597,
+                "margin": 0.011845827102661133
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 7,
+      "intent": "destination을 source에 전달하고 destination은 없애줘.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination을 source에 전달하고 destination은 없애줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "b8702dffa76f10786d4e5a255216eb5a5ad112da93e437878cc4ba089962ec9a",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.21693986654281616,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.6360663175582886,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8090828061103821,
+              "nearest_margin": 0.17650353908538818,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination",
+                  "source"
+                ],
+                "score": 0.500921368598938,
+                "margin": 0.08179491758346558
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 8,
+      "intent": "Keep source and destination exactly as they were; alter no files.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.02463802695274353,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5077401995658875,
+              "score_is_probability": false,
+              "nearest_similarity": 0.6473888158798218,
+              "nearest_margin": 0.017377793788909912,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 0.647335410118103,
+                "margin": 0.13959521055221558
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 9,
+      "intent": "Keep source exactly as it was; remove destination only.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Keep source exactly as it was; remove destination only.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "73387bd61f1c5c9416c2fb39cc8b8c201f156573aa8fc60aa1ceb5c3d2cbf1cd",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.3795621395111084,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.8887831568717957,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8249491453170776,
+              "nearest_margin": 0.19157469272613525,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 1.0077497959136963,
+                "margin": 0.4985288381576538
+              },
+              "state:destination": {
+                "value": "absent",
+                "score": 0.6495625972747803,
+                "margin": 0.08833271265029907
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 10,
+      "intent": "source와 destination을 둘 다 그대로 두고 다른 파일도 그대로 둬.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.03724467754364014,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.3843764066696167,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8168262243270874,
+              "nearest_margin": 0.06344079971313477,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 0.5421532988548279,
+                "margin": 0.2331056296825409
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 11,
+      "intent": "source는 그대로 두고 destination만 제거하고 다른 파일도 그대로 둬.",
+      "supported": true,
+      "results": {
+        "baseline": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.12045255303382874,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5537046790122986,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8286639451980591,
+              "nearest_margin": 0.06904482841491699,
+              "consensus": true
+            }
+          }
+        },
+        "conditions": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 0.6480356454849243,
+                "margin": 0.20287978649139404
+              },
+              "state:destination": {
+                "value": "absent",
+                "score": 0.5656081438064575,
+                "margin": 0.0380246639251709
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": false,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 12,
+      "intent": "Keep source intact and also delete source after copying it.",
+      "supported": false,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.028299659490585327,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5281467437744141,
+              "score_is_probability": false,
+              "nearest_similarity": 0.6843442916870117,
+              "nearest_margin": 0.012771308422088623,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 0.9727659225463867,
+                "margin": 0.44461923837661743
+              },
+              "state:destination": {
+                "value": "unchanged",
+                "score": 0.6894194483757019,
+                "margin": 0.5499321520328522
+              },
+              "state:source": {
+                "value": "unchanged",
+                "score": 1.1340388059616089,
+                "margin": 1.0459650307893753
+              }
+            },
+            "reason": "No unique existing goal satisfies all predicted conditions"
+          }
+        },
+        "agreement": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 13,
+      "intent": "Reverse source bytes into destination while retaining source.",
+      "supported": false,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.05683237314224243,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5427108407020569,
+              "score_is_probability": false,
+              "nearest_similarity": 0.8037731647491455,
+              "nearest_margin": 0.022395610809326172,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": [
+                  "destination"
+                ],
+                "score": 0.44201138615608215,
+                "margin": 0.19080546498298645
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 14,
+      "intent": "source를 보존하고 destination에 암호화해서 전달해.",
+      "supported": false,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+              "margin": 0.08480900526046753,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5101983547210693,
+              "score_is_probability": false,
+              "nearest_similarity": 0.658973217010498,
+              "nearest_margin": 0.007895112037658691,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": null,
+                "score": 0.5101983547210693,
+                "margin": 0.08480909466743469
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    },
+    {
+      "index": 15,
+      "intent": "Do the appropriate thing with source and destination.",
+      "supported": false,
+      "results": {
+        "baseline": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+              "margin": 0.22446367144584656,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge_consensus",
+              "score": 0.5536618232727051,
+              "score_is_probability": false,
+              "nearest_similarity": 0.6197421550750732,
+              "nearest_margin": 0.10724985599517822,
+              "consensus": false
+            }
+          }
+        },
+        "conditions": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input",
+            "conditions": {
+              "allowed_changes": {
+                "value": null,
+                "score": 0.5536618232727051,
+                "margin": 0.22446367144584656
+              }
+            }
+          }
+        },
+        "agreement": {
+          "correct": true,
+          "wrong_proposal": false,
+          "proposal": {
+            "status": "needs_input"
+          }
+        }
+      },
+      "matching_tensor_routes": []
+    }
+  ]
+}

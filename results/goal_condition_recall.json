@@ -1,0 +1,2012 @@
+{
+  "protocol": "same16 cases diagnostic; positive candidate ranking is not supportedness/intent proof; no LLM",
+  "supported_total": 12,
+  "recall": {
+    "1": 4,
+    "2": 7,
+    "3": 10,
+    "6": 12
+  },
+  "cases": [
+    {
+      "intent": "Transfer the source bytes into destination, retaining the source file.",
+      "supported": true,
+      "correct_goal_rank": 3,
+      "ranked_goals": [
+        {
+          "similarity": 0.8780196309089661,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.8079842925071716,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7809042930603027,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.7030941247940063,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5956369042396545,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "similarity": 0.5910248756408691,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Transfer the source bytes into destination, deleting the source file.",
+      "supported": true,
+      "correct_goal_rank": 2,
+      "ranked_goals": [
+        {
+          "similarity": 0.8102102875709534,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7734439373016357,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.7041075229644775,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6938621997833252,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.677803635597229,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.44865861535072327,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source를 destination에 전달하고 source는 남겨둬.",
+      "supported": true,
+      "correct_goal_rank": 3,
+      "ranked_goals": [
+        {
+          "similarity": 0.7423690557479858,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6635136008262634,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6532993912696838,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.629891037940979,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6051797866821289,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.45936957001686096,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source를 destination에 전달하고 source는 없애줘.",
+      "supported": true,
+      "correct_goal_rank": 5,
+      "ranked_goals": [
+        {
+          "similarity": 0.768745481967926,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6503791213035583,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6312965154647827,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6081072688102722,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5890697240829468,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.364846408367157,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Transfer the destination bytes into source, retaining the destination file.",
+      "supported": true,
+      "correct_goal_rank": 2,
+      "ranked_goals": [
+        {
+          "similarity": 0.9146754741668701,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.8426603674888611,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7414116263389587,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6971230506896973,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5932086706161499,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "similarity": 0.581455647945404,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Transfer the destination bytes into source, deleting the destination file.",
+      "supported": true,
+      "correct_goal_rank": 1,
+      "ranked_goals": [
+        {
+          "similarity": 0.8473621606826782,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.720396101474762,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7098854780197144,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6915513277053833,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.674985408782959,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.452236533164978,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "destination을 source에 전달하고 destination은 남겨둬.",
+      "supported": true,
+      "correct_goal_rank": 2,
+      "ranked_goals": [
+        {
+          "similarity": 0.7780564427375793,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6430971026420593,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.603906512260437,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5398784875869751,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5130003094673157,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.39069610834121704,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "destination을 source에 전달하고 destination은 없애줘.",
+      "supported": true,
+      "correct_goal_rank": 1,
+      "ranked_goals": [
+        {
+          "similarity": 0.8090826869010925,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6325792074203491,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6184710264205933,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5168693661689758,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5167221426963806,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.3414466679096222,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Keep source and destination exactly as they were; alter no files.",
+      "supported": true,
+      "correct_goal_rank": 3,
+      "ranked_goals": [
+        {
+          "similarity": 0.6473889350891113,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6300110816955566,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6194994449615479,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "similarity": 0.5935673713684082,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.559855043888092,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.472367525100708,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Keep source exactly as it was; remove destination only.",
+      "supported": true,
+      "correct_goal_rank": 1,
+      "ranked_goals": [
+        {
+          "similarity": 0.8249492049217224,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6333745718002319,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6030831336975098,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.5935216546058655,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5242302417755127,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5003584027290344,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source와 destination을 둘 다 그대로 두고 다른 파일도 그대로 둬.",
+      "supported": true,
+      "correct_goal_rank": 6,
+      "ranked_goals": [
+        {
+          "similarity": 0.8168262243270874,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.7533853650093079,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.719802737236023,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.693798303604126,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6427708268165588,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6081216335296631,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source는 그대로 두고 destination만 제거하고 다른 파일도 그대로 둬.",
+      "supported": true,
+      "correct_goal_rank": 1,
+      "ranked_goals": [
+        {
+          "similarity": 0.8286639451980591,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.7596191763877869,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.7495879530906677,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7186559438705444,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6787359118461609,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.562174916267395,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Keep source intact and also delete source after copying it.",
+      "supported": false,
+      "correct_goal_rank": null,
+      "ranked_goals": [
+        {
+          "similarity": 0.6843443512916565,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6715729832649231,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6215555667877197,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.5975203514099121,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.527471661567688,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "similarity": 0.5023061037063599,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Reverse source bytes into destination while retaining source.",
+      "supported": false,
+      "correct_goal_rank": null,
+      "ranked_goals": [
+        {
+          "similarity": 0.8037731051445007,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.7813776731491089,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6933086514472961,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6718634366989136,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.6139748096466064,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "similarity": 0.5210855007171631,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source를 보존하고 destination에 암호화해서 전달해.",
+      "supported": false,
+      "correct_goal_rank": null,
+      "ranked_goals": [
+        {
+          "similarity": 0.658973217010498,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.6510781049728394,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.5871478915214539,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.5842543244361877,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.49760013818740845,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.4913194477558136,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Do the appropriate thing with source and destination.",
+      "supported": false,
+      "correct_goal_rank": null,
+      "ranked_goals": [
+        {
+          "similarity": 0.6197421550750732,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.512492299079895,
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        {
+          "similarity": 0.4958508014678955,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.4937756061553955,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.4338141679763794,
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        {
+          "similarity": 0.32134202122688293,
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "intent": "Transfer the source bytes into destination, retaining the source file.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Transfer the source bytes into destination, deleting the source file.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source를 destination에 전달하고 source는 남겨둬.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source를 destination에 전달하고 source는 없애줘.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Transfer the destination bytes into source, retaining the destination file.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Transfer the destination bytes into source, deleting the destination file.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "destination을 source에 전달하고 destination은 남겨둬.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "destination을 source에 전달하고 destination은 없애줘.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Keep source and destination exactly as they were; alter no files.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Keep source exactly as it was; remove destination only.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source와 destination을 둘 다 그대로 두고 다른 파일도 그대로 둬.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "source는 그대로 두고 destination만 제거하고 다른 파일도 그대로 둬.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Keep source intact and also delete source after copying it.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Reverse source bytes into destination while retaining source.",
+    "expected_rules": null
+  },
+  {
+    "intent": "source를 보존하고 destination에 암호화해서 전달해.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Do the appropriate thing with source and destination.",
+    "expected_rules": null
+  }
+]

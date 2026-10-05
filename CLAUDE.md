@@ -5,6 +5,8 @@
 
 추가로 읽을 문서:
 
+- [LLM 없는 조건별 검색과 선택/실행 정확도의 구분](docs/GOAL_CONDITION_SEARCH.md)
+
 - [후보 차이 확인 질문의 모의 호출자/Gemma 비교와 실패](docs/GOAL_QUESTIONS.md)
 
 - [목표 분류 학습·합의·새 독립 평가와 남은 한계](docs/GOAL_ROUTER.md)

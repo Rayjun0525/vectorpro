@@ -1,5 +1,8 @@
 # 테스트와 결과 확인
 
+LLM 없는 조건별 검색의 새16건, 후보 순위/최종 선택/가상 실행의 분리 검증은
+[GOAL_CONDITION_SEARCH.md](GOAL_CONDITION_SEARCH.md). 관련35 passed (4.52초).
+
 후속 질문 생성·답변 연결·오래된 질문 거부의 관련34개 테스트와 실제 Gemma 비교,
 메모리 환경의 기존 텐서 후보12회 실행은 [GOAL_QUESTIONS.md](GOAL_QUESTIONS.md).
 전체392 passed (261.70초), 마지막 JSON 왕복 표현 검증 후 관련34 passed (3.62초).
