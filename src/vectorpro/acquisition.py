@@ -27,9 +27,9 @@ def validate_bindings(bindings, contracts):
         raise ValueError("at most 256 verified request bindings")
     keys = set()
     for binding in bindings:
-        if not isinstance(binding, dict) or set(binding) != required or not isinstance(binding["contract_id"], str) or binding["contract_id"] not in ids:
+        if not isinstance(binding, dict) or not required <= set(binding) or set(binding) - required - {"goal_sha256"} or not isinstance(binding["contract_id"], str) or binding["contract_id"] not in ids:
             raise ValueError("request binding must reference a current contract")
-        for field in ("intent_sha256", "source_sha256"):
+        for field in ("intent_sha256", "source_sha256") + (("goal_sha256",) if "goal_sha256" in binding else ()):
             value = binding[field]
             if not isinstance(value, str) or len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
                 raise ValueError("request binding requires SHA-256 hex")
@@ -43,7 +43,9 @@ def validate_bindings(bindings, contracts):
 
 
 class EvidenceBank:
-    def __init__(self, records):
+    def __init__(self, records, goal=None):
+        from vectorpro.goal_evidence import validate_goal, check_goal
+        self.goal = validate_goal(goal) if goal is not None else None
         if not isinstance(records, list) or len(records) > 32:
             raise ValueError("evidence bank needs at most 32 records")
         self._records = {}
@@ -88,6 +90,8 @@ class EvidenceBank:
                         rounds=(len(examples.training),), train_width=examples.training.width,
                         validation_width=examples.validation.width, validation_examples=len(examples.validation))
                     examples.validate(plan)
+            if self.goal is not None:
+                check_goal(self.goal, record)
             self._records[record["id"]] = record
 
     def describe(self, intent):
@@ -102,6 +106,8 @@ class EvidenceBank:
             receipts += [b for b in runtime._intent_bindings
                          if b["intent_sha256"] == digest(intent) and b["contract_id"] == contract_id]
         for approved in receipts:
+            if self.goal is not None and (self.goal["intent"] != intent or approved.get("goal_sha256") != digest(self.goal)):
+                continue
             source = self._records.get(approved.get("source_id"))
             if source is None or (source["intent"] == intent and approved.get("source_sha256") == digest(source)):
                 return True
@@ -158,7 +164,9 @@ class EvidenceBank:
             return {"status": "ambiguous_reuse", "reason": "multiple contracts passed current evidence"}
         contract, count = matches[0]
         binding = {"contract_id": contract["id"], "intent_sha256": digest(intent),
-                   "source_id": source_id, "source_sha256": digest(source), "checked_cases": count}
+                     "source_id": source_id, "source_sha256": digest(source), "checked_cases": count}
+        if self.goal is not None:
+            binding["goal_sha256"] = digest(self.goal)
         bindings = [b for b in runtime._intent_bindings if (b["contract_id"], b["intent_sha256"]) != (contract["id"], digest(intent))]
         bindings.append(binding)
         validate_bindings(bindings, runtime.contracts())
@@ -221,6 +229,8 @@ class EvidenceBank:
                       "intent_sha256": digest(intent), "origin": source["origin"],
                       "heldout_cases": len(passed), "passed": len(passed),
                       "scope": "caller-controlled finite evidence; not universal or independent intent proof"}
+        if self.goal is not None:
+            acceptance["goal_sha256"] = digest(self.goal)
         cap.provenance["acceptance"] = acceptance
         contract = staged.contract(draft["name"])
         if program_path is not None:

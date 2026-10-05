@@ -22,3 +22,6 @@ results/verified_reuse*/copy/** -text
 results/verified_reuse*/move/** -text
 results/verified_reuse*/repeat/** -text
 results/verified_reuse*/unsupported/** -text
+results/goal_evidence*/copy/** -text
+results/goal_evidence*/move/** -text
+results/goal_evidence*/repeat/** -text

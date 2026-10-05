@@ -30,6 +30,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=Path("results/verified_reuse"))
     parser.add_argument("--live-gemma", action="store_true")
+    parser.add_argument("--caller-goals", action="store_true", help="supply independently fixed state predicates; measure clean rejection separately")
     parser.add_argument("--run-kind", choices=("first-use", "replay"), default="first-use")
     args = parser.parse_args()
     root = args.output
@@ -40,10 +41,17 @@ def main():
     cases = [("copy", "Please duplicate source.bin into target.bin and keep source.bin."),
              ("move", "Rename source.bin to target.bin, so source.bin no longer exists."),
              ("repeat", "Please duplicate source.bin into target.bin and keep source.bin.")]
-    if args.live_gemma:
+    if args.live_gemma and not args.caller_goals:
         cases.append(("unsupported", "Encrypt source.bin into target.bin using a secret key."))
     (root / "cases.json").write_text(json.dumps(cases, indent=2), encoding="utf-8")
     (root / "providers.json").write_text(json.dumps(definitions, indent=2), encoding="utf-8")
+    goals = {kind: {"intent": intent, "rules": [
+        {"kind": "equals_initial", "parameter": "destination", "source": "source"},
+        {"kind": "absent" if kind == "move" else "unchanged", "parameter": "source"},
+        {"kind": "unchanged_except", "parameters": ["source", "destination"]}]}
+        for kind, intent in cases} if args.caller_goals else {}
+    if goals:
+        (root / "caller_goals.json").write_text(json.dumps(goals, indent=2), encoding="utf-8")
     runtime = VectorRuntime.load(SOURCE)
     initial_registry, initial_contracts = runtime.registry.to_data(), runtime.contracts()
     (root / "initial_contracts.json").write_text(json.dumps(initial_contracts, indent=2), encoding="utf-8")
@@ -65,7 +73,7 @@ def main():
         runtime.host = HostContext(native)
         selected = model or ProtocolModel(kind, copy_contract if kind == "repeat" else None)
         session = AgentSession(runtime, selected, program, reference_providers=ReferenceProviders(definitions),
-                               allow_learning=kind != "repeat")
+                               allow_learning=kind != "repeat", request_goal=goals.get(kind))
         result = session.run(intent)
         if kind == "copy" and result["status"] == "executed":
             copy_contract = next(c for c in runtime.contracts() if c["id"] == result["contract_id"])
@@ -89,7 +97,12 @@ def main():
             else:
                 passed = passed and any(e["result"].get("status") == "reused" for e in result["tools"])
         passed = passed and runtime.registry.to_data() == initial_registry and runtime.contracts() == initial_contracts
-        checks.append({"kind": kind, "passed": passed, "result": result, "files": files, "directories": directories})
+        rejected_cleanly = (result["status"] in ("needs_input", "not_executed")
+            and files == {"keep": b"keep".hex(), "source.bin": data.hex()} and directories == ["empty"]
+            and all(e["name"] != "call_contract" for e in result["tools"])
+            and runtime.registry.to_data() == initial_registry)
+        checks.append({"kind": kind, "passed": passed, "rejected_cleanly": rejected_cleanly,
+            "result": result, "files": files, "directories": directories})
         (root / "summary.json").write_text(json.dumps({"protocol": "live wording evaluation" if model else "scripted protocol", "run_kind": args.run_kind,
             "cases": checks, "unchanged_contracts": runtime.contracts() == initial_contracts}, indent=2), encoding="utf-8")
         if model:

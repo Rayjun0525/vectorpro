@@ -1,0 +1,437 @@
+{
+  "protocol": "scripted protocol",
+  "run_kind": "first-use",
+  "cases": [
+    {
+      "kind": "copy",
+      "passed": true,
+      "rejected_cleanly": false,
+      "result": {
+        "status": "executed",
+        "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+        "contract_version": 1,
+        "capability": "copy_input_to_output",
+        "outputs": [
+          21
+        ],
+        "effects": [
+          {
+            "operation": "file.read",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              2,
+              3
+            ],
+            "result": 21
+          }
+        ],
+        "tools": [
+          {
+            "name": "collect_evidence",
+            "result": {
+              "status": "reused",
+              "contract": {
+                "version": 1,
+                "name": "copy_input_to_output",
+                "description": "Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path",
+                "input_types": [
+                  "path",
+                  "path"
+                ],
+                "argument_roles": [
+                  "relative file path",
+                  "relative file path"
+                ],
+                "output_width": "W",
+                "has_effects": true,
+                "parameters": [
+                  {
+                    "name": "source",
+                    "type": "path",
+                    "role": "source file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  },
+                  {
+                    "name": "destination",
+                    "type": "path",
+                    "role": "destination file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  }
+                ],
+                "output": {
+                  "type": "value",
+                  "width": "W"
+                },
+                "width": {
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "execution": {
+                  "address": [
+                    -0.12802205979824066,
+                    0.12203803658485413,
+                    0.09308016300201416,
+                    0.09026636928319931,
+                    0.039235178381204605,
+                    0.20040567219257355,
+                    -0.06567467004060745,
+                    0.2337123453617096,
+                    -0.017018724232912064,
+                    -0.24985916912555695,
+                    0.08968071639537811,
+                    0.13600493967533112,
+                    0.1515030860900879,
+                    -0.27595606446266174,
+                    0.13895906507968903,
+                    -0.12516863644123077,
+                    0.2679005563259125,
+                    0.022303402423858643,
+                    0.2203834056854248,
+                    0.19223394989967346,
+                    -0.2867884635925293,
+                    0.22575050592422485,
+                    -0.11315823346376419,
+                    -0.29351139068603516,
+                    0.21851837635040283,
+                    0.29363369941711426,
+                    -0.1523236632347107,
+                    0.12928107380867004,
+                    0.06581558287143707,
+                    -0.0076348790898919106,
+                    -0.24291963875293732,
+                    -0.026176350191235542
+                  ],
+                  "requires_host": true,
+                  "operations": [
+                    "file.read",
+                    "file.write"
+                  ],
+                  "digest": "85d2f2c7f2f934479e001f758f6542f9a500cb95a6557cb14ded94f08034a18d"
+                },
+                "verification": {
+                  "source": "stored training/validation records; not independent intent proof",
+                  "history": [
+                    {
+                      "strategy": "state search",
+                      "steps": 2,
+                      "candidates": 2,
+                      "control": "sequence",
+                      "tensor_steps": 2,
+                      "training_cases": 2,
+                      "validation_cases": 2,
+                      "accepted": true
+                    }
+                  ],
+                  "audit": null
+                },
+                "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+                "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de"
+              },
+              "binding": {
+                "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+                "intent_sha256": "d9213d01f90fafda43e54ee4ede7e99859fa33d96bc837410b22fd0dd6947e96",
+                "source_id": "reference:a123845fdfa4ca1fcbf83ee4",
+                "source_sha256": "287ae9f2326684b422def6c056a5aeaf29fa58521e6b0cdb15317203ac782fc5",
+                "checked_cases": 7,
+                "goal_sha256": "2233ca3bc9a8944f9a2b432c9bb580df3e06a2ed2931723339db7146aa55eaae"
+              },
+              "intent_independently_verified": false
+            }
+          },
+          {
+            "name": "call_contract",
+            "result": {
+              "status": "executed",
+              "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+              "contract_version": 1,
+              "capability": "copy_input_to_output",
+              "outputs": [
+                21
+              ],
+              "effects": [
+                {
+                  "operation": "file.read",
+                  "arguments": [
+                    1
+                  ],
+                  "result": 3
+                },
+                {
+                  "operation": "file.write",
+                  "arguments": [
+                    2,
+                    3
+                  ],
+                  "result": 21
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "files": {
+        "keep": "6b656570",
+        "source.bin": "6e657700ffebafb8ec82acec9aa920ec9e85eba0a5",
+        "target.bin": "6e657700ffebafb8ec82acec9aa920ec9e85eba0a5"
+      },
+      "directories": [
+        "empty"
+      ]
+    },
+    {
+      "kind": "move",
+      "passed": true,
+      "rejected_cleanly": false,
+      "result": {
+        "status": "executed",
+        "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+        "contract_version": 1,
+        "capability": "input_bin",
+        "outputs": [
+          1
+        ],
+        "effects": [
+          {
+            "operation": "file.move",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 1
+          }
+        ],
+        "tools": [
+          {
+            "name": "collect_evidence",
+            "result": {
+              "status": "reused",
+              "contract": {
+                "version": 1,
+                "name": "input_bin",
+                "description": "Apply operations to two separate files. Move a file to a destination path, replacing a destination file; return 1. \ud30c\uc77c \uc774\ub3d9 \uc774\ub984 \ubcc0\uacbd.",
+                "input_types": [
+                  "path",
+                  "path"
+                ],
+                "argument_roles": [
+                  "relative file path",
+                  "relative file path"
+                ],
+                "output_width": "W",
+                "has_effects": true,
+                "parameters": [
+                  {
+                    "name": "source",
+                    "type": "path",
+                    "role": "source file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  },
+                  {
+                    "name": "destination",
+                    "type": "path",
+                    "role": "destination file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  }
+                ],
+                "output": {
+                  "type": "value",
+                  "width": "W"
+                },
+                "width": {
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "execution": {
+                  "address": [
+                    -0.0077123199589550495,
+                    -0.15699291229248047,
+                    -0.09706755727529526,
+                    -0.0708136186003685,
+                    0.11461237818002701,
+                    -0.22643935680389404,
+                    -0.028082409873604774,
+                    -0.038145918399095535,
+                    -0.016760217025876045,
+                    0.2731595039367676,
+                    0.11692118644714355,
+                    -0.09458065778017044,
+                    -0.07171164453029633,
+                    -0.2599439322948456,
+                    0.33207252621650696,
+                    0.40459144115448,
+                    -0.04582778736948967,
+                    0.13854998350143433,
+                    0.11362021416425705,
+                    0.05255519226193428,
+                    -0.4033063054084778,
+                    0.1046043261885643,
+                    -0.10487351566553116,
+                    -0.16917528212070465,
+                    -0.004602100234478712,
+                    0.2295074760913849,
+                    0.07809511572122574,
+                    -0.038924530148506165,
+                    -0.22642646729946136,
+                    -0.06202943995594978,
+                    0.18418622016906738,
+                    -0.22466623783111572
+                  ],
+                  "requires_host": true,
+                  "operations": [
+                    "file.move"
+                  ],
+                  "digest": "5178ece7da87952b6e3134473b2b7a1d3d0239f728b86387b6e8598856edc6dc"
+                },
+                "verification": {
+                  "source": "stored training/validation records; not independent intent proof",
+                  "history": [
+                    {
+                      "strategy": "state search",
+                      "steps": 1,
+                      "candidates": 2,
+                      "control": "sequence",
+                      "tensor_steps": 1,
+                      "training_cases": 2,
+                      "validation_cases": 2,
+                      "accepted": true
+                    }
+                  ],
+                  "audit": null
+                },
+                "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+                "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858"
+              },
+              "binding": {
+                "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+                "intent_sha256": "e9e40f0e0b251a8c4e871f3eca467f8941a41b5d8c92ede4c16721a41a42f038",
+                "source_id": "reference:8fd82bf4440dc66811d8458c",
+                "source_sha256": "ac663217af0a92be0675bed460a42e6dcf46cf08e67b997f72678ed6764136eb",
+                "checked_cases": 7,
+                "goal_sha256": "6a678cc2e0489b3faac025daf2a2be6a878cf812d61fe8d74e01db5c45c0932d"
+              },
+              "intent_independently_verified": false
+            }
+          },
+          {
+            "name": "call_contract",
+            "result": {
+              "status": "executed",
+              "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+              "contract_version": 1,
+              "capability": "input_bin",
+              "outputs": [
+                1
+              ],
+              "effects": [
+                {
+                  "operation": "file.move",
+                  "arguments": [
+                    1,
+                    2
+                  ],
+                  "result": 1
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "files": {
+        "keep": "6b656570",
+        "target.bin": "6e657700ffebafb8ec82acec9aa920ec9e85eba0a5"
+      },
+      "directories": [
+        "empty"
+      ]
+    },
+    {
+      "kind": "repeat",
+      "passed": true,
+      "rejected_cleanly": false,
+      "result": {
+        "status": "executed",
+        "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+        "contract_version": 1,
+        "capability": "copy_input_to_output",
+        "outputs": [
+          21
+        ],
+        "effects": [
+          {
+            "operation": "file.read",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              2,
+              3
+            ],
+            "result": 21
+          }
+        ],
+        "tools": [
+          {
+            "name": "call_contract",
+            "result": {
+              "status": "executed",
+              "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+              "contract_version": 1,
+              "capability": "copy_input_to_output",
+              "outputs": [
+                21
+              ],
+              "effects": [
+                {
+                  "operation": "file.read",
+                  "arguments": [
+                    1
+                  ],
+                  "result": 3
+                },
+                {
+                  "operation": "file.write",
+                  "arguments": [
+                    2,
+                    3
+                  ],
+                  "result": 21
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "files": {
+        "keep": "6b656570",
+        "source.bin": "6e657700ffebafb8ec82acec9aa920ec9e85eba0a5",
+        "target.bin": "6e657700ffebafb8ec82acec9aa920ec9e85eba0a5"
+      },
+      "directories": [
+        "empty"
+      ]
+    }
+  ],
+  "unchanged_contracts": true
+}

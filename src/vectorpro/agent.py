@@ -323,7 +323,7 @@ class HTTPChatModel:
 
 class AgentSession:
     def __init__(self, runtime: VectorRuntime, model: ChatModel, program_path: Path | None = None,
-                 max_calls: int = 12, catalog=None, allow_learning: bool = True, evidence_bank=None, reference_providers=None):
+                 max_calls: int = 12, catalog=None, allow_learning: bool = True, evidence_bank=None, reference_providers=None, request_goal=None):
         if type(max_calls) is not int or max_calls < 1:
             raise ValueError("max_calls must be a positive integer")
         self.runtime, self.model, self.program_path, self.max_calls = runtime, model, program_path, max_calls
@@ -333,9 +333,13 @@ class AgentSession:
         self._proposed = None
         self._goal, self._candidates = None, []
         self.allow_learning = allow_learning
+        if request_goal is not None and evidence_bank is not None:
+            raise ValueError("provide goal through EvidenceBank or request_goal, not both")
+        if request_goal is not None and reference_providers is None:
+            raise ValueError("request_goal requires reference providers")
         if reference_providers is not None and evidence_bank is None:
             from vectorpro.acquisition import EvidenceBank
-            evidence_bank = EvidenceBank([])
+            evidence_bank = EvidenceBank([], goal=request_goal)
         if evidence_bank is not None and catalog is not None:
             raise ValueError("verified acquisition and catalog sessions are separate adapter modes")
         self.evidence_bank = evidence_bank
@@ -490,13 +494,13 @@ class AgentSession:
                 self._collection_attempted = True
                 record = self.reference_providers.collect(args["provider_id"], self._intent)
                 from vectorpro.acquisition import EvidenceBank
-                self.evidence_bank = EvidenceBank([record])
+                self.evidence_bank = EvidenceBank([record], goal=self.evidence_bank.goal)
                 self.collected_evidence = record
                 reuse = self.evidence_bank.reuse(self.runtime, self._intent, record["id"], program_path=self.program_path)
                 if reuse["status"] == "reused":
                     return reuse
                 if reuse["status"] in ("reuse_failed", "ambiguous_reuse"):
-                    self.evidence_bank = EvidenceBank([])
+                    self.evidence_bank = EvidenceBank([], goal=self.evidence_bank.goal)
                     return reuse
                 return {"status": "evidence_ready", "sources": self.evidence_bank.describe(self._intent),
                         "intent_independently_verified": False}
@@ -890,6 +894,7 @@ def main(argv=None):
     parser.add_argument("--evidence-file", type=Path, help="caller evidence shown only after actual inputs have been proposed")
     parser.add_argument("--acquisition-evidence", type=Path, help="caller-controlled source bank with hidden acceptance cases")
     parser.add_argument("--reference-providers", type=Path, help="caller-installed external reference manifests for automatic observation")
+    parser.add_argument("--request-goal", type=Path, help="caller-owned exact intent and state predicates; independent of model reference selection")
     args = parser.parse_args(argv)
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
@@ -902,14 +907,15 @@ def main(argv=None):
         identity = json.loads((args.encoder / "download.json").read_text())
         catalog = TensorCatalog(runtime, Encoder(args.encoder), identity)
     bank = None
+    goal = json.loads(args.request_goal.read_text(encoding="utf-8")) if args.request_goal else None
     if args.acquisition_evidence:
         from vectorpro.acquisition import EvidenceBank
-        bank = EvidenceBank(json.loads(args.acquisition_evidence.read_text(encoding="utf-8")))
+        bank = EvidenceBank(json.loads(args.acquisition_evidence.read_text(encoding="utf-8")), goal=goal)
     providers = None
     if args.reference_providers:
         from vectorpro.reference_evidence import ReferenceProviders
         providers = ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8")))
-    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning, evidence_bank=bank, reference_providers=providers).run(
+    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning, evidence_bank=bank, reference_providers=providers, request_goal=goal if bank is None else None).run(
         args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] in ("answered", "executed", "registered") else 2

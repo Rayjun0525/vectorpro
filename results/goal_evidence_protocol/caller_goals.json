@@ -1,0 +1,65 @@
+{
+  "copy": {
+    "intent": "Please duplicate source.bin into target.bin and keep source.bin.",
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  "move": {
+    "intent": "Rename source.bin to target.bin, so source.bin no longer exists.",
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  "repeat": {
+    "intent": "Please duplicate source.bin into target.bin and keep source.bin.",
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  }
+}
