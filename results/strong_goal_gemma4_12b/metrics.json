@@ -1,0 +1,42 @@
+{
+  "replay_rules": {
+    "correct": 4,
+    "supported_correct": 0,
+    "strict_mismatched_proposals": 0,
+    "native_passed": 0,
+    "native_total": 0,
+    "seconds": 139.77934422800007,
+    "prompt_tokens": 11082,
+    "output_tokens": 803
+  },
+  "replay_compact": {
+    "correct": 13,
+    "supported_correct": 9,
+    "strict_mismatched_proposals": 2,
+    "native_passed": 27,
+    "native_total": 27,
+    "seconds": 87.62344624600036,
+    "prompt_tokens": 5642,
+    "output_tokens": 504
+  },
+  "fresh_rules": {
+    "correct": 3,
+    "supported_correct": 0,
+    "strict_mismatched_proposals": 1,
+    "native_passed": 0,
+    "native_total": 0,
+    "seconds": 138.60873544000015,
+    "prompt_tokens": 11105,
+    "output_tokens": 862
+  },
+  "fresh_compact": {
+    "correct": 14,
+    "supported_correct": 10,
+    "strict_mismatched_proposals": 1,
+    "native_passed": 24,
+    "native_total": 24,
+    "seconds": 87.61008670599995,
+    "prompt_tokens": 5665,
+    "output_tokens": 501
+  }
+}
