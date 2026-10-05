@@ -1,5 +1,10 @@
 # Initial model v0
 
+간결한 의미 추출의 선택 경로와 내부 전체 보존 조건 구성을 추가했다. 구조화 상태는
+LLM 없이 같은 목표로 변환한다. 자연어 정확도 개선은 입증되지 않아 기존 기본값과
+호출자 검토 경계를 유지한다. 구현·실패·가정·재현은 SEMANTIC_GOAL_INTERPRETATION.md,
+최종 전체431개 회귀와 실제 CLI 초안 확인은 HANDOFF.md에 기록한다.
+
 Contract drafts now use isolated acquisition and acceptance against supplied examples,
 input/output shape and permitted effects. See [CONTRACT_LEARNING.md](CONTRACT_LEARNING.md).
 Registration does not independently certify the user's intent or model-generated labels.

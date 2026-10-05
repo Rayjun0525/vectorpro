@@ -1,0 +1,27 @@
+{
+  "completed_calls": 32,
+  "incomplete": false,
+  "metrics": {
+    "final_unseen_baseline": {
+      "cases": 16,
+      "strict_correct": 16,
+      "file_domain_equivalent": 16,
+      "supported_equivalent": 12,
+      "wrong_proposals": 0,
+      "native_passed": 24,
+      "native_total": 24
+    },
+    "final_unseen_semantic": {
+      "cases": 16,
+      "strict_correct": 15,
+      "file_domain_equivalent": 15,
+      "supported_equivalent": 12,
+      "wrong_proposals": 1,
+      "native_passed": 24,
+      "native_total": 27
+    }
+  },
+  "seconds": 253.04890574200135,
+  "prompt_tokens": 14582,
+  "output_tokens": 1453
+}

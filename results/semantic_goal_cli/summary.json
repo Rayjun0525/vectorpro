@@ -1,0 +1,9 @@
+{
+  "exit_code": 2,
+  "reviewable": false,
+  "result": {
+    "status": "goal_draft_failed",
+    "reason": "one semantic description required"
+  },
+  "program_unchanged": true
+}

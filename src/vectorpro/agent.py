@@ -896,6 +896,8 @@ def main(argv=None):
     parser.add_argument("--reference-providers", type=Path, help="caller-installed external reference manifests for automatic observation")
     parser.add_argument("--request-goal", type=Path, help="caller-owned exact intent and state predicates; independent of model reference selection")
     parser.add_argument("--draft-goal", action="store_true", help="return a reviewable goal draft and stop before acquisition or execution")
+    parser.add_argument("--goal-encoding", choices=("compact", "rules", "states", "per_parameter"), default="rules",
+                        help="LLM goal representation for --draft-goal (default: rules; compact is opt-in)")
     parser.add_argument("--goal-memory-encoder", type=Path, help="draft from stored goal examples with a matching local encoder; no LLM request")
     args = parser.parse_args(argv)
     if args.goal_memory_encoder and not args.draft_goal:
@@ -918,7 +920,8 @@ def main(argv=None):
             from vectorpro.semantic_catalog import Encoder
             identity = json.loads((args.goal_memory_encoder / "download.json").read_text())
             memory = GoalMemory.from_runtime(runtime, Encoder(args.goal_memory_encoder), identity)
-        draft = propose_goal(model, ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8"))), args.intent, goal_memory=memory)
+        draft = propose_goal(model, ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8"))), args.intent,
+                             encoding=args.goal_encoding, goal_memory=memory)
         print(json.dumps(draft, ensure_ascii=False))
         return 2  # Drafting never reports a completed task.
     catalog = None

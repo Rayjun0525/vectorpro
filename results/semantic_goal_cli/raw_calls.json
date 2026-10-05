@@ -1,0 +1,97 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "source is retained; destination must contain the original source bytes."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "reply": {
+      "role": "assistant",
+      "content": "```json\n{\n  \"states\": {\n    \"source\": \"unchanged\",\n    \"destination\": \"initial:source\"\n  },\n  \"unrepresented_effects\": [],\n  \"unresolved\": []\n}\n```",
+      "reasoning": "*   User Instruction: \"source is retained; destination must contain the original source bytes.\"\n    *   Input Roles:\n        *   `source`: \"source file\"\n        *   `destination`: \"destination file\"\n    *   Goal:\n        *   `source` is retained -> `source` is `unchanged`.\n        *   `destination` must contain the original `source` bytes -> `destination` is `initial:source`.\n\n    *   `source` (role: \"source file\"): `unchanged` means the original file remains at its path and its content remains the same.\n    *   `destination` (role: \"destination file\"): `initial:source` means the destination file is created (or updated) with the exact bytes from the `source` role.\n\n    *   \"Preserving everything means all roles unchanged.\" (Rule 1)\n    *   \"For a move the original role must be absent, not unchanged.\" (Rule 2)\n    *   \"initial:NAME = receive the ORIGINAL bytes of the OTHER named role.\" (Rule 3)\n    *   \"present = existence ONLY; never use it instead of copying bytes.\" (Rule 4)\n\n    *   Query: \"source is retained\" -> `source` is `unchanged`.\n    *   Query: \"destination must contain the original source bytes\" -> `destination` is `initial:source`.\n    *   `unrepresented_effects`: Since the instruction is a direct copy (initial:source), no transformations are needed. `[]`\n    *   `unresolved`: Goal is clear and consistent. `[]`\n\n    *   `source`: `unchanged`\n    *   `destination`: `initial:source`\n    *   `unrepresented_effects`: `[]`\n    *   `unresolved`: `[]`"
+    },
+    "seconds": 41.76501710299999
+  }
+]

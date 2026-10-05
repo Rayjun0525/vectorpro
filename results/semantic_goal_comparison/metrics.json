@@ -1,0 +1,45 @@
+{
+  "completed_calls": 28,
+  "incomplete": true,
+  "metrics": {
+    "replay_baseline": {
+      "cases": 16,
+      "strict_correct": 14,
+      "file_domain_equivalent": 15,
+      "supported_equivalent": 11,
+      "wrong_proposals": 0,
+      "native_passed": 24,
+      "native_total": 24
+    },
+    "replay_semantic": {
+      "cases": 12,
+      "strict_correct": 6,
+      "file_domain_equivalent": 6,
+      "supported_equivalent": 6,
+      "wrong_proposals": 0,
+      "native_passed": 9,
+      "native_total": 9
+    },
+    "unseen_baseline": {
+      "cases": 0,
+      "strict_correct": 0,
+      "file_domain_equivalent": 0,
+      "supported_equivalent": 0,
+      "wrong_proposals": 0,
+      "native_passed": 0,
+      "native_total": 0
+    },
+    "unseen_semantic": {
+      "cases": 0,
+      "strict_correct": 0,
+      "file_domain_equivalent": 0,
+      "supported_equivalent": 0,
+      "wrong_proposals": 0,
+      "native_passed": 0,
+      "native_total": 0
+    }
+  },
+  "seconds": 201.19369979599878,
+  "prompt_tokens": 12761,
+  "output_tokens": 1176
+}

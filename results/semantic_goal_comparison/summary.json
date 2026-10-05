@@ -1,0 +1,2551 @@
+{
+  "model": "gemma4:12b",
+  "metrics": {
+    "replay_baseline": {
+      "cases": 16,
+      "strict_correct": 14,
+      "file_domain_equivalent": 15,
+      "supported_equivalent": 11,
+      "wrong_proposals": 0,
+      "native_passed": 24,
+      "native_total": 24
+    },
+    "replay_semantic": {
+      "cases": 12,
+      "strict_correct": 6,
+      "file_domain_equivalent": 6,
+      "supported_equivalent": 6,
+      "wrong_proposals": 0,
+      "native_passed": 9,
+      "native_total": 9
+    },
+    "unseen_baseline": {
+      "cases": 0,
+      "strict_correct": 0,
+      "file_domain_equivalent": 0,
+      "supported_equivalent": 0,
+      "wrong_proposals": 0,
+      "native_passed": 0,
+      "native_total": 0
+    },
+    "unseen_semantic": {
+      "cases": 0,
+      "strict_correct": 0,
+      "file_domain_equivalent": 0,
+      "supported_equivalent": 0,
+      "wrong_proposals": 0,
+      "native_passed": 0,
+      "native_total": 0
+    }
+  },
+  "equivalence_domain": "source/destination initially regular files; normalization is not universal equivalence",
+  "program_sha256": "277964b962ab167e840b9f8f21544577696d14548ecf8b3da203d80582438f2c",
+  "cases": [
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 0,
+      "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577",
+                    "source.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "",
+                    "source.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 1,
+      "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 2,
+      "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "destination"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "target.bin",
+              "destination": "source.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 3,
+      "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "destination"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "arguments": {
+              "source": "target.bin",
+              "destination": "source.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 4,
+      "intent": "destination만 지워. source를 비롯한 나머지는 그대로 둬.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "destination만 지워. source를 비롯한 나머지는 그대로 둬.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 5,
+      "intent": "두 파일과 다른 모든 항목에 아무 변경도 하지 마.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 6,
+      "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577",
+                    "source.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "",
+                    "source.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 7,
+      "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 8,
+      "intent": "Overwrite source using the original destination bytes; retain destination.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Overwrite source using the original destination bytes; retain destination.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "destination"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "target.bin",
+              "destination": "source.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Overwrite source using the original destination bytes; retain destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Overwrite source using the original destination bytes; retain destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Overwrite source using the original destination bytes; retain destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 9,
+      "intent": "Relocate destination into source; the former destination entry must disappear.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Relocate destination into source; the former destination entry must disappear.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "source",
+              "source": "destination"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "arguments": {
+              "source": "target.bin",
+              "destination": "source.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Relocate destination into source; the former destination entry must disappear.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Relocate destination into source; the former destination entry must disappear.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Relocate destination into source; the former destination entry must disappear.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 10,
+      "intent": "Erase destination alone and retain source without modification.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Erase destination alone and retain source without modification.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 11,
+      "intent": "Leave every file and directory exactly as found.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Leave every file and directory exactly as found.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        }
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 12,
+      "intent": "source를 gzip으로 압축해서 destination에 저장하고 원본은 보존해.",
+      "supported": false,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 13,
+      "intent": "Write only the first three bytes of source to destination.",
+      "supported": false,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 14,
+      "intent": "source는 삭제하면서 동시에 원래 파일이 같은 경로에 그대로 존재하게 해.",
+      "supported": false,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "baseline",
+      "index": 15,
+      "intent": "Please deal with source and destination appropriately.",
+      "supported": false,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 0,
+      "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "initial:source"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "2cb92402b8241d4193f9ab5d39e98106cc3b0f95aec8da3552583562fadb9ced",
+        "review": [
+          "destination 파일 내용 = 작업 전 source 파일 내용",
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577",
+                    "source.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "",
+                    "source.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "새 destination에는 source의 원래 바이트를 담고, source는 그대로 남겨 줘.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 1,
+      "intent": "source가 사라지고 destination에 source의 원본 내용만 남도록 옮겨 줘.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "absent",
+            "destination": "initial:source"
+          },
+          "unrepresented_effects": [
+            "The move operation involves moving the content from source to destination and deleting the source file."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 2,
+      "intent": "destination의 원래 내용을 source에 복제하되 destination은 건드리지 마.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "initial:destination",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "The operation involves copying the content of the destination file into the source file while ensuring the destination file remains unmodified."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 3,
+      "intent": "destination 이름은 없애고 그 원본 내용을 source 쪽으로 옮겨 줘.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "initial:destination",
+            "destination": "absent"
+          },
+          "unrepresented_effects": [
+            "The content of the 'destination' file is moved to the 'source' file, and the 'destination' file is deleted."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 4,
+      "intent": "destination만 지워. source를 비롯한 나머지는 그대로 둬.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "absent"
+          },
+          "unrepresented_effects": [
+            "The instruction specifically requests the removal of the 'destination' file while keeping the 'source' file and all other elements unchanged."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 5,
+      "intent": "두 파일과 다른 모든 항목에 아무 변경도 하지 마.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "두 파일과 다른 모든 항목에 아무 변경도 하지 마.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "777befaf7ecc78b083e10b112ecdedab63e022955e27953bbaef9b994a51e2ad",
+        "review": [
+          "destination: 기존 항목의 내용과 종류를 보존해야 함",
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 6,
+      "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "initial:source"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "e1edd8c9c776409a95cc7849fd9bdecc1292efd4d864c21310cb361d567a3c0c",
+        "review": [
+          "destination 파일 내용 = 작업 전 source 파일 내용",
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577",
+                    "source.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "",
+                    "source.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Replace destination with an exact duplicate of source; retain the original source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 7,
+      "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination",
+                "source"
+              ]
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "absent",
+            "destination": "initial:source"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "a24d7580f39d2dc5f5bcecdd42c952cbc2dfb7ef9b402893067f7e458e474512",
+        "review": [
+          "source: 파일과 폴더 모두 없어야 함",
+          "destination 파일 내용 = 작업 전 source 파일 내용",
+          "허용된 변경 항목: destination, source; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "executed",
+        "matches": [
+          {
+            "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "arguments": {
+              "source": "source.bin",
+              "destination": "target.bin"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "00ff6e6577",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "00ff6e6577"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          },
+          {
+            "intent": "Transfer the original source bytes to destination and eliminate the source entry.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "eb8f85eba6bd20ec8ba4ed968920ec9e85eba0a5"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        ]
+      },
+      "native_passed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 8,
+      "intent": "Overwrite source using the original destination bytes; retain destination.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "initial:destination",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "The operation involves a cross-file copy where the source file's content is replaced by the content of the destination file."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 9,
+      "intent": "Relocate destination into source; the former destination entry must disappear.",
+      "supported": true,
+      "strict_correct": false,
+      "file_domain_equivalent": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "present",
+            "destination": "absent"
+          },
+          "unrepresented_effects": [
+            "The content of the destination file is moved to the source file location.",
+            "The original destination file entry is removed from the system."
+          ],
+          "unresolved": []
+        },
+        "question": "목표 조건에 담기지 않은 효과 또는 불명확한 요구를 확인해 주세요.",
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "declined",
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 10,
+      "intent": "Erase destination alone and retain source without modification.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Erase destination alone and retain source without modification.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "absent"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "ea78e5ebf4470104bda06d870aa24015cedc5e81a039c9c3714a96f0bf9afd01",
+        "review": [
+          "destination: 파일과 폴더 모두 없어야 함",
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    },
+    {
+      "suite": "replay",
+      "method": "semantic",
+      "index": 11,
+      "intent": "Leave every file and directory exactly as found.",
+      "supported": true,
+      "strict_correct": true,
+      "file_domain_equivalent": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Leave every file and directory exactly as found.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [],
+          "unresolved": []
+        },
+        "proposal_sha256": "f417dc19481b91264a527efa8d18a2c6ab6a3ecb808c7ddd21e6e3d620b7214b",
+        "review": [
+          "destination: 기존 항목의 내용과 종류를 보존해야 함",
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false
+      },
+      "execution": {
+        "status": "no_unique_stored_contract",
+        "matches": [],
+        "observations": []
+      },
+      "native_passed": []
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "source is retained; destination must contain the original source bytes."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "reply": {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The user wants to describe a state where:\n1. The `source` file is retained (preserved).\n2. The `destination` file must contain the original bytes from the `source` file.\n\nLooking at the definitions:\n- `unchanged`: preserve the original entry and bytes.\n- `initial:source`: receive the ORIGINAL bytes of the OTHER named role (source).\n- `present`: existence ONLY; never use it instead of copying bytes.\n\nMapping to requirements:\n- \"source is retained\": `source` state should be `unchanged`.\n- \"destination must contain the original source bytes\": `destination` state should be `initial:source`.\n\nWait, checking the rules:\n- \"initial:NAME = receive the ORIGINAL bytes of the OTHER named role.\"\n- \"unchanged = preserve the original entry and bytes.\"\n- \"For a move the original role must be absent, not unchanged.\" (Not a move, but a copy/retention).\n\nSo:\n- `source`: `unchanged` (retains original entry and bytes).\n- `destination`: `initial:source` (receives original bytes from source).\n\n`unrepresented_effects` should be empty `[]` since the standard \"initial:source\" handles the copy.\n`unresolved` should be empty `[]`.",
+      "tool_calls": [
+        {
+          "id": "call_gn5ff8w0",
+          "index": 0,
+          "type": "function",
+          "function": {
+            "name": "describe_goal",
+            "arguments": "{\"states\":{\"destination\":\"initial:source\",\"source\":\"unchanged\"},\"unrepresented_effects\":[],\"unresolved\":[]}"
+          }
+        }
+      ]
+    },
+    "seconds": 26.566499221000413
+  }
+]

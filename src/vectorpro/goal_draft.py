@@ -19,8 +19,8 @@ def review_lines(goal):
 
 
 def propose_goal(model, providers, intent, *, encoding="rules", goal_memory=None):
-    if encoding not in ("per_parameter", "states", "rules"):
-        raise ValueError("goal encoding must be per_parameter, states or rules")
+    if encoding not in ("per_parameter", "states", "rules", "compact"):
+        raise ValueError("goal encoding must be compact, per_parameter, states or rules")
     if not isinstance(intent, str) or not 1 <= len(intent) <= 2000:
         raise ValueError("goal draft requires bounded intent")
     interfaces = [p["interface"]["parameters"] for p in providers.describe()]
@@ -35,6 +35,9 @@ def propose_goal(model, providers, intent, *, encoding="rules", goal_memory=None
                 if any(n not in names for n in referenced):
                     return {"status": "goal_draft_failed", "reason": "goal memory interface mismatch"}
         return draft
+    if encoding == "compact":
+        from vectorpro.goal_interpretation import propose_interpretation
+        return propose_interpretation(model, interfaces[0], intent)
     parameter = {"type": "string", "enum": names}
     rules = []
     for kind in ("absent", "present", "unchanged", "equals_initial", "unchanged_except"):

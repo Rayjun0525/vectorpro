@@ -1,0 +1,43 @@
+{
+  "exit_code": 2,
+  "reviewable": true,
+  "result": {
+    "status": "needs_goal_review",
+    "goal": {
+      "intent": "source is retained; destination must contain the original source bytes.",
+      "rules": [
+        {
+          "kind": "equals_initial",
+          "parameter": "destination",
+          "source": "source"
+        },
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "destination"
+          ]
+        }
+      ]
+    },
+    "interpretation": {
+      "states": {
+        "destination": "initial:source",
+        "source": "unchanged"
+      },
+      "unrepresented_effects": [],
+      "unresolved": []
+    },
+    "proposal_sha256": "14229a91a2659468b05a44275d3e64355bab4893fbfd272e7b680d5706a27e8c",
+    "review": [
+      "destination 파일 내용 = 작업 전 source 파일 내용",
+      "source: 기존 항목의 내용과 종류를 보존해야 함",
+      "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+    ],
+    "intent_independently_verified": false
+  },
+  "program_unchanged": true
+}

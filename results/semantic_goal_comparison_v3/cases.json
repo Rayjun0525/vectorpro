@@ -1,0 +1,256 @@
+{
+  "final_unseen": [
+    {
+      "intent": "source 원본을 유지하며 destination의 내용만 그 원본과 똑같게 해.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "equals_initial",
+          "parameter": "destination",
+          "source": "source"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "destination이 원본이야. 그것은 유지하고 source에는 동일한 사본을 둬.",
+      "expected_rules": [
+        {
+          "kind": "equals_initial",
+          "parameter": "source",
+          "source": "destination"
+        },
+        {
+          "kind": "unchanged",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source의 내용을 destination에 남기되 source 파일 항목은 제거해.",
+      "expected_rules": [
+        {
+          "kind": "absent",
+          "parameter": "source"
+        },
+        {
+          "kind": "equals_initial",
+          "parameter": "destination",
+          "source": "source"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source",
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "destination의 내용을 source에 남기되 destination 파일 항목은 제거해.",
+      "expected_rules": [
+        {
+          "kind": "equals_initial",
+          "parameter": "source",
+          "source": "destination"
+        },
+        {
+          "kind": "absent",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source",
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Put a byte-for-byte replica of source at destination while leaving source intact.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "equals_initial",
+          "parameter": "destination",
+          "source": "source"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Put a byte-for-byte replica of destination at source while leaving destination intact.",
+      "expected_rules": [
+        {
+          "kind": "equals_initial",
+          "parameter": "source",
+          "source": "destination"
+        },
+        {
+          "kind": "unchanged",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "The resulting destination must contain the old source bytes, and source must be removed.",
+      "expected_rules": [
+        {
+          "kind": "absent",
+          "parameter": "source"
+        },
+        {
+          "kind": "equals_initial",
+          "parameter": "destination",
+          "source": "source"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source",
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "The resulting source must contain the old destination bytes, and destination must be removed.",
+      "expected_rules": [
+        {
+          "kind": "equals_initial",
+          "parameter": "source",
+          "source": "destination"
+        },
+        {
+          "kind": "absent",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "source",
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source와 destination 모두 현재 상태를 유지하고 다른 항목도 변경하지 마.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "unchanged",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "intent": "Retain every existing entry, including source and destination, with identical contents.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "unchanged",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "intent": "destination 파일 항목을 삭제하고 source 및 나머지는 원래대로 유지해.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "absent",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "Delete the destination entry without touching source or any other entry.",
+      "expected_rules": [
+        {
+          "kind": "unchanged",
+          "parameter": "source"
+        },
+        {
+          "kind": "absent",
+          "parameter": "destination"
+        },
+        {
+          "kind": "unchanged_except",
+          "parameters": [
+            "destination"
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "source를 암호화한 바이트를 destination에 저장하고 source는 그대로 둬.",
+      "expected_rules": null
+    },
+    {
+      "intent": "Duplicate source into destination only when source is nonempty.",
+      "expected_rules": null
+    },
+    {
+      "intent": "source 파일은 사라져야 하고 동일한 source 파일은 삭제 없이 그대로 유지해.",
+      "expected_rules": null
+    },
+    {
+      "intent": "두 파일로 뭔가 적당한 작업을 해줘.",
+      "expected_rules": null
+    }
+  ]
+}
