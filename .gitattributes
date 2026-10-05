@@ -11,3 +11,7 @@ results/process_chain_*/guard-*/** -text
 results/linux_bundle_*/native-*/** -text
 results/linux_bundle_*/created-*/** -text
 results/linux_bundle_*/fail-*/** -text
+results/verified_acquisition*/native/** -text
+results/verified_acquisition_gemma*/unknown/** -text
+results/verified_acquisition_gemma*/known/** -text
+results/verified_acquisition_gemma*/missing_evidence/** -text

@@ -1,0 +1,4 @@
+{
+  "reason": "Intermediate schema expanded description maxLength=2000 into an invalid llama.cpp grammar; process ended with exit 139. No candidate accepted. Final implementation uses backend length validation.",
+  "status": "excluded"
+}

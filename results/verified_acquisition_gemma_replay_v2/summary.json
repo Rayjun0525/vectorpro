@@ -1,0 +1,85 @@
+{
+  "protocol": "bounded live Gemma; caller reference evidence",
+  "run_kind": "replay",
+  "passed": 1,
+  "cases": [
+    {
+      "name": "unknown",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the name of the file you want to copy?",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What is the name of the file you want to copy?"
+            }
+          }
+        ]
+      },
+      "files": {
+        "input.bin": "666972737420756e7365656e00ff",
+        "keep": "707265736572766564"
+      },
+      "directories": [
+        "empty"
+      ]
+    },
+    {
+      "name": "known",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the intent of this request?",
+        "tools": [
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What is the intent of this request?"
+            }
+          }
+        ]
+      },
+      "files": {
+        "input.bin": "ec9eacec82acec9aa920ec9e90eba38c",
+        "keep": "707265736572766564"
+      },
+      "directories": [
+        "empty"
+      ]
+    },
+    {
+      "name": "missing_evidence",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What kind of contracts are you trying to list?",
+        "tools": [
+          {
+            "name": "list_contracts",
+            "result": {
+              "contracts": []
+            }
+          },
+          {
+            "name": "ask_user",
+            "result": {
+              "status": "needs_input",
+              "question": "What kind of contracts are you trying to list?"
+            }
+          }
+        ]
+      },
+      "files": {
+        "input.bin": "756e6368616e676564",
+        "keep": "707265736572766564"
+      },
+      "directories": [
+        "empty"
+      ]
+    }
+  ]
+}

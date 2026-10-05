@@ -226,3 +226,9 @@ macOS 검증은 사용자 결정으로 보류한다.
 스트리밍 파이프, 프로세스 전후 전체 상태 관찰, HTTP 및 시스템 조회와 조합 학습을 추가했다. 다섯 기능의 학습/검증과 저장 후 실제 리눅스 13건 검증을 통과했다. 실행 기능과 습득 절차의 구분, 재현 명령, 현재 범위와 남은 과제는 docs/LINUX_BUNDLE.md를 참조한다. 최종 증거는 results/linux_bundle_final_verified에 있다. 전체 회귀 결과는 docs/HANDOFF.md에 기록한다.
 
 최종 전체 회귀: 297 passed (270.77초). tests/test_linux_bundle.py: 11 passed (5.30초).
+
+## 2026-10-05: 호출자 근거와 숨긴 사례를 통한 학습 채택
+
+EvidenceBank 모드에서 LLM은 근거 ID와 새 이름을 선택하고, 백엔드가 고정된 인터페이스와 예제로 격리 학습한다. 학습에 제공하지 않은 사례를 통과하고 저장이 성공해야 등록한다. 승인 계약은 LLM 없이 직접 재사용할 수 있다. 실제 의도와 근거 출처를 자동 인증한 것은 아니다. 명세와 재현은 docs/VERIFIED_ACQUISITION.md, 최종 검증은 docs/HANDOFF.md를 참조한다.
+
+호출자 근거 채택의 최종 회귀: 309 passed (309.40초). 관련 32 passed (12.33초). Gemma 동일 요청 replay 3/3: results/verified_acquisition_gemma_phased_final. 최초 1/3과 구분한다.

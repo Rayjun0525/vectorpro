@@ -1,0 +1,499 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": [{\"id\": \"copy-observation-v1\", \"intent\": \"\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918.\", \"origin\": \"caller-selected /bin/cp observations, separate temporary roots\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}}]}"
+      },
+      {
+        "role": "user",
+        "content": "\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "learn_verified_contract",
+              "arguments": "{\"source_id\": \"copy-observation-v1\", \"name\": \"copy_observations\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"registered\", \"registered\": true, \"contract\": {\"version\": 1, \"name\": \"copy_observations\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"4dcc1f30841a31ce426b8568531af34a42598ecf92ce6ad824f829de7773227f\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\"}, \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"evidence_source\": \"caller_examples\", \"intent_independently_verified\": false, \"acceptance\": {\"source_id\": \"copy-observation-v1\", \"source_sha256\": \"ab3a8110fc00321e645b3635da8387963a9688e5fc562e3b37fe75506b993f31\", \"intent_sha256\": \"f90e0987ade4ecc8d7fe4dde0633b6c0a61d89af0726412fb03735ab74424bec\", \"origin\": \"caller-selected /bin/cp observations, separate temporary roots\", \"heldout_cases\": 3, \"passed\": 3, \"scope\": \"caller-controlled finite evidence; not universal or independent intent proof\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"arguments\": {\"source\": \"input.bin\", \"destination\": \"output.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"contract_version\": 1, \"capability\": \"copy_observations\", \"outputs\": [14], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 14}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "learn_verified_contract",
+          "description": "Learn from an offered immutable source, then check hidden cases before registering",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "source_id": {
+                "type": "string",
+                "enum": [
+                  "copy-observation-v1"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+              }
+            },
+            "required": [
+              "source_id",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"learn_verified_contract\",\"arguments\":{ \"source_id\": \"copy-observation-v1\", \"name\": \"copy_observations\" }}</tool_call>",
+    "seconds": 22.322331664996454,
+    "usage": {
+      "prompt_tokens": 530,
+      "completion_tokens": 44,
+      "total_tokens": 574
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": [{\"id\": \"copy-observation-v1\", \"intent\": \"\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918.\", \"origin\": \"caller-selected /bin/cp observations, separate temporary roots\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}}]}"
+      },
+      {
+        "role": "user",
+        "content": "\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "learn_verified_contract",
+              "arguments": "{\"source_id\": \"copy-observation-v1\", \"name\": \"copy_observations\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"registered\", \"registered\": true, \"contract\": {\"version\": 1, \"name\": \"copy_observations\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"4dcc1f30841a31ce426b8568531af34a42598ecf92ce6ad824f829de7773227f\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\"}, \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"evidence_source\": \"caller_examples\", \"intent_independently_verified\": false, \"acceptance\": {\"source_id\": \"copy-observation-v1\", \"source_sha256\": \"ab3a8110fc00321e645b3635da8387963a9688e5fc562e3b37fe75506b993f31\", \"intent_sha256\": \"f90e0987ade4ecc8d7fe4dde0633b6c0a61d89af0726412fb03735ab74424bec\", \"origin\": \"caller-selected /bin/cp observations, separate temporary roots\", \"heldout_cases\": 3, \"passed\": 3, \"scope\": \"caller-controlled finite evidence; not universal or independent intent proof\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"arguments\": {\"source\": \"input.bin\", \"destination\": \"output.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"contract_version\": 1, \"capability\": \"copy_observations\", \"outputs\": [14], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 14}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "call_contract",
+          "description": "Execute an acquired contract using exact named actual request inputs",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "contract_id": {
+                "type": "string",
+                "enum": [
+                  "vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a"
+                ]
+              },
+              "arguments": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "source file",
+                    "enum": [
+                      "input.bin",
+                      "output.bin"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "destination file",
+                    "enum": [
+                      "input.bin",
+                      "output.bin"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "contract_id",
+              "arguments",
+              "width"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"call_contract\", \"arguments\": {\"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"arguments\": {\"source\": \"input.bin\", \"destination\": \"output.bin\"}, \"width\": 64}}</tool_call>",
+    "seconds": 72.31114812000305,
+    "usage": {
+      "prompt_tokens": 2130,
+      "completion_tokens": 116,
+      "total_tokens": 2246
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure.\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": [{\"id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"name\": \"copy_observations\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}}]}, \"evidence_sources\": [{\"id\": \"copy-observation-v1\", \"intent\": \"\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918.\", \"origin\": \"caller-selected /bin/cp observations, separate temporary roots\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}}]}"
+      },
+      {
+        "role": "user",
+        "content": "\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"arguments\": {\"source\": \"input.bin\", \"destination\": \"output.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"contract_version\": 1, \"capability\": \"copy_observations\", \"outputs\": [16], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 16}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "call_contract",
+          "description": "Execute an acquired contract using exact named actual request inputs",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "contract_id": {
+                "type": "string",
+                "enum": [
+                  "vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a"
+                ]
+              },
+              "arguments": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "source file",
+                    "enum": [
+                      "input.bin",
+                      "output.bin"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "destination file",
+                    "enum": [
+                      "input.bin",
+                      "output.bin"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "contract_id",
+              "arguments",
+              "width"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"call_contract\", \"arguments\":{ \"contract_id\": \"vp1:360dacea4b4f6162308dc723a52e520295f8fea778443745e1c7a13f0502f76a\", \"arguments\": {\"source\": \"input.bin\", \"destination\": \"output.bin\"}, \"width\": 64}}</tool_call>",
+    "seconds": 24.65213345900702,
+    "usage": {
+      "prompt_tokens": 869,
+      "completion_tokens": 116,
+      "total_tokens": 985
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": []}"
+      },
+      {
+        "role": "user",
+        "content": "input.bin\uc758 \uac01 \ubc14\uc774\ud2b8\ub97c \ub4a4\uc9d1\uc5b4\uc11c output.bin\uc5d0 \uc800\uc7a5\ud574\uc918."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "list_contracts",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"contracts\": []}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"What are the names of the contracts in local_call_0?\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"needs_input\", \"question\": \"What are the names of the contracts in local_call_0?\"}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "list_contracts",
+          "description": "Read compact acquired interfaces from the tensor file",
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing intent/evidence and stop this turn",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"list_contracts\", \"arguments\":{}}</tool_call>",
+    "seconds": 14.26507532899268,
+    "usage": {
+      "prompt_tokens": 408,
+      "completion_tokens": 23,
+      "total_tokens": 431
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": []}"
+      },
+      {
+        "role": "user",
+        "content": "input.bin\uc758 \uac01 \ubc14\uc774\ud2b8\ub97c \ub4a4\uc9d1\uc5b4\uc11c output.bin\uc5d0 \uc800\uc7a5\ud574\uc918."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "list_contracts",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"contracts\": []}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"What are the names of the contracts in local_call_0?\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"needs_input\", \"question\": \"What are the names of the contracts in local_call_0?\"}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "list_contracts",
+          "description": "Read compact acquired interfaces from the tensor file",
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing intent/evidence and stop this turn",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"ask_user\", \"arguments\": { \"question\": \"What are the names of the contracts in local_call_0?\" }}</tool_call>",
+    "seconds": 8.685203661996638,
+    "usage": {
+      "prompt_tokens": 456,
+      "completion_tokens": 41,
+      "total_tokens": 497
+    }
+  }
+]

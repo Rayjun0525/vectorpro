@@ -83,9 +83,10 @@ EXAMPLE_SCHEMA = {"type": "object", "properties": {
 
 DRAFT_SCHEMA = {"type": "object", "properties": {
     "version": {"type": "integer", "enum": [1]},
-    "name": {"type": "string"}, "description": {"type": "string"},
+    "name": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"},
+    "description": {"type": "string", "minLength": 1},
     "parameters": {"type": "array", "minItems": 1, "maxItems": 3, "items": {
-        "type": "object", "properties": {"name": {"type": "string"},
+        "type": "object", "properties": {"name": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"},
         "type": {"type": "string", "enum": ["value", "path", "buffer"]},
         "role": {"type": "string"}}, "required": ["name", "type", "role"], "additionalProperties": False}},
     "output": {"type": "object", "properties": {"type": {"type": "string", "enum": ["value", "path", "buffer"]},
@@ -322,7 +323,7 @@ class HTTPChatModel:
 
 class AgentSession:
     def __init__(self, runtime: VectorRuntime, model: ChatModel, program_path: Path | None = None,
-                 max_calls: int = 12, catalog=None, allow_learning: bool = True):
+                 max_calls: int = 12, catalog=None, allow_learning: bool = True, evidence_bank=None):
         if type(max_calls) is not int or max_calls < 1:
             raise ValueError("max_calls must be a positive integer")
         self.runtime, self.model, self.program_path, self.max_calls = runtime, model, program_path, max_calls
@@ -332,11 +333,60 @@ class AgentSession:
         self._proposed = None
         self._goal, self._candidates = None, []
         self.allow_learning = allow_learning
+        if evidence_bank is not None and catalog is not None:
+            raise ValueError("verified acquisition and catalog sessions are separate adapter modes")
+        self.evidence_bank = evidence_bank
+        self._intent = None
         self.messages = [{"role": "system", "content": CATALOG_GUIDE if catalog else GUIDE}]
+        if evidence_bank is not None:
+            self.messages = [{"role": "system", "content":
+                "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. "
+                "For unknown work use learn_verified_contract with an offered source_id and a new function name. "
+                "The source already defines the typed interface; do not rewrite its metadata or examples. "
+                "The backend owns examples and hidden acceptance; you cannot submit or change answers. "
+                "Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. "
+                "Registration is not native execution: after registered, call the new contract for the actual request. "
+                "Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. "
+                "Bind named argument roles to literal paths in the caller request; do not use role names as file paths. "
+                "Never claim independent intent proof or success on failure."}]
         if not allow_learning:
             self.messages[0]["content"] += "\nLearning is disabled in this session; never call teaching tools."
 
+    def _verified_contracts(self):
+        return [c for c in self.runtime.contracts()
+                if self.runtime.registry.get(c["name"]).provenance["kind"] != "host"
+                and self.evidence_bank.permits(self.runtime.registry.get(c["name"]), self._intent)]
+
     def available_tools(self):
+        if self.evidence_bank is not None:
+            tools = [tool("list_contracts", "Read compact acquired interfaces from the tensor file", {}),
+                next(t for t in TOOLS if t["function"]["name"] == "ask_user")]
+            acquired = self._verified_contracts()
+            paths = list(dict.fromkeys(p for _, _, p in path_literals(self._intent or "")))
+            if acquired:
+                from vectorpro.contracts import tool_schema
+                shapes = [tool_schema(c)["function"]["parameters"]["properties"]["arguments"] for c in acquired]
+                for contract, shape in zip(acquired, shapes):
+                    for parameter in contract["parameters"]:
+                        if parameter["type"] == "path" and paths:
+                            shape["properties"][parameter["name"]]["enum"] = paths
+                tools.append(tool("call_contract", "Execute an acquired contract using exact named actual request inputs",
+                    {"contract_id": {"type": "string", "enum": [c["id"] for c in acquired]},
+                     "arguments": shapes[0] if len(shapes) == 1 else {"anyOf": shapes},
+                     "width": {"type": "integer", "minimum": 1, "maximum": 64}},
+                    ("contract_id", "arguments", "width")))
+            sources = self.evidence_bank.describe(self._intent)
+            if self.allow_learning and sources:
+                tools.append(tool("learn_verified_contract", "Learn from an offered immutable source, then check hidden cases before registering",
+                    {"source_id": {"type": "string", "enum": [s["id"] for s in sources]},
+                     "name": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"}}, ("source_id", "name")))
+            if sources and self.allow_learning and not acquired:
+                # Caller already bound complete acquisition evidence to the goal.
+                return [t for t in tools if t["function"]["name"] == "learn_verified_contract"]
+            if len(acquired) == 1 and all(p["type"] == "path" for p in acquired[0]["parameters"]) and len(paths) == len(acquired[0]["parameters"]):
+                # Only literal binding remains. Roles are still selected by the model.
+                return [t for t in tools if t["function"]["name"] == "call_contract"]
+            return tools
         if self.catalog is None:
             return [t for t in TOOLS if self.allow_learning or t["function"]["name"] not in ("teach", "teach_numeric", "teach_contract")]
         permitted = {"ask_user"}
@@ -412,6 +462,32 @@ class AgentSession:
                 *[t for t in TOOLS if t["function"]["name"] in permitted]]
 
     def call(self, name, args):
+        if self.evidence_bank is not None:
+            if name not in {t["function"]["name"] for t in self.available_tools()}:
+                raise ValueError("tool is not available in verified acquisition mode")
+            if name == "list_contracts":
+                if args:
+                    raise ValueError("list_contracts takes no arguments")
+                return {"contracts": [{k: c[k] for k in ("id", "name", "description", "parameters", "output")}
+                    for c in self._verified_contracts()]}
+            if name == "learn_verified_contract":
+                if set(args) != {"source_id", "name"}:
+                    raise ValueError("verified learning accepts only source identity and function name")
+                proposed = self.evidence_bank.proposal(self._intent, args["source_id"], args["name"])
+                result = self.evidence_bank.acquire(self.runtime, self._intent, args["source_id"], proposed,
+                                                    program_path=self.program_path)
+                return result
+            if name == "call_contract":
+                if set(args) != {"contract_id", "arguments", "width"}:
+                    raise ValueError("contract call requires ID, named arguments and width")
+                contract = next((c for c in self._verified_contracts() if c["id"] == args["contract_id"]), None)
+                if contract is None or self.runtime.registry.get(contract["name"]).provenance["kind"] == "host":
+                    raise ValueError("call an acquired contract, not a provided host operation")
+                paths = [p for _, _, p in path_literals(self._intent or "")]
+                for parameter in contract["parameters"]:
+                    if parameter["type"] == "path" and args["arguments"].get(parameter["name"]) not in paths:
+                        raise ValueError("path arguments must be literal paths from the actual request")
+                return self.runtime.call_contract(**args)
         if name in ("teach", "teach_numeric", "teach_small", "teach_contract") and not self.allow_learning:
             raise ValueError("learning is disabled for this session")
         if name == "teach_contract":
@@ -634,6 +710,12 @@ class AgentSession:
             self.runtime.save(self.program_path)
 
     def run(self, intent: str, *, evidence: str | None = None):
+        self._intent = intent
+        if self.evidence_bank is not None:
+            self.messages.append({"role": "system", "content": json.dumps({
+                "acquired": {"contracts": [{k: c[k] for k in ("id", "name", "description", "parameters", "output")}
+                    for c in self._verified_contracts()]},
+                "evidence_sources": self.evidence_bank.describe(intent)}, ensure_ascii=False)})
         self._resolved, self._resolution_status = None, None
         self._proposed = None
         self._goal, self._candidates = None, []
@@ -655,7 +737,7 @@ class AgentSession:
                 if isinstance(cases, list) and cases and all(isinstance(c, dict) and "inputs" in c for c in cases):
                     self._caller_types = operand_types([c["inputs"] for c in cases])
                     self._caller_evidence = {"state_validation": cases}
-        if self.catalog is None:
+        if self.catalog is None and self.evidence_bank is None:
             self.messages.append({"role": "system", "content": "Available capabilities (names, arity and input types): " +
                                   json.dumps(self.call("list_capabilities", {}), ensure_ascii=False)})
         self.messages.append({"role": "user", "content": intent})
@@ -689,6 +771,8 @@ class AgentSession:
                 binding_messages.append(message)
             calls = message.get("tool_calls") or []
             if not calls:
+                if self.evidence_bank is not None:
+                    return {"status": "not_executed", "text": message.get("content"), "tools": events}
                 if self.catalog is not None and not any(e["result"].get("status") == "executed" for e in events):
                     status = self._resolution_status if self._resolution_status in ("needs_evidence", "needs_learning_examples") else "not_executed"
                     return {"status": status, "text": message.get("content"), "tools": events}
@@ -722,7 +806,11 @@ class AgentSession:
                 small_messages.append(feedback)
             if binding:
                 binding_messages.append(feedback)
-            if isinstance(result, dict) and result.get("status") == "registered":
+            if isinstance(result, dict) and result.get("status") == "registered" and self.evidence_bank is None:
+                return result | {"tools": events}
+            if self.evidence_bank is not None and result.get("status") == "executed":
+                return result | {"tools": events}
+            if self.evidence_bank is not None and result.get("status") == "learning_failed":
                 return result | {"tools": events}
             if self.catalog is not None and result.get("status") == "executed":
                 # The single bound request is complete. A model cannot undo success,
@@ -749,6 +837,7 @@ def main(argv=None):
     parser.add_argument("--encoder", type=Path, help="enable tensor-catalog resolution with a local multilingual MiniLM directory")
     parser.add_argument("--no-learning", action="store_true", help="execution-only session; do not expose teaching tools")
     parser.add_argument("--evidence-file", type=Path, help="caller evidence shown only after actual inputs have been proposed")
+    parser.add_argument("--acquisition-evidence", type=Path, help="caller-controlled source bank with hidden acceptance cases")
     args = parser.parse_args(argv)
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
@@ -760,7 +849,11 @@ def main(argv=None):
         from vectorpro.semantic_catalog import Encoder, TensorCatalog
         identity = json.loads((args.encoder / "download.json").read_text())
         catalog = TensorCatalog(runtime, Encoder(args.encoder), identity)
-    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning).run(
+    bank = None
+    if args.acquisition_evidence:
+        from vectorpro.acquisition import EvidenceBank
+        bank = EvidenceBank(json.loads(args.acquisition_evidence.read_text(encoding="utf-8")))
+    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning, evidence_bank=bank).run(
         args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] in ("answered", "executed", "registered") else 2

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "unknown",
+    "intent": "\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918.",
+    "input": "666972737420756e7365656e00ff"
+  },
+  {
+    "name": "known",
+    "intent": "\ud30c\uc77c input.bin\uc744 output.bin\uc73c\ub85c \ubcf5\uc0ac\ud574\uc918.",
+    "input": "ec9eacec82acec9aa920ec9e90eba38c"
+  },
+  {
+    "name": "missing_evidence",
+    "intent": "input.bin\uc758 \uac01 \ubc14\uc774\ud2b8\ub97c \ub4a4\uc9d1\uc5b4\uc11c output.bin\uc5d0 \uc800\uc7a5\ud574\uc918.",
+    "input": "756e6368616e676564"
+  }
+]
