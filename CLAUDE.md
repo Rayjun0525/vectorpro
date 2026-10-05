@@ -5,6 +5,8 @@
 
 추가로 읽을 문서:
 
+- [목표 분류 학습·합의·새 독립 평가와 남은 한계](docs/GOAL_ROUTER.md)
+
 - [초기모델 명세](docs/INITIAL_MODEL.md)
 - [첫 완성 목표: 리눅스 사용](docs/LINUX_TARGET.md)
 - [목록·문자열·JSON과 학습된 순회](docs/STRUCTURED_DATA.md)

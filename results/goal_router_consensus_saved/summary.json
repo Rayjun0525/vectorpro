@@ -1,0 +1,554 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "per_parameter",
+  "suite": "replay",
+  "choice_adapter": false,
+  "compact_choice": false,
+  "word_choice": false,
+  "goal_memory": true,
+  "router": "ridge_consensus",
+  "cases": [
+    {
+      "name": "case_0",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.05671730637550354,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.3984051048755646,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7495657205581665,
+          "nearest_margin": 0.04755687713623047,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_1",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "source\uc758 \ubcf5\uc81c\ubcf8\uc744 destination\uc5d0 \ub9cc\ub4e4\uace0 source\ub294 \uc190\ub300\uc9c0 \ub9c8.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "eb5e10c93a5a90bdcc1cabebcc08933da475f64c6f1efcc587f019a93d36155d",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.2502172291278839,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.6350085139274597,
+          "score_is_probability": false,
+          "nearest_similarity": 0.6253213882446289,
+          "nearest_margin": 0.04200083017349243,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_2",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.1861623227596283,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.5598732233047485,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8137409687042236,
+          "nearest_margin": 0.07175111770629883,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_3",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.08567500114440918,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.5940149426460266,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8262914419174194,
+          "nearest_margin": 0.030027389526367188,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_4",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.02625766396522522,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4106247127056122,
+          "score_is_probability": false,
+          "nearest_similarity": 0.4774378538131714,
+          "nearest_margin": 0.07798224687576294,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_5",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "\ub450 \ud30c\uc77c \ubaa8\ub450 \uc218\uc815\ub3c4 \uc0ad\uc81c\ub3c4 \ud558\uc9c0 \ub9d0\uace0 \uc804\uccb4 \ub514\uc2a4\ud06c \uc0c1\ud0dc\ub97c \uc720\uc9c0\ud574.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        "proposal_sha256": "ea72f164946f60b62599f8fcc166041594d291bbef36beb15bc5219c79361156",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: ; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+          "margin": 0.4578520655632019,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.761073112487793,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7870043516159058,
+          "nearest_margin": 0.16264206171035767,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_6",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Leave source alone and ensure destination no longer exists.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "e88ffaf69afaa3d4e60b8a5fd0246151e90058bbe3bff2ef422c905920e57d13",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.6978632509708405,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8641661405563354,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8837974667549133,
+          "nearest_margin": 0.225419282913208,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_7",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+          "margin": 0.05442202091217041,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4453492760658264,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7761331796646118,
+          "nearest_margin": 0.03703504800796509,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_8",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+          "margin": 0.2215886116027832,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8772938847541809,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7308460474014282,
+          "nearest_margin": 0.027389168739318848,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_9",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.13519465923309326,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4648051857948303,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7442811131477356,
+          "nearest_margin": 0.02338719367980957,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_10",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Relocate destination to source so that destination becomes absent.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        "proposal_sha256": "e40b8f84006ecf9bc6b3d5381e0f4daca09226fe34696c3bcb2b6a7df1a0eb64",
+        "review": [
+          "source \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 destination \ud30c\uc77c \ub0b4\uc6a9",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+          "margin": 0.6188920438289642,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.9341965317726135,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8023015856742859,
+          "nearest_margin": 0.12440460920333862,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_11",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "destination\uc744 source\ub85c \uc774\ub3d9\ud574\uc11c destination \uacbd\ub85c\ub294 \ube44\uc6cc\uc918.",
+          "rules": [
+            {
+              "kind": "equals_initial",
+              "source": "destination",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "parameters": [
+                "source",
+                "destination"
+              ],
+              "kind": "unchanged_except"
+            }
+          ]
+        },
+        "proposal_sha256": "a659b44f71de695fbaaaeacb13793faa1197d5af172df9220cf988a7800265d9",
+        "review": [
+          "source \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 destination \ud30c\uc77c \ub0b4\uc6a9",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: source, destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+          "margin": 0.5181535184383392,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.7293846011161804,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8739503026008606,
+          "nearest_margin": 0.19080382585525513,
+          "consensus": true
+        }
+      }
+    },
+    {
+      "name": "case_12",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.37972185015678406,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.6739873290061951,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7268052101135254,
+          "nearest_margin": 0.012521147727966309,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_13",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.10871338844299316,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.798117995262146,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8044488430023193,
+          "nearest_margin": 0.03571760654449463,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_14",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.07075110077857971,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4429031014442444,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7015505433082581,
+          "nearest_margin": 0.02178168296813965,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_15",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.11773693561553955,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.3829830288887024,
+          "score_is_probability": false,
+          "nearest_similarity": 0.44262686371803284,
+          "nearest_margin": 0.04369005560874939,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_16",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.24717533588409424,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.538828432559967,
+          "score_is_probability": false,
+          "nearest_similarity": 0.6609407067298889,
+          "nearest_margin": 0.016030848026275635,
+          "consensus": false
+        }
+      }
+    },
+    {
+      "name": "case_17",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+          "margin": 0.48662903904914856,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.7889856100082397,
+          "score_is_probability": false,
+          "nearest_similarity": 0.4973064363002777,
+          "nearest_margin": 0.11145466566085815,
+          "consensus": false
+        }
+      }
+    }
+  ]
+}

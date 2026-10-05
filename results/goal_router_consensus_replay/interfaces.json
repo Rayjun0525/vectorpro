@@ -1,0 +1,55 @@
+[
+  {
+    "id": "copy",
+    "description": "Copy file contents to another path, keeping source and replacing destination",
+    "interface": {
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source file"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination file"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.read",
+        "file.write"
+      ]
+    },
+    "executable_sha256": "5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9"
+  },
+  {
+    "id": "move",
+    "description": "Move or rename a file: remove source and replace destination",
+    "interface": {
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source file"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination file"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.move"
+      ]
+    },
+    "executable_sha256": "7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0"
+  }
+]

@@ -1,0 +1,672 @@
+[
+  {
+    "intent": "Copy the source file to the destination file without changing the source.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc744 \ubcf4\uc874\ud558\uace0 \ub300\uc0c1 \ud30c\uc77c\uc5d0 \uac19\uc740 \ub0b4\uc6a9\uc744 \ubcf5\uc0ac\ud55c\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Move the source file to the destination and remove the old source file.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc758 \uc774\ub984\uc744 \ub300\uc0c1 \uc774\ub984\uc73c\ub85c \ubcc0\uacbd\ud558\uace0 \uc774\uc804 \uc774\ub984\uc740 \uc5c6\uc564\ub2e4.",
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Preserve both files without any changes.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "\ub450 \ud30c\uc77c\uc744 \ubaa8\ub450 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uace0 \uc544\ubb34\uac83\ub3c4 \uc218\uc815\ud558\uc9c0 \uc54a\ub294\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Delete the destination file and retain the source file untouched.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "\uc6d0\ubcf8 \ud30c\uc77c\uc740 \uadf8\ub300\ub85c \ub450\uace0 \ub300\uc0c1 \ud30c\uc77c\ub9cc \uc0ad\uc81c\ud55c\ub2e4.",
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Encrypt the file with a password.",
+    "rules": null
+  },
+  {
+    "intent": "Change the byte values or reorder the contents of the file.",
+    "rules": null
+  },
+  {
+    "intent": "\ud30c\uc77c \ub0b4\uc6a9\uc744 \uc554\ud638\ud654\ud558\uac70\ub098 \ubc14\uc774\ud2b8 \uc21c\uc11c\ub97c \ubc14\uafbc\ub2e4.",
+    "rules": null
+  },
+  {
+    "intent": "Process the files somehow, with no specified result.",
+    "rules": null
+  },
+  {
+    "intent": "\ud30c\uc77c\ub85c \ubb54\uac00 \uc791\uc5c5\uc744 \ud55c\ub2e4. \uc6d0\ud558\ub294 \uacb0\uacfc\ub294 \uc815\ud558\uc9c0 \uc54a\uc558\ub2e4.",
+    "rules": null
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Duplicate source into destination; keep the original source file."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Transfer the contents, retaining a source file at the old location."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Only destination changes; source is not removed."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "\uc6d0\ubcf8\uc744 \uc0ad\uc81c\ud558\uc9c0 \uc54a\uace0 \ub300\uc0c1\uc5d0 \ub611\uac19\uc740 \ubc14\uc774\ud2b8\ub97c \ub123\ub294\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Transfer the contents so the original source file is gone."
+  },
+  {
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Destination gets the original bytes and the source must be absent."
+  },
+  {
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Do not leave an original file behind when moving it into destination."
+  },
+  {
+    "rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "intent": "\ub300\uc0c1\uc5d0 \uc6d0\ubcf8 \ub0b4\uc6a9\uc744 \ub123\uc740 \ub4a4 \uc6d0\ubcf8 \ud30c\uc77c\uc740 \ub0a8\uae30\uc9c0 \uc54a\ub294\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ],
+    "intent": "Both source and destination must remain byte-for-byte unchanged."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ],
+    "intent": "Do not write to or remove either file."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ],
+    "intent": "Neither file may have any changed bytes."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ],
+    "intent": "\uc6d0\ubcf8\uacfc \ub300\uc0c1 \ud30c\uc77c \uc5b4\ub290 \ucabd\ub3c4 \ubc14\uafb8\uac70\ub098 \uc9c0\uc6b0\uc9c0 \uc54a\ub294\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Destination must not exist; source must stay unchanged."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Remove only the destination while preserving the original source."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "Leave source alone and erase destination."
+  },
+  {
+    "rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "intent": "\ub300\uc0c1 \ud30c\uc77c\uc740 \uc5c6\uc5b4\uc57c \ud558\uace0 \uc6d0\ubcf8 \ud30c\uc77c\uc740 \ubcf4\uc874\ud55c\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Copy the destination file contents into source; keep destination."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Source should get the old destination bytes without deleting destination."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "\ub300\uc0c1 \ud30c\uc77c \ub0b4\uc6a9\uc744 \uc6d0\ubcf8 \ud30c\uc77c\uc5d0 \ubcf5\uc0ac\ud558\uace0 \ub300\uc0c1\uc740 \ub0a8\uae34\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Replace source with the original bytes of destination, which stays intact."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Move destination into source and remove destination afterward."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Source should get the old destination bytes and destination should disappear."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "\ub300\uc0c1 \ud30c\uc77c \ub0b4\uc6a9\uc744 \uc6d0\ubcf8 \uc704\uce58\ub85c \uc62e\uae30\uace0 \ub300\uc0c1 \ud30c\uc77c\uc740 \uc0ad\uc81c\ud55c\ub2e4."
+  },
+  {
+    "rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "intent": "Transfer destination bytes into source without keeping destination."
+  },
+  {
+    "rules": null,
+    "intent": "Run a shell command to process the files."
+  },
+  {
+    "rules": null,
+    "intent": "Send file contents to a remote server."
+  },
+  {
+    "rules": null,
+    "intent": "Calculate the sum or checksum of file bytes."
+  },
+  {
+    "rules": null,
+    "intent": "If a file exists, do one thing, otherwise choose a different final effect."
+  },
+  {
+    "rules": null,
+    "intent": "Do not copy the file; encrypt its bytes instead."
+  },
+  {
+    "rules": null,
+    "intent": "\ud30c\uc77c\uc744 \uc555\ucd95\ud558\uac70\ub098 \uc554\ud638\ud654\ud558\uac70\ub098 \ub124\ud2b8\uc6cc\ud06c\ub85c \ubcf4\ub0b8\ub2e4."
+  }
+]

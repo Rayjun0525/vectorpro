@@ -1,0 +1,1 @@
+{"intent": "Duplicate source.bin into target.bin, preserving source.bin.", "expected": "source unchanged; target initial source bytes; keep and empty unchanged"}

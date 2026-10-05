@@ -1,0 +1,262 @@
+[
+  {
+    "intent": "Create destination from source without removing or altering source.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source\uc758 \ubcf5\uc81c\ubcf8\uc744 destination\uc5d0 \ub9cc\ub4e4\uace0 source\ub294 \uc190\ub300\uc9c0 \ub9c8.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Remove source only after its original contents have been placed in destination.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source\ub97c destination\uc73c\ub85c \uc774\uc804\ud574\uc11c \uc774\uc804 source \uacbd\ub85c\uc5d0\ub294 \ud30c\uc77c\uc774 \uc5c6\uac8c \ud574\uc918.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "The final disk state must be identical to the initial disk state.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "\ub450 \ud30c\uc77c \ubaa8\ub450 \uc218\uc815\ub3c4 \uc0ad\uc81c\ub3c4 \ud558\uc9c0 \ub9d0\uace0 \uc804\uccb4 \ub514\uc2a4\ud06c \uc0c1\ud0dc\ub97c \uc720\uc9c0\ud574.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Leave source alone and ensure destination no longer exists.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source\ub294 \uc218\uc815\ud558\uc9c0 \ub9d0\uace0 destination \ud30c\uc77c\ub9cc \uc9c0\uc6cc.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Duplicate destination at source while leaving destination intact.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "source\uc5d0 destination\uc758 \uc0ac\ubcf8\uc744 \ub9cc\ub4e4\uace0 destination\uc740 \ubcc0\uacbd\ud558\uc9c0 \ub9c8.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Relocate destination to source so that destination becomes absent.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "destination\uc744 source\ub85c \uc774\ub3d9\ud574\uc11c destination \uacbd\ub85c\ub294 \ube44\uc6cc\uc918.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Remove source but keep source present with its original contents.",
+    "expected_rules": null
+  },
+  {
+    "intent": "source\ub97c \ubcf5\uc0ac\ud558\uba74\uc11c destination\uc758 \uae30\uc874 \ub0b4\uc6a9\uc744 \ud569\uccd0\uc918.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Convert source text to uppercase and save it in destination.",
+    "expected_rules": null
+  },
+  {
+    "intent": "source\uc640 destination\uc744 \uc5b4\ub5bb\uac8c\ub4e0 \uc815\ub9ac\ud574\uc918.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Copy only if destination does not already exist.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Run a web server serving the source file.",
+    "expected_rules": null
+  }
+]

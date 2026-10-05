@@ -1,0 +1,10 @@
+{
+  "protocol": "failed experiments preserved; not counted as passing samples",
+  "failures": [
+    {"path": "goal_router_consensus_replay", "reason": "cases lacked name; experiment script KeyError; fixed with indexed fallback"},
+    {"path": "goal_router_execution", "reason": "role-only request rejected literal-path binding; test protocol then KeyError"},
+    {"path": "goal_router_execution_retry", "reason": "learning protocol change did not solve missing literal paths"},
+    {"path": "goal_router_execution_diagnostic", "reason": "confirmed runtime error: path arguments must be literal paths from the actual request"},
+    {"path": "goal_router_execution_paths", "reason": "adding literal paths changed embedding; consensus withheld draft"}
+  ]
+}

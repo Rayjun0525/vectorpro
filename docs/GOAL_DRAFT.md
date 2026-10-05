@@ -66,6 +66,9 @@ nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m 
 실행이 차단된 것을 목표 이해 성공으로 세지 않는다. 결과는 HANDOFF.md에 보존한다.
 
 추가 GoalMemory 모드는 확인된 예제의 벡터 검색으로 초안을 제안한다.
+후속 `ridge`/`ridge_consensus`는 같은 예제의 벡터에서 선형 목표 분류기를 학습하고
+선택적으로 검색과의 합의를 요구한다. 형식·저장·독립 평가·보류의 한계는
+[GOAL_ROUTER.md](GOAL_ROUTER.md). 승인 없이 실행하는 경로는 추가하지 않았다.
 예제 검색의 별도8건은 기존 Gemma2/8 대비6/8이었다. 동일 프로그램 파일에
 예제와 벡터를 함께 저장하며 LLM 호출은 필요 없다. 승인·실행을 자동으로 하지 않는다.
 호출자 확인, 관찰 목표 검사와 계약 재사용 검사는 계속 적용한다.

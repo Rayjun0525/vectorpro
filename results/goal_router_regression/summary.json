@@ -1,0 +1,246 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "encoding": "per_parameter",
+  "suite": "replay",
+  "choice_adapter": false,
+  "compact_choice": false,
+  "word_choice": false,
+  "goal_memory": true,
+  "router": "ridge",
+  "cases": [
+    {
+      "name": "copy_en",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Make a copy of the source file into the destination file and do not modify the source.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "4a55f1385e3e171042ae363934006dad812548ae0da9f16dd8e1d0991ea37421",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination \ud30c\uc77c \ub0b4\uc6a9 = \uc791\uc5c5 \uc804 source \ud30c\uc77c \ub0b4\uc6a9",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.4154534339904785,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.6906899213790894,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "move_en",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+          "margin": 0.33869020640850067,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.5829493403434753,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "copy_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.016879886388778687,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.3741152584552765,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "move_ko",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+          "margin": 0.05059054493904114,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.5260591506958008,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "preserve_both",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Neither the source file nor the destination file should be modified.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "unchanged",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": []
+            }
+          ]
+        },
+        "proposal_sha256": "155032939d2741c7f6194fe033de38fd64b592ef6bc4cb79114807afc8393618",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: ; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+          "margin": 0.5228166431188583,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.7297217845916748,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "delete_target",
+      "passed": true,
+      "result": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Erase the destination file only; the source file must remain intact.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "5701393d8d56554d1130cc60a967c212f9d1cf9f8546857a7e9525fa29a773e1",
+        "review": [
+          "source: \uae30\uc874 \ud56d\ubaa9\uc758 \ub0b4\uc6a9\uacfc \uc885\ub958\ub97c \ubcf4\uc874\ud574\uc57c \ud568",
+          "destination: \ud30c\uc77c\uacfc \ud3f4\ub354 \ubaa8\ub450 \uc5c6\uc5b4\uc57c \ud568",
+          "\ud5c8\uc6a9\ub41c \ubcc0\uacbd \ud56d\ubaa9: destination; \uadf8 \ubc16\uc758 \ud30c\uc77c\uacfc \ud3f4\ub354\ub294 \ubaa8\ub450 \ubcf4\uc874"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.8766237646341324,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 1.0242092609405518,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "unsupported_reverse",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+          "margin": 0.11115923523902893,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.5485334992408752,
+          "score_is_probability": false
+        }
+      }
+    },
+    {
+      "name": "ambiguous",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "\ud655\uc778\ub41c \uc608\uc81c\uc640 \ucda9\ubd84\ud788 \uad6c\ubcc4\ub418\ub294 \ubaa9\ud45c\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+        "retrieval": {
+          "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+          "margin": 0.5518485456705093,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge",
+          "score": 0.752495288848877,
+          "score_is_probability": false
+        }
+      }
+    }
+  ]
+}

@@ -88,3 +88,50 @@ def test_memory_does_not_cross_interface_names():
     examples[0]["rules"][0]["parameter"] = "unknown"
     memory = GoalMemory(examples, Encoder(), IDENTITY)
     assert propose_goal(None, ReferenceProviders(manifests()), "new-copy", goal_memory=memory)["status"] == "goal_draft_failed"
+
+
+@pytest.mark.parametrize("suffix", [".pt", ".json"])
+@pytest.mark.parametrize("routing", ["ridge", "ridge_consensus"])
+def test_learned_router_reloads_without_retraining(tmp_path, suffix, routing, monkeypatch):
+    memory = GoalMemory(EXAMPLES, Encoder(), IDENTITY, routing=routing)
+    result = memory.propose("new-copy")
+    assert result["status"] == "needs_goal_review" and result["goal"]["rules"] == RULES
+    assert result["retrieval"]["score_is_probability"] is False
+    assert "similarity" not in result["retrieval"]
+    for text in ("ambiguous", "unrelated", "unsupported"):
+        assert memory.propose(text)["status"] == "needs_input"
+    runtime = VectorRuntime()
+    memory.attach(runtime)
+    path = tmp_path / ("router" + suffix)
+    runtime.save(path)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Saved router must not be fitted again")
+    monkeypatch.setattr(torch.linalg, "solve", forbidden)
+    restored = GoalMemory.from_runtime(VectorRuntime.load(path), Encoder(), IDENTITY)
+    assert restored.propose("new-copy") == result
+
+
+def test_consensus_rejects_confident_disagreement():
+    memory = GoalMemory(EXAMPLES, Encoder(), IDENTITY, routing="ridge_consensus")
+    # Simulate a strongly wrong learned class; the independent nearest gate must block it.
+    memory.router["weights"] = [[0, 1, 0], [0, 1, 0], [0, 0, 1]]
+    result = memory.propose("new-copy")
+    assert result["status"] == "needs_input"
+    assert result["retrieval"]["consensus"] is False
+
+
+@pytest.mark.parametrize("mutation", ["shape", "nonfinite", "groups", "ridge", "threshold"])
+def test_invalid_learned_router_rejected(mutation):
+    data = GoalMemory(EXAMPLES, Encoder(), IDENTITY, routing="ridge").to_data()
+    if mutation == "shape":
+        data["router"]["weights"] = [[1]]
+    elif mutation == "nonfinite":
+        data["router"]["weights"][0][0] = float("nan")
+    elif mutation == "groups":
+        data["router"]["groups"] = [1, 0, 2]
+    elif mutation == "ridge":
+        data["router"]["ridge"] = 0
+    else:
+        data["router"]["minimum"] = 1.1
+    with pytest.raises(ValueError):
+        GoalMemory.validate_data(data)

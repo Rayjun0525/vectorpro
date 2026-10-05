@@ -1,5 +1,8 @@
 # 테스트와 결과 확인
 
+최신 목표 분류기의 독립 평가, 저장 후 재시험, 경로 연결 실패 기록은
+[GOAL_ROUTER.md](GOAL_ROUTER.md). 전체 회귀385 passed (289.81초).
+
 목록/문자열/JSON 연산과 학습된 순회 검증은 [STRUCTURED_DATA.md](STRUCTURED_DATA.md)를 참고한다.
 버퍼 출력의 실제 바이트 검증과 레코드 결과 전달은
 [RECORD_RESULTS.md](RECORD_RESULTS.md), `tests/test_record_results.py`를 참고한다.

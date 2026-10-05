@@ -1,0 +1,2516 @@
+{
+  "cases_sha256": "b440dfaa05680fd6e6d42ad8d9cc2e6988846f0e191dd7e7f60249aa9293d6e7",
+  "protocol": "24 new fixed requests; authored labels; draft only; no tuning on this suite",
+  "results": {
+    "nearest13": {
+      "correct": 9,
+      "total": 24,
+      "wrong_proposals": 8,
+      "supported_correct": 6,
+      "supported_total": 18,
+      "cases": [
+        {
+          "intent": "Put identical bytes from source into destination; keep source available.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "b7dd1669581aab551f2ba5c02d985921ae14adc633660725b4d956af11e119f1",
+              "similarity": 0.5356494188308716,
+              "margin": 0.1217825710773468,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "원본 source를 지우지 않고 destination에 같은 내용을 남겨줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.6577644348144531,
+              "margin": 0.01547253131866455,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "After copying source to destination, both files must contain the original source bytes.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "After copying source to destination, both files must contain the original source bytes.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "b63baaedb60fd145a75efcddf1936d3681a1bf4053584644685dca63ace3051a",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "similarity": 0.7026480436325073,
+              "margin": 0.12221872806549072,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Destination must receive source contents, and source must disappear afterward.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Destination must receive source contents, and source must disappear afterward.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "705e9ea04a8497eec29754a0edd45ed0ff011948b46f66e4c0e6ad40a507bde1",
+            "review": [
+              "source: 파일과 폴더 모두 없어야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "similarity": 0.6895880103111267,
+              "margin": 0.04939156770706177,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source 내용은 destination에 남기되 source 파일은 없애줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source 내용은 destination에 남기되 source 파일은 없애줘.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "fedc951718d793c210ad1ae9e9ed4c79ca52631be80c1eabaa5d5853f38ecd2c",
+            "review": [
+              "source: 파일과 폴더 모두 없어야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "similarity": 0.7686773538589478,
+              "margin": 0.03565281629562378,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Keep only destination after relocating source there.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.46166548132896423,
+              "margin": 0.01027137041091919,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Leave everything on disk exactly as it is, including both files.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Leave everything on disk exactly as it is, including both files.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "7b77d8cf2303efbc392e0638984fcf80303e429e58bd39e58c164fb313a58846",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "similarity": 0.5795888304710388,
+              "margin": 0.11248910427093506,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source와 destination 모두 현재 상태 그대로 유지해줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.4418705701828003,
+              "margin": 0.053337156772613525,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Do not copy, remove, or change either file.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Do not copy, remove, or change either file.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "49d181796f3fe36e175eec28f0e6b63c9fb57d642a6be47ba637d02aa6ee0875",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "similarity": 0.6238338351249695,
+              "margin": 0.10338044166564941,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Erase destination only; source and all other files must stay untouched.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Erase destination only; source and all other files must stay untouched.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "2d7dbb0edf99c79e7fc873e822f127894eaf28caa29170de11812fb171c8ff7c",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.8154289126396179,
+              "margin": 0.2740170359611511,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination만 없애고 source는 그대로 놔둬.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "similarity": 0.5068849325180054,
+              "margin": 0.004364192485809326,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Make destination absent without editing source.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.5912327766418457,
+              "margin": 0.015319406986236572,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Replace source contents with a copy of destination; preserve destination.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Replace source contents with a copy of destination; preserve destination.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "7b8e38ac3d3dbd0841fc86186f35e36d7e38c95408f4bacb74e3e9ddbf33c331",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "similarity": 0.7917338609695435,
+              "margin": 0.06688457727432251,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "09298c191968fbeff41406eb2f5b56527ed83b467d31995dbe8e0b8209e34301",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "similarity": 0.7041538953781128,
+              "margin": 0.16387051343917847,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Both files should contain the original destination bytes without removing destination.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Both files should contain the original destination bytes without removing destination.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "12be18e51cfdb0963897b44d4c125754779f107bbd457238f86d1f64a26e7d07",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "similarity": 0.6158221960067749,
+              "margin": 0.07122427225112915,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Move destination into source, removing the old destination file.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Move destination into source, removing the old destination file.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "ee66eef2766769deeb875a8d07fff46daf929c60ce0764096d7208ddbaa68216",
+            "review": [
+              "source: 파일과 폴더 모두 없어야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "similarity": 0.9104646444320679,
+              "margin": 0.17053532600402832,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "ddedc772e5eaef5a736b9333ca58787add14cc93753b916d0a138ba4f5d9d9f6",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.6525040864944458,
+              "margin": 0.03737759590148926,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Only source should remain, containing the previous destination contents.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.49110788106918335,
+              "margin": 0.023747652769088745,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Copy source to destination and also keep destination unchanged when their contents differ.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Copy source to destination and also keep destination unchanged when their contents differ.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "a2d6ddba5fa22085e485211e1e05d7d5511c42bd03fc3870640972604aeaf56e",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "similarity": 0.7990276217460632,
+              "margin": 0.17693853378295898,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source를 삭제하면서 동시에 source를 원래 상태로 보존해줘.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source를 삭제하면서 동시에 source를 원래 상태로 보존해줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "0ac189e1a87eaf43b4817c3e29cbc0d5febdafaec237d5af5613e5fdba8718ed",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.6968555450439453,
+              "margin": 0.06735718250274658,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Append source bytes to the existing destination bytes.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "11073fe60be03fb9a3cb02841d42813125f3f58c6bf38ad051f6904bab1c8e1e",
+              "similarity": 0.6093057990074158,
+              "margin": 0.10799401998519897,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination에 source를 이어 붙여줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "similarity": 0.36944061517715454,
+              "margin": 0.007836580276489258,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "If source is empty delete destination; otherwise copy source.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "If source is empty delete destination; otherwise copy source.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "c94fa7bf6b2e4a6bc3fb034e17cbfae5677654527b73da908ae3c91b92e1e9a8",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.7417225241661072,
+              "margin": 0.052989184856414795,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "파일을 적당히 처리해줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "a51a4680b0364e70ea1fbda7b4ca7e92f34181506c92a67ab4323a0de5c0f5fd",
+              "similarity": 0.5614664554595947,
+              "margin": 0.13231831789016724,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        }
+      ]
+    },
+    "nearest43": {
+      "correct": 12,
+      "total": 24,
+      "wrong_proposals": 7,
+      "supported_correct": 10,
+      "supported_total": 18,
+      "cases": [
+        {
+          "intent": "Put identical bytes from source into destination; keep source available.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Put identical bytes from source into destination; keep source available.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "cea1bc76cc1036d8c6784ecf4f55152896abbad413036c7420b3db4381a83ed3",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "9d439414d3d9f7b821346c284d5787cdde08eb8a4dfd166fea8c3af738a18cea",
+              "similarity": 0.7505845427513123,
+              "margin": 0.0322534441947937,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "원본 source를 지우지 않고 destination에 같은 내용을 남겨줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "원본 source를 지우지 않고 destination에 같은 내용을 남겨줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "d79114d3a7b6c0158cda90ba790af44ce22fd1f7bd7748c418e07248614b8919",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "9d439414d3d9f7b821346c284d5787cdde08eb8a4dfd166fea8c3af738a18cea",
+              "similarity": 0.7285317182540894,
+              "margin": 0.04485464096069336,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "After copying source to destination, both files must contain the original source bytes.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "679a392dccabd9089eced5e303cac636e8e4118e646d7f01395e378b2bff41e9",
+              "similarity": 0.7427690625190735,
+              "margin": 0.023510098457336426,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Destination must receive source contents, and source must disappear afterward.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "03f68f9d49d74daedee5001b520b813c0240d375185dad81458d716bb1b77166",
+              "similarity": 0.7283303141593933,
+              "margin": 0.02005314826965332,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source 내용은 destination에 남기되 source 파일은 없애줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source 내용은 destination에 남기되 source 파일은 없애줘.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "fedc951718d793c210ad1ae9e9ed4c79ca52631be80c1eabaa5d5853f38ecd2c",
+            "review": [
+              "source: 파일과 폴더 모두 없어야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "343c1c28eaf6803f9996be5ac5ae7b2ff0d9a757112e5d93ecc74558e1806b9a",
+              "similarity": 0.7875014543533325,
+              "margin": 0.054476916790008545,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Keep only destination after relocating source there.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "63749471273436d01b775fc26220782952187a91ac4dd467fb93a9c0410d3ed1",
+              "similarity": 0.6797230243682861,
+              "margin": 0.02034139633178711,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Leave everything on disk exactly as it is, including both files.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Leave everything on disk exactly as it is, including both files.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "7b77d8cf2303efbc392e0638984fcf80303e429e58bd39e58c164fb313a58846",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "similarity": 0.5795888304710388,
+              "margin": 0.11248910427093506,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source와 destination 모두 현재 상태 그대로 유지해줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "a57ca003b8f271a1301c9c3253fd11eb6a9e89455759814af4ebf074637452fd",
+              "similarity": 0.6295444965362549,
+              "margin": 0.004480540752410889,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Do not copy, remove, or change either file.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Do not copy, remove, or change either file.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "49d181796f3fe36e175eec28f0e6b63c9fb57d642a6be47ba637d02aa6ee0875",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "20342e3d6aef705d05a8697fa296a32a6befec2f2b75bfd69e09019dac45593b",
+              "similarity": 0.8793125152587891,
+              "margin": 0.27055251598358154,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Erase destination only; source and all other files must stay untouched.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Erase destination only; source and all other files must stay untouched.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "2d7dbb0edf99c79e7fc873e822f127894eaf28caa29170de11812fb171c8ff7c",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.8154289126396179,
+              "margin": 0.24455630779266357,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination만 없애고 source는 그대로 놔둬.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination만 없애고 source는 그대로 놔둬.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "74dc14b1688f6bbbb9aa5496d0e61d46af6304bf2a36142db7a075703ce2da42",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "616a834e7b639ea7f495fbe12ab5cc68b54d31e3cd2e237fedfbb7fbf8e7461b",
+              "similarity": 0.8455034494400024,
+              "margin": 0.23580694198608398,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Make destination absent without editing source.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Make destination absent without editing source.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "c564b8cf1750419c729006ecbcb39671cfbfc714c6445e9fc0de40d82d9357f6",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "similarity": 0.6552268862724304,
+              "margin": 0.05042189359664917,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Replace source contents with a copy of destination; preserve destination.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Replace source contents with a copy of destination; preserve destination.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "9ea9f620a20b7eb4f4b009c534750bece615bf460b9de7628c560ff704fc0040",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "similarity": 0.8548840284347534,
+              "margin": 0.06315016746520996,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "a5463c5dd9dc3ea8b4b16ee552fa5ce1164671fb876603f6c5a5ebe7d58bbad6",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "similarity": 0.8443069458007812,
+              "margin": 0.11453670263290405,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Both files should contain the original destination bytes without removing destination.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "d1b2a2ca23f51907661e4be35498e976a4c61d9ee685dc84bb2ff5c5fe162127",
+              "similarity": 0.7243257164955139,
+              "margin": 0.006829202175140381,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Move destination into source, removing the old destination file.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Move destination into source, removing the old destination file.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "ee66eef2766769deeb875a8d07fff46daf929c60ce0764096d7208ddbaa68216",
+            "review": [
+              "source: 파일과 폴더 모두 없어야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "similarity": 0.9104646444320679,
+              "margin": 0.043203115463256836,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "b58a7449547b90ab6f344926e02b669da2c5c2aa1b5f13a3c08adf753af27cf4",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "similarity": 0.8830532431602478,
+              "margin": 0.14110904932022095,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Only source should remain, containing the previous destination contents.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Only source should remain, containing the previous destination contents.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "0f57f1fde5184535428ddeea50a22eedef537bc8210a015c0b58f2389480c5b4",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "7b4c6498f3a22f5cf5ef6bf3c1a917855dade62ca128651c1d059de43e24b70c",
+              "similarity": 0.692855179309845,
+              "margin": 0.06346088647842407,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Copy source to destination and also keep destination unchanged when their contents differ.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Copy source to destination and also keep destination unchanged when their contents differ.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "bc78ab250f39e934434a6947932220a1c5a6a51378480f368bcd1a2de702804a",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "similarity": 0.867321252822876,
+              "margin": 0.06829363107681274,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "source를 삭제하면서 동시에 source를 원래 상태로 보존해줘.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source를 삭제하면서 동시에 source를 원래 상태로 보존해줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "0ac189e1a87eaf43b4817c3e29cbc0d5febdafaec237d5af5613e5fdba8718ed",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "d0042b6757e57c47ca3e0af9926dc0971a035cb5bbbdfe4f8717f3d286204718",
+              "similarity": 0.7345079183578491,
+              "margin": 0.05634504556655884,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "Append source bytes to the existing destination bytes.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Append source bytes to the existing destination bytes.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "c27cb72674f3d1fbf3fb9a371c04e0feafa1a9d30e1a2a55297206179d80fba2",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "679a392dccabd9089eced5e303cac636e8e4118e646d7f01395e378b2bff41e9",
+              "similarity": 0.7804043292999268,
+              "margin": 0.10407876968383789,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "destination에 source를 이어 붙여줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "similarity": 0.5427267551422119,
+              "margin": 0.0593111515045166,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "If source is empty delete destination; otherwise copy source.",
+          "supported": false,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "If source is empty delete destination; otherwise copy source.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "c94fa7bf6b2e4a6bc3fb034e17cbfae5677654527b73da908ae3c91b92e1e9a8",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "similarity": 0.7417225241661072,
+              "margin": 0.035679519176483154,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        },
+        {
+          "intent": "파일을 적당히 처리해줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "79d0944785a03e8bdeb4d8943941d36086c181098b34bde9909ec9a0aeaf7ff8",
+              "similarity": 0.5628675818443298,
+              "margin": 0.13371944427490234,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof"
+            }
+          }
+        }
+      ]
+    },
+    "ridge43": {
+      "correct": 13,
+      "total": 24,
+      "wrong_proposals": 1,
+      "supported_correct": 7,
+      "supported_total": 18,
+      "cases": [
+        {
+          "intent": "Put identical bytes from source into destination; keep source available.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Put identical bytes from source into destination; keep source available.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "cea1bc76cc1036d8c6784ecf4f55152896abbad413036c7420b3db4381a83ed3",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.6814713478088379,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.8742254376411438,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "원본 source를 지우지 않고 destination에 같은 내용을 남겨줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "원본 source를 지우지 않고 destination에 같은 내용을 남겨줘.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "d79114d3a7b6c0158cda90ba790af44ce22fd1f7bd7748c418e07248614b8919",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination 파일 내용 = 작업 전 source 파일 내용",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.45571622252464294,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.7931439280509949,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "After copying source to destination, both files must contain the original source bytes.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+              "margin": 0.007267087697982788,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.40435856580734253,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Destination must receive source contents, and source must disappear afterward.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.07642325758934021,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.4816341698169708,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "source 내용은 destination에 남기되 source 파일은 없애줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.010354369878768921,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.28556764125823975,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Keep only destination after relocating source there.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.0724102258682251,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5251818299293518,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Leave everything on disk exactly as it is, including both files.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "margin": 0.34687550365924835,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5634769201278687,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "source와 destination 모두 현재 상태 그대로 유지해줘.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": true,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source와 destination 모두 현재 상태 그대로 유지해줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "9d81723dcb6dea9d4d74d7d391d61eef939b8b57cdda34703db8d3b645493789",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.4930209815502167,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.8417741656303406,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Do not copy, remove, or change either file.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Do not copy, remove, or change either file.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "proposal_sha256": "49d181796f3fe36e175eec28f0e6b63c9fb57d642a6be47ba637d02aa6ee0875",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: ; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "margin": 0.5751716941595078,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.7478265166282654,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Erase destination only; source and all other files must stay untouched.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Erase destination only; source and all other files must stay untouched.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "proposal_sha256": "2d7dbb0edf99c79e7fc873e822f127894eaf28caa29170de11812fb171c8ff7c",
+            "review": [
+              "source: 기존 항목의 내용과 종류를 보존해야 함",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.9338015615940094,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 1.2088580131530762,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "destination만 없애고 source는 그대로 놔둬.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.29673412442207336,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5880776643753052,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Make destination absent without editing source.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.12601357698440552,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.35137850046157837,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Replace source contents with a copy of destination; preserve destination.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Replace source contents with a copy of destination; preserve destination.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "9ea9f620a20b7eb4f4b009c534750bece615bf460b9de7628c560ff704fc0040",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.36749958992004395,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.6337645053863525,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination을 source로 복사하고 destination은 보존해줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "a5463c5dd9dc3ea8b4b16ee552fa5ce1164671fb876603f6c5a5ebe7d58bbad6",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 기존 항목의 내용과 종류를 보존해야 함",
+              "허용된 변경 항목: source; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.45400893688201904,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.7640103101730347,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Both files should contain the original destination bytes without removing destination.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "5b5e63068efa08aa7e76b42e6c4dd8920072b7918231eac2d62620e0c7cbd76a",
+              "margin": 0.1330709159374237,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.551114022731781,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Move destination into source, removing the old destination file.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.12247630953788757,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5408013463020325,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+          "supported": true,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "destination의 내용을 source에 옮긴 뒤 destination은 삭제해줘.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "proposal_sha256": "b58a7449547b90ab6f344926e02b669da2c5c2aa1b5f13a3c08adf753af27cf4",
+            "review": [
+              "source 파일 내용 = 작업 전 destination 파일 내용",
+              "destination: 파일과 폴더 모두 없어야 함",
+              "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+            ],
+            "intent_independently_verified": false,
+            "retrieval": {
+              "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+              "margin": 0.4982950687408447,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.8087589144706726,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Only source should remain, containing the previous destination contents.",
+          "supported": true,
+          "correct": false,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.12796488404273987,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5363780856132507,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Copy source to destination and also keep destination unchanged when their contents differ.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.1811894178390503,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.5903297662734985,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "source를 삭제하면서 동시에 source를 원래 상태로 보존해줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+              "margin": 0.016517966985702515,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.49613073468208313,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "Append source bytes to the existing destination bytes.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.05846676230430603,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.3886471092700958,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "destination에 source를 이어 붙여줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+              "margin": 0.03079158067703247,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.3967961370944977,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "If source is empty delete destination; otherwise copy source.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+              "margin": 0.13874447345733643,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.414050817489624,
+              "score_is_probability": false
+            }
+          }
+        },
+        {
+          "intent": "파일을 적당히 처리해줘.",
+          "supported": false,
+          "correct": true,
+          "wrong_proposal": false,
+          "result": {
+            "status": "needs_input",
+            "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+            "retrieval": {
+              "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+              "margin": 0.6374344527721405,
+              "encoder_identity": {
+                "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+                "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+              },
+              "source": "caller-labelled goal examples; not independent intent proof",
+              "routing": "ridge",
+              "score": 0.8320121765136719,
+              "score_is_probability": false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

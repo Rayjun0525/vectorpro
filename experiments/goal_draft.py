@@ -17,6 +17,8 @@ def main():
     parser.add_argument("--word-choice", action="store_true")
     parser.add_argument("--cases-file", type=Path)
     parser.add_argument("--goal-memory", action="store_true")
+    parser.add_argument("--router", choices=("nearest", "ridge", "ridge_consensus"), default="nearest")
+    parser.add_argument("--teacher-file", type=Path, default=Path("experiments/goal_memory_seed.json"))
     args = parser.parse_args()
     if args.output.exists():
         raise RuntimeError("Preserve evidence; choose a new output directory")
@@ -42,9 +44,9 @@ def main():
         from vectorpro.runtime import VectorRuntime
         directory = Path("/opt/vectorpro-models/multilingual-minilm")
         encoder, identity = Encoder(directory), json.loads((directory / "download.json").read_text())
-        seeds = json.loads(Path("experiments/goal_memory_seed.json").read_text())
+        seeds = json.loads(args.teacher_file.read_text(encoding="utf-8"))
         (args.output / "teacher_examples.json").write_text(json.dumps(seeds, indent=2), encoding="utf-8")
-        memory = GoalMemory(seeds, encoder, identity)
+        memory = GoalMemory(seeds, encoder, identity, routing=args.router)
         runtime = VectorRuntime.load("results/reference_acquisition_gemma/program.pt")
         memory.attach(runtime)
         runtime.save(args.output / "program.pt")
@@ -58,14 +60,15 @@ def main():
     def canonical(rules):
         return sorted(json.dumps({**r, **({"parameters": sorted(r["parameters"])} if "parameters" in r else {})}, sort_keys=True) for r in rules)
     outcomes = []
-    for case in cases:
+    for index, case in enumerate(cases):
         result = propose_goal(model, providers, case["intent"], encoding=args.encoding, goal_memory=memory)
         passed = result["status"] == "needs_input" if case["expected_rules"] is None else (
             result["status"] == "needs_goal_review" and canonical(result["goal"]["rules"]) == canonical(case["expected_rules"]))
-        outcomes.append({"name": case["name"], "passed": passed, "result": result})
-        (args.output / "summary.json").write_text(json.dumps({"protocol": "goal-draft-only; no approval or execution", "encoding": args.encoding, "suite": args.suite, "choice_adapter": args.choice_adapter, "compact_choice": args.compact_choice, "word_choice": args.word_choice, "goal_memory": args.goal_memory, "cases": outcomes}, indent=2), encoding="utf-8")
+        name = case.get("name", "case_" + str(index))
+        outcomes.append({"name": name, "passed": passed, "result": result})
+        (args.output / "summary.json").write_text(json.dumps({"protocol": "goal-draft-only; no approval or execution", "encoding": args.encoding, "suite": args.suite, "choice_adapter": args.choice_adapter, "compact_choice": args.compact_choice, "word_choice": args.word_choice, "goal_memory": args.goal_memory, "router": args.router, "cases": outcomes}, indent=2), encoding="utf-8")
         (args.output / "raw_calls.json").write_text(json.dumps(model.raw if model else [], indent=2), encoding="utf-8")
-        print(json.dumps({"name": case["name"], "passed": passed, "status": result["status"]}), flush=True)
+        print(json.dumps({"name": name, "passed": passed, "status": result["status"]}), flush=True)
 
 
 if __name__ == "__main__":
