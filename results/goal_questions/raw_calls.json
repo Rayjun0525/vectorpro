@@ -1,0 +1,800 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Create destination from source without removing or altering source.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"d04480936012dce72d7b0d36b4f54667d45ca8fcaae162989a6b314a5e80b86c\"}"
+      },
+      {
+        "role": "user",
+        "content": "Create destination from source without removing or altering source."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"option_1\"}}</tool_call>",
+    "seconds": 9.678037584002595,
+    "usage": {
+      "prompt_tokens": 622,
+      "completion_tokens": 29,
+      "total_tokens": 651
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Remove source only after its original contents have been placed in destination.\", \"condition\": \"state:source\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:destination\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\"], \"question_sha256\": \"646fc536cc71ec7cc877e4e9a1fd7e21645d038f704efe6c08419b24adf870df\"}"
+      },
+      {
+        "role": "user",
+        "content": "Remove source only after its original contents have been placed in destination."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"option_1\"}}</tool_call>",
+    "seconds": 7.56647768500261,
+    "usage": {
+      "prompt_tokens": 626,
+      "completion_tokens": 29,
+      "total_tokens": 655
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.\", \"condition\": \"state:source\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:destination\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\"], \"question_sha256\": \"ca64aacce37b5cacbdf4d755f64d09f61d9b380342f5fe0ae592041611ed3af9\"}"
+      },
+      {
+        "role": "user",
+        "content": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"option_0\"}}</tool_call>",
+    "seconds": 8.671997092998936,
+    "usage": {
+      "prompt_tokens": 626,
+      "completion_tokens": 28,
+      "total_tokens": 654
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"The final disk state must be identical to the initial disk state.\", \"condition\": \"allowed_changes\", \"options\": [{\"id\": \"option_0\", \"value\": [\"destination\"]}, {\"id\": \"option_1\", \"value\": [\"source\"]}, {\"id\": \"option_2\", \"value\": []}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d\"], \"question_sha256\": \"9f1678ad9c3183f7fe1bc4ddbb62943542bbb46ae46df66f5ed25e936b6c97b6\"}"
+      },
+      {
+        "role": "user",
+        "content": "The final disk state must be identical to the initial disk state."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"outside\"}}</tool_call>",
+    "seconds": 9.732360872003483,
+    "usage": {
+      "prompt_tokens": 610,
+      "completion_tokens": 27,
+      "total_tokens": 637
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"source는 수정하지 말고 destination 파일만 지워.\", \"condition\": \"state:source\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"91edef59ff593fc893d930ffb4ed3f755923d17b8daf344179ddc89ac14b0868\"}"
+      },
+      {
+        "role": "user",
+        "content": "source는 수정하지 말고 destination 파일만 지워."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"outside\"}}</tool_call>",
+    "seconds": 10.522614623012487,
+    "usage": {
+      "prompt_tokens": 593,
+      "completion_tokens": 27,
+      "total_tokens": 620
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Duplicate destination at source while leaving destination intact.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\"], \"question_sha256\": \"8b6ab659b3bb66b916bcd9488a7380f21e0b313787cda61e9b483d42c6f9ef6c\"}"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate destination at source while leaving destination intact."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"outside\"}}</tool_call>",
+    "seconds": 9.111219971004175,
+    "usage": {
+      "prompt_tokens": 618,
+      "completion_tokens": 27,
+      "total_tokens": 645
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"source에 destination의 사본을 만들고 destination은 변경하지 마.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\"], \"question_sha256\": \"796d417efb39163cba98311a07121d3dc10abdb875d62f893a5737cb531e4bd2\"}"
+      },
+      {
+        "role": "user",
+        "content": "source에 destination의 사본을 만들고 destination은 변경하지 마."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"option_1\"}}</tool_call>",
+    "seconds": 9.337924089995795,
+    "usage": {
+      "prompt_tokens": 629,
+      "completion_tokens": 35,
+      "total_tokens": 664
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Keep source intact while making destination hold the same bytes.\", \"condition\": \"allowed_changes\", \"options\": [{\"id\": \"option_0\", \"value\": [\"destination\"]}, {\"id\": \"option_1\", \"value\": [\"source\"]}, {\"id\": \"option_2\", \"value\": []}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"a06c9dbb920974b07846d61b434b4b34c88ac7a8b219533def850c9a20211ed1\"}"
+      },
+      {
+        "role": "user",
+        "content": "Keep source intact while making destination hold the same bytes."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"option_0\"}}</tool_call>",
+    "seconds": 7.671736641001189,
+    "usage": {
+      "prompt_tokens": 611,
+      "completion_tokens": 28,
+      "total_tokens": 639
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"At the end destination has the old source contents and source is gone.\", \"condition\": \"state:source\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:destination\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"3ade216a291ecd3487a66c0787e0dbc937f4d78993c7a8635b2a6b849f40d8ba\"}"
+      },
+      {
+        "role": "user",
+        "content": "At the end destination has the old source contents and source is gone."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"outside\"}}</tool_call>",
+    "seconds": 8.189317126001697,
+    "usage": {
+      "prompt_tokens": 632,
+      "completion_tokens": 27,
+      "total_tokens": 659
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"변경되는 파일이 하나도 없도록 source와 destination을 보존해.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\"], \"question_sha256\": \"86fd4d83c2209370b631af2395a5a5cd9b899ae200c6ed6c0205559eb41fb681\"}"
+      },
+      {
+        "role": "user",
+        "content": "변경되는 파일이 하나도 없도록 source와 destination을 보존해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"option_1\"}}</tool_call>",
+    "seconds": 8.685567603009986,
+    "usage": {
+      "prompt_tokens": 624,
+      "completion_tokens": 28,
+      "total_tokens": 652
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Remove the destination entry and preserve the source entry exactly.\", \"condition\": \"allowed_changes\", \"options\": [{\"id\": \"option_0\", \"value\": [\"destination\", \"source\"]}, {\"id\": \"option_1\", \"value\": [\"destination\"]}, {\"id\": \"option_2\", \"value\": [\"source\"]}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\"], \"question_sha256\": \"6e9b0dd8cc807b672325948c22c23087df781c99650d4ff73220fb4e6918c4e0\"}"
+      },
+      {
+        "role": "user",
+        "content": "Remove the destination entry and preserve the source entry exactly."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"outside\"}}</tool_call>",
+    "seconds": 9.137602932009031,
+    "usage": {
+      "prompt_tokens": 619,
+      "completion_tokens": 27,
+      "total_tokens": 646
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Use destination as the original and make its duplicate at source.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\"], \"question_sha256\": \"b55286d4a67594f2be0dfb8dcdbc79cf6e770ed418756fe34fc04762400be3c6\"}"
+      },
+      {
+        "role": "user",
+        "content": "Use destination as the original and make its duplicate at source."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"outside\"}}</tool_call>",
+    "seconds": 12.38524365799094,
+    "usage": {
+      "prompt_tokens": 621,
+      "completion_tokens": 27,
+      "total_tokens": 648
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"source만 남기되 내용은 작업 전 destination의 내용이어야 해.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\"], \"question_sha256\": \"66c2473b7106bb6230493003d20c9b8aefd58aefcdf3aa96a3783aea4dce4c9d\"}"
+      },
+      {
+        "role": "user",
+        "content": "source만 남기되 내용은 작업 전 destination의 내용이어야 해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"outside\"}}</tool_call>",
+    "seconds": 9.609804188003181,
+    "usage": {
+      "prompt_tokens": 630,
+      "completion_tokens": 27,
+      "total_tokens": 657
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Encrypt source and keep the encrypted result at destination.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"25702e4a438cffca91188bbb4dd723f652f2dfda0d5df8c98915da98f368a88c\"}"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source and keep the encrypted result at destination."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"option_1\"}}</tool_call>",
+    "seconds": 8.616108896996593,
+    "usage": {
+      "prompt_tokens": 617,
+      "completion_tokens": 33,
+      "total_tokens": 650
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"source와 destination을 잘 처리해.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2\"], \"question_sha256\": \"c3b3d08f6cb21cc8701bfd3559761d2f3b0d4bd6126d6281f33104bfbdc4f310\"}"
+      },
+      {
+        "role": "user",
+        "content": "source와 destination을 잘 처리해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"outside\"}}</tool_call>",
+    "seconds": 10.557911766998586,
+    "usage": {
+      "prompt_tokens": 616,
+      "completion_tokens": 27,
+      "total_tokens": 643
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Delete source and also leave source untouched and present.\", \"condition\": \"state:source\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:destination\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\", \"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\"], \"question_sha256\": \"feb1e04e601c578d1e9d347b798e0b014eafe103cc40c07741cce5ec74df0a80\"}"
+      },
+      {
+        "role": "user",
+        "content": "Delete source and also leave source untouched and present."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\", \"arguments\": {\"choice\": \"outside\"}}</tool_call>",
+    "seconds": 10.867248463997385,
+    "usage": {
+      "prompt_tokens": 622,
+      "completion_tokens": 27,
+      "total_tokens": 649
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Read the entire request. Answer ONE final-state condition. unchanged means preserve initial state; absent means missing; equals_initial:NAME means original bytes from NAME. allowed_changes lists the ONLY parameters permitted to change. Choose outside if any requested effect needs encryption, byte transformation, conditional logic, or contradictory states, or none of the values matches. Choose unclear if the request lacks a goal. Your answer is a draft, not authorization. Question: {\"intent\": \"Sort the bytes of source and write them to destination.\", \"condition\": \"state:destination\", \"options\": [{\"id\": \"option_0\", \"value\": \"absent\"}, {\"id\": \"option_1\", \"value\": \"equals_initial:source\"}, {\"id\": \"option_2\", \"value\": \"unchanged\"}, {\"id\": \"outside\", \"value\": null}, {\"id\": \"unclear\", \"value\": null}], \"candidate_hashes\": [\"40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287\", \"125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5\", \"f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60\"], \"question_sha256\": \"b101dc97d4ed3c2c2de9ac86260686311283cd227b43a99c2c0a66d3e8e7427c\"}"
+      },
+      {
+        "role": "user",
+        "content": "Sort the bytes of source and write them to destination."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "answer_condition",
+          "description": "Choose one condition value or reject unsupported/unclear whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string",
+                "enum": [
+                  "option_0",
+                  "option_1",
+                  "option_2",
+                  "outside",
+                  "unclear"
+                ]
+              }
+            },
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"answer_condition\",\"arguments\":{ \"choice\": \"option_0\"}}</tool_call>",
+    "seconds": 10.175705615009065,
+    "usage": {
+      "prompt_tokens": 626,
+      "completion_tokens": 29,
+      "total_tokens": 655
+    }
+  }
+]

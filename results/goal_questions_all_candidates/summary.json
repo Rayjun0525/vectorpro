@@ -1,0 +1,3165 @@
+{
+  "protocol": "max2 questions; teacher oracle is extra information, not autonomous accuracy; draft only",
+  "candidate_count": 6,
+  "cases": [
+    {
+      "index": 0,
+      "suite": "prior_abstentions",
+      "intent": "Create destination from source without removing or altering source.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.05671730637550354,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.3984051048755646,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7495657205581665,
+          "nearest_margin": 0.04755687713623047,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Create destination from source without removing or altering source.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "4a0b214d3ae3a898fa9a85584c175fa385ff53db7c0c4f086f3461b089173eaa"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Create destination from source without removing or altering source.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "4a0b214d3ae3a898fa9a85584c175fa385ff53db7c0c4f086f3461b089173eaa"
+              },
+              "choice": "option_1"
+            },
+            {
+              "question": {
+                "intent": "Create destination from source without removing or altering source.",
+                "condition": "state:destination",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:source"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "7ba6ecfd44d5cef1ccee3a0b6648ebc9dd4ea2bde41f02babcef693911d5383f"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Create destination from source without removing or altering source.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "suite": "prior_abstentions",
+      "intent": "Remove source only after its original contents have been placed in destination.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.1861623227596283,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.5598732233047485,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8137410879135132,
+          "nearest_margin": 0.07175123691558838,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Remove source only after its original contents have been placed in destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "9fc36a3af8e7aee34a8cb6a76b9482d36fd01132a50386ed9d9d11d515a8c3dc"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Remove source only after its original contents have been placed in destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "9fc36a3af8e7aee34a8cb6a76b9482d36fd01132a50386ed9d9d11d515a8c3dc"
+              },
+              "choice": "option_0"
+            },
+            {
+              "question": {
+                "intent": "Remove source only after its original contents have been placed in destination.",
+                "condition": "state:source",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:destination"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "8d34e980fa03fea3e7473353426c6e3522aaefd6620d2ce06bdec56765fd84e7"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Remove source only after its original contents have been placed in destination.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "suite": "prior_abstentions",
+      "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.08567500114440918,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.5940149426460266,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8262914419174194,
+          "nearest_margin": 0.030027389526367188,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "1cda04accec2b6a4f3eb610183da1ab51e8155dd3a7bcfa88de855ace9de00c8"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "1cda04accec2b6a4f3eb610183da1ab51e8155dd3a7bcfa88de855ace9de00c8"
+              },
+              "choice": "option_0"
+            },
+            {
+              "question": {
+                "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+                "condition": "state:source",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:destination"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "b22fa96e538af3011310f46aa271ebf2deda4b78f8eb9a390e8b75e2a5cf80dd"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "suite": "prior_abstentions",
+      "intent": "The final disk state must be identical to the initial disk state.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.02625766396522522,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4106247127056122,
+          "score_is_probability": false,
+          "nearest_similarity": 0.47743791341781616,
+          "nearest_margin": 0.07798230648040771,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "The final disk state must be identical to the initial disk state.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "c394a47e037833974947acbf70b270365275605f8e365e1bc7fe7481d005b2c3"
+              },
+              "choice": "option_3"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "The final disk state must be identical to the initial disk state.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "The final disk state must be identical to the initial disk state.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "c394a47e037833974947acbf70b270365275605f8e365e1bc7fe7481d005b2c3"
+              },
+              "choice": "option_3"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "The final disk state must be identical to the initial disk state.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "suite": "prior_abstentions",
+      "intent": "source는 수정하지 말고 destination 파일만 지워.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+          "margin": 0.05442202091217041,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4453492760658264,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7761331796646118,
+          "nearest_margin": 0.03703504800796509,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source는 수정하지 말고 destination 파일만 지워.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "83e430f7621e58084320e3f00a75db49ebe28d12647ee2593da8ebbf09d14dea"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source는 수정하지 말고 destination 파일만 지워.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "83e430f7621e58084320e3f00a75db49ebe28d12647ee2593da8ebbf09d14dea"
+              },
+              "choice": "option_1"
+            },
+            {
+              "question": {
+                "intent": "source는 수정하지 말고 destination 파일만 지워.",
+                "condition": "state:destination",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:source"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2"
+                ],
+                "question_sha256": "dc84a199b6eb335aaf0b1e49a7a8b0f09f4ac96432217ed92a8ab05e70ca6033"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source는 수정하지 말고 destination 파일만 지워.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "suite": "prior_abstentions",
+      "intent": "Duplicate destination at source while leaving destination intact.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "29a3ea92214a1fc22cb86dcf14965751355ec2b9d5b5f6fc3ea4d89b4c587551",
+          "margin": 0.2215886116027832,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8772938847541809,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7308460474014282,
+          "nearest_margin": 0.027389168739318848,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Duplicate destination at source while leaving destination intact.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60"
+                ],
+                "question_sha256": "6715191e0410832cf7b9d4329fbdee1c1247dd9e68ffe6ea732f345719088cec"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Duplicate destination at source while leaving destination intact.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Duplicate destination at source while leaving destination intact.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60"
+                ],
+                "question_sha256": "6715191e0410832cf7b9d4329fbdee1c1247dd9e68ffe6ea732f345719088cec"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Duplicate destination at source while leaving destination intact.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 6,
+      "suite": "prior_abstentions",
+      "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.13519465923309326,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4648051857948303,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7442811131477356,
+          "nearest_margin": 0.02338719367980957,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "394b298e76a3868eabc991eb3d14b1ffdf27d6a10c68ed0f4f4adf9c35ffe6b5"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "394b298e76a3868eabc991eb3d14b1ffdf27d6a10c68ed0f4f4adf9c35ffe6b5"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "suite": "new",
+      "intent": "Keep source intact while making destination hold the same bytes.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.24224162101745605,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.5136265158653259,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8001937866210938,
+          "nearest_margin": 0.0034742355346679688,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Keep source intact while making destination hold the same bytes.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "1f7b9f4f0d01dbcce73dd8237f48335d32da9c35953f447b59a72308ac1da8d2"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Keep source intact while making destination hold the same bytes.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "1f7b9f4f0d01dbcce73dd8237f48335d32da9c35953f447b59a72308ac1da8d2"
+              },
+              "choice": "option_1"
+            },
+            {
+              "question": {
+                "intent": "Keep source intact while making destination hold the same bytes.",
+                "condition": "state:destination",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:source"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "b54ebec5b87caa81a78354744b0bda53bcb85869b1f2b282324a180dd6c584bd"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Keep source intact while making destination hold the same bytes.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 8,
+      "suite": "new",
+      "intent": "At the end destination has the old source contents and source is gone.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "At the end destination has the old source contents and source is gone.",
+          "rules": [
+            {
+              "kind": "absent",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "source",
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "999a11bbb9f71f6349c336654e6fa43e19c4ff9fffa4bd87c37b26b0fb75c633",
+        "review": [
+          "source: 파일과 폴더 모두 없어야 함",
+          "destination 파일 내용 = 작업 전 source 파일 내용",
+          "허용된 변경 항목: source, destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "735c03f9a406a7b79f313114b3c1e31e172c8284defe6016587aa9e3283fa56d",
+          "margin": 0.5116460919380188,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8580814599990845,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7283938527107239,
+          "nearest_margin": 0.03663527965545654,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "At the end destination has the old source contents and source is gone.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "0effda54dbdaad92c66e00f991df03a29ff74633102096a5e6ee85799b4e8c16"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "At the end destination has the old source contents and source is gone.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "0effda54dbdaad92c66e00f991df03a29ff74633102096a5e6ee85799b4e8c16"
+              },
+              "choice": "option_0"
+            },
+            {
+              "question": {
+                "intent": "At the end destination has the old source contents and source is gone.",
+                "condition": "state:source",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:destination"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "0470ffc2f986282cf23570039d943830b3b3ef4f5c11bdcd62475cb0f1d2193e"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "At the end destination has the old source contents and source is gone.",
+              "rules": [
+                {
+                  "kind": "absent",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "equals_initial",
+                  "parameter": "destination",
+                  "source": "source"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 9,
+      "suite": "new",
+      "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.03075149655342102,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.4952874779701233,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7797657251358032,
+          "nearest_margin": 0.0746755599975586,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "55f1b38c83fac318d48275593e445087b94f16f137c1fdd0f941e4480c36174a"
+              },
+              "choice": "option_3"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287"
+                ],
+                "question_sha256": "55f1b38c83fac318d48275593e445087b94f16f137c1fdd0f941e4480c36174a"
+              },
+              "choice": "option_3"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": []
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 10,
+      "suite": "new",
+      "intent": "Remove the destination entry and preserve the source entry exactly.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Remove the destination entry and preserve the source entry exactly.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "e3f200aafdf32f3d65cc39a492ff7f113a9730cf4cdf8fe6756fbdfd684be50a",
+        "review": [
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "destination: 파일과 폴더 모두 없어야 함",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.4196126163005829,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.7171190977096558,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8262495398521423,
+          "nearest_margin": 0.1450122594833374,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Remove the destination entry and preserve the source entry exactly.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "cb01f70b4562124901273036e3a7b0f8ffb4d7b6d555f25463cb66cd9d73d64d"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Remove the destination entry and preserve the source entry exactly.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "cb01f70b4562124901273036e3a7b0f8ffb4d7b6d555f25463cb66cd9d73d64d"
+              },
+              "choice": "option_1"
+            },
+            {
+              "question": {
+                "intent": "Remove the destination entry and preserve the source entry exactly.",
+                "condition": "state:destination",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:source"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2"
+                ],
+                "question_sha256": "c8b0058cfb0d7d8737dab71760769c38170796de011592c0663b7db42cc3e67d"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Remove the destination entry and preserve the source entry exactly.",
+              "rules": [
+                {
+                  "kind": "unchanged",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "kind": "unchanged_except",
+                  "parameters": [
+                    "destination"
+                  ]
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 11,
+      "suite": "new",
+      "intent": "Use destination as the original and make its duplicate at source.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Use destination as the original and make its duplicate at source.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "equals_initial",
+              "parameter": "destination",
+              "source": "source"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "9237fc013a4cad2ffe7a3db5c612df2c8d227aad09fd02b81c6bc5c97d7a953f",
+        "review": [
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "destination 파일 내용 = 작업 전 source 파일 내용",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "e2d2b5fd15e93e2b763b6f77cc34ba42d7100b012e920db42e6c5c742d95f58f",
+          "margin": 0.6434916853904724,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.9615017771720886,
+          "score_is_probability": false,
+          "nearest_similarity": 0.7413516044616699,
+          "nearest_margin": 0.10357117652893066,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Use destination as the original and make its duplicate at source.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "f3125a76fbfc97bfeb06b0ed0ef59416dfebe057b4a377bc38ad015a6b350726"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Use destination as the original and make its duplicate at source.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Use destination as the original and make its duplicate at source.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "f3125a76fbfc97bfeb06b0ed0ef59416dfebe057b4a377bc38ad015a6b350726"
+              },
+              "choice": "option_2"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "Use destination as the original and make its duplicate at source.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "unchanged",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 12,
+      "suite": "new",
+      "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+      "supported": true,
+      "candidate_coverage": true,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.09414622187614441,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.43479013442993164,
+          "score_is_probability": false,
+          "nearest_similarity": 0.6213541626930237,
+          "nearest_margin": 0.051083385944366455,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": false,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "3d43da064eaf4c529686f0b09f81181e1f1e6afeaf0a9857e49d295ef9e4b8a8"
+              },
+              "choice": "option_0"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "3d43da064eaf4c529686f0b09f81181e1f1e6afeaf0a9857e49d295ef9e4b8a8"
+              },
+              "choice": "option_0"
+            },
+            {
+              "question": {
+                "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+                "condition": "state:source",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": "absent"
+                  },
+                  {
+                    "id": "option_1",
+                    "value": "equals_initial:destination"
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60"
+                ],
+                "question_sha256": "9fe28f9f91cc4a65f51b093ccefbd104b9f8940c712606585fd9693f55b7fde5"
+              },
+              "choice": "option_1"
+            }
+          ],
+          "result": {
+            "status": "needs_goal_review",
+            "goal": {
+              "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+              "rules": [
+                {
+                  "kind": "equals_initial",
+                  "source": "destination",
+                  "parameter": "source"
+                },
+                {
+                  "kind": "absent",
+                  "parameter": "destination"
+                },
+                {
+                  "parameters": [
+                    "source",
+                    "destination"
+                  ],
+                  "kind": "unchanged_except"
+                }
+              ]
+            },
+            "intent_independently_verified": false
+          }
+        }
+      }
+    },
+    {
+      "index": 13,
+      "suite": "new",
+      "intent": "Encrypt source and keep the encrypted result at destination.",
+      "supported": false,
+      "candidate_coverage": false,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+          "margin": 0.4001794457435608,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8230252861976624,
+          "score_is_probability": false,
+          "nearest_similarity": 0.6813541650772095,
+          "nearest_margin": 0.19928893446922302,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Encrypt source and keep the encrypted result at destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60"
+                ],
+                "question_sha256": "f5415eb9e37215b2b445afd38178a4eb90e2ee1ead87e60423bce6e00b2d175a"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Encrypt source and keep the encrypted result at destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60"
+                ],
+                "question_sha256": "f5415eb9e37215b2b445afd38178a4eb90e2ee1ead87e60423bce6e00b2d175a"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        }
+      }
+    },
+    {
+      "index": 14,
+      "suite": "new",
+      "intent": "source와 destination을 잘 처리해.",
+      "supported": false,
+      "candidate_coverage": false,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "38532d01f3d309c112fae50f14c8f57df1ecc253494fd6bc488352aae7f62c06",
+          "margin": 0.1031232476234436,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.547166109085083,
+          "score_is_probability": false,
+          "nearest_similarity": 0.5925190448760986,
+          "nearest_margin": 0.04286831617355347,
+          "consensus": false
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source와 destination을 잘 처리해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "bead0d23e0eaf563122fc739f84dd53a8df1d717e3d9fc541792e87b2c949ed1"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "source와 destination을 잘 처리해.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "bead0d23e0eaf563122fc739f84dd53a8df1d717e3d9fc541792e87b2c949ed1"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        }
+      }
+    },
+    {
+      "index": 15,
+      "suite": "new",
+      "intent": "Delete source and also leave source untouched and present.",
+      "supported": false,
+      "candidate_coverage": false,
+      "baseline": {
+        "status": "needs_goal_review",
+        "goal": {
+          "intent": "Delete source and also leave source untouched and present.",
+          "rules": [
+            {
+              "kind": "unchanged",
+              "parameter": "source"
+            },
+            {
+              "kind": "absent",
+              "parameter": "destination"
+            },
+            {
+              "kind": "unchanged_except",
+              "parameters": [
+                "destination"
+              ]
+            }
+          ]
+        },
+        "proposal_sha256": "f97a73452a2830ce96ff9d2c625c5f1190e3a99de26bf6276c83b3d10ce8ab26",
+        "review": [
+          "source: 기존 항목의 내용과 종류를 보존해야 함",
+          "destination: 파일과 폴더 모두 없어야 함",
+          "허용된 변경 항목: destination; 그 밖의 파일과 폴더는 모두 보존"
+        ],
+        "intent_independently_verified": false,
+        "retrieval": {
+          "example_sha256": "15ff13b2ddabf6aad4769681e686e910e6f5341d50f6621e362c2d8861b61853",
+          "margin": 0.603644996881485,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.8353031873703003,
+          "score_is_probability": false,
+          "nearest_similarity": 0.8079473972320557,
+          "nearest_margin": 0.14122915267944336,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Delete source and also leave source untouched and present.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "4a336f4f4f9936e0f77806ecec2a5ecb191c0e039349db59943a1115656fd9cc"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Delete source and also leave source untouched and present.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d"
+                ],
+                "question_sha256": "4a336f4f4f9936e0f77806ecec2a5ecb191c0e039349db59943a1115656fd9cc"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        }
+      }
+    },
+    {
+      "index": 16,
+      "suite": "new",
+      "intent": "Sort the bytes of source and write them to destination.",
+      "supported": false,
+      "candidate_coverage": false,
+      "baseline": {
+        "status": "needs_input",
+        "question": "확인된 예제와 충분히 구별되는 목표가 필요합니다.",
+        "retrieval": {
+          "example_sha256": "9ad477ccaa2409571c7c7f5e2ed46ea39dd28eaa4acb8c95ce83c7b180595ea8",
+          "margin": 0.39757147431373596,
+          "encoder_identity": {
+            "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+            "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+          },
+          "source": "caller-labelled goal examples; not independent intent proof",
+          "routing": "ridge_consensus",
+          "score": 0.7596859335899353,
+          "score_is_probability": false,
+          "nearest_similarity": 0.6246995329856873,
+          "nearest_margin": 0.06190270185470581,
+          "consensus": true
+        }
+      },
+      "questions": {
+        "scripted_caller_1": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Sort the bytes of source and write them to destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "9befd134ad6177c8649ccc870055f2063b7bf6a791074b8adc52f97ac422102a"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        },
+        "scripted_caller_2": {
+          "correct": true,
+          "wrong_proposal": false,
+          "trace": [
+            {
+              "question": {
+                "intent": "Sort the bytes of source and write them to destination.",
+                "condition": "allowed_changes",
+                "options": [
+                  {
+                    "id": "option_0",
+                    "value": [
+                      "destination",
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_1",
+                    "value": [
+                      "destination"
+                    ]
+                  },
+                  {
+                    "id": "option_2",
+                    "value": [
+                      "source"
+                    ]
+                  },
+                  {
+                    "id": "option_3",
+                    "value": []
+                  },
+                  {
+                    "id": "outside",
+                    "value": null
+                  },
+                  {
+                    "id": "unclear",
+                    "value": null
+                  }
+                ],
+                "candidate_hashes": [
+                  "40cd24ef2080727b7e970a4873f4b6290c1c460495c9bc82476cd8127a218287",
+                  "125bef078cacca4d708fe4ae5b6fd5125a339fe2749f59ccdf65b1fc0d39e1c5",
+                  "f78758736fed8fbd4a316a5c3b9c42ae78ee199e29fac8a3c007e54b30b65e60",
+                  "e37bb12fa6b624fb547ae334a03b62ccc4e6af8ce31578b6071271b2befa34f2",
+                  "6165d5e36706f0cdb15ed23c3af98df80d77de4adcdbe3f302439fc73262f40d",
+                  "a2c0668c34db652acb53337dcbb2c16d1ba5fab3158daebda586c7eb4c1a50a6"
+                ],
+                "question_sha256": "9befd134ad6177c8649ccc870055f2063b7bf6a791074b8adc52f97ac422102a"
+              },
+              "choice": "outside"
+            }
+          ],
+          "result": {
+            "status": "needs_input"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "protocol": "actual stored tensor calls; fresh MemoryHostContext per case; no learning or native files; preview is not intent proof",
+  "candidate_routes": 4,
+  "executions": 12,
+  "observations": [
+    {
+      "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+      "arguments": {
+        "source": "source.bin",
+        "destination": "target.bin"
+      },
+      "cases": [
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6100ff",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "6100ff",
+            "target.bin": "6100ff",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "",
+            "target.bin": "",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6f7468657220756e7365656e206279746573",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "6f7468657220756e7365656e206279746573",
+            "target.bin": "6f7468657220756e7365656e206279746573",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        }
+      ],
+      "matching_goals": [
+        [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+      "arguments": {
+        "source": "target.bin",
+        "destination": "source.bin"
+      },
+      "cases": [
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6100ff",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6f7468657220756e7365656e206279746573",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        }
+      ],
+      "matching_goals": [
+        [
+          {
+            "kind": "equals_initial",
+            "source": "destination",
+            "parameter": "source"
+          },
+          {
+            "kind": "unchanged",
+            "parameter": "destination"
+          },
+          {
+            "parameters": [
+              "source"
+            ],
+            "kind": "unchanged_except"
+          }
+        ]
+      ]
+    },
+    {
+      "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+      "arguments": {
+        "source": "source.bin",
+        "destination": "target.bin"
+      },
+      "cases": [
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6100ff",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "target.bin": "6100ff",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "target.bin": "",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6f7468657220756e7365656e206279746573",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "target.bin": "6f7468657220756e7365656e206279746573",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        }
+      ],
+      "matching_goals": [
+        [
+          {
+            "kind": "absent",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+      "arguments": {
+        "source": "target.bin",
+        "destination": "source.bin"
+      },
+      "cases": [
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6100ff",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        },
+        {
+          "inputs": [
+            "source.bin",
+            "target.bin"
+          ],
+          "before": {
+            "source.bin": "6f7468657220756e7365656e206279746573",
+            "target.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "after": {
+            "source.bin": "646966666572656e742064657374696e6174696f6e",
+            "keep": "7072657365727665"
+          },
+          "before_directories": [
+            "empty"
+          ],
+          "after_directories": [
+            "empty"
+          ]
+        }
+      ],
+      "matching_goals": [
+        [
+          {
+            "kind": "equals_initial",
+            "source": "destination",
+            "parameter": "source"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "parameters": [
+              "source",
+              "destination"
+            ],
+            "kind": "unchanged_except"
+          }
+        ]
+      ]
+    }
+  ]
+}

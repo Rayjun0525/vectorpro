@@ -1,0 +1,291 @@
+[
+  {
+    "intent": "Create destination from source without removing or altering source.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "Remove source only after its original contents have been placed in destination.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "source를 destination으로 이전해서 이전 source 경로에는 파일이 없게 해줘.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "The final disk state must be identical to the initial disk state.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "source는 수정하지 말고 destination 파일만 지워.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "Duplicate destination at source while leaving destination intact.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "intent": "source에 destination의 사본을 만들고 destination은 변경하지 마.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ],
+    "suite": "prior_abstentions"
+  },
+  {
+    "suite": "new",
+    "intent": "Keep source intact while making destination hold the same bytes.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "At the end destination has the old source contents and source is gone.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "변경되는 파일이 하나도 없도록 source와 destination을 보존해.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "Remove the destination entry and preserve the source entry exactly.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "Use destination as the original and make its duplicate at source.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "source만 남기되 내용은 작업 전 destination의 내용이어야 해.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "suite": "new",
+    "intent": "Encrypt source and keep the encrypted result at destination.",
+    "expected_rules": null
+  },
+  {
+    "suite": "new",
+    "intent": "source와 destination을 잘 처리해.",
+    "expected_rules": null
+  },
+  {
+    "suite": "new",
+    "intent": "Delete source and also leave source untouched and present.",
+    "expected_rules": null
+  },
+  {
+    "suite": "new",
+    "intent": "Sort the bytes of source and write them to destination.",
+    "expected_rules": null
+  }
+]

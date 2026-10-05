@@ -1,5 +1,9 @@
 # 테스트와 결과 확인
 
+후속 질문 생성·답변 연결·오래된 질문 거부의 관련34개 테스트와 실제 Gemma 비교,
+메모리 환경의 기존 텐서 후보12회 실행은 [GOAL_QUESTIONS.md](GOAL_QUESTIONS.md).
+전체392 passed (261.70초), 마지막 JSON 왕복 표현 검증 후 관련34 passed (3.62초).
+
 최신 목표 분류기의 독립 평가, 저장 후 재시험, 경로 연결 실패 기록은
 [GOAL_ROUTER.md](GOAL_ROUTER.md). 전체 회귀385 passed (289.81초).
 

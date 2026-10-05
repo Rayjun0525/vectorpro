@@ -1,0 +1,117 @@
+{
+  "goal_questions": {
+    "prior_abstentions": {
+      "baseline": {
+        "correct": 0,
+        "wrong_proposals": 0,
+        "supported_correct": 0,
+        "supported_total": 7,
+        "questions": 0
+      },
+      "scripted_caller_1": {
+        "correct": 6,
+        "wrong_proposals": 0,
+        "supported_correct": 6,
+        "supported_total": 7,
+        "questions": 7
+      },
+      "scripted_caller_2": {
+        "correct": 7,
+        "wrong_proposals": 0,
+        "supported_correct": 7,
+        "supported_total": 7,
+        "questions": 8
+      },
+      "gemma_2": {
+        "correct": 2,
+        "wrong_proposals": 2,
+        "supported_correct": 2,
+        "supported_total": 7,
+        "questions": 7
+      }
+    },
+    "new": {
+      "baseline": {
+        "correct": 5,
+        "wrong_proposals": 2,
+        "supported_correct": 2,
+        "supported_total": 6,
+        "questions": 0
+      },
+      "scripted_caller_1": {
+        "correct": 9,
+        "wrong_proposals": 1,
+        "supported_correct": 5,
+        "supported_total": 6,
+        "questions": 10
+      },
+      "scripted_caller_2": {
+        "correct": 9,
+        "wrong_proposals": 1,
+        "supported_correct": 5,
+        "supported_total": 6,
+        "questions": 10
+      },
+      "gemma_2": {
+        "correct": 3,
+        "wrong_proposals": 3,
+        "supported_correct": 1,
+        "supported_total": 6,
+        "questions": 10
+      }
+    },
+    "gemma_cost": {
+      "calls": 17,
+      "seconds": 160.51687880903773,
+      "total_tokens": 11024
+    }
+  },
+  "goal_questions_all_candidates": {
+    "prior_abstentions": {
+      "baseline": {
+        "correct": 0,
+        "wrong_proposals": 0,
+        "supported_correct": 0,
+        "supported_total": 7,
+        "questions": 0
+      },
+      "scripted_caller_1": {
+        "correct": 3,
+        "wrong_proposals": 0,
+        "supported_correct": 3,
+        "supported_total": 7,
+        "questions": 7
+      },
+      "scripted_caller_2": {
+        "correct": 7,
+        "wrong_proposals": 0,
+        "supported_correct": 7,
+        "supported_total": 7,
+        "questions": 11
+      }
+    },
+    "new": {
+      "baseline": {
+        "correct": 5,
+        "wrong_proposals": 2,
+        "supported_correct": 2,
+        "supported_total": 6,
+        "questions": 0
+      },
+      "scripted_caller_1": {
+        "correct": 6,
+        "wrong_proposals": 0,
+        "supported_correct": 2,
+        "supported_total": 6,
+        "questions": 10
+      },
+      "scripted_caller_2": {
+        "correct": 10,
+        "wrong_proposals": 0,
+        "supported_correct": 6,
+        "supported_total": 6,
+        "questions": 14
+      }
+    }
+  }
+}
