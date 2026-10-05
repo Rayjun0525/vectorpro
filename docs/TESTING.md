@@ -220,3 +220,9 @@ summary.json, 각 시나리오의 result.json/transcript.json을 함께 확인�
 플랫폼 검증은 [PORTABILITY.md](PORTABILITY.md), 상세 설계/결과는
 [TENSOR_CATALOG.md](TENSOR_CATALOG.md)와 [LLM_ADAPTER.md](LLM_ADAPTER.md)를 참고한다.
 macOS 검증은 사용자 결정으로 보류한다.
+
+## 2026-10-05: 리눅스 기능 통합
+
+스트리밍 파이프, 프로세스 전후 전체 상태 관찰, HTTP 및 시스템 조회와 조합 학습을 추가했다. 다섯 기능의 학습/검증과 저장 후 실제 리눅스 13건 검증을 통과했다. 실행 기능과 습득 절차의 구분, 재현 명령, 현재 범위와 남은 과제는 docs/LINUX_BUNDLE.md를 참조한다. 최종 증거는 results/linux_bundle_final_verified에 있다. 전체 회귀 결과는 docs/HANDOFF.md에 기록한다.
+
+최종 전체 회귀: 297 passed (270.77초). tests/test_linux_bundle.py: 11 passed (5.30초).

@@ -25,6 +25,7 @@ class StateExample:
     before_directories: tuple[str, ...] = ()
     after_directories: tuple[str, ...] = ()
     processes: tuple[dict, ...] = ()
+    observations: tuple[dict, ...] = ()
 
     def signature(self):
         return (self.inputs, tuple(sorted(self.before.items())),
@@ -75,16 +76,8 @@ class StateLesson:
         if not self.training or not self.validation:
             raise ValueError("state learning requires training and validation examples")
         for case in self.training + self.validation:
-            from vectorpro.process_host import specification, decode, encode
-            for fixture in case.processes:
-                if not isinstance(fixture, dict) or set(fixture) != {"request", "stdin", "stdout", "stderr", "code"}:
-                    raise ValueError("process evidence requires request/stdin/stdout/stderr/code")
-                for key in ("request", "stdin", "stdout", "stderr"):
-                    v = fixture[key]
-                    if not isinstance(v, str) or len(v) % 2 or any(c not in "0123456789abcdefABCDEF" for c in v):
-                        raise ValueError("process evidence requires hexadecimal byte pairs")
-                specification(bytes.fromhex(fixture["request"]), None)
-                decode(encode(bytes.fromhex(fixture["stdout"]), bytes.fromhex(fixture["stderr"]), fixture["code"]))
+            from vectorpro.learning.observations import validate
+            validate(case.processes, case.observations)
             if len(case.inputs) != len(self.input_types):
                 raise ValueError("state input arity mismatch")
             for value, kind in zip(case.inputs, self.input_types):
@@ -126,7 +119,7 @@ class StateLesson:
                                  {p: bytes.fromhex(v) for p, v in c["before"].items()},
                                  {p: bytes.fromhex(v) for p, v in c["after"].items()}, c.get("output"),
                                  tuple(c["operations"]) if "operations" in c else None,
-                                 c.get("before_directories", ()), c.get("after_directories", ()), tuple(c.get("processes", ())))
+                                 c.get("before_directories", ()), c.get("after_directories", ()), tuple(c.get("processes", ())), tuple(c.get("observations", ())))
                     for c in data[name]]
         return cls(tuple(data["input_types"]), cases("training"), cases("validation"),
                    data.get("width", 16), data.get("max_steps", 3), data.get("candidate_budget", 5000),
@@ -144,6 +137,7 @@ class StateOutcome:
 def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
     context = MemoryHostContext(case.before, directories=case.before_directories)
     context.processes = case.processes
+    context.observations = case.observations
     inputs = tuple(context.put(value.encode("utf-8")) if kind == "path" else context.put(bytes.fromhex(value)) if kind == "buffer" else value
                    for value, kind in zip(case.inputs, lesson.input_types))
     try:
@@ -151,6 +145,7 @@ def evaluate(executable, case: StateExample, lesson: StateLesson) -> bool:
             output = executable([inputs], lesson.width)[0]
         return (context.files == case.after
                 and getattr(context, "process_index", 0) == len(case.processes)
+                and getattr(context, "observation_index", 0) == len(case.observations)
                 and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
                 and (case.output is None or (bytes(context.buffers[output]) == bytes.fromhex(case.output)
                      if lesson.output_type == "buffer" else output == case.output))
@@ -167,6 +162,7 @@ def prefilter_instructions(registry, instructions, registers, output, case, less
     """
     context = MemoryHostContext(case.before, directories=case.before_directories)
     context.processes = case.processes
+    context.observations = case.observations
     values = {name: int(value == "one") for name, value in registers.items()}
     for i, (value, kind) in enumerate(zip(case.inputs, lesson.input_types)):
         values[f"x{i}"] = context.put(value.encode()) if kind == "path" else context.put(bytes.fromhex(value)) if kind == "buffer" else value
@@ -181,6 +177,7 @@ def prefilter_instructions(registry, instructions, registers, output, case, less
                 if pc == len(instructions):
                     return (context.files == case.after
                             and getattr(context, "process_index", 0) == len(case.processes)
+                            and getattr(context, "observation_index", 0) == len(case.observations)
                             and context.directories == MemoryHostContext.directory_state(case.after, case.after_directories)
                             and (case.output is None or (bytes(context.buffers[values[output]]) == bytes.fromhex(case.output)
                                  if lesson.output_type == "buffer" else values[output] == case.output))
@@ -283,7 +280,7 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
             continue  # Old effectful programs without a type contract cannot be inferred safely.
         operations.append((cap.name, signature))
     # Explore data producers before terminal scalar/effect calls; keep all options.
-    if any(case.processes for case in lesson.training):
+    if any(case.processes or case.observations for case in lesson.training):
         operations.sort(key=lambda op: {"buffer": 0, "path": 1, "value": 2}[op[1][1]])
     plan = LearningPlan(name, "learned state transformation", len(lesson.input_types), OutputWidth.SAME)
     initial = {f"x{i}": "zero" for i in range(plan.arity)} | {"zero": "zero", "one": "one"}
@@ -348,7 +345,7 @@ def learn_stateful(registry: Registry, name: str, lesson: StateLesson) -> StateO
                         if tried >= lesson.candidate_budget:
                             return StateOutcome(None, [{"candidates": tried, "accepted": False, "reason": "candidate budget"}])
                         tried += 1
-                        if (control == "sequence" and any(case.processes for case in lesson.training)
+                        if (control == "sequence" and any(case.processes or case.observations for case in lesson.training)
                                 and not all(prefilter_instructions(registry, candidate, registers, output,
                                             case, lesson, timed_out) for case in lesson.training)):
                             continue

@@ -1,0 +1,919 @@
+{
+  "learning": [
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "pipeline_save",
+        "description": "Execute acquired calls according to stored conditional routing. Extract stdout bytes from a process result. save Extract stdout bytes from a process result. to input path",
+        "input_types": [
+          "buffer",
+          "buffer",
+          "path"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes",
+          "hexadecimal buffer bytes",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "request",
+            "type": "buffer",
+            "role": "request",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "stdin",
+            "type": "buffer",
+            "role": "stdin",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            -0.08411091566085815,
+            0.05602958798408508,
+            0.1067773625254631,
+            0.06607595086097717,
+            -0.04896661266684532,
+            0.2490670084953308,
+            -0.1019660085439682,
+            -0.007527072913944721,
+            -0.24079708755016327,
+            0.04949389398097992,
+            0.10164663195610046,
+            -0.29438328742980957,
+            -0.032599832862615585,
+            -0.07175611704587936,
+            0.11369560658931732,
+            0.140928715467453,
+            -0.014130348339676857,
+            0.28651174902915955,
+            -0.3713669776916504,
+            0.011623715981841087,
+            -0.002522469265386462,
+            0.3510317802429199,
+            0.061568766832351685,
+            0.18117733299732208,
+            -0.26856616139411926,
+            0.03785564750432968,
+            -0.34211239218711853,
+            0.00997908040881157,
+            -0.2732788622379303,
+            0.17191341519355774,
+            -0.16323961317539215,
+            0.030663784593343735
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.write",
+            "process.code",
+            "process.pipeline",
+            "process.stdout"
+          ],
+          "digest": "515e30660412bfa75448898ebd8bc09b5c132bb680ce2e1a583ce2783e62ce9d"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 116,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:c0b9c3a980a51dc61b08970976210aacd35fa46b0a34c1e3e544e586afb27476"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 116,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "created_content",
+        "description": "Execute argv with input bytes and return captured streams and exit code. file bytes read from input path",
+        "input_types": [
+          "buffer",
+          "buffer",
+          "path"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes",
+          "hexadecimal buffer bytes",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "request",
+            "type": "buffer",
+            "role": "request",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "stdin",
+            "type": "buffer",
+            "role": "stdin",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "source",
+            "type": "path",
+            "role": "source",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "buffer",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.08035056293010712,
+            -0.13002930581569672,
+            0.010348664596676826,
+            0.0675140917301178,
+            -0.04217280447483063,
+            0.3102990984916687,
+            -0.1801059991121292,
+            -0.31094807386398315,
+            0.009638577699661255,
+            0.19724887609481812,
+            0.4204989969730377,
+            -0.03627506643533707,
+            -0.15423373878002167,
+            0.35268908739089966,
+            -0.0999201312661171,
+            0.011232499033212662,
+            -0.10881645232439041,
+            -0.13733556866645813,
+            -0.13023069500923157,
+            0.1379694640636444,
+            -0.0927291214466095,
+            -0.03334537521004677,
+            0.15058621764183044,
+            0.23587656021118164,
+            -0.12517087161540985,
+            -0.012985552661120892,
+            0.12285462021827698,
+            0.39746636152267456,
+            0.058616094291210175,
+            0.1054985448718071,
+            -0.1037769764661789,
+            0.019750243052840233
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.read",
+            "process.run"
+          ],
+          "digest": "0c19bb087254a02ec3793329130f9e16e8c5e018556ab489337f25e4c797b7fb"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 26,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:79ee969ce4f36915cf641853c8e8f204d275305e0c225089d51c34a01c9613bb"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 26,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "http_checked",
+        "description": "Send a bounded HTTP request and retain status and body bytes. Extract body bytes only for a successful HTTP status; otherwise raise an error.",
+        "input_types": [
+          "buffer"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "request",
+            "type": "buffer",
+            "role": "request",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "buffer",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.21930773556232452,
+            0.1316322535276413,
+            0.08100023120641708,
+            0.2975766360759735,
+            0.20512744784355164,
+            -0.04044362157583237,
+            0.1948142945766449,
+            0.13068647682666779,
+            -0.18722842633724213,
+            0.005613322369754314,
+            -0.2143283486366272,
+            -0.1907660812139511,
+            0.04560469463467598,
+            -0.01379392296075821,
+            -0.09644758701324463,
+            0.15078632533550262,
+            0.1879962533712387,
+            0.025840969756245613,
+            -0.14394693076610565,
+            -0.2653292119503021,
+            0.2772667109966278,
+            -0.026630019769072533,
+            0.06101629137992859,
+            0.15676963329315186,
+            0.04083764925599098,
+            0.20648588240146637,
+            0.11449483782052994,
+            0.35818222165107727,
+            -0.06776942312717438,
+            -0.29836952686309814,
+            -0.12573425471782684,
+            -0.24667063355445862
+          ],
+          "requires_host": true,
+          "operations": [
+            "network.http",
+            "network.require_body"
+          ],
+          "digest": "a115377bbfbdc18207d9d828f267a9798df9ae2accc5e1e5a4d69dbdb3742613"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 6,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:760c780b086cc607f7c2235e7c066f3acc0323c8989d5c2502a76e199eadb68e"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 6,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "system_text",
+        "description": "Query platform, machine, CPU count, host cwd or process ID as JSON bytes. Decode a JSON string as UTF-8 bytes. JSON \ubb38\uc790\uc5f4 \ucd94\ucd9c.",
+        "input_types": [
+          "buffer"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "query",
+            "type": "buffer",
+            "role": "query",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "buffer",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.1194726899266243,
+            0.13666388392448425,
+            -0.3207828998565674,
+            0.0608777180314064,
+            -0.03611619025468826,
+            -0.19542983174324036,
+            -0.043566275388002396,
+            -0.31877848505973816,
+            -0.04414370656013489,
+            -0.030394893139600754,
+            0.09915265440940857,
+            -0.01880522631108761,
+            0.17640522122383118,
+            0.36166509985923767,
+            -0.10827549546957016,
+            -0.24927663803100586,
+            0.1986294686794281,
+            0.3197941780090332,
+            0.020459866151213646,
+            0.10485232621431351,
+            0.21314305067062378,
+            -0.21123544871807098,
+            -0.23733340203762054,
+            -0.10773197561502457,
+            0.1537172943353653,
+            -0.23175401985645294,
+            0.09121502935886383,
+            -0.22405053675174713,
+            0.03194635733962059,
+            0.12762872874736786,
+            -0.007905560545623302,
+            -0.06510160118341446
+          ],
+          "requires_host": true,
+          "operations": [
+            "json.text",
+            "system.info"
+          ],
+          "digest": "4fd9944515e0c9642fd9a66ce755d710e04896253abad331c15dd3dbc064396c"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 6,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:0004ea96633537e13be3617be2bab9e94050de3fda5aea00ce3bd2f8c4f9b121"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 6,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    },
+    {
+      "status": "registered",
+      "registered": true,
+      "contract": {
+        "version": 1,
+        "name": "download_transform",
+        "description": "Send a bounded HTTP request and retain status and body bytes. Extract body bytes only for a successful HTTP status; otherwise raise an error. Execute acquired calls according to stored conditional routing. Extract stdout bytes from a process result. save Extract stdout bytes from a process result. to input path",
+        "input_types": [
+          "buffer",
+          "buffer",
+          "path"
+        ],
+        "argument_roles": [
+          "hexadecimal buffer bytes",
+          "hexadecimal buffer bytes",
+          "relative file path"
+        ],
+        "output_width": "W",
+        "has_effects": true,
+        "parameters": [
+          {
+            "name": "http",
+            "type": "buffer",
+            "role": "http",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "pipeline",
+            "type": "buffer",
+            "role": "pipeline",
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-fA-F]{2})*$"
+            },
+            "role_source": "draft declaration, not independent proof"
+          },
+          {
+            "name": "destination",
+            "type": "path",
+            "role": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "role_source": "draft declaration, not independent proof"
+          }
+        ],
+        "output": {
+          "type": "value",
+          "width": "W"
+        },
+        "width": {
+          "minimum": 1,
+          "maximum": 64
+        },
+        "execution": {
+          "address": [
+            0.18263845145702362,
+            0.20811006426811218,
+            -0.17069606482982635,
+            -0.10221785306930542,
+            0.1854594200849533,
+            0.061706796288490295,
+            -0.17463424801826477,
+            0.13365398347377777,
+            -0.07402312010526657,
+            -0.10111026465892792,
+            0.01465919241309166,
+            0.195473775267601,
+            0.4777495265007019,
+            -0.07675562053918839,
+            0.038381289690732956,
+            -0.024709239602088928,
+            -0.2669702470302582,
+            0.21083059906959534,
+            0.3173214793205261,
+            -0.03707553446292877,
+            -0.16979436576366425,
+            -0.12665198743343353,
+            0.1406216323375702,
+            -0.0445910282433033,
+            -0.0744519904255867,
+            0.30687999725341797,
+            0.11006470024585724,
+            -0.09077446162700653,
+            -0.15197041630744934,
+            -0.03544601425528526,
+            -0.22282850742340088,
+            0.1683347076177597
+          ],
+          "requires_host": true,
+          "operations": [
+            "file.write",
+            "network.http",
+            "network.require_body",
+            "process.code",
+            "process.pipeline",
+            "process.stdout"
+          ],
+          "digest": "b9c4c53e288dfcb9484a4b5d8af874673d28ad807f3564e19e6c6525d5b7a557"
+        },
+        "verification": {
+          "source": "stored training/validation records; not independent intent proof",
+          "history": [
+            {
+              "strategy": "state search",
+              "steps": 2,
+              "candidates": 384,
+              "control": "sequence",
+              "tensor_steps": 2,
+              "training_cases": 2,
+              "validation_cases": 2,
+              "accepted": true
+            }
+          ],
+          "audit": null
+        },
+        "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+        "id": "vp1:14a509af4472ca4dee5c2b639d9f2543205378afafe073c2c89b0c9dbaa1d55f"
+      },
+      "history": [
+        {
+          "strategy": "state search",
+          "steps": 2,
+          "candidates": 384,
+          "control": "sequence",
+          "tensor_steps": 2,
+          "training_cases": 2,
+          "validation_cases": 2,
+          "accepted": true
+        }
+      ],
+      "evidence_source": "caller_examples",
+      "intent_independently_verified": false
+    }
+  ],
+  "native": [
+    {
+      "kind": "integration",
+      "bytes": 0,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:14a509af4472ca4dee5c2b639d9f2543205378afafe073c2c89b0c9dbaa1d55f",
+        "contract_version": 1,
+        "capability": "download_transform",
+        "outputs": [
+          0
+        ],
+        "effects": [
+          {
+            "operation": "network.http",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "network.require_body",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "process.pipeline",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "process.code",
+            "arguments": [
+              6
+            ],
+            "result": 0
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              6
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              7
+            ],
+            "result": 0
+          }
+        ]
+      }
+    },
+    {
+      "kind": "integration",
+      "bytes": 4,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:14a509af4472ca4dee5c2b639d9f2543205378afafe073c2c89b0c9dbaa1d55f",
+        "contract_version": 1,
+        "capability": "download_transform",
+        "outputs": [
+          4
+        ],
+        "effects": [
+          {
+            "operation": "network.http",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "network.require_body",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "process.pipeline",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "process.code",
+            "arguments": [
+              6
+            ],
+            "result": 0
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              6
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              7
+            ],
+            "result": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "integration",
+      "bytes": 14,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:14a509af4472ca4dee5c2b639d9f2543205378afafe073c2c89b0c9dbaa1d55f",
+        "contract_version": 1,
+        "capability": "download_transform",
+        "outputs": [
+          14
+        ],
+        "effects": [
+          {
+            "operation": "network.http",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "network.require_body",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "process.pipeline",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "process.code",
+            "arguments": [
+              6
+            ],
+            "result": 0
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              6
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              7
+            ],
+            "result": 14
+          }
+        ]
+      }
+    },
+    {
+      "kind": "integration",
+      "bytes": 8192,
+      "passed": true,
+      "call": {
+        "status": "executed",
+        "contract_id": "vp1:14a509af4472ca4dee5c2b639d9f2543205378afafe073c2c89b0c9dbaa1d55f",
+        "contract_version": 1,
+        "capability": "download_transform",
+        "outputs": [
+          8192
+        ],
+        "effects": [
+          {
+            "operation": "network.http",
+            "arguments": [
+              1
+            ],
+            "result": 4
+          },
+          {
+            "operation": "network.require_body",
+            "arguments": [
+              4
+            ],
+            "result": 5
+          },
+          {
+            "operation": "process.pipeline",
+            "arguments": [
+              2,
+              5
+            ],
+            "result": 6
+          },
+          {
+            "operation": "process.code",
+            "arguments": [
+              6
+            ],
+            "result": 0
+          },
+          {
+            "operation": "process.stdout",
+            "arguments": [
+              6
+            ],
+            "result": 7
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              3,
+              7
+            ],
+            "result": 8192
+          }
+        ]
+      }
+    },
+    {
+      "kind": "http failure",
+      "passed": true
+    },
+    {
+      "kind": "pipeline failure",
+      "passed": true
+    },
+    {
+      "kind": "process filesystem",
+      "bytes": 0,
+      "passed": true
+    },
+    {
+      "kind": "process filesystem",
+      "bytes": 4,
+      "passed": true
+    },
+    {
+      "kind": "process filesystem",
+      "bytes": 14,
+      "passed": true
+    },
+    {
+      "kind": "process filesystem",
+      "bytes": 8192,
+      "passed": true
+    },
+    {
+      "kind": "system",
+      "query": "platform",
+      "passed": true
+    },
+    {
+      "kind": "system",
+      "query": "machine",
+      "passed": true
+    },
+    {
+      "kind": "system",
+      "query": "cwd",
+      "passed": true
+    }
+  ]
+}

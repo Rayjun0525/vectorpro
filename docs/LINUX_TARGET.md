@@ -91,10 +91,11 @@ LLM 및 검색 인코더를 import하지 않았다. 테스트는 같은 `vectorp
 현재는 파일시스템과 동기 프로세스 입출력의 초기 기반이다. 단일 실행 argv/stdin/
 stdout/stderr/종료/cwd/env/시간 제한과 학습한 stdout 저장을 검증했다.
 [PROCESS_RESULTS.md](PROCESS_RESULTS.md)에 명세와 미사용 검증을 기록했다.
-동시 파이프/권한/시스템
-정보/네트워크와 임의의 중첩 조건·문자열 처리·자료구조는 아직 구현하지 않았다.
+동시 파이프와 기본 HTTP/시스템 조회는 구현·조합 검증했다.
+권한과 임의의 중첩 조건·문자열 처리·자료구조는 추가 과제다.
 두 프로세스의 순차 stdin/stdout 연결과 종료 코드에 따른 쓰기 분기를 학습·검증했다.
-범위는 [PROCESS_CHAIN.md](PROCESS_CHAIN.md)에 있다. 동시 스트리밍 파이프가 다음 과제다.
+범위는 [PROCESS_CHAIN.md](PROCESS_CHAIN.md)에 있다. 이후 동시 스트리밍 파이프와
+HTTP 통합 결과는 [LINUX_BUNDLE.md](LINUX_BUNDLE.md)에 기록했다.
 버퍼+숫자 이진 레코드의 반환·분리와 다음 계약 전달은 구현·검증했다.
 현재의 제한과 재현은 [RECORD_RESULTS.md](RECORD_RESULTS.md)에 있다.
 
@@ -105,3 +106,7 @@ stdout/stderr/종료/cwd/env/시간 제한과 학습한 stdout 저장을 검증�
 native 실행 중 뒤쪽 호출이 실패했을 때 앞선 변경을 되돌리는 트랜잭션은 없다.
 시간·용량 한도와 검증 성공은 범용 정확성이나 사용자의 의도에 대한 증명이 아니다.
 macOS 검증은 사용자의 요청에 따라 뒤로 남긴다.
+
+## 2026-10-05: 리눅스 기능 통합
+
+스트리밍 파이프, 프로세스 전후 전체 상태 관찰, HTTP 및 시스템 조회와 조합 학습을 추가했다. 다섯 기능의 학습/검증과 저장 후 실제 리눅스 13건 검증을 통과했다. 실행 기능과 습득 절차의 구분, 재현 명령, 현재 범위와 남은 과제는 docs/LINUX_BUNDLE.md를 참조한다. 최종 증거는 results/linux_bundle_final_verified에 있다. 전체 회귀 결과는 docs/HANDOFF.md에 기록한다.

@@ -13,6 +13,13 @@ from vectorpro.machine import VectorProgram
 from vectorpro.tensor_codec import encode_tree, decode_tree
 
 HOST_TEXT = {
+    "process.pipeline": "Execute concurrent processes joined by OS pipes and retain streams and exit codes.",
+    "network.http": "Send a bounded HTTP request and retain status and body bytes.",
+    "network.body": "Extract HTTP body bytes, including error responses.",
+    "network.require_body": "Extract body bytes only for a successful HTTP status; otherwise raise an error.",
+    "network.status": "Extract the HTTP response status.",
+    "network.ok": "Return 1 for successful HTTP status and 0 otherwise.",
+    "system.info": "Query platform, machine, CPU count, host cwd or process ID as JSON bytes.",
     "process.run": "Execute argv with input bytes and return captured streams and exit code.",
     "process.stdout": "Extract stdout bytes from a process result.",
     "process.stderr": "Extract stderr bytes from a process result.",

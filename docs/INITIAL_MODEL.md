@@ -128,3 +128,7 @@ learning, checking Unicode paths, numeric functions, mutation and composed loops
 Linux and Windows results are recorded with identical program SHA-256. The
 user explicitly authorized the Windows desktop test directory on 2026-10-04.
 macOS remains unverified. Native OS results must not be inferred from source alone.
+
+## 2026-10-05: 리눅스 기능 통합
+
+스트리밍 파이프, 프로세스 전후 전체 상태 관찰, HTTP 및 시스템 조회와 조합 학습을 추가했다. 다섯 기능의 학습/검증과 저장 후 실제 리눅스 13건 검증을 통과했다. 실행 기능과 습득 절차의 구분, 재현 명령, 현재 범위와 남은 과제는 docs/LINUX_BUNDLE.md를 참조한다. 최종 증거는 results/linux_bundle_final_verified에 있다. 전체 회귀 결과는 docs/HANDOFF.md에 기록한다.

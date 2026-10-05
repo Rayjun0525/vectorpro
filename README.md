@@ -8,7 +8,8 @@
 프로세스 입력·출력·종료 코드와 학습된 출력 저장 절차는
 [PROCESS_RESULTS.md](docs/PROCESS_RESULTS.md)를 참고한다.
 두 프로세스의 순차 연결과 종료 코드에 따른 저장 분기까지 학습·검증했다.
-현재 범위와 남은 파이프 과제는 [PROCESS_CHAIN.md](docs/PROCESS_CHAIN.md)에 있다.
+최신 스트리밍 파이프·HTTP·시스템 조회 통합과 남은 범위는
+[LINUX_BUNDLE.md](docs/LINUX_BUNDLE.md)에 있다.
 
 실제 Gemma로 반복 작업의 비용을 비교했다. 정확한 구조화 입력의 텐서 직접 호출은
 LLM 사용 0회였지만, 자연어 인자 준비는 오류가 많았고 Python 직접 함수가 더 빨랐다.
@@ -671,3 +672,7 @@ outside the repository. macOS verification is deferred at the user's request.
 | M3 | structure discovery beyond a fixed candidate set; capability search by behaviour vectors |
 | M4 | ingest binaries via emulator traces (Unicorn), held-out compilers |
 | M5 | synthesizer, effect log for native calls, cost vs native/interpreter |
+
+## 2026-10-05: 리눅스 기능 통합
+
+스트리밍 파이프, 프로세스 전후 전체 상태 관찰, HTTP 및 시스템 조회와 조합 학습을 추가했다. 다섯 기능의 학습/검증과 저장 후 실제 리눅스 13건 검증을 통과했다. 실행 기능과 습득 절차의 구분, 재현 명령, 현재 범위와 남은 과제는 docs/LINUX_BUNDLE.md를 참조한다. 최종 증거는 results/linux_bundle_final_verified에 있다. 전체 회귀 결과는 docs/HANDOFF.md에 기록한다.

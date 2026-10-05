@@ -36,6 +36,13 @@ HOST_TYPES = {"buffer.new": (("value",), "buffer"),
               "directory.list": (("path",), "buffer")}
 HOST_TYPES.update({"list.length": (("buffer",), "value"),
                    "process.run": (("buffer", "buffer"), "buffer"),
+                   "process.pipeline": (("buffer", "buffer"), "buffer"),
+                   "network.http": (("buffer",), "buffer"),
+                   "network.body": (("buffer",), "buffer"),
+                   "network.require_body": (("buffer",), "buffer"),
+                   "network.status": (("buffer",), "value"),
+                   "network.ok": (("buffer",), "value"),
+                   "system.info": (("buffer",), "buffer"),
                    "process.stdout": (("buffer",), "buffer"),
                    "process.stderr": (("buffer",), "buffer"),
                    "process.code": (("buffer",), "value"),
@@ -141,8 +148,20 @@ class HostContext:
             parent = MemoryHostContext.normalize(bytes(self.buffers[args[0]]).decode("utf-8"))
             child = MemoryHostContext.normalize(bytes(self.buffers[args[1]]).decode("utf-8"))
             result = self.put(MemoryHostContext.normalize(parent + "/" + child).encode("utf-8"))
-        elif operation == "process.run":
-            result = self.put(self._run_process(bytes(self.buffers[args[0]]), bytes(self.buffers[args[1]])))
+        elif operation in ("process.run", "process.pipeline"):
+            method = self._run_process if operation == "process.run" else self._run_pipeline
+            result = self.put(method(bytes(self.buffers[args[0]]), bytes(self.buffers[args[1]])))
+        elif operation == "network.http":
+            result = self.put(self._http(bytes(self.buffers[args[0]])))
+        elif operation in ("network.body", "network.require_body", "network.status", "network.ok"):
+            from vectorpro.network_host import decode
+            response = decode(bytes(self.buffers[args[0]]))
+            success = 200 <= response["status"] < 300
+            if operation == "network.require_body" and not success:
+                raise OSError(f"HTTP status {response['status']}")
+            result = response["status"] if operation == "network.status" else int(success) if operation == "network.ok" else self.put(bytes.fromhex(response["body"]))
+        elif operation == "system.info":
+            result = self.put(self._system_info(bytes(self.buffers[args[0]])))
         elif operation in ("process.stdout", "process.stderr", "process.code"):
             from vectorpro.process_host import decode
             value = decode(bytes(self.buffers[args[0]]))
@@ -209,6 +228,18 @@ class HostContext:
         from vectorpro.process_host import run
         return run(self, request, stdin)
 
+    def _run_pipeline(self, request, stdin):
+        from vectorpro.process_host import pipeline
+        return pipeline(self, request, stdin)
+
+    def _http(self, request):
+        from vectorpro.network_host import run
+        return run(self, request)
+
+    def _system_info(self, query):
+        from vectorpro.system_host import run
+        return run(self, query)
+
     def _write_file(self, path: Path, data: bytearray) -> int:
         return path.write_bytes(data)
 
@@ -258,15 +289,57 @@ class MemoryHostContext(HostContext):
     def _run_process(self, request, stdin):
         from vectorpro.process_host import specification, encode
         specification(request, None)
+        return self._recorded_process("process.run", request, stdin, encode)
+
+    def _run_pipeline(self, request, stdin):
+        from vectorpro.process_host import pipeline_specification, encode
+        pipeline_specification(request, None)
+        return self._recorded_process("process.pipeline", request, stdin, encode)
+
+    def _recorded_process(self, operation, request, stdin, encode):
         index = getattr(self, "process_index", 0)
         fixtures = getattr(self, "processes", ())
         if index >= len(fixtures):
             raise ValueError("process execution requires recorded evidence in memory")
         fixture = fixtures[index]
-        if bytes.fromhex(fixture["request"]) != request or bytes.fromhex(fixture["stdin"]) != stdin:
+        if fixture.get("operation", "process.run") != operation or bytes.fromhex(fixture["request"]) != request or bytes.fromhex(fixture["stdin"]) != stdin:
             raise ValueError("process call does not match recorded evidence")
         self.process_index = index + 1
+        self._apply_observed_state(fixture)
         return encode(bytes.fromhex(fixture["stdout"]), bytes.fromhex(fixture["stderr"]), fixture["code"])
+
+    def _apply_observed_state(self, fixture):
+        if "after" in fixture:
+            before = {self.normalize(p): bytes.fromhex(data) for p, data in fixture["before"].items()}
+            if self.files != before or self.directories != self.directory_state(before, fixture["before_directories"]):
+                raise ValueError("process filesystem does not match recorded before state")
+            files = {self.normalize(p): bytes.fromhex(data) for p, data in fixture["after"].items()}
+            directories = self.directory_state(files, fixture["after_directories"])
+            self.files, self.directories = files, directories
+
+    def _observe(self, operation, request):
+        index = getattr(self, "observation_index", 0)
+        fixtures = getattr(self, "observations", ())
+        if index >= len(fixtures):
+            raise ValueError("external operation requires recorded observation")
+        fixture = fixtures[index]
+        if fixture["operation"] != operation or bytes.fromhex(fixture["request"]) != request:
+            raise ValueError("external operation does not match observation")
+        self.observation_index = index + 1
+        self._apply_observed_state(fixture)
+        return bytes.fromhex(fixture["response"])
+
+    def _http(self, request):
+        from vectorpro.network_host import specification, decode
+        specification(request)
+        response = self._observe("network.http", request)
+        decode(response)
+        return response
+
+    def _system_info(self, query):
+        from vectorpro.system_host import validate
+        validate(query)
+        return self._observe("system.info", query)
 
     def __init__(self, files: dict[str, bytes], max_buffer_bytes: int = 16 * 1024 * 1024,
                  directories=None):

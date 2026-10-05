@@ -8,3 +8,6 @@ results/record_results_verified/native-*/** -text
 results/process_results_verified_ordered/native-*/** -text
 results/process_chain_*/native-*/** -text
 results/process_chain_*/guard-*/** -text
+results/linux_bundle_*/native-*/** -text
+results/linux_bundle_*/created-*/** -text
+results/linux_bundle_*/fail-*/** -text

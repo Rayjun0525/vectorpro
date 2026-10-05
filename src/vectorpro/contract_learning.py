@@ -81,11 +81,13 @@ def state_lesson(data):
         if not isinstance(data[split],list) or not 1<=len(data[split])<=8:
             raise ValueError("state evidence needs 1..8 cases per split")
         for case in data[split]:
-            if (not isinstance(case,dict) or set(case)-{"inputs","before","after","output","operations","before_directories","after_directories","processes"}
+            if (not isinstance(case,dict) or set(case)-{"inputs","before","after","output","operations","before_directories","after_directories","processes","observations"}
                     or not {"inputs","before","after"}<=set(case)):
                 raise ValueError("state cases accept only inputs/snapshots/output/operation observations")
             if "processes" in case and (not isinstance(case["processes"], list) or len(case["processes"]) > 16):
                 raise ValueError("state process evidence must contain at most 16 recorded calls")
+            if "observations" in case and (not isinstance(case["observations"], list) or len(case["observations"]) > 16):
+                raise ValueError("state observations must contain at most 16 recorded calls")
             if sum(len(f.get(k, "")) for f in case.get("processes", []) if isinstance(f, dict)
                    for k in ("request", "stdin", "stdout", "stderr") if isinstance(f.get(k, ""), str)) > 131072:
                 raise ValueError("process evidence exceeds byte limit")
