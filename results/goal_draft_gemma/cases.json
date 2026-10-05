@@ -1,0 +1,51 @@
+[
+  {
+    "name": "copy",
+    "intent": "Duplicate source.bin into target.bin, preserving source.bin.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      }
+    ]
+  },
+  {
+    "name": "move",
+    "intent": "Rename source.bin to target.bin. Afterward source.bin must not exist.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      },
+      {
+        "kind": "absent",
+        "parameter": "source"
+      }
+    ]
+  },
+  {
+    "name": "unsupported",
+    "intent": "Encrypt source.bin into target.bin using a secret key.",
+    "expected_rules": null
+  }
+]

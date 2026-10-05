@@ -895,12 +895,21 @@ def main(argv=None):
     parser.add_argument("--acquisition-evidence", type=Path, help="caller-controlled source bank with hidden acceptance cases")
     parser.add_argument("--reference-providers", type=Path, help="caller-installed external reference manifests for automatic observation")
     parser.add_argument("--request-goal", type=Path, help="caller-owned exact intent and state predicates; independent of model reference selection")
+    parser.add_argument("--draft-goal", action="store_true", help="return a reviewable goal draft and stop before acquisition or execution")
     args = parser.parse_args(argv)
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
     if host:
         runtime.provide_host_operations()
     model = HTTPChatModel(args.endpoint, args.model, os.environ.get(args.api_key_env))
+    if args.draft_goal:
+        if not args.reference_providers or args.request_goal or args.acquisition_evidence or args.encoder:
+            parser.error("--draft-goal requires --reference-providers and cannot combine with supplied goals/evidence/catalog")
+        from vectorpro.reference_evidence import ReferenceProviders
+        from vectorpro.goal_draft import propose_goal
+        draft = propose_goal(model, ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8"))), args.intent)
+        print(json.dumps(draft, ensure_ascii=False))
+        return 2  # Drafting never reports a completed task.
     catalog = None
     if args.encoder:
         from vectorpro.semantic_catalog import Encoder, TensorCatalog

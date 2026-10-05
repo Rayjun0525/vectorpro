@@ -1,0 +1,29 @@
+{
+  "protocol": "goal-draft-only; no approval or execution",
+  "cases": [
+    {
+      "name": "copy",
+      "passed": false,
+      "result": {
+        "status": "goal_draft_failed",
+        "reason": "draft needs state conditions and one frame condition"
+      }
+    },
+    {
+      "name": "move",
+      "passed": false,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the final state of source.bin? Does it need to be removed or preserved? Please describe the desired final state."
+      }
+    },
+    {
+      "name": "unsupported",
+      "passed": true,
+      "result": {
+        "status": "needs_input",
+        "question": "What is the desired final state of source.bin? Is it intended to be encrypted or preserved? Please specify 'encrypt' or 'preserve'."
+      }
+    }
+  ]
+}

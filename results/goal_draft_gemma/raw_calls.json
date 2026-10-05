@@ -1,0 +1,539 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the request into FINAL STATE conditions, not actions or a reference choice. absent: no file or directory remains. present: file or directory exists. unchanged: existing contents and item kind preserved. equals_initial: final parameter file bytes equal initial source file bytes. unchanged_except: every other file and directory stays identical. Include explicit source removal or source preservation requested, and a frame condition. These conditions cannot express encryption, byte transformations, processes, network, or numeric results. Use ask_user for unsupported or ambiguous goals. Do not approximate an unsupported goal with copying. Make exactly one tool call. A trusted caller must review the draft separately.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Duplicate source.bin into target.bin, preserving source.bin."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Draft final-state predicates; this does not authorize execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "rules": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "absent"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "present"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "equals_initial"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter",
+                        "source"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged_except"
+                        },
+                        "parameters": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "source",
+                              "destination"
+                            ]
+                          },
+                          "minItems": 1,
+                          "maxItems": 2,
+                          "uniqueItems": true
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameters"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 32
+              }
+            },
+            "required": [
+              "rules"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"propose_goal\",\"arguments\":{ \"rules\": [{\"kind\": \"absent\", \"parameter\": \"source\"}, {\"kind\": \"present\", \"parameter\": \"source\"}]}}</tool_call>",
+    "seconds": 13.652174522998394,
+    "usage": {
+      "prompt_tokens": 739,
+      "completion_tokens": 51,
+      "total_tokens": 790
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the request into FINAL STATE conditions, not actions or a reference choice. absent: no file or directory remains. present: file or directory exists. unchanged: existing contents and item kind preserved. equals_initial: final parameter file bytes equal initial source file bytes. unchanged_except: every other file and directory stays identical. Include explicit source removal or source preservation requested, and a frame condition. These conditions cannot express encryption, byte transformations, processes, network, or numeric results. Use ask_user for unsupported or ambiguous goals. Do not approximate an unsupported goal with copying. Make exactly one tool call. A trusted caller must review the draft separately.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin. Afterward source.bin must not exist."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Draft final-state predicates; this does not authorize execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "rules": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "absent"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "present"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "equals_initial"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter",
+                        "source"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged_except"
+                        },
+                        "parameters": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "source",
+                              "destination"
+                            ]
+                          },
+                          "minItems": 1,
+                          "maxItems": 2,
+                          "uniqueItems": true
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameters"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 32
+              }
+            },
+            "required": [
+              "rules"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"ask_user\",\"arguments\":{ \"question\": \"What is the final state of source.bin? Does it need to be removed or preserved? Please describe the desired final state.\"}}</tool_call>",
+    "seconds": 6.503092847997323,
+    "usage": {
+      "prompt_tokens": 742,
+      "completion_tokens": 51,
+      "total_tokens": 793
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the request into FINAL STATE conditions, not actions or a reference choice. absent: no file or directory remains. present: file or directory exists. unchanged: existing contents and item kind preserved. equals_initial: final parameter file bytes equal initial source file bytes. unchanged_except: every other file and directory stays identical. Include explicit source removal or source preservation requested, and a frame condition. These conditions cannot express encryption, byte transformations, processes, network, or numeric results. Use ask_user for unsupported or ambiguous goals. Do not approximate an unsupported goal with copying. Make exactly one tool call. A trusted caller must review the draft separately.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source.bin into target.bin using a secret key."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "propose_goal",
+          "description": "Draft final-state predicates; this does not authorize execution",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "rules": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "absent"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "present"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "equals_initial"
+                        },
+                        "parameter": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "source",
+                            "destination"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameter",
+                        "source"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "unchanged_except"
+                        },
+                        "parameters": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "source",
+                              "destination"
+                            ]
+                          },
+                          "minItems": 1,
+                          "maxItems": 2,
+                          "uniqueItems": true
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parameters"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 32
+              }
+            },
+            "required": [
+              "rules"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing or unsupported goal semantics",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"ask_user\",\"arguments\":{ \"question\": \"What is the desired final state of source.bin? Is it intended to be encrypted or preserved? Please specify 'encrypt' or 'preserve'.\"}}</tool_call>",
+    "seconds": 8.615411938997568,
+    "usage": {
+      "prompt_tokens": 738,
+      "completion_tokens": 54,
+      "total_tokens": 792
+    }
+  }
+]
