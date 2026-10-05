@@ -1,0 +1,458 @@
+{
+  "protocol": "scripted protocol",
+  "cases": [
+    {
+      "kind": "copy",
+      "passed": true,
+      "result": {
+        "status": "executed",
+        "contract_id": "vp1:1e7ed62af6231be554a3aa8f324419f43ed5f3863a09dd125287dc70ce22f869",
+        "contract_version": 1,
+        "capability": "observed_copy",
+        "outputs": [
+          21
+        ],
+        "effects": [
+          {
+            "operation": "file.read",
+            "arguments": [
+              1
+            ],
+            "result": 3
+          },
+          {
+            "operation": "file.write",
+            "arguments": [
+              2,
+              3
+            ],
+            "result": 21
+          }
+        ],
+        "tools": [
+          {
+            "name": "collect_evidence",
+            "result": {
+              "status": "evidence_ready",
+              "sources": [
+                {
+                  "id": "reference:a123845fdfa4ca1fcbf83ee4",
+                  "intent": "Copy input.bin to output.bin, keeping input.bin.",
+                  "origin": "caller-installed reference copy; executable sha256=5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9; manifest sha256=a123845fdfa4ca1fcbf83ee470581a3779f473c8fae6af619826ca189c90c2b8",
+                  "interface": {
+                    "parameters": [
+                      {
+                        "name": "source",
+                        "type": "path",
+                        "role": "source file"
+                      },
+                      {
+                        "name": "destination",
+                        "type": "path",
+                        "role": "destination file"
+                      }
+                    ],
+                    "output": {
+                      "type": "value",
+                      "width": "W"
+                    },
+                    "allowed_operations": [
+                      "file.read",
+                      "file.write"
+                    ]
+                  }
+                }
+              ],
+              "intent_independently_verified": false
+            }
+          },
+          {
+            "name": "learn_verified_contract",
+            "result": {
+              "status": "registered",
+              "registered": true,
+              "contract": {
+                "version": 1,
+                "name": "observed_copy",
+                "description": "Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path",
+                "input_types": [
+                  "path",
+                  "path"
+                ],
+                "argument_roles": [
+                  "relative file path",
+                  "relative file path"
+                ],
+                "output_width": "W",
+                "has_effects": true,
+                "parameters": [
+                  {
+                    "name": "source",
+                    "type": "path",
+                    "role": "source file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  },
+                  {
+                    "name": "destination",
+                    "type": "path",
+                    "role": "destination file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  }
+                ],
+                "output": {
+                  "type": "value",
+                  "width": "W"
+                },
+                "width": {
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "execution": {
+                  "address": [
+                    -0.12802205979824066,
+                    0.12203803658485413,
+                    0.09308016300201416,
+                    0.09026636928319931,
+                    0.039235178381204605,
+                    0.20040567219257355,
+                    -0.06567467004060745,
+                    0.2337123453617096,
+                    -0.017018724232912064,
+                    -0.24985916912555695,
+                    0.08968071639537811,
+                    0.13600493967533112,
+                    0.1515030860900879,
+                    -0.27595606446266174,
+                    0.13895906507968903,
+                    -0.12516863644123077,
+                    0.2679005563259125,
+                    0.022303402423858643,
+                    0.2203834056854248,
+                    0.19223394989967346,
+                    -0.2867884635925293,
+                    0.22575050592422485,
+                    -0.11315823346376419,
+                    -0.29351139068603516,
+                    0.21851837635040283,
+                    0.29363369941711426,
+                    -0.1523236632347107,
+                    0.12928107380867004,
+                    0.06581558287143707,
+                    -0.0076348790898919106,
+                    -0.24291963875293732,
+                    -0.026176350191235542
+                  ],
+                  "requires_host": true,
+                  "operations": [
+                    "file.read",
+                    "file.write"
+                  ],
+                  "digest": "eadeed8b47ee6328afe04ff7ae1e93d9293b5d14d16bcaabb48d1e523642961b"
+                },
+                "verification": {
+                  "source": "stored training/validation records; not independent intent proof",
+                  "history": [
+                    {
+                      "strategy": "state search",
+                      "steps": 2,
+                      "candidates": 2,
+                      "control": "sequence",
+                      "tensor_steps": 2,
+                      "training_cases": 2,
+                      "validation_cases": 2,
+                      "accepted": true
+                    }
+                  ],
+                  "audit": null
+                },
+                "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+                "id": "vp1:1e7ed62af6231be554a3aa8f324419f43ed5f3863a09dd125287dc70ce22f869"
+              },
+              "history": [
+                {
+                  "strategy": "state search",
+                  "steps": 2,
+                  "candidates": 2,
+                  "control": "sequence",
+                  "tensor_steps": 2,
+                  "training_cases": 2,
+                  "validation_cases": 2,
+                  "accepted": true
+                }
+              ],
+              "evidence_source": "caller_examples",
+              "intent_independently_verified": false,
+              "acceptance": {
+                "source_id": "reference:a123845fdfa4ca1fcbf83ee4",
+                "source_sha256": "e8fec95bcb204c87d0381c37feb218f2731c3e47284fcb1d8e06b3cf2cced525",
+                "intent_sha256": "60608f2fe6ec452989d8ac74bc61b7d3f9693e07bc42eb5bbb5245774ea75fc3",
+                "origin": "caller-installed reference copy; executable sha256=5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9; manifest sha256=a123845fdfa4ca1fcbf83ee470581a3779f473c8fae6af619826ca189c90c2b8",
+                "heldout_cases": 3,
+                "passed": 3,
+                "scope": "caller-controlled finite evidence; not universal or independent intent proof"
+              }
+            }
+          },
+          {
+            "name": "call_contract",
+            "result": {
+              "status": "executed",
+              "contract_id": "vp1:1e7ed62af6231be554a3aa8f324419f43ed5f3863a09dd125287dc70ce22f869",
+              "contract_version": 1,
+              "capability": "observed_copy",
+              "outputs": [
+                21
+              ],
+              "effects": [
+                {
+                  "operation": "file.read",
+                  "arguments": [
+                    1
+                  ],
+                  "result": 3
+                },
+                {
+                  "operation": "file.write",
+                  "arguments": [
+                    2,
+                    3
+                  ],
+                  "result": 21
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "files": {
+        "input.bin": "756e7365656e00ffec8ba4eca09c20ec9e85eba0a5",
+        "keep": "6b656570",
+        "output.bin": "756e7365656e00ffec8ba4eca09c20ec9e85eba0a5"
+      }
+    },
+    {
+      "kind": "move",
+      "passed": true,
+      "result": {
+        "status": "executed",
+        "contract_id": "vp1:84a5d0b0c05cc52c8dda7cc759d90acaa2739a08cd6bcf00bf9c1e6253ca6ce0",
+        "contract_version": 1,
+        "capability": "observed_move",
+        "outputs": [
+          1
+        ],
+        "effects": [
+          {
+            "operation": "file.move",
+            "arguments": [
+              1,
+              2
+            ],
+            "result": 1
+          }
+        ],
+        "tools": [
+          {
+            "name": "collect_evidence",
+            "result": {
+              "status": "evidence_ready",
+              "sources": [
+                {
+                  "id": "reference:8fd82bf4440dc66811d8458c",
+                  "intent": "Move input.bin to output.bin, removing input.bin.",
+                  "origin": "caller-installed reference move; executable sha256=7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0; manifest sha256=8fd82bf4440dc66811d8458cc5baeb657d235fc6a6cfd1d7e3503ed654aafd46",
+                  "interface": {
+                    "parameters": [
+                      {
+                        "name": "source",
+                        "type": "path",
+                        "role": "source file"
+                      },
+                      {
+                        "name": "destination",
+                        "type": "path",
+                        "role": "destination file"
+                      }
+                    ],
+                    "output": {
+                      "type": "value",
+                      "width": "W"
+                    },
+                    "allowed_operations": [
+                      "file.move"
+                    ]
+                  }
+                }
+              ],
+              "intent_independently_verified": false
+            }
+          },
+          {
+            "name": "learn_verified_contract",
+            "result": {
+              "status": "registered",
+              "registered": true,
+              "contract": {
+                "version": 1,
+                "name": "observed_move",
+                "description": "Apply operations to two separate files. Move a file to a destination path, replacing a destination file; return 1. \ud30c\uc77c \uc774\ub3d9 \uc774\ub984 \ubcc0\uacbd.",
+                "input_types": [
+                  "path",
+                  "path"
+                ],
+                "argument_roles": [
+                  "relative file path",
+                  "relative file path"
+                ],
+                "output_width": "W",
+                "has_effects": true,
+                "parameters": [
+                  {
+                    "name": "source",
+                    "type": "path",
+                    "role": "source file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  },
+                  {
+                    "name": "destination",
+                    "type": "path",
+                    "role": "destination file",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "role_source": "draft declaration, not independent proof"
+                  }
+                ],
+                "output": {
+                  "type": "value",
+                  "width": "W"
+                },
+                "width": {
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "execution": {
+                  "address": [
+                    -0.0077123199589550495,
+                    -0.15699291229248047,
+                    -0.09706755727529526,
+                    -0.0708136186003685,
+                    0.11461237818002701,
+                    -0.22643935680389404,
+                    -0.028082409873604774,
+                    -0.038145918399095535,
+                    -0.016760217025876045,
+                    0.2731595039367676,
+                    0.11692118644714355,
+                    -0.09458065778017044,
+                    -0.07171164453029633,
+                    -0.2599439322948456,
+                    0.33207252621650696,
+                    0.40459144115448,
+                    -0.04582778736948967,
+                    0.13854998350143433,
+                    0.11362021416425705,
+                    0.05255519226193428,
+                    -0.4033063054084778,
+                    0.1046043261885643,
+                    -0.10487351566553116,
+                    -0.16917528212070465,
+                    -0.004602100234478712,
+                    0.2295074760913849,
+                    0.07809511572122574,
+                    -0.038924530148506165,
+                    -0.22642646729946136,
+                    -0.06202943995594978,
+                    0.18418622016906738,
+                    -0.22466623783111572
+                  ],
+                  "requires_host": true,
+                  "operations": [
+                    "file.move"
+                  ],
+                  "digest": "ef3b9269fa20ba2307a86f0e393e8669678b507b9c5522d8ccce4f7658b1003f"
+                },
+                "verification": {
+                  "source": "stored training/validation records; not independent intent proof",
+                  "history": [
+                    {
+                      "strategy": "state search",
+                      "steps": 1,
+                      "candidates": 2,
+                      "control": "sequence",
+                      "tensor_steps": 1,
+                      "training_cases": 2,
+                      "validation_cases": 2,
+                      "accepted": true
+                    }
+                  ],
+                  "audit": null
+                },
+                "interface_origin": "validated draft shape/effect bounds; descriptive roles are supplied",
+                "id": "vp1:84a5d0b0c05cc52c8dda7cc759d90acaa2739a08cd6bcf00bf9c1e6253ca6ce0"
+              },
+              "history": [
+                {
+                  "strategy": "state search",
+                  "steps": 1,
+                  "candidates": 2,
+                  "control": "sequence",
+                  "tensor_steps": 1,
+                  "training_cases": 2,
+                  "validation_cases": 2,
+                  "accepted": true
+                }
+              ],
+              "evidence_source": "caller_examples",
+              "intent_independently_verified": false,
+              "acceptance": {
+                "source_id": "reference:8fd82bf4440dc66811d8458c",
+                "source_sha256": "1c3815edca28fc9978884ef373caecff90868cf26b80ff6ef15338f525253f74",
+                "intent_sha256": "d7213d03ac99d8375bff14b0e1168d8a4e9828cebbd0be035708319418df8b05",
+                "origin": "caller-installed reference move; executable sha256=7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0; manifest sha256=8fd82bf4440dc66811d8458cc5baeb657d235fc6a6cfd1d7e3503ed654aafd46",
+                "heldout_cases": 3,
+                "passed": 3,
+                "scope": "caller-controlled finite evidence; not universal or independent intent proof"
+              }
+            }
+          },
+          {
+            "name": "call_contract",
+            "result": {
+              "status": "executed",
+              "contract_id": "vp1:84a5d0b0c05cc52c8dda7cc759d90acaa2739a08cd6bcf00bf9c1e6253ca6ce0",
+              "contract_version": 1,
+              "capability": "observed_move",
+              "outputs": [
+                1
+              ],
+              "effects": [
+                {
+                  "operation": "file.move",
+                  "arguments": [
+                    1,
+                    2
+                  ],
+                  "result": 1
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "files": {
+        "keep": "6b656570",
+        "output.bin": "756e7365656e00ffec8ba4eca09c20ec9e85eba0a5"
+      }
+    }
+  ]
+}

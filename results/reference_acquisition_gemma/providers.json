@@ -1,0 +1,90 @@
+[
+  {
+    "seed_files": {
+      "$source": "$payload",
+      "$destination": "6f6c64",
+      "keep": "aa"
+    },
+    "directories": [
+      "empty"
+    ],
+    "id": "copy",
+    "description": "Copy file contents to another path, keeping source and replacing destination",
+    "interface": {
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source file"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination file"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.read",
+        "file.write"
+      ]
+    },
+    "argv": [
+      "/bin/cp",
+      "--",
+      "$source",
+      "$destination"
+    ],
+    "return": {
+      "kind": "file_length",
+      "parameter": "destination"
+    },
+    "max_steps": 2
+  },
+  {
+    "seed_files": {
+      "$source": "$payload",
+      "$destination": "6f6c64",
+      "keep": "aa"
+    },
+    "directories": [
+      "empty"
+    ],
+    "id": "move",
+    "description": "Move or rename a file: remove source and replace destination",
+    "interface": {
+      "parameters": [
+        {
+          "name": "source",
+          "type": "path",
+          "role": "source file"
+        },
+        {
+          "name": "destination",
+          "type": "path",
+          "role": "destination file"
+        }
+      ],
+      "output": {
+        "type": "value",
+        "width": "W"
+      },
+      "allowed_operations": [
+        "file.move"
+      ]
+    },
+    "argv": [
+      "/bin/mv",
+      "--",
+      "$source",
+      "$destination"
+    ],
+    "return": {
+      "kind": "success"
+    },
+    "max_steps": 1
+  }
+]

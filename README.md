@@ -1,5 +1,9 @@
 # vectorpro
 
+등록된 외부 기준을 골라 임시 루트에서 예제를 수집하는 경로를 추가했다.
+사람이 정답을 요청마다 작성하는 부담을 줄이며, 채택 뒤에는 텐서 절차가 실제 작업을
+수행한다. 범위와 재현은 [REFERENCE_EVIDENCE.md](docs/REFERENCE_EVIDENCE.md)에 있다.
+
 호출자 근거를 모델과 분리하고, 학습에 제공하지 않은 사례를 통과한 후보만 저장하는
 요청 학습 경로를 추가했다. Gemma의 동일 요청 재시험은 새 기능 학습·실행,
 알려진 기능 재사용, 근거 없는 요청 보존의 3/3을 통과했다.
@@ -685,3 +689,7 @@ outside the repository. macOS verification is deferred at the user's request.
 ## 2026-10-05: 호출자 근거와 숨긴 사례를 통한 학습 채택
 
 EvidenceBank 모드에서 LLM은 근거 ID와 새 이름을 선택하고, 백엔드가 고정된 인터페이스와 예제로 격리 학습한다. 학습에 제공하지 않은 사례를 통과하고 저장이 성공해야 등록한다. 승인 계약은 LLM 없이 직접 재사용할 수 있다. 실제 의도와 근거 출처를 자동 인증한 것은 아니다. 명세와 재현은 docs/VERIFIED_ACQUISITION.md, 최종 검증은 docs/HANDOFF.md를 참조한다.
+
+## 2026-10-05: 설치된 외부 기준에서 근거 자동 수집
+
+ReferenceProviders가 제공된 manifest의 실행 파일을 임시 루트에서 관찰해 학습/검증/숨긴 사례를 자동 생성한다. LLM은 기준 ID만 선택하고 실제 사용자 파일은 수집에 사용하지 않는다. 기준 설치와 의미 선택의 독립 검증은 여전히 남아 있다. 명세/재현은 docs/REFERENCE_EVIDENCE.md, 검증 결과는 docs/HANDOFF.md를 참조한다.

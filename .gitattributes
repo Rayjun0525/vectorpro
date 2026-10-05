@@ -15,3 +15,6 @@ results/verified_acquisition*/native/** -text
 results/verified_acquisition_gemma*/unknown/** -text
 results/verified_acquisition_gemma*/known/** -text
 results/verified_acquisition_gemma*/missing_evidence/** -text
+results/reference_acquisition*/copy/** -text
+results/reference_acquisition*/move/** -text
+results/reference_acquisition*/unsupported/** -text

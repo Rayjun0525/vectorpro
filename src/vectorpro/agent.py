@@ -323,7 +323,7 @@ class HTTPChatModel:
 
 class AgentSession:
     def __init__(self, runtime: VectorRuntime, model: ChatModel, program_path: Path | None = None,
-                 max_calls: int = 12, catalog=None, allow_learning: bool = True, evidence_bank=None):
+                 max_calls: int = 12, catalog=None, allow_learning: bool = True, evidence_bank=None, reference_providers=None):
         if type(max_calls) is not int or max_calls < 1:
             raise ValueError("max_calls must be a positive integer")
         self.runtime, self.model, self.program_path, self.max_calls = runtime, model, program_path, max_calls
@@ -333,9 +333,15 @@ class AgentSession:
         self._proposed = None
         self._goal, self._candidates = None, []
         self.allow_learning = allow_learning
+        if reference_providers is not None and evidence_bank is None:
+            from vectorpro.acquisition import EvidenceBank
+            evidence_bank = EvidenceBank([])
         if evidence_bank is not None and catalog is not None:
             raise ValueError("verified acquisition and catalog sessions are separate adapter modes")
         self.evidence_bank = evidence_bank
+        self.reference_providers = reference_providers
+        self._collection_attempted = False
+        self.collected_evidence = None
         self._intent = None
         self.messages = [{"role": "system", "content": CATALOG_GUIDE if catalog else GUIDE}]
         if evidence_bank is not None:
@@ -343,6 +349,8 @@ class AgentSession:
                 "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. "
                 "For unknown work use learn_verified_contract with an offered source_id and a new function name. "
                 "The source already defines the typed interface; do not rewrite its metadata or examples. "
+                "If no source is ready, choose a caller-installed reference with collect_evidence only when its description matches the goal. "
+                "References run only on temporary fixtures, never actual request inputs. Unsupported goals require ask_user. "
                 "The backend owns examples and hidden acceptance; you cannot submit or change answers. "
                 "Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. "
                 "Registration is not native execution: after registered, call the new contract for the actual request. "
@@ -376,6 +384,12 @@ class AgentSession:
                      "width": {"type": "integer", "minimum": 1, "maximum": 64}},
                     ("contract_id", "arguments", "width")))
             sources = self.evidence_bank.describe(self._intent)
+            if (self.reference_providers is not None and self.allow_learning and not sources
+                    and not acquired and not self._collection_attempted):
+                providers = self.reference_providers.describe()
+                if providers:
+                    tools.append(tool("collect_evidence", "Observe a matching caller-installed external reference on independent fixtures; never runs on actual request files",
+                        {"provider_id": {"type": "string", "enum": [p["id"] for p in providers]}}, ("provider_id",)))
             if self.allow_learning and sources:
                 tools.append(tool("learn_verified_contract", "Learn from an offered immutable source, then check hidden cases before registering",
                     {"source_id": {"type": "string", "enum": [s["id"] for s in sources]},
@@ -470,6 +484,16 @@ class AgentSession:
                     raise ValueError("list_contracts takes no arguments")
                 return {"contracts": [{k: c[k] for k in ("id", "name", "description", "parameters", "output")}
                     for c in self._verified_contracts()]}
+            if name == "collect_evidence":
+                if set(args) != {"provider_id"}:
+                    raise ValueError("collection accepts only installed provider identity")
+                self._collection_attempted = True
+                record = self.reference_providers.collect(args["provider_id"], self._intent)
+                from vectorpro.acquisition import EvidenceBank
+                self.evidence_bank = EvidenceBank([record])
+                self.collected_evidence = record
+                return {"status": "evidence_ready", "sources": self.evidence_bank.describe(self._intent),
+                        "intent_independently_verified": False}
             if name == "learn_verified_contract":
                 if set(args) != {"source_id", "name"}:
                     raise ValueError("verified learning accepts only source identity and function name")
@@ -711,11 +735,14 @@ class AgentSession:
 
     def run(self, intent: str, *, evidence: str | None = None):
         self._intent = intent
+        self._collection_attempted = False
+        self.collected_evidence = None
         if self.evidence_bank is not None:
             self.messages.append({"role": "system", "content": json.dumps({
                 "acquired": {"contracts": [{k: c[k] for k in ("id", "name", "description", "parameters", "output")}
                     for c in self._verified_contracts()]},
-                "evidence_sources": self.evidence_bank.describe(intent)}, ensure_ascii=False)})
+                "evidence_sources": self.evidence_bank.describe(intent),
+                "reference_providers": self.reference_providers.describe() if self.reference_providers else []}, ensure_ascii=False)})
         self._resolved, self._resolution_status = None, None
         self._proposed = None
         self._goal, self._candidates = None, []
@@ -838,6 +865,7 @@ def main(argv=None):
     parser.add_argument("--no-learning", action="store_true", help="execution-only session; do not expose teaching tools")
     parser.add_argument("--evidence-file", type=Path, help="caller evidence shown only after actual inputs have been proposed")
     parser.add_argument("--acquisition-evidence", type=Path, help="caller-controlled source bank with hidden acceptance cases")
+    parser.add_argument("--reference-providers", type=Path, help="caller-installed external reference manifests for automatic observation")
     args = parser.parse_args(argv)
     host = HostContext(args.host_root) if args.host_root else None
     runtime = VectorRuntime.load(args.program, host=host) if args.program.exists() else VectorRuntime(host=host)
@@ -853,7 +881,11 @@ def main(argv=None):
     if args.acquisition_evidence:
         from vectorpro.acquisition import EvidenceBank
         bank = EvidenceBank(json.loads(args.acquisition_evidence.read_text(encoding="utf-8")))
-    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning, evidence_bank=bank).run(
+    providers = None
+    if args.reference_providers:
+        from vectorpro.reference_evidence import ReferenceProviders
+        providers = ReferenceProviders(json.loads(args.reference_providers.read_text(encoding="utf-8")))
+    result = AgentSession(runtime, model, args.program, catalog=catalog, allow_learning=not args.no_learning, evidence_bank=bank, reference_providers=providers).run(
         args.intent, evidence=args.evidence_file.read_text(encoding="utf-8") if args.evidence_file else None)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] in ("answered", "executed", "registered") else 2

@@ -7,10 +7,39 @@
 
 ## 현재 구현
 
-최신 상태는 [VERIFIED_ACQUISITION.md](VERIFIED_ACQUISITION.md)와
+최신 상태는 [REFERENCE_EVIDENCE.md](REFERENCE_EVIDENCE.md),
+[VERIFIED_ACQUISITION.md](VERIFIED_ACQUISITION.md)와
 [LINUX_BUNDLE.md](LINUX_BUNDLE.md)를 기준으로 한다. 아래 날짜별
 기록의 당시 남은 과제 중 스트리밍 파이프/프로세스 상태 관찰/기본 HTTP와 시스템
 조회는 이번에 구현·통합 검증했다. 자연어 목표의 독립 검증과 폭넓은 OS 의미론은 남았다.
+
+### 등록된 외부 기준의 자동 관찰 (2026-10-05)
+
+ReferenceProviders는 호출자 제공 manifest의 기준 설명/타입/허용 기능/argv/초기 파일/
+빈 디렉터리/반환 관찰 규칙을 읽는다. 모델은 collect_evidence에서 ID만 고른다.
+argv나 실제 경로/정답을 모델이 변경할 수 없다. 기준 실행은 임시 루트 7개에서만 하며
+실제 사용자 파일을 관찰 입력에 쓰지 않는다. shell 없이 기존 process_host를 사용한다.
+전체 파일/디렉터리/반환값을 관찰한 뒤 학습2/검증2/숨긴3으로 분리해 EvidenceBank에 준다.
+기준 바이너리/manifest SHA를 출처에 남기고 수집 시작 때 실행 파일 변경을 거절한다.
+실행당 2초/수집7회, 상태65536바이트/파일·디렉터리32개이며 링크/특수 파일을 거절한다.
+한 요청의 수집은 한 번이며 실패하면 학습이나 재수집으로 진행하지 않는다.
+
+v1은 path 입력과 W-bit value 출력, success/file_length 관찰을 지원한다.
+기준 프로그램의 알고리즘은 외부에서 제공하며 학습기는 관찰된 상태에서 텐서 호출·인자
+경로를 찾는다. 호출자 interface/반환 관찰 규칙의 자동 발견이나 임의 실행 프로그램의
+OS 샌드박스는 아니다. 모델의 기준 선택은 선언이며 intent_independently_verified=false.
+새 CLI: --reference-providers FILE. 기존 직접 근거 및 알려진 계약 경로는 유지한다.
+
+프로토콜 실험은 /bin/cp와 /bin/mv의 관찰을 자동 수집해 한 텐서 파일에 두 기능을
+축적하고, 실제 새 데이터에서 복사/이동을 통과했다. 자료는 results/reference_acquisition.
+관련 테스트 28 passed, 8.35초: 임시 루트 정리, 실제 파일 보존, 수집 이후 Popen 금지
+학습, 저장·재로드·학습 비활성 재사용, 실패/잘못된 manifest/코드 주입/경로 이탈/
+변경된 실행 파일/상태 한도/링크 거절을 확인했다.
+실제 Gemma 첫 평가와 최종 전체 회귀 결과는 아래에 추가한다.
+
+다음은 더 다양한 기준과 상태·프로세스·HTTP 수집, 표현이 다른 요청의 검증된 재사용,
+기준 선택/인자 역할의 독립 평가, 긴 작업과 실패 복구 및 추가 OS 검증이다.
+기존 vectorpro-test/기존 Gemma만 재사용했고 새 이미지/컨테이너는 만들지 않았다.
 
 ### 호출자 근거에 기반한 학습 채택과 Gemma (2026-10-05)
 
@@ -722,3 +751,6 @@ LLM_ADAPTER 및 results/local_small_llm에 있다.
 재현은 docs/LINUX_BUNDLE.md 명령을 사용한다. 기존 vectorpro-test 하나와 기존 이미지만 재사용했다.
 
 2026-10-05 최종 채택 검증: 전체 회귀 309 passed, 309.40초. 관련 테스트 32 passed, 12.33초. 최종 코드의 Gemma 동일 요청 replay는 3/3이고, 프로토콜 학습/저장/직접 재사용 실험도 통과했다. 기존 vectorpro-test 하나와 기존 Gemma만 사용했다.
+
+2026-10-05 외부 기준 자동 수집의 실제 Gemma 첫 평가: 3/3. 복사와 이동은 각각 올바른 기준 수집/학습/실제 실행을 통과했고, 암호화는 list_contracts/ask_user만 수행해 수집/등록/파일 변경이 없었다. 모델 호출은 3/3/2회, 총 추론 306.16초이며 회귀 병행 값이라 성능 비교에 쓰지 않는다. 결과는 results/reference_acquisition_gemma에 보존한다. 설치된 두 기준과 영어 세 요청의 유한 사례 검증이며 범용 의도 이해를 증명하지 않는다.
+최종 전체 회귀 319 passed, 403.55초. 관련 테스트 28 passed, 8.35초. 프로토콜의 두 기능 자동 수집/학습/실행도 모두 통과했다.

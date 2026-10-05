@@ -232,3 +232,9 @@ macOS 검증은 사용자 결정으로 보류한다.
 EvidenceBank 모드에서 LLM은 근거 ID와 새 이름을 선택하고, 백엔드가 고정된 인터페이스와 예제로 격리 학습한다. 학습에 제공하지 않은 사례를 통과하고 저장이 성공해야 등록한다. 승인 계약은 LLM 없이 직접 재사용할 수 있다. 실제 의도와 근거 출처를 자동 인증한 것은 아니다. 명세와 재현은 docs/VERIFIED_ACQUISITION.md, 최종 검증은 docs/HANDOFF.md를 참조한다.
 
 호출자 근거 채택의 최종 회귀: 309 passed (309.40초). 관련 32 passed (12.33초). Gemma 동일 요청 replay 3/3: results/verified_acquisition_gemma_phased_final. 최초 1/3과 구분한다.
+
+## 2026-10-05: 설치된 외부 기준에서 근거 자동 수집
+
+ReferenceProviders가 제공된 manifest의 실행 파일을 임시 루트에서 관찰해 학습/검증/숨긴 사례를 자동 생성한다. LLM은 기준 ID만 선택하고 실제 사용자 파일은 수집에 사용하지 않는다. 기준 설치와 의미 선택의 독립 검증은 여전히 남아 있다. 명세/재현은 docs/REFERENCE_EVIDENCE.md, 검증 결과는 docs/HANDOFF.md를 참조한다.
+
+외부 기준 자동 관찰의 최종 검증: 전체 회귀 319 passed (403.55초), 관련 28 passed (8.35초). 실제 Gemma 첫 평가 3/3: results/reference_acquisition_gemma. 복사/이동 자동 수집·학습·실행과 미지원 요청의 질문·파일 보존을 확인했다.

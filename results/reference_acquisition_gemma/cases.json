@@ -1,0 +1,1 @@
+[["copy", "Copy input.bin to output.bin, keeping input.bin."], ["move", "Move input.bin to output.bin, removing input.bin."], ["unsupported", "Encrypt input.bin into output.bin with a secret key."]]
