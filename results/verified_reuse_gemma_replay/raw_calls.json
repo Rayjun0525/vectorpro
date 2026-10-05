@@ -1,0 +1,583 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Select ONE installed reference whose description matches ALL requested final effects. Check removal/absence, preservation and replacement requirements separately. Matching final contents alone is insufficient when other effects differ. Never choose a reference that contradicts any requested effect. Use collect_evidence only for a complete match; otherwise use ask_user. Do not execute, create functions or prepare actual arguments in this phase.\n[{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Please duplicate source.bin into target.bin and keep source.bin."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "collect_evidence",
+              "arguments": "{\"provider_id\": \"copy\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"reused\", \"contract\": {\"version\": 1, \"name\": \"copy_input_to_output\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"85d2f2c7f2f934479e001f758f6542f9a500cb95a6557cb14ded94f08034a18d\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\"}, \"binding\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"intent_sha256\": \"d9213d01f90fafda43e54ee4ede7e99859fa33d96bc837410b22fd0dd6947e96\", \"source_id\": \"reference:a123845fdfa4ca1fcbf83ee4\", \"source_sha256\": \"287ae9f2326684b422def6c056a5aeaf29fa58521e6b0cdb15317203ac782fc5\", \"checked_cases\": 7}, \"intent_independently_verified\": false}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing intent/evidence and stop this turn",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "collect_evidence",
+          "description": "Observe a matching caller-installed external reference on independent fixtures; never runs on actual request files",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "provider_id": {
+                "type": "string",
+                "enum": [
+                  "copy",
+                  "move"
+                ]
+              }
+            },
+            "required": [
+              "provider_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"collect_evidence\",\"arguments\":{ \"provider_id\": \"copy\"}}</tool_call>",
+    "seconds": 27.762454887997592,
+    "usage": {
+      "prompt_tokens": 653,
+      "completion_tokens": 29,
+      "total_tokens": 682
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. If no source is ready, choose a caller-installed reference with collect_evidence only when its description matches the goal. References run only on temporary fixtures, never actual request inputs. Unsupported goals require ask_user. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": [], \"reference_providers\": [{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]}"
+      },
+      {
+        "role": "user",
+        "content": "Please duplicate source.bin into target.bin and keep source.bin."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "collect_evidence",
+              "arguments": "{\"provider_id\": \"copy\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"reused\", \"contract\": {\"version\": 1, \"name\": \"copy_input_to_output\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"85d2f2c7f2f934479e001f758f6542f9a500cb95a6557cb14ded94f08034a18d\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\"}, \"binding\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"intent_sha256\": \"d9213d01f90fafda43e54ee4ede7e99859fa33d96bc837410b22fd0dd6947e96\", \"source_id\": \"reference:a123845fdfa4ca1fcbf83ee4\", \"source_sha256\": \"287ae9f2326684b422def6c056a5aeaf29fa58521e6b0cdb15317203ac782fc5\", \"checked_cases\": 7}, \"intent_independently_verified\": false}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"contract_version\": 1, \"capability\": \"copy_input_to_output\", \"outputs\": [21], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 21}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "call_contract",
+          "description": "Execute an acquired contract using exact named actual request inputs",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "contract_id": {
+                "type": "string",
+                "enum": [
+                  "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de"
+                ]
+              },
+              "arguments": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "source file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "destination file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "contract_id",
+              "arguments",
+              "width"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"call_contract\", \"arguments\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\",\"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}}</tool_call>",
+    "seconds": 75.95518226799322,
+    "usage": {
+      "prompt_tokens": 2341,
+      "completion_tokens": 115,
+      "total_tokens": 2456
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Select ONE installed reference whose description matches ALL requested final effects. Check removal/absence, preservation and replacement requirements separately. Matching final contents alone is insufficient when other effects differ. Never choose a reference that contradicts any requested effect. Use collect_evidence only for a complete match; otherwise use ask_user. Do not execute, create functions or prepare actual arguments in this phase.\n[{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin, so source.bin no longer exists."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "collect_evidence",
+              "arguments": "{\"provider_id\": \"copy\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"reused\", \"contract\": {\"version\": 1, \"name\": \"copy_input_to_output\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"85d2f2c7f2f934479e001f758f6542f9a500cb95a6557cb14ded94f08034a18d\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\"}, \"binding\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"intent_sha256\": \"e9e40f0e0b251a8c4e871f3eca467f8941a41b5d8c92ede4c16721a41a42f038\", \"source_id\": \"reference:a123845fdfa4ca1fcbf83ee4\", \"source_sha256\": \"9d5d0d4f2fefaa90f40b956aa77f91824e50367478da379a24d31c9106b48666\", \"checked_cases\": 7}, \"intent_independently_verified\": false}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing intent/evidence and stop this turn",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "collect_evidence",
+          "description": "Observe a matching caller-installed external reference on independent fixtures; never runs on actual request files",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "provider_id": {
+                "type": "string",
+                "enum": [
+                  "copy",
+                  "move"
+                ]
+              }
+            },
+            "required": [
+              "provider_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"collect_evidence\", \"arguments\":{ \"provider_id\": \"copy\"}}</tool_call>",
+    "seconds": 22.210180952999508,
+    "usage": {
+      "prompt_tokens": 655,
+      "completion_tokens": 30,
+      "total_tokens": 685
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. If no source is ready, choose a caller-installed reference with collect_evidence only when its description matches the goal. References run only on temporary fixtures, never actual request inputs. Unsupported goals require ask_user. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": []}, \"evidence_sources\": [], \"reference_providers\": [{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]}"
+      },
+      {
+        "role": "user",
+        "content": "Rename source.bin to target.bin, so source.bin no longer exists."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "collect_evidence",
+              "arguments": "{\"provider_id\": \"copy\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"reused\", \"contract\": {\"version\": 1, \"name\": \"copy_input_to_output\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"input_types\": [\"path\", \"path\"], \"argument_roles\": [\"relative file path\", \"relative file path\"], \"output_width\": \"W\", \"has_effects\": true, \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"width\": {\"minimum\": 1, \"maximum\": 64}, \"execution\": {\"address\": [-0.12802205979824066, 0.12203803658485413, 0.09308016300201416, 0.09026636928319931, 0.039235178381204605, 0.20040567219257355, -0.06567467004060745, 0.2337123453617096, -0.017018724232912064, -0.24985916912555695, 0.08968071639537811, 0.13600493967533112, 0.1515030860900879, -0.27595606446266174, 0.13895906507968903, -0.12516863644123077, 0.2679005563259125, 0.022303402423858643, 0.2203834056854248, 0.19223394989967346, -0.2867884635925293, 0.22575050592422485, -0.11315823346376419, -0.29351139068603516, 0.21851837635040283, 0.29363369941711426, -0.1523236632347107, 0.12928107380867004, 0.06581558287143707, -0.0076348790898919106, -0.24291963875293732, -0.026176350191235542], \"requires_host\": true, \"operations\": [\"file.read\", \"file.write\"], \"digest\": \"85d2f2c7f2f934479e001f758f6542f9a500cb95a6557cb14ded94f08034a18d\"}, \"verification\": {\"source\": \"stored training/validation records; not independent intent proof\", \"history\": [{\"strategy\": \"state search\", \"steps\": 2, \"candidates\": 2, \"control\": \"sequence\", \"tensor_steps\": 2, \"training_cases\": 2, \"validation_cases\": 2, \"accepted\": true}], \"audit\": null}, \"interface_origin\": \"validated draft shape/effect bounds; descriptive roles are supplied\", \"id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\"}, \"binding\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"intent_sha256\": \"e9e40f0e0b251a8c4e871f3eca467f8941a41b5d8c92ede4c16721a41a42f038\", \"source_id\": \"reference:a123845fdfa4ca1fcbf83ee4\", \"source_sha256\": \"9d5d0d4f2fefaa90f40b956aa77f91824e50367478da379a24d31c9106b48666\", \"checked_cases\": 7}, \"intent_independently_verified\": false}"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"contract_version\": 1, \"capability\": \"copy_input_to_output\", \"outputs\": [21], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 21}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "call_contract",
+          "description": "Execute an acquired contract using exact named actual request inputs",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "contract_id": {
+                "type": "string",
+                "enum": [
+                  "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de"
+                ]
+              },
+              "arguments": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "source file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "destination file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "contract_id",
+              "arguments",
+              "width"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\": \"call_contract\", \"arguments\": {\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}}</tool_call>",
+    "seconds": 80.6786449259962,
+    "usage": {
+      "prompt_tokens": 2354,
+      "completion_tokens": 116,
+      "total_tokens": 2470
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use ONE tool at a time. Known acquired contracts execute with their exact ID and named arguments. For unknown work use learn_verified_contract with an offered source_id and a new function name. The source already defines the typed interface; do not rewrite its metadata or examples. If no source is ready, choose a caller-installed reference with collect_evidence only when its description matches the goal. References run only on temporary fixtures, never actual request inputs. Unsupported goals require ask_user. The backend owns examples and hidden acceptance; you cannot submit or change answers. Choose an unused ASCII function identifier yourself, such as acquired_1; do not ask the caller to name it. Registration is not native execution: after registered, call the new contract for the actual request. Use actual request inputs, never virtual examples. If intent or evidence is missing, call ask_user. Bind named argument roles to literal paths in the caller request; do not use role names as file paths. Never claim independent intent proof or success on failure.\nLearning is disabled in this session; never call teaching tools."
+      },
+      {
+        "role": "system",
+        "content": "{\"acquired\": {\"contracts\": [{\"id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"name\": \"copy_input_to_output\", \"description\": \"Apply operations to two separate files. file bytes read from input path save file bytes read from input path to input path\", \"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\", \"schema\": {\"type\": \"string\"}, \"role_source\": \"draft declaration, not independent proof\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}}]}, \"evidence_sources\": [], \"reference_providers\": [{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]}"
+      },
+      {
+        "role": "user",
+        "content": "Please duplicate source.bin into target.bin and keep source.bin."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "call_contract",
+              "arguments": "{\"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"executed\", \"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"contract_version\": 1, \"capability\": \"copy_input_to_output\", \"outputs\": [21], \"effects\": [{\"operation\": \"file.read\", \"arguments\": [1], \"result\": 3}, {\"operation\": \"file.write\", \"arguments\": [2, 3], \"result\": 21}]}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "call_contract",
+          "description": "Execute an acquired contract using exact named actual request inputs",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "contract_id": {
+                "type": "string",
+                "enum": [
+                  "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de"
+                ]
+              },
+              "arguments": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "source file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "destination file",
+                    "enum": [
+                      "source.bin",
+                      "target.bin"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "contract_id",
+              "arguments",
+              "width"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"call_contract\",\"arguments\":{ \"contract_id\": \"vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de\", \"arguments\": {\"source\": \"source.bin\", \"destination\": \"target.bin\"}, \"width\": 64}}</tool_call>",
+    "seconds": 34.7280274520017,
+    "usage": {
+      "prompt_tokens": 1123,
+      "completion_tokens": 115,
+      "total_tokens": 1238
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Select ONE installed reference whose description matches ALL requested final effects. Check removal/absence, preservation and replacement requirements separately. Matching final contents alone is insufficient when other effects differ. Never choose a reference that contradicts any requested effect. Use collect_evidence only for a complete match; otherwise use ask_user. Do not execute, create functions or prepare actual arguments in this phase.\n[{\"id\": \"copy\", \"description\": \"Copy file contents to another path, keeping source and replacing destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.read\", \"file.write\"]}, \"executable_sha256\": \"5a3a8808bab81a67c6ac578670f5608595f1569948d4dc7d7d604c1d08d596d9\"}, {\"id\": \"move\", \"description\": \"Move or rename a file: remove source and replace destination\", \"interface\": {\"parameters\": [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}], \"output\": {\"type\": \"value\", \"width\": \"W\"}, \"allowed_operations\": [\"file.move\"]}, \"executable_sha256\": \"7db4661c6397fe5fd5ba6837692aa5adb7dce1efc656369d7b08dfd6ece525a0\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Encrypt source.bin into target.bin using a secret key."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "local_call_0",
+            "type": "function",
+            "function": {
+              "name": "ask_user",
+              "arguments": "{\"question\": \"What is the secret key?\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "local_call_0",
+        "content": "{\"status\": \"needs_input\", \"question\": \"What is the secret key?\"}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ask_user",
+          "description": "Ask for missing intent/evidence and stop this turn",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "collect_evidence",
+          "description": "Observe a matching caller-installed external reference on independent fixtures; never runs on actual request files",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "provider_id": {
+                "type": "string",
+                "enum": [
+                  "copy",
+                  "move"
+                ]
+              }
+            },
+            "required": [
+              "provider_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"ask_user\",\"arguments\":{ \"question\": \"What is the secret key?\"}}</tool_call>",
+    "seconds": 20.793979177993606,
+    "usage": {
+      "prompt_tokens": 651,
+      "completion_tokens": 31,
+      "total_tokens": 682
+    }
+  }
+]

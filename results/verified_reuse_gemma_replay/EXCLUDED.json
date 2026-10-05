@@ -1,0 +1,1 @@
+{"status":"diagnostic_only","usable_program":false,"reason":"Replay passed 3/4, but rename selected copy evidence and persisted an incorrect intent binding. Do not execute or reuse this program.pt. This is a prompt-adjustment replay, not independent first-use accuracy."}

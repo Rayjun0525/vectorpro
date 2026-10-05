@@ -363,7 +363,7 @@ class AgentSession:
     def _verified_contracts(self):
         return [c for c in self.runtime.contracts()
                 if self.runtime.registry.get(c["name"]).provenance["kind"] != "host"
-                and self.evidence_bank.permits(self.runtime.registry.get(c["name"]), self._intent)]
+                and self.evidence_bank.permits(self.runtime.registry.get(c["name"]), self._intent, self.runtime, c["id"])]
 
     def available_tools(self):
         if self.evidence_bank is not None:
@@ -492,6 +492,12 @@ class AgentSession:
                 from vectorpro.acquisition import EvidenceBank
                 self.evidence_bank = EvidenceBank([record])
                 self.collected_evidence = record
+                reuse = self.evidence_bank.reuse(self.runtime, self._intent, record["id"], program_path=self.program_path)
+                if reuse["status"] == "reused":
+                    return reuse
+                if reuse["status"] in ("reuse_failed", "ambiguous_reuse"):
+                    self.evidence_bank = EvidenceBank([])
+                    return reuse
                 return {"status": "evidence_ready", "sources": self.evidence_bank.describe(self._intent),
                         "intent_independently_verified": False}
             if name == "learn_verified_contract":
@@ -750,6 +756,7 @@ class AgentSession:
         self._verification_attempted = False
         small_messages = None
         binding_messages = None
+        reference_messages = None
         if self.catalog is not None and evidence is not None:
             from vectorpro.semantic_catalog import operand_types
             try:
@@ -771,6 +778,19 @@ class AgentSession:
         events = []
         for _ in range(self.max_calls):
             offered_tools = self.available_tools()
+            reference_selection = any(t["function"]["name"] == "collect_evidence" for t in offered_tools)
+            if reference_selection:
+                offered_tools = [t for t in offered_tools if t["function"]["name"] in ("collect_evidence", "ask_user")]
+                if reference_messages is None:
+                    reference_messages = [{"role": "system", "content":
+                        "Select ONE installed reference whose description matches ALL requested final effects. "
+                        "Check removal/absence, preservation and replacement requirements separately. "
+                        "Matching final contents alone is insufficient when other effects differ. "
+                        "Never choose a reference that contradicts any requested effect. "
+                        "Use collect_evidence only for a complete match; otherwise use ask_user. "
+                        "Do not execute, create functions or prepare actual arguments in this phase.\n" +
+                        json.dumps(self.reference_providers.describe(), ensure_ascii=False)},
+                        {"role": "user", "content": intent}]
             binding = any(t["function"]["name"].startswith("prepare_") for t in offered_tools)
             if binding and binding_messages is None:
                 binding_messages = [{"role": "system", "content": BINDING_GUIDE},
@@ -787,11 +807,13 @@ class AgentSession:
                     goal = re.sub(r"(?<!\d)" + str(self._proposed["width"]) + r"(?!\d)", "execution_width", goal)
                 small_messages = [{"role": "system", "content": SMALL_GUIDE},
                                   {"role": "user", "content": "Operation intent (examples still use 4 bits):\n" + goal}]
-            model_messages = binding_messages if binding else small_messages if compact else self.messages
+            model_messages = reference_messages if reference_selection else binding_messages if binding else small_messages if compact else self.messages
             message = self.model.complete(model_messages, offered_tools)
             if message.get("role") != "assistant":
                 raise ValueError("model must return an assistant message")
             self.messages.append(message)
+            if reference_selection:
+                reference_messages.append(message)
             if compact:
                 small_messages.append(message)
             if binding:
@@ -829,6 +851,8 @@ class AgentSession:
             events.append({"name": call["function"]["name"], "result": result})
             feedback = {"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result, ensure_ascii=False)}
             self.messages.append(feedback)
+            if reference_selection:
+                reference_messages.append(feedback)
             if compact:
                 small_messages.append(feedback)
             if binding:

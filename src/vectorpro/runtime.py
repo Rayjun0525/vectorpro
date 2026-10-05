@@ -35,6 +35,7 @@ class VectorRuntime:
         self.host = host
         self._rng = random.Random(seed)
         self._tensor_extras = {}
+        self._intent_bindings = []
 
     def provide_host_operations(self, operations: Sequence[str] | None = None) -> None:
         """Install primitive descriptions; these are execution machinery, not learned rules."""
@@ -275,6 +276,9 @@ class VectorRuntime:
         path.parent.mkdir(parents=True, exist_ok=True)
         data = {"format": "vectorpro-runtime", "version": 1, "registry": self.registry.to_data(),
                 "learning_rng_state": self._rng.getstate(), "contracts": self.contracts()}
+        if self._intent_bindings:
+            from vectorpro.acquisition import validate_bindings
+            data["intent_bindings"] = validate_bindings(self._intent_bindings, data["contracts"])
         temporary = None
         try:
             if path.suffix == ".pt":
@@ -323,4 +327,7 @@ class VectorRuntime:
         runtime._rng.setstate((state[0], tuple(state[1]), state[2]))
         if "contracts" in data and data["contracts"] != runtime.contracts():
             raise ValueError("saved contracts do not match the stored implementations")
+        if "intent_bindings" in data:
+            from vectorpro.acquisition import validate_bindings
+            runtime._intent_bindings = validate_bindings(data["intent_bindings"], runtime.contracts())
         return runtime

@@ -19,6 +19,29 @@ def digest(data):
                                      ensure_ascii=False, allow_nan=False).encode()).hexdigest()
 
 
+def validate_bindings(bindings, contracts):
+    from vectorpro.host import HOST_TYPES
+    ids = {c["id"] for c in contracts if c["name"] not in HOST_TYPES}
+    required = {"contract_id", "intent_sha256", "source_id", "source_sha256", "checked_cases"}
+    if not isinstance(bindings, list) or len(bindings) > 256:
+        raise ValueError("at most 256 verified request bindings")
+    keys = set()
+    for binding in bindings:
+        if not isinstance(binding, dict) or set(binding) != required or not isinstance(binding["contract_id"], str) or binding["contract_id"] not in ids:
+            raise ValueError("request binding must reference a current contract")
+        for field in ("intent_sha256", "source_sha256"):
+            value = binding[field]
+            if not isinstance(value, str) or len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
+                raise ValueError("request binding requires SHA-256 hex")
+        if not isinstance(binding["source_id"], str) or not 1 <= len(binding["source_id"]) <= 2000 or type(binding["checked_cases"]) is not int or not 1 <= binding["checked_cases"] <= 768:
+            raise ValueError("invalid request binding evidence")
+        key = (binding["intent_sha256"], binding["contract_id"])
+        if key in keys:
+            raise ValueError("duplicate request binding")
+        keys.add(key)
+    return copy.deepcopy(bindings)
+
+
 class EvidenceBank:
     def __init__(self, records):
         if not isinstance(records, list) or len(records) > 32:
@@ -72,12 +95,82 @@ class EvidenceBank:
                  "interface": copy.deepcopy(r["interface"])}
                 for r in self._records.values() if r["intent"] == intent]
 
-    def permits(self, capability, intent):
+    def permits(self, capability, intent, runtime=None, contract_id=None):
         receipt = capability.provenance.get("acceptance", {})
-        if not receipt or receipt.get("intent_sha256") != digest(intent):
-            return False
-        source = self._records.get(receipt.get("source_id"))
-        return source is None or (source["intent"] == intent and receipt.get("source_sha256") == digest(source))
+        receipts = [receipt] if receipt and receipt.get("intent_sha256") == digest(intent) else []
+        if runtime is not None:
+            receipts += [b for b in runtime._intent_bindings
+                         if b["intent_sha256"] == digest(intent) and b["contract_id"] == contract_id]
+        for approved in receipts:
+            source = self._records.get(approved.get("source_id"))
+            if source is None or (source["intent"] == intent and approved.get("source_sha256") == digest(source)):
+                return True
+        return False
+
+    def reuse(self, runtime, intent, source_id, *, program_path=None, time_budget_seconds=10):
+        """Check existing implementations against all source cases; never searches."""
+        source = self._records.get(source_id)
+        if source is None or source["intent"] != intent:
+            return {"status": "needs_evidence", "reason": "no bound source"}
+        if type(time_budget_seconds) not in (int, float) or not 0 < time_budget_seconds <= 60:
+            raise ValueError("reuse time budget must be in (0,60]")
+        interface = source["interface"]
+        matches, checked = [], 0
+        start = monotonic()
+        for contract in runtime.contracts():
+            cap = runtime.registry.get(contract["name"])
+            params = [{k: p[k] for k in ("name", "type", "role")} for p in contract["parameters"]]
+            if (cap.provenance["kind"] == "host" or params != interface["parameters"]
+                    or contract["output"] != interface["output"]
+                    or set(contract["execution"]["operations"]) - set(interface["allowed_operations"])):
+                continue
+            checked += 1
+            if checked > 32 or monotonic() - start > time_budget_seconds:
+                return {"status": "reuse_failed", "reason": "reuse verification budget exhausted"}
+            if "state_lesson" in source:
+                lessons = [state_lesson(source["state_lesson"]),
+                           state_lesson({**source["state_lesson"], "validation": source["heldout"]})]
+                cases = lessons[0].training + lessons[0].validation + lessons[1].validation
+                passed = True
+                for case in cases:
+                    if monotonic() - start > time_budget_seconds:
+                        return {"status": "reuse_failed", "reason": "reuse verification budget exhausted"}
+                    if not evaluate(cap.executable, case, lessons[0]):
+                        passed = False
+                        break
+                count = len(cases)
+            else:
+                numeric = numeric_lesson(source["lesson"])
+                hidden = numeric_lesson({"training": source["lesson"]["training"], "validation": source["heldout"]})
+                sets = (numeric.training, numeric.validation, hidden.validation)
+                try:
+                    passed = all(cap.executable(examples.operands, examples.width) == examples.targets for examples in sets)
+                except (ValueError, RuntimeError, IndexError, KeyError):
+                    passed = False
+                count = sum(len(examples) for examples in sets)
+            if passed:
+                matches.append((contract, count))
+        if monotonic() - start > time_budget_seconds:
+            return {"status": "reuse_failed", "reason": "reuse verification budget exhausted"}
+        if not matches:
+            return {"status": "needs_learning_examples", "reason": "no existing contract passed current evidence"}
+        if len(matches) != 1:
+            return {"status": "ambiguous_reuse", "reason": "multiple contracts passed current evidence"}
+        contract, count = matches[0]
+        binding = {"contract_id": contract["id"], "intent_sha256": digest(intent),
+                   "source_id": source_id, "source_sha256": digest(source), "checked_cases": count}
+        bindings = [b for b in runtime._intent_bindings if (b["contract_id"], b["intent_sha256"]) != (contract["id"], digest(intent))]
+        bindings.append(binding)
+        validate_bindings(bindings, runtime.contracts())
+        staged = VectorRuntime(Registry.from_data(runtime.registry.to_data()), config=runtime.learner.config)
+        staged._rng.setstate(runtime._rng.getstate())
+        staged._intent_bindings = bindings
+        staged._tensor_extras = runtime._tensor_extras.copy()
+        if program_path is not None:
+            staged.save(program_path)
+        runtime._intent_bindings = copy.deepcopy(bindings)
+        return {"status": "reused", "contract": contract, "binding": binding,
+                "intent_independently_verified": False}
 
     def proposal(self, intent, source_id, name):
         source = self._records.get(source_id)
@@ -96,6 +189,7 @@ class EvidenceBank:
             raise ValueError("proposed interface must match the caller evidence interface")
         # The candidate is disposable until hidden acceptance AND persistence pass.
         staged = VectorRuntime(Registry.from_data(runtime.registry.to_data()), config=runtime.learner.config)
+        staged._intent_bindings = copy.deepcopy(runtime._intent_bindings)
         staged._rng.setstate(runtime._rng.getstate())
         key = "state_lesson" if "state_lesson" in source else "lesson"
         start = monotonic()
@@ -135,5 +229,6 @@ class EvidenceBank:
         runtime.learner = Learner(runtime.registry, runtime.learner.config)
         runtime._rng.setstate(staged._rng.getstate())
         runtime._tensor_extras = {}
+        runtime._intent_bindings = staged._intent_bindings
         return {**result, "contract": contract, "acceptance": acceptance,
                 "intent_independently_verified": False}

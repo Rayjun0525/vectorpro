@@ -1,0 +1,1 @@
+{"status":"diagnostic_only","usable_program":false,"reason":"First-use evaluation passed 2/4. The model selected copy evidence for both rename and encryption requests, persisting incorrect intent bindings. Do not execute or reuse this program.pt; replay starts from the original reference_acquisition_gemma program."}

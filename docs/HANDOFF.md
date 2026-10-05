@@ -7,6 +7,38 @@
 
 ## 현재 구현
 
+### 다른 표현의 요청에 대한 기존 계약 재사용 (2026-10-05)
+
+명세와 재현 명령은 [VERIFIED_REUSE.md](VERIFIED_REUSE.md)를 참조한다.
+EvidenceBank.reuse는 호환 인터페이스/허용 연산의 기존 계약을 학습·검증·숨긴 사례
+전체로 검사한다. 상태 사례는 새 MemoryHostContext에서 파일/디렉터리/반환/외부
+관찰을 비교한다. 한 계약만 통과해야 요청 SHA와 근거 SHA를 같은 프로그램 파일의
+intent_bindings에 저장한다. 학습 호출, 기존 기능 텐서, 계약 ID와 RNG는 유지한다.
+후보 32개/기본 10초/연결 256개 한도, 여러 후보와 저장 실패를 거절한다.
+.pt/.json 재로드와 기존 v1 파일을 지원한다. 새 학습 시 기존 연결도 보존한다.
+
+관련 테스트 43 passed (21.65초). 스크립트 모델 실험 3/3:
+results/verified_reuse. 실제 Gemma 첫 평가 2/4: results/verified_reuse_gemma.
+복사와 반복은 성공했으나 이름 변경과 암호화 요청 모두 복사 기준을 골라 실행했다.
+기존 계약 전체는 유지됐지만 잘못된 요청 연결이 저장됐다. EXCLUDED.json으로
+해당 program.pt를 진단용으로 제외했다. 사용자 실제 파일 대신 실험 루트만 사용했다.
+
+선택 단계의 도구와 문맥을 분리하고 삭제/보존 등 모든 최종 효과를 비교하도록
+지시한 재시험은 results/verified_reuse_gemma_replay에 보존한다.
+재시험은 3/4로 암호화 요청을 거절했으나 이름 변경 요청에 복사를 골랐다.
+재시험 program.pt도 EXCLUDED.json으로 제외했다. 이는 독립된 새 정확도 측정이 아니다.
+선택된 기준과의 일치 검사는 사용자 의도와 기준의 일치를 보장하지 않는다.
+intent_independently_verified=false를 유지하며 자연어 자동 실행의 신뢰성은 미완성이다.
+다음 과제는 기준 선택과 사용자 목표의 독립 검증, 더 다양한 관찰/인자 변환,
+긴 작업과 실패 복구다. 더 큰 모델만으로 해결됐다고 판단하지 않는다.
+
+마지막 수정 전 전체 회귀는 326 passed (551.57초). 마지막 수정 후 최종 전체 회귀는
+326 passed (298.34초). 기존 vectorpro-test 하나에서 아래 명령으로 실행했다.
+
+```powershell
+nerdctl exec -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q
+```
+
 최신 상태는 [REFERENCE_EVIDENCE.md](REFERENCE_EVIDENCE.md),
 [VERIFIED_ACQUISITION.md](VERIFIED_ACQUISITION.md)와
 [LINUX_BUNDLE.md](LINUX_BUNDLE.md)를 기준으로 한다. 아래 날짜별

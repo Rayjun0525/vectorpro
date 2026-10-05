@@ -18,3 +18,7 @@ results/verified_acquisition_gemma*/missing_evidence/** -text
 results/reference_acquisition*/copy/** -text
 results/reference_acquisition*/move/** -text
 results/reference_acquisition*/unsupported/** -text
+results/verified_reuse*/copy/** -text
+results/verified_reuse*/move/** -text
+results/verified_reuse*/repeat/** -text
+results/verified_reuse*/unsupported/** -text

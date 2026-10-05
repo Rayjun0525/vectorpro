@@ -1,0 +1,18 @@
+[
+  [
+    "copy",
+    "Please duplicate source.bin into target.bin and keep source.bin."
+  ],
+  [
+    "move",
+    "Rename source.bin to target.bin, so source.bin no longer exists."
+  ],
+  [
+    "repeat",
+    "Please duplicate source.bin into target.bin and keep source.bin."
+  ],
+  [
+    "unsupported",
+    "Encrypt source.bin into target.bin using a secret key."
+  ]
+]
