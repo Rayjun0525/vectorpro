@@ -1,5 +1,10 @@
 # 테스트와 결과 확인
 
+벡터 대비 학습의 쌍/가중치 복원/원본 보존과 마지막 인코더 블록 경계 검증,
+관련40개 테스트와 새 요청 비교는
+[CONTRASTIVE_GOAL_EMBEDDING.md](CONTRASTIVE_GOAL_EMBEDDING.md).
+전체398 passed (282.65초), 관련40 passed (7.15초). 의미 평가 오류는 별도로 기록한다.
+
 LLM 없는 조건별 검색의 새16건, 후보 순위/최종 선택/가상 실행의 분리 검증은
 [GOAL_CONDITION_SEARCH.md](GOAL_CONDITION_SEARCH.md). 관련35 passed (4.52초).
 

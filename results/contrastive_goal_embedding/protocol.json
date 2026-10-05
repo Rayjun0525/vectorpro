@@ -1,0 +1,10 @@
+{
+  "train_sha256": "017aef09acfe9d5b650c4790a62df3ddc999837ba27550e71b324338c74f5e43",
+  "heldout_sha256": "f5483ef5cfbba2e755b202a9d0cc56a58ce033575094971bf5902a52bc6cd82b",
+  "steps": 400,
+  "learning_rate": 0.01,
+  "regularization": 0.001,
+  "minimum": 0.55,
+  "margin": 0.03,
+  "protocol": "heldout fixed before fitting; no threshold/epoch selection from heldout; frozen base MiniLM; learn square metric projection only; no LLM"
+}

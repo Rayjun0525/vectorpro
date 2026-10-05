@@ -1,0 +1,352 @@
+[
+  {
+    "intent": "Put source data at destination while leaving the original source unaltered.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Put source data at destination and remove the original source.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Put destination data at source while leaving the original destination unaltered.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Put destination data at source and remove the original destination.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "source의 내용은 destination에 똑같이 두고 source는 지우지 마.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "source의 내용은 destination에 똑같이 두고 source는 지워.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "destination의 내용은 source에 똑같이 두고 destination은 지우지 마.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "destination의 내용은 source에 똑같이 두고 destination은 지워.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Leave both named files and every other entry completely untouched.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "Only destination should disappear; every other entry stays unchanged.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "두 경로에 있는 파일 내용과 나머지 파일들을 모두 보존해.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": []
+      }
+    ]
+  },
+  {
+    "intent": "대상 destination의 항목만 없애고 source와 나머지는 전부 보존해.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Copy source (alpha.dat) to destination (omega.dat), keeping alpha.dat.",
+    "expected_rules": [
+      {
+        "kind": "unchanged",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Move source (alpha.dat) to destination (omega.dat), removing alpha.dat.",
+    "expected_rules": [
+      {
+        "kind": "absent",
+        "parameter": "source"
+      },
+      {
+        "kind": "equals_initial",
+        "parameter": "destination",
+        "source": "source"
+      },
+      {
+        "kind": "unchanged_except",
+        "parameters": [
+          "source",
+          "destination"
+        ]
+      }
+    ]
+  },
+  {
+    "intent": "Copy destination (omega.dat) to source (alpha.dat), keeping omega.dat.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "unchanged",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Move destination (omega.dat) to source (alpha.dat), removing omega.dat.",
+    "expected_rules": [
+      {
+        "kind": "equals_initial",
+        "source": "destination",
+        "parameter": "source"
+      },
+      {
+        "kind": "absent",
+        "parameter": "destination"
+      },
+      {
+        "parameters": [
+          "source",
+          "destination"
+        ],
+        "kind": "unchanged_except"
+      }
+    ]
+  },
+  {
+    "intent": "Make destination contain a compressed version of source.",
+    "expected_rules": null
+  },
+  {
+    "intent": "source를 destination에 복사하되 각 바이트를 반전해.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Keep source present and delete source in the same final state.",
+    "expected_rules": null
+  },
+  {
+    "intent": "원본 파일을 보존하는 동시에 원본 파일이 없어야 해.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Handle the two paths in whatever manner is appropriate.",
+    "expected_rules": null
+  },
+  {
+    "intent": "두 경로를 알아서 처리해줘.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Copy source to destination only when destination is empty.",
+    "expected_rules": null
+  },
+  {
+    "intent": "Swap the initial source and destination contents.",
+    "expected_rules": null
+  }
+]

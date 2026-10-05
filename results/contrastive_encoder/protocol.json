@@ -1,0 +1,10 @@
+{
+  "train_sha256": "017aef09acfe9d5b650c4790a62df3ddc999837ba27550e71b324338c74f5e43",
+  "validation_sha256": "dd4bcd03c8bdb1128ac48546ab590b33ae3471f3aa8d35155ef7efc9f362d304",
+  "steps": 100,
+  "learning_rate": 0.0001,
+  "anchor_weight": 0.05,
+  "minimum": 0.55,
+  "margin": 0.03,
+  "protocol": "fixed validation before fitting; only final encoder block trained; no early stopping or heldout tuning"
+}

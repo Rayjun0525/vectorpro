@@ -5,6 +5,8 @@
 
 추가로 읽을 문서:
 
+- [임베딩/마지막 인코더 층 대비 학습과 독립 평가](docs/CONTRASTIVE_GOAL_EMBEDDING.md)
+
 - [LLM 없는 조건별 검색과 선택/실행 정확도의 구분](docs/GOAL_CONDITION_SEARCH.md)
 
 - [후보 차이 확인 질문의 모의 호출자/Gemma 비교와 실패](docs/GOAL_QUESTIONS.md)
