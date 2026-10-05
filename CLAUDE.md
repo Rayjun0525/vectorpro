@@ -5,6 +5,8 @@
 
 추가로 읽을 문서:
 
+- [어시스턴트 해석 교체와 실제 Gemma/native 대조](docs/ASSISTANT_INTERCEPT.md)
+
 - [임베딩/마지막 인코더 층 대비 학습과 독립 평가](docs/CONTRASTIVE_GOAL_EMBEDDING.md)
 
 - [LLM 없는 조건별 검색과 선택/실행 정확도의 구분](docs/GOAL_CONDITION_SEARCH.md)

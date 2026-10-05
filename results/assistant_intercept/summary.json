@@ -1,0 +1,2590 @@
+{
+  "protocol": "assistant hand-authored replay after seeing labels; not blind or model-size causal proof; caller supplies concrete role paths; expected labels only score interpretation and final native states",
+  "metrics": {
+    "assistant_correct": 16,
+    "cases": 16,
+    "native_passed": 30,
+    "native_total": 30,
+    "gemma_correct": 2,
+    "gemma_wrong_proposals": 0
+  },
+  "cases": [
+    {
+      "index": 0,
+      "intent": "Populate destination with source bytes without losing source.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "Populate destination with source bytes without losing source.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              8
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 8
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes without losing source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6e617469766500ff"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 0
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes without losing source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              14
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 14
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes without losing source.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "ec838820ec9e85eba0a520eab092"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired source and destination files. Are there any specific requirements for the source or destination files? For example, do you want to preserve the original source or destination files? Please describe the desired outcome in detail. Be as specific as possible. For example, 'preserve the original source' or 'preserve the original destination'."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+          "arguments": {
+            "source": "source.bin",
+            "destination": "target.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "intent": "Populate destination with source bytes, leaving source absent.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "Populate destination with source bytes, leaving source absent.",
+        "rules": [
+          {
+            "kind": "absent",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes, leaving source absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6e617469766500ff"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes, leaving source absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate destination with source bytes, leaving source absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "ec838820ec9e85eba0a520eab092"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired source and destination files."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "source.bin",
+            "destination": "target.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "intent": "Populate source with destination bytes without losing destination.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "Populate source with destination bytes without losing destination.",
+        "rules": [
+          {
+            "kind": "equals_initial",
+            "parameter": "source",
+            "source": "destination"
+          },
+          {
+            "kind": "unchanged",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes without losing destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes without losing destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes without losing destination.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "intent": "Populate source with destination bytes, leaving destination absent.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "Populate source with destination bytes, leaving destination absent.",
+        "rules": [
+          {
+            "kind": "equals_initial",
+            "parameter": "source",
+            "source": "destination"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes, leaving destination absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes, leaving destination absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "Populate source with destination bytes, leaving destination absent.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "intent": "source에서 destination으로 사본을 전달하고 source는 남겨.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "source에서 destination으로 사본을 전달하고 source는 남겨.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              8
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 8
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 사본을 전달하고 source는 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6e617469766500ff"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 0
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 사본을 전달하고 source는 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              14
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 14
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 사본을 전달하고 source는 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "ec838820ec9e85eba0a520eab092"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired outcome, including any necessary source or destination files or directories. For example, 'final state is a file containing the data' or 'final state is a directory with specific files and subdirectories'."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+          "arguments": {
+            "source": "source.bin",
+            "destination": "target.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "intent": "source에서 destination으로 내용을 이전하고 source는 제거해.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "source에서 destination으로 내용을 이전하고 source는 제거해.",
+        "rules": [
+          {
+            "kind": "absent",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 내용을 이전하고 source는 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "6e617469766500ff"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 내용을 이전하고 source는 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": ""
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source에서 destination으로 내용을 이전하고 source는 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "target.bin": "ec838820ec9e85eba0a520eab092"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the source file? Is it absent, present, or unchanged? Please specify the type of file (e.g., file, directory) and the desired action (e.g., remove, preserve, or keep)."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "source.bin",
+            "destination": "target.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "intent": "destination에서 source로 사본을 전달하고 destination은 남겨.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "destination에서 source로 사본을 전달하고 destination은 남겨.",
+        "rules": [
+          {
+            "kind": "equals_initial",
+            "parameter": "source",
+            "source": "destination"
+          },
+          {
+            "kind": "unchanged",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 사본을 전달하고 destination은 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 사본을 전달하고 destination은 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              15
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 15
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 사본을 전달하고 destination은 남겨.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e",
+                    "target.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired source and destination files."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "intent": "destination에서 source로 내용을 이전하고 destination은 제거해.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "destination에서 source로 내용을 이전하고 destination은 제거해.",
+        "rules": [
+          {
+            "kind": "equals_initial",
+            "parameter": "source",
+            "source": "destination"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 내용을 이전하고 destination은 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "6e617469766500ff",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 내용을 이전하고 destination은 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination에서 source로 내용을 이전하고 destination은 제거해.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "source.bin",
+                    "target.bin"
+                  ],
+                  "before": {
+                    "source.bin": "ec838820ec9e85eba0a520eab092",
+                    "target.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "keep": "6b656570",
+                    "source.bin": "6f6c642064657374696e6174696f6e"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the destination file? Is it a file or a directory? Please specify if it's a file or a directory."
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "target.bin",
+            "destination": "source.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "intent": "Both paths must retain their initial contents and nothing else may change.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "Both paths must retain their initial contents and nothing else may change.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "unchanged",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": []
+          }
+        ]
+      },
+      "native": [],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired outcome, including any necessary source or destination files or directories.  Are there any files or directories that need to be removed or preserved? Be as specific as possible."
+        }
+      },
+      "execution_status": "no_unique_stored_contract",
+      "matching_routes": []
+    },
+    {
+      "index": 9,
+      "intent": "The destination path must vanish; source and every other path must retain their initial contents.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "The destination path must vanish; source and every other path must retain their initial contents.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the desired outcome, including any necessary source or destination files or directories.  Are there any files or directories that need to be removed or preserved?  For example, 'present' means the destination exists, 'absent' means it doesn't.  'unchanged' means the existing content is preserved, and 'equals_initial' means the final state is identical to the initial state of the source files/directories.  If you are unsure, please describe the desired outcome."
+        }
+      },
+      "execution_status": "no_unique_stored_contract",
+      "matching_routes": []
+    },
+    {
+      "index": 10,
+      "intent": "source input-x.bin should remain after duplicating it to destination archive-y.bin.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "source input-x.bin should remain after duplicating it to destination archive-y.bin.",
+        "rules": [
+          {
+            "kind": "unchanged",
+            "parameter": "source"
+          },
+          {
+            "kind": "equals_initial",
+            "parameter": "destination",
+            "source": "source"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              8
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 8
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source input-x.bin should remain after duplicating it to destination archive-y.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "6e617469766500ff",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "archive-y.bin": "6e617469766500ff",
+                    "input-x.bin": "6e617469766500ff",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              0
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 0
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source input-x.bin should remain after duplicating it to destination archive-y.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "archive-y.bin": "",
+                    "input-x.bin": "",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+            "contract_version": 1,
+            "capability": "copy_input_to_output",
+            "outputs": [
+              14
+            ],
+            "effects": [
+              {
+                "operation": "file.read",
+                "arguments": [
+                  1
+                ],
+                "result": 3
+              },
+              {
+                "operation": "file.write",
+                "arguments": [
+                  2,
+                  3
+                ],
+                "result": 14
+              }
+            ]
+          },
+          "observation": {
+            "intent": "source input-x.bin should remain after duplicating it to destination archive-y.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "ec838820ec9e85eba0a520eab092",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "archive-y.bin": "ec838820ec9e85eba0a520eab092",
+                    "input-x.bin": "ec838820ec9e85eba0a520eab092",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:ebba92068ed0f9c640f9f66c973e4dbb78a299a70fe78d66209222f4a82065de",
+          "arguments": {
+            "source": "input-x.bin",
+            "destination": "archive-y.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "intent": "destination archive-y.bin should vanish after relocation to source input-x.bin.",
+      "supported": true,
+      "assistant_correct": true,
+      "assistant_goal": {
+        "intent": "destination archive-y.bin should vanish after relocation to source input-x.bin.",
+        "rules": [
+          {
+            "kind": "equals_initial",
+            "parameter": "source",
+            "source": "destination"
+          },
+          {
+            "kind": "absent",
+            "parameter": "destination"
+          },
+          {
+            "kind": "unchanged_except",
+            "parameters": [
+              "source",
+              "destination"
+            ]
+          }
+        ]
+      },
+      "native": [
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination archive-y.bin should vanish after relocation to source input-x.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "6e617469766500ff",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "input-x.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination archive-y.bin should vanish after relocation to source input-x.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "input-x.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        },
+        {
+          "passed": true,
+          "result": {
+            "status": "executed",
+            "contract_id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+            "contract_version": 1,
+            "capability": "input_bin",
+            "outputs": [
+              1
+            ],
+            "effects": [
+              {
+                "operation": "file.move",
+                "arguments": [
+                  1,
+                  2
+                ],
+                "result": 1
+              }
+            ]
+          },
+          "observation": {
+            "intent": "destination archive-y.bin should vanish after relocation to source input-x.bin.",
+            "interface": {
+              "parameters": [
+                {
+                  "name": "source"
+                },
+                {
+                  "name": "destination"
+                }
+              ]
+            },
+            "state_lesson": {
+              "training": [
+                {
+                  "inputs": [
+                    "input-x.bin",
+                    "archive-y.bin"
+                  ],
+                  "before": {
+                    "input-x.bin": "ec838820ec9e85eba0a520eab092",
+                    "archive-y.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "after": {
+                    "input-x.bin": "6f6c642064657374696e6174696f6e",
+                    "keep": "6b656570"
+                  },
+                  "before_directories": [
+                    "empty"
+                  ],
+                  "after_directories": [
+                    "empty"
+                  ]
+                }
+              ],
+              "validation": []
+            },
+            "heldout": []
+          }
+        }
+      ],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "matching_routes": [
+        {
+          "id": "vp1:dca0600b3c745e04b1529c1999122a5be72132722c9db986707bcc0f08eea858",
+          "arguments": {
+            "source": "archive-y.bin",
+            "destination": "input-x.bin"
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "intent": "Filter out zero bytes while copying source to destination.",
+      "supported": false,
+      "assistant_correct": true,
+      "assistant_goal": null,
+      "native": [],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "execution_status": "declined_no_execution",
+      "matching_routes": []
+    },
+    {
+      "index": 13,
+      "intent": "source를 destination에 보내되 압축된 내용이어야 해.",
+      "supported": false,
+      "assistant_correct": true,
+      "assistant_goal": null,
+      "native": [],
+      "gemma": {
+        "correct": true,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify whether the goal is absent or present. Also, please specify the source and destination file paths."
+        }
+      },
+      "execution_status": "declined_no_execution",
+      "matching_routes": []
+    },
+    {
+      "index": 14,
+      "intent": "Leave source exactly unchanged and make source disappear.",
+      "supported": false,
+      "assistant_correct": true,
+      "assistant_goal": null,
+      "native": [],
+      "gemma": {
+        "correct": false,
+        "wrong_proposal": false,
+        "result": {
+          "status": "goal_draft_failed",
+          "reason": "draft needs state conditions and one frame condition"
+        }
+      },
+      "execution_status": "declined_no_execution",
+      "matching_routes": []
+    },
+    {
+      "index": 15,
+      "intent": "Please do something with the two paths.",
+      "supported": false,
+      "assistant_correct": true,
+      "assistant_goal": null,
+      "native": [],
+      "gemma": {
+        "correct": true,
+        "wrong_proposal": false,
+        "result": {
+          "status": "needs_input",
+          "question": "What is the final state of the goal? Please specify the source and destination paths."
+        }
+      },
+      "execution_status": "declined_no_execution",
+      "matching_routes": []
+    }
+  ]
+}

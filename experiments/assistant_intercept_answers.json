@@ -1,0 +1,18 @@
+[
+  {"index": 0, "decision": "supported", "states": {"source": "unchanged", "destination": "initial:source"}, "reason": "목적지에 원본 바이트를 두되 원본을 잃지 말라는 복사 요청"},
+  {"index": 1, "decision": "supported", "states": {"source": "absent", "destination": "initial:source"}, "reason": "목적지에 원본 바이트를 두고 원본은 없어야 하는 이동 요청"},
+  {"index": 2, "decision": "supported", "states": {"source": "initial:destination", "destination": "unchanged"}, "reason": "destination이 원본이고 source가 사본을 받을 역방향 복사"},
+  {"index": 3, "decision": "supported", "states": {"source": "initial:destination", "destination": "absent"}, "reason": "destination의 바이트를 source에 두고 destination은 삭제"},
+  {"index": 4, "decision": "supported", "states": {"source": "unchanged", "destination": "initial:source"}, "reason": "사본 전달 후 source를 남기는 복사"},
+  {"index": 5, "decision": "supported", "states": {"source": "absent", "destination": "initial:source"}, "reason": "내용 이전 후 source 제거"},
+  {"index": 6, "decision": "supported", "states": {"source": "initial:destination", "destination": "unchanged"}, "reason": "destination에서 source로 사본을 보내고 destination 보존"},
+  {"index": 7, "decision": "supported", "states": {"source": "initial:destination", "destination": "absent"}, "reason": "destination에서 source로 이전 후 destination 제거"},
+  {"index": 8, "decision": "supported", "states": {"source": "unchanged", "destination": "unchanged"}, "reason": "두 경로와 다른 모든 항목을 보존"},
+  {"index": 9, "decision": "supported", "states": {"source": "unchanged", "destination": "absent"}, "reason": "destination만 제거하고 source와 나머지를 보존"},
+  {"index": 10, "decision": "supported", "states": {"source": "unchanged", "destination": "initial:source"}, "literal_paths": {"source": "input-x.bin", "destination": "archive-y.bin"}, "reason": "input-x.bin을 남기며 archive-y.bin으로 복제"},
+  {"index": 11, "decision": "supported", "states": {"source": "initial:destination", "destination": "absent"}, "literal_paths": {"source": "input-x.bin", "destination": "archive-y.bin"}, "reason": "archive-y.bin을 input-x.bin으로 이전한 후 archive-y.bin 제거"},
+  {"index": 12, "decision": "unsupported", "reason": "제로 바이트 필터링은 현재 여섯 파일 상태 목표에 포함되지 않음"},
+  {"index": 13, "decision": "unsupported", "reason": "압축된 바이트 변환은 현재 목표/저장된 복사·이동 계약으로 표현할 수 없음"},
+  {"index": 14, "decision": "contradictory", "reason": "같은 최종 상태에서 source 보존과 부재를 동시에 요구함"},
+  {"index": 15, "decision": "unclear", "reason": "두 경로에 어떤 결과를 원하는지 지정하지 않음"}
+]

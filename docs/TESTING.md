@@ -1,5 +1,8 @@
 # 테스트와 결과 확인
 
+어시스턴트의 고정 해석과 실제Gemma 두 형식/저장텐서 native30개 대조는
+[ASSISTANT_INTERCEPT.md](ASSISTANT_INTERCEPT.md). 관련37 passed (6.77초).
+
 벡터 대비 학습의 쌍/가중치 복원/원본 보존과 마지막 인코더 블록 경계 검증,
 관련40개 테스트와 새 요청 비교는
 [CONTRASTIVE_GOAL_EMBEDDING.md](CONTRASTIVE_GOAL_EMBEDDING.md).
