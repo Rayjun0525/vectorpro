@@ -1,0 +1,1022 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "Use destination as the original. Replace source with its exact bytes, keeping destination intact."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unclear\", \"states\": { \"source\": \"unchanged\", \"destination\": \"unchanged\"}}}</tool_call>",
+    "seconds": 13.47019845500472,
+    "usage": {
+      "prompt_tokens": 402,
+      "completion_tokens": 46,
+      "total_tokens": 448
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "destination 원본을 source에 옮기고 destination 항목은 제거해. 다른 파일은 보존해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unsupported\", \"states\": { \"source\": \"unchanged\", \"destination\": \"unchanged\"}}}</tool_call>",
+    "seconds": 6.439154063991737,
+    "usage": {
+      "prompt_tokens": 406,
+      "completion_tokens": 46,
+      "total_tokens": 452
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "At the end source must not exist, and the same source entry must remain intact at the end."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unclear\", \"states\": { \"source\": \"unchanged\", \"destination\": \"unchanged\"}}}</tool_call>",
+    "seconds": 6.500496938999277,
+    "usage": {
+      "prompt_tokens": 405,
+      "completion_tokens": 46,
+      "total_tokens": 451
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "작업 종료 시 destination 파일은 없어야 하고, 동일한 destination 파일은 원래 내용 그대로 존재해야 해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unclear\", \"states\": { \"source\": \"unchanged\", \"destination\": \"unchanged\"}}}</tool_call>",
+    "seconds": 6.594997933003469,
+    "usage": {
+      "prompt_tokens": 408,
+      "completion_tokens": 46,
+      "total_tokens": 454
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "Keep source intact and write its encrypted bytes into destination."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unclear\", \"states\": { \"source\": \"unchanged\", \"destination\": \"initial:source\"}}}</tool_call>",
+    "seconds": 6.810909410996828,
+    "usage": {
+      "prompt_tokens": 396,
+      "completion_tokens": 47,
+      "total_tokens": 443
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Interpret the whole requested file effect. The roles source and destination are known; concrete paths are not needed to describe final states. supported: copying exact bytes, moving, removing destination, or preserving files. unsupported: byte filtering/transformation/compression/encryption or conditional operations. contradictory: incompatible final states. unclear: no specified effect. For supported provide both role states. unchanged preserves initial contents; absent removes the entry; initial:source copies original source bytes; initial:destination copies original destination bytes. Keep direction and removal separate. A source may receive destination bytes. Other files must remain unchanged. This only drafts an interpretation, never executes or approves."
+      },
+      {
+        "role": "user",
+        "content": "두 파일로 적절한 작업을 해줘."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "interpret_goal",
+          "description": "Describe final states or decline this whole request",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "unsupported",
+                  "contradictory",
+                  "unclear"
+                ]
+              },
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "initial:source",
+                      "initial:destination"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "decision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"interpret_goal\",\"arguments\":{ \"decision\": \"unclear\", \"states\": { \"source\": \"unchanged\", \"destination\": \"unchanged\"}}}</tool_call>",
+    "seconds": 5.523336683996604,
+    "usage": {
+      "prompt_tokens": 395,
+      "completion_tokens": 46,
+      "total_tokens": 441
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Use destination as the original. Replace source with its exact bytes, keeping destination intact."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"initial:destination\", \"destination\": \"unchanged\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": [\"initial:destination\", \"unchanged\"]}}</tool_call>",
+    "seconds": 17.433427468989976,
+    "usage": {
+      "prompt_tokens": 602,
+      "completion_tokens": 89,
+      "total_tokens": 691
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "destination 원본을 source에 옮기고 destination 항목은 제거해. 다른 파일은 보존해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"unchanged\", \"destination\": \"absent\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": [\"none\"]}}</tool_call>",
+    "seconds": 8.433397036991664,
+    "usage": {
+      "prompt_tokens": 606,
+      "completion_tokens": 81,
+      "total_tokens": 687
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "At the end source must not exist, and the same source entry must remain intact at the end."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"unchanged\", \"destination\": \"unchanged\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": []}}</tool_call>",
+    "seconds": 8.543778401013697,
+    "usage": {
+      "prompt_tokens": 605,
+      "completion_tokens": 79,
+      "total_tokens": 684
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "작업 종료 시 destination 파일은 없어야 하고, 동일한 destination 파일은 원래 내용 그대로 존재해야 해."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"unchanged\", \"destination\": \"unchanged\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": []}}</tool_call>",
+    "seconds": 8.646019898005761,
+    "usage": {
+      "prompt_tokens": 608,
+      "completion_tokens": 80,
+      "total_tokens": 688
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "Keep source intact and write its encrypted bytes into destination."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"unchanged\", \"destination\": \"unspecified\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": [\"none\"]}}</tool_call>",
+    "seconds": 8.628658781002741,
+    "usage": {
+      "prompt_tokens": 596,
+      "completion_tokens": 82,
+      "total_tokens": 678
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "Describe the whole requested final file state in one describe_goal call. Roles do not fix direction: source may receive the original destination bytes. unchanged = preserve the original entry and bytes. absent = remove the entry. initial:NAME = receive the ORIGINAL bytes of the OTHER named role. present = existence ONLY; never use it instead of copying bytes. For a move the original role must be absent, not unchanged. Preserving everything means all roles unchanged. Other entries are preserved by the backend. For copying, moving, deleting or preserving, unrepresented_effects is []. Only list additional effects using codes: byte_transformation, filtering, compression, encryption, conditional_effect, process, network, other_effect. Do not discard any requested effect. unresolved is [] for clear consistent goals. For conflicting requirements or unspecified goals, explain the issue there and use unspecified for affected roles. This is a draft for caller review, never approval or execution.\nInterface: [{\"name\": \"source\", \"type\": \"path\", \"role\": \"source file\"}, {\"name\": \"destination\", \"type\": \"path\", \"role\": \"destination file\"}]"
+      },
+      {
+        "role": "user",
+        "content": "두 파일로 적절한 작업을 해줘."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "describe_goal",
+          "description": "Describe requested final states and any effects or ambiguities not captured by them",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:destination"
+                    ]
+                  },
+                  "destination": {
+                    "type": "string",
+                    "enum": [
+                      "unchanged",
+                      "absent",
+                      "present",
+                      "unspecified",
+                      "initial:source"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ],
+                "additionalProperties": false
+              },
+              "unrepresented_effects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "byte_transformation",
+                    "filtering",
+                    "compression",
+                    "encryption",
+                    "conditional_effect",
+                    "process",
+                    "network",
+                    "other_effect"
+                  ]
+                },
+                "maxItems": 8,
+                "uniqueItems": true
+              },
+              "unresolved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 8
+              }
+            },
+            "required": [
+              "states",
+              "unrepresented_effects",
+              "unresolved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "raw_output": "<tool_call>{\"name\":\"describe_goal\",\"arguments\":{ \"states\": {\"source\": \"unchanged\", \"destination\": \"unchanged\"}, \"unrepresented_effects\": [\"byte_transformation\", \"filtering\", \"compression\", \"encryption\", \"conditional_effect\", \"process\", \"network\", \"other_effect\"], \"unresolved\": [\"none\"]}}</tool_call>",
+    "seconds": 8.801718855000217,
+    "usage": {
+      "prompt_tokens": 595,
+      "completion_tokens": 81,
+      "total_tokens": 676
+    }
+  }
+]

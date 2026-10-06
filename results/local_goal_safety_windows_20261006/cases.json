@@ -1,0 +1,38 @@
+[
+  {
+    "name": "reverse_copy",
+    "intent": "Use destination as the original. Replace source with its exact bytes, keeping destination intact.",
+    "states": {
+      "source": "initial:destination",
+      "destination": "unchanged"
+    }
+  },
+  {
+    "name": "reverse_move",
+    "intent": "destination 원본을 source에 옮기고 destination 항목은 제거해. 다른 파일은 보존해.",
+    "states": {
+      "source": "initial:destination",
+      "destination": "absent"
+    }
+  },
+  {
+    "name": "contradiction_en",
+    "intent": "At the end source must not exist, and the same source entry must remain intact at the end.",
+    "states": null
+  },
+  {
+    "name": "contradiction_ko",
+    "intent": "작업 종료 시 destination 파일은 없어야 하고, 동일한 destination 파일은 원래 내용 그대로 존재해야 해.",
+    "states": null
+  },
+  {
+    "name": "unsupported",
+    "intent": "Keep source intact and write its encrypted bytes into destination.",
+    "states": null
+  },
+  {
+    "name": "unclear",
+    "intent": "두 파일로 적절한 작업을 해줘.",
+    "states": null
+  }
+]

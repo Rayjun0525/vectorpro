@@ -1,0 +1,269 @@
+{
+  "model": "/opt/vectorpro-models/gemma-3-1b-it-Q8_0.gguf",
+  "protocol": "small authored diagnostic; drafts only; no execution or approval",
+  "metrics": {
+    "baseline": {
+      "completed": 6,
+      "correct": 4,
+      "supported_correct": 0,
+      "wrong_proposals": 0
+    },
+    "semantic": {
+      "completed": 6,
+      "correct": 4,
+      "supported_correct": 0,
+      "wrong_proposals": 0
+    }
+  },
+  "rows": [
+    {
+      "method": "baseline",
+      "name": "reverse_copy",
+      "supported": true,
+      "correct": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "baseline",
+      "name": "reverse_move",
+      "supported": true,
+      "correct": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "baseline",
+      "name": "contradiction_en",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "baseline",
+      "name": "contradiction_ko",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "baseline",
+      "name": "unsupported",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "baseline",
+      "name": "unclear",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input"
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "reverse_copy",
+      "supported": true,
+      "correct": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "initial:destination",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": [
+            "initial:destination",
+            "unchanged"
+          ]
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "reverse_move",
+      "supported": true,
+      "correct": false,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "absent"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": [
+            "none"
+          ]
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "contradiction_en",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": []
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "contradiction_ko",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": []
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "unsupported",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unspecified"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": [
+            "none"
+          ]
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    },
+    {
+      "method": "semantic",
+      "name": "unclear",
+      "supported": false,
+      "correct": true,
+      "wrong_proposal": false,
+      "proposal": {
+        "status": "needs_input",
+        "reason": "goal_outside_representation",
+        "interpretation": {
+          "states": {
+            "source": "unchanged",
+            "destination": "unchanged"
+          },
+          "unrepresented_effects": [
+            "byte_transformation",
+            "filtering",
+            "compression",
+            "encryption",
+            "conditional_effect",
+            "process",
+            "network",
+            "other_effect"
+          ],
+          "unresolved": [
+            "none"
+          ]
+        },
+        "question": "현재 파일 상태 목표에 담기지 않는 효과: 바이트 변환, 필터링, 압축, 암호화, 조건부 효과, 프로세스, 네트워크, 그 밖의 효과. 이 효과를 표현할 목표·근거가 필요합니다.",
+        "intent_independently_verified": false
+      }
+    }
+  ]
+}

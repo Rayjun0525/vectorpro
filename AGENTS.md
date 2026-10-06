@@ -23,21 +23,21 @@ LLM이 필수인 구조로 만들지 않는다.
 
 ## 실행 환경: 사용자 명시 규칙
 
-- 2026-10-05 사용자 지시로 현재 테스트 환경은 Docker의
-  **`vectorpro-strong-test` 하나만** 사용한다. 이전 nerdctl 환경 지침을 대체한다.
-- `docker`를 사용한다. 테스트용 컨테이너를 추가 생성하지 않는다.
+- 2026-10-06 Windows에서 사용자의 최신 지시로 **nerdctl의
+  `vectorpro-test` 하나만** 사용한다. 이전 Docker 환경 지침을 대체한다.
+- `nerdctl`을 사용한다. 테스트용 컨테이너를 추가 생성하지 않는다.
 - 이미 생성된 같은 컨테이너를 계속 재사용한다.
 - 새 이미지를 빌드하거나 commit하지 않는다. 의존성·환경 변경은 같은 컨테이너에
   누적한다. 컨테이너를 삭제하거나 `--rm`으로 일회성 실행하지 않는다.
-- 먼저 `docker ps -a --filter name=vectorpro-strong-test`로 상태를 확인한다.
-  중지된 경우 `docker start vectorpro-strong-test`로 재사용한다.
+- 먼저 `nerdctl ps -a --filter name=vectorpro-test`로 상태를 확인한다.
+  중지된 경우 `nerdctl start vectorpro-test`로 재사용한다.
   없어진 경우 다른 컨테이너를 자동 생성하지 말고 환경 손실을 알린다.
 - 프로젝트는 `/workspace`에 마운트돼 있고 기본 작업 디렉터리도 `/workspace`다.
-- 현재 macOS 호스트 셸은 zsh다. 모든 테스트는 컨테이너 내부에서 실행한다.
+- 현재 Windows 호스트 셸은 PowerShell이다. 모든 테스트는 컨테이너 내부에서 실행한다.
 
 ```sh
-docker exec -e PYTHONPATH=/workspace/src -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-strong-test python -m pytest -q
-docker exec -e PYTHONPATH=/workspace/src -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-strong-test python experiments/stateful_learning.py
+nerdctl exec -e PYTHONPATH=/workspace/src -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m pytest -q
+nerdctl exec -e PYTHONPATH=/workspace/src -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python experiments/stateful_learning.py
 ```
 
 ## 구현 원칙

@@ -63,10 +63,20 @@ LLM 호출 횟수와 토큰, 벽시계 시간, 측정 가능한 메모리를 기
 
 ## 실행 환경과 현재 위치
 
-기존 Docker `vectorpro-strong-test` 하나와 설치된 로컬 Gemma만 사용한다.
+2026-10-06 사용자의 최신 지시로 Windows의 기존 nerdctl `vectorpro-test`
+하나와 설치된 로컬 Gemma만 사용한다. 이전 Docker 환경 계획을 대체한다.
 모델·컨테이너 추가 생성이나 이미지 빌드 없이 기존 환경을 재사용한다.
-현재 Windows 호스트에서는 Docker 데몬 연결이 실패해 이 계획을 실행하지 못했다.
-이 문서 추가로 기존 431개 회귀 결과를 새 결과로 갱신하지 않는다.
+기존 프로젝트 마운트와 Gemma 3 1B Q8_0 GGUF를 확인했다. Docker 연결 실패는
+현재 Rancher Desktop이 containerd 엔진을 사용하기 때문이었다.
+이전 Mac의 Gemma 12B 결과와 현재 1B 결과를 동일 모델의 비교로 합산하지 않는다.
+
+환경 연결 직후의 작은 진단은 다음 명령으로 실행한다. 출력 경로가 이미 있으면
+거절하며 원시 프롬프트·응답과 비용을 보존한다. 여섯 요청은 작성자가 고정한
+소규모 진단이며 독립 정확도 평가나 실행 성공 증명이 아니다. 초안을 실행하지 않는다.
+
+```powershell
+nerdctl exec -e PYTHONPATH=/workspace/src -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 vectorpro-test python -m experiments.local_goal_safety --output results/local_goal_safety_windows_20261006
+```
 
 현재는 제한된 절차 획득·저장·직접 실행과 선택적 목표 해석이 구현된 단계다.
 다음 작업은 모순 요구 누락과 경로 역할의 검증, 이후 반복 비용 비교다.
